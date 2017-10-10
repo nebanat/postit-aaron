@@ -43,13 +43,18 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.18.2",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-plugin-react": "^7.4.0",
     "express": "^4.16.1",
+    "morgan": "^1.9.0",
     "npm-run-all": "^4.1.1",
     "open": "0.0.5",
     "path": "^0.12.7",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "sequelize": "^4.13.8"
   }
 }
