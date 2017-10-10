@@ -1,3 +1,10 @@
+import userController from '../controllers/user';
+import signUpValidation from '../middleware/validations/signUpValidation';
+import userDetailExist from '../middleware/validations/userDetailExist';
+
 export default (app) => {
-  app.get('/api/test', (req, res) => res.send({ message: 'Welcome to PostIt app' }));
+  app.post(
+    '/api/user/signup', signUpValidation,
+    userDetailExist, userController.signup
+  );
 };
