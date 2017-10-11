@@ -8,7 +8,7 @@ export default {
    * @param {req} req
    * @param {res} res
    * @param {next} next
-   * @return {user} user
+   * @return {object} message,username,email
    */
   signup(req, res) {
     const { username, email, password } = req.body;
@@ -25,6 +25,6 @@ export default {
         username: user.username,
         email: user.email,
       }))
-      .catch(error => res.status(400).send({ message: error }));
+      .catch(error => res.status(500).send({ message: error }));
   }
 };
