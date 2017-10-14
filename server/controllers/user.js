@@ -1,6 +1,8 @@
 import md5 from 'md5';
+import jwt from 'jsonwebtoken';
 import models from '../models';
 
+require('dotenv').config();
 
 export default {
   /**
@@ -27,5 +29,41 @@ export default {
         email: user.email,
       }))
       .catch(error => res.status(500).send({ message: error }));
+  },
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return {object} user
+   */
+  signIn(req, res) {
+    const { username, password } = req.body;
+    // check if there is a user with email and password combination
+    models.User
+      .findOne({
+        where: {
+          username, password: md5(password)
+        },
+        attributes: {
+          exclude: ['password', 'resetPassToken', 'expirePassToken']
+        }
+      })
+      .then((user) => {
+        // Checks to see if the user exist//
+        if (!user) {
+          return res.status(400).send({
+            message: 'Invalid username or password'
+          });
+        }
+        const token = jwt.sign({ user }, process.env.SECRET, {
+          expiresIn: '24h'
+        });
+
+        return res.status(200).send({
+          message: `Welcome ${user.username}`,
+          token,
+          user
+        });
+      });
   }
 };
