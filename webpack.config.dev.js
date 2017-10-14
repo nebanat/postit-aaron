@@ -48,5 +48,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin()
-  ]
+  ],
+  devServer: {
+    historyApiFallback: true
+  }
 };

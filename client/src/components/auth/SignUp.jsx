@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-// import Navigation from '../navigation/Navigation.jsx';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as userActions from '../../actions/userActions';
+
 
 /**
  * @class
  * @extends component
  */
-class Register extends Component {
+class SignUp extends Component {
   /**
    *
    * @param {object} props
@@ -14,6 +17,9 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.registerUser = this.registerUser.bind(this);
+    this.state = {
+      passwordMatchError: ''
+    };
   }
   /**
    *
@@ -22,8 +28,22 @@ class Register extends Component {
    */
   registerUser(event) {
     event.preventDefault();
-  }
+    const username = this.refs.username.value;
+    const email = this.refs.email.value;
+    const password = this.refs.password.value;
+    const cpassword = this.refs.cpassword.value;
 
+    if (password !== cpassword) {
+      this.setState({ passwordMatchError: 'Confirm password does not match password' });
+      return;
+    }
+
+    this.props.actions.userActions.signUpUser(username, email, password);
+    this.refs.signUpForm.reset();
+  }
+  // /**
+  //  * @return { actions } actions
+  //  */
   // componentWillMount() {
   //   this.props.signUpUserSuccess('');
   //   this.props.signUpUserError('');
@@ -45,29 +65,29 @@ class Register extends Component {
                             <div className="card">
                                 <div className="card-content">
                                     <p className='red-text center col s12'>
-                                      {/* {
-                                        (this.props.registerErrorMessage &&
-                                        !this.props.registerSuccessMessage)
-                                        ? this.props.registerErrorMessage : ''
-                                       } */}
+                                      { this.state.passwordMatchError }
+                                      {
+                                        (this.props.userErrorMessage)
+                                        ? this.props.userErrorMessage : ''
+                                       }
                                       </p><br/>
                                     <p className='green-text center col s12'>
-                                      {/* {(this.props.registerSuccessMessage)
-                                         ? this.props.registerSuccessMessage
-                                         : ''} */}
+                                      {(this.props.userSuccessMessage)
+                                         ? this.props.userSuccessMessage
+                                         : ''}
                                     <span>
                                       {/* link to login */}
-                                      <a href='#'>
+                                      <Link href='/signin'>
                                         {/* {
-                                          this.props.registerSuccessMessage
+                                          (this.props.userSuccessMessage)
                                           ? ' Login here' : ' '
                                         } */}
-                                        </a></span></p>
-                                    <br/>
+                                        </Link></span></p>
+                                    <br/><br/>
                                     <span className="card-title center">
                                       Register
                                     </span>
-                                    <form onSubmit = { this.registerUser }>
+                                    <form onSubmit = { this.registerUser } ref='signUpForm'>
                                         <div className='row'>
                                             <div
                                               className="input-field col s10 offset-s1">
@@ -132,8 +152,7 @@ class Register extends Component {
                                             <span>
                                               Have an account?
                                             </span>
-                                            {/* link to login */}
-                                            <a href='#'> Sign In</a>
+                                            <Link to='/signin'> Sign In</Link>
                                         </div>
                                     </div>
                                 </div>
@@ -149,4 +168,29 @@ class Register extends Component {
   }
 }
 
-export default Register;
+/**
+ *
+ * @param {state} state
+ * @return {state} state
+ */
+function mapStateToProps(state) {
+  return {
+    userSuccessMessage: state.userSuccessMessage,
+    userErrorMessage: state.userErrorMessage
+  };
+}
+/**
+ *
+ * @param {dispatch} dispatch
+ * @return {object} actions
+ */
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      userActions: bindActionCreators(userActions, dispatch),
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+

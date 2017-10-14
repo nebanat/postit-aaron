@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import Navigation from './navigation/Navigation.jsx';
 
 /**
  * @class
@@ -12,6 +12,7 @@ class App extends Component {
   render() {
     return (
             <div>
+                <Navigation/>
                 { React.cloneElement(this.props.children, this.props) }
             </div>
 
@@ -22,5 +23,4 @@ class App extends Component {
 // App.propTypes = {
 //   children: PropTypes.object.isRequired
 // };
-
 export default App;

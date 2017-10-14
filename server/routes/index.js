@@ -1,10 +1,11 @@
 import userController from '../controllers/user';
 import signUpValidation from '../middleware/validations/signUpValidation';
-import userDetailExist from '../middleware/validations/userDetailExist';
+import emailExist from '../middleware/validations/emailExist';
+import usernameExist from '../middleware/validations/usernameExist';
 
 export default (app) => {
   app.post(
-    '/api/user/signup', signUpValidation,
-    userDetailExist, userController.signup
+    '/api/user/signup', signUpValidation, emailExist, usernameExist,
+    userController.signup
   );
 };

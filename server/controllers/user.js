@@ -13,6 +13,7 @@ export default {
   signup(req, res) {
     const { username, email, password } = req.body;
 
+
     // creates user
     models.User
       .create({

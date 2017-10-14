@@ -10,18 +10,15 @@ export default function signUpValidation(req, res, next) {
     return res.status(400).send({
       message: 'username is required'
     });
-  }
-  if (!req.body.email || req.body.email.trim() === '') {
+  } else if (!req.body.email || req.body.email.trim() === '') {
     return res.status(400).send({
       message: 'email is required'
     });
-  }
-  if (!req.body.password || req.body.password.trim() === '') {
+  } else if (!req.body.password || req.body.password.trim() === '') {
     return res.status(400).send({
       message: 'password is required'
     });
-  }
-  if (req.body.password.length < 6) {
+  } else if (req.body.password.length < 6) {
     return res.status(400).send({
       message: 'password must be at least 6 characters'
     });
