@@ -3,7 +3,7 @@ node_js:
     - "6"
 before_script:
     - npm install sequelize-cli -g
-    - createdb post-test --username=postgres
+    - createdb post-test --username=andeladeveloper
     - sequelize db:migrate 
 script: npm test
 after_success:
