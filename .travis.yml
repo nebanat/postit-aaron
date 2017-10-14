@@ -3,7 +3,8 @@ node_js:
     - "6"
 before_script:
     - npm install sequelize-cli -g
-    - createdb postit-test --username=postgres
+    - createdb post-test --username=postgres
+   
 script: npm test
 after_success:
     -npm run coveralls

@@ -1,33 +1,55 @@
-import webpack from 'webpack';
-import path from 'path';
+// const path = require('path');
+const webpack = require('webpack');
 
-export default {
-  devtool: 'inline-source-map',
-  entry: [
-   'webpack-hot-middleware/client?reload=true', //note that it reloads the page if hot module reloading fails.
-    path.resolve(__dirname, 'client/src/index')
-  ],
-  target: 'web',
+module.exports = {
+  entry: ['webpack-hot-middleware/client', './client/src/index.js'],
   output: {
-    path: __dirname + '/dist', // Note: Physical files are only output by the production build task `npm run build`.
+    path: `${__dirname}/dist`, // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: '/',
     filename: 'bundle.js'
   },
-  devServer: {
-    contentBase: path.resolve(__dirname, 'client/src')
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  ],
   module: {
     loaders: [
-      {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel-loader']},
-      {test: /(\.css)$/, loaders: ['style', 'css']},
-      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
-      {test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000'},
-      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'}
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+        exclude: /node_modules\//,
+        query: {
+          presets: ['react', 'es2015'],
+          plugins: [
+            'react-html-attrs',
+            'transform-decorators-legacy',
+            'transform-class-properties'],
+        }
+      },
+      {
+        test: /\.css$/,
+        loader: [
+          'style-loader',
+          'css-loader?importLoaders=1',
+          'font-loader?format[]=truetype&format[]=woff&format[]=embedded-opentype'
+        ]
+      },
+      {
+        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader: 'file-loader?name=/fonts/[name].[ext]'
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader'
+      }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+  // devtool: '#eval-source-map',
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin()
+  ],
+  devServer: {
+    historyApiFallback: true
   }
 };
