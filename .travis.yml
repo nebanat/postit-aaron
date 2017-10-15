@@ -4,7 +4,7 @@ node_js:
 before_script:
     - npm install sequelize-cli -g
     - createdb post-test --username=postgres
-   
+    - sequelize db:migrate
 script: npm test
 after_success:
     -npm run coveralls
