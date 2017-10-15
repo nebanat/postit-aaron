@@ -1,9 +1,7 @@
-
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Group = sequelize.define('Group', {
     name: {
       type: DataTypes.STRING,
-      unique: true,
       allowNull: false,
       validate: {
         notEmpty: {
@@ -21,14 +19,14 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     }
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-        // relationship between groups and users//
-        Group.belongsToMany(models.User, { through: 'UsersGroups', foreignKey: 'groupId' });
-      }
-    }
+
   });
+  Group.associate = (models) => {
+    // relationship between groups and users//
+    Group.belongsToMany(models.User, { through: 'UsersGroups', foreignKey: 'groupId' });
+
+    // relationship betweeb group and messages//
+    // Group.hasMany(models.Message, { foreignKey: 'userId', as: 'messages' });
+  };
   return Group;
 };

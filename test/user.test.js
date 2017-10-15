@@ -4,6 +4,7 @@ import chaiHttp from 'chai-http';
 import app from '../server/app';
 import models from '../server/models';
 
+
 chai.use(chaiHttp);
 
 describe('User routes', () => {
