@@ -13,15 +13,12 @@ class CreateGroup extends Component {
   handleGroupSubmit(event) {
     event.preventDefault();
 
-    alert('create group touched');
+    const name = this.refs.name.value;
+    const description = this.refs.description.value;
+    
+    this.props.actions.groupActions.createGroup(name, description);
 
-    // let name = this.refs.name.value;
-    // let description = this.refs.description.value;
-
-
-    // this.props.createGroup(name,description);
-
-    // this.refs.groupForm.reset();
+    this.refs.groupForm.reset();
   }
   /**
    * @return {jsx} jsx
@@ -30,6 +27,18 @@ class CreateGroup extends Component {
     return (
             <div className='container'>
                 <h2>New Group</h2>
+                <p className='red-text center col s12'>
+                      {
+                       (this.props.createGroupError)
+                          ? this.props.createGroupError : ''
+                       }
+                 </p><br/>
+                 <p className='green-text center col s12'>
+                      {
+                       (this.props.createGroupMessage)
+                          ? this.props.createGroupMessage : ''
+                       }
+                 </p><br/>
                 <form
                   ref="groupForm"
                   onSubmit={this.handleGroupSubmit.bind(this)}
