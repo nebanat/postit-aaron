@@ -12,7 +12,7 @@ class Dashboard extends Component {
   render() {
     return (
             <div>
-               <h2>This is the dashboard</h2>
+               <h2>Welcome {this.props.authenticatedUser.username}</h2>
             </div>
 
     );

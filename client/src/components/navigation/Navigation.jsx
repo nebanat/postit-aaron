@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-// import { isLoggedIn, logout } from '../utils/AuthService'
+import { isLoggedIn, logout } from '../../utils/authservice';
 // import SearchUser from '../dashboard/search/user/SearchUser'
 
 /**
@@ -15,11 +15,11 @@ class Navigation extends React.Component {
     return (
             <div className="navbar-fixed">
 
-            {/* <ul id="dropdown1" className="dropdown-content">
+            <ul id="dropdown1" className="dropdown-content">
                 <li><a href="#!" className="black-text">Profile</a></li>
-                <li className="divider"></li> */}
-                {/* <li><Link className="black-text" onClick={() => logout()} to="/login">Logout</Link></li> */}
-            {/* </ul> */}
+                <li className="divider"></li>
+                <li><Link className="black-text" onClick={() => logout()} to="/signin">Logout</Link></li> */}
+            </ul>
                 <nav className='white'>
 
                     <div className="nav-wrapper">
@@ -40,7 +40,7 @@ class Navigation extends React.Component {
                                           Home
                                         </Link>
                                     </li>
-                                    {/* <li>
+                                    <li>
                                     {
                                         (isLoggedIn()) ?
                                         (
@@ -48,10 +48,10 @@ class Navigation extends React.Component {
                                             className="black-text">
                                         Dashboard
                                         </Link>
-                                        ):
+                                        ) :
                                         ('')
                                     }
-                                    </li> */}
+                                    </li>
                                     {/* <li>
                                     {
                                         (isLoggedIn()) ?
@@ -64,34 +64,38 @@ class Navigation extends React.Component {
                                     }
                                     </li> */}
                                     <li>
-                                      <Link
+                                      {
+                                      (!isLoggedIn()) ?
+                                      (<Link
                                           className="black-text"
                                           activeClassName = "orange white-text"
                                           to="/signin">
-                                          Log In
-                                      </Link>
+                                          Login
+                                      </Link>) : ''
+                                      }
                                    </li>
                                     <li>
                                     {
-                                        <Link
+                                      (!isLoggedIn()) ?
+                                        (<Link
                                           className="btn white black-text"
                                           activeClassName = "active"
                                           to="/signup">
                                           Get Started
-                                        </Link>
+                                        </Link>) : ('')
                                     }
                                     </li>
-                                    {/* <li>
+                                    <li>
                                     {
                                         (isLoggedIn()) ?
                                         (<a
                                             className="dropdown-button black-text"
                                             href="#!"
                                             data-activates="dropdown1">
-                                            { this.props.authUser ? this.props.authUser.username : ''}
+                                            { this.props.authenticatedUser ? this.props.authenticatedUser.username : ''}
                                             <i className="material-icons right">arrow_drop_down</i></a>) : ('')
                                     }
-                                    </li> */}
+                                    </li>
                                 </ul>
 
                             </div>
