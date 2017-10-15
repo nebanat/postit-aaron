@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
-import { userSuccessMessage, userErrorMessage } from './userReducer';
+import { userSuccessMessage,
+  userErrorMessage, authenticatedUser } from './userReducer';
 
 const rootReducers = combineReducers({
   userSuccessMessage,
-  userErrorMessage
+  userErrorMessage,
+  authenticatedUser
 });
 
 export default rootReducers;

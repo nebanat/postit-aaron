@@ -3,22 +3,24 @@
  * @param {*} req
  * @param {*} res
  * @param {*} next
- * @return {user} user
+ * @return {json} validation messages
  */
 export default function signUpValidation(req, res, next) {
-  if (!req.body.username || req.body.username.trim() === '') {
+  const { username, email, password } = req.body;
+
+  if (!username || username.trim() === '') {
     return res.status(400).send({
       message: 'username is required'
     });
-  } else if (!req.body.email || req.body.email.trim() === '') {
+  } else if (!email || email.trim() === '') {
     return res.status(400).send({
       message: 'email is required'
     });
-  } else if (!req.body.password || req.body.password.trim() === '') {
+  } else if (!password || password.trim() === '') {
     return res.status(400).send({
       message: 'password is required'
     });
-  } else if (req.body.password.length < 6) {
+  } else if (password.length < 6) {
     return res.status(400).send({
       message: 'password must be at least 6 characters'
     });

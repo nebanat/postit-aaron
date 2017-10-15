@@ -23,6 +23,22 @@ export function userErrorMessage(state = [], action) {
   switch (action.type) {
     case types.SIGN_UP_FAILURE:
       return action.userErrorMessage;
+    case types.SIGN_IN_FAILURE:
+      return action.userErrorMessage;
+    default:
+      return state;
+  }
+}
+/**
+ *
+ * @param {state} state
+ * @param {action} action
+ * @return {authenticatedUser} authenticatedUser
+ */
+export function authenticatedUser(state = [], action) {
+  switch (action.type) {
+    case types.SIGN_IN_SUCCESS:
+      return action.authenticatedUser;
     default:
       return state;
   }
