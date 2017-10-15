@@ -7,6 +7,8 @@ import SignUp from './components/auth/SignUp.jsx';
 import SignIn from './components/auth/SignIn.jsx';
 import Password from './components/auth/Password.jsx';
 import Dashboard from './components/dashboard/Dashboard.jsx';
+import CreateGroup from './components/group/CreateGroup.jsx';
+import { requireAuth, noRequireAuth } from './utils/authservice';
 import App from './components/App.jsx';
 import configureStore from './store/configureStore';
 
@@ -18,10 +20,11 @@ const Root = () => (
       <Router history ={ browserHistory }>
         <Route path="/" component = { App }>
           <IndexRoute component = { Home }></IndexRoute>
-          <Route path='/signup' component = { SignUp }></Route>
-          <Route path='/signin' component = { SignIn }></Route>
-          <Route path='/password' component = { Password }></Route>
-          <Route path='/dashboard' component = { Dashboard }></Route>
+          <Route path='/signup' component = { SignUp } onEnter={ noRequireAuth }></Route>
+          <Route path='/signin' component = { SignIn } onEnter={ noRequireAuth }></Route>
+          <Route path='/password' component = { Password } onEnter={ noRequireAuth }></Route>
+          <Route path='/dashboard' component = { Dashboard } onEnter={ requireAuth }></Route>
+          <Route path='/group/new' component = { CreateGroup } onEnter={ requireAuth }></Route>
         </Route>
       </Router>
 </Provider>

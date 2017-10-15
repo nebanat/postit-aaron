@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from '../actions/userActions';
+import * as groupActions from '../actions/groupActions';
 import Navigation from './navigation/Navigation.jsx';
 
 /**
@@ -35,7 +36,10 @@ function mapStateToProps(state) {
   return {
     userSuccessMessage: state.userSuccessMessage,
     userErrorMessage: state.userErrorMessage,
-    authenticatedUser: state.authenticatedUser
+    authenticatedUser: state.authenticatedUser,
+    groups: state.groups,
+    createGroupError: state.createGroupError,
+    createGroupMessage: state.createGroupMessage
   };
 }
 /**
@@ -47,6 +51,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       userActions: bindActionCreators(userActions, dispatch),
+      groupActions: bindActionCreators(groupActions, dispatch)
     }
   };
 }

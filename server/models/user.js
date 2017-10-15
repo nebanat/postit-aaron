@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: {
       type: DataTypes.STRING,
@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         // validates that the username doesnt already exist//
         notEmpty: {
           args: true,
-          msg: 'username is required'
+          msg: 'username cannot be empty'
         }
       }
     },
@@ -27,10 +27,11 @@ module.exports = (sequelize, DataTypes) => {
         }
 
       }
+
     },
     resetPassToken: {
       type: DataTypes.STRING,
-      unique: false
+      unique: true
     },
     expirePassToken: {
       type: DataTypes.STRING,
@@ -50,12 +51,14 @@ module.exports = (sequelize, DataTypes) => {
 
       }
     }
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-      }
-    }
   });
+  User.associate = function (models) {
+    // relationship between users and groups//
+    User.belongsToMany(models.Group, { through: 'UsersGroups', foreignKey: 'userId' });
+
+    // relationship between user and messages//
+    // User.hasMany(models.Message, { foreignKey: 'userId' });
+  };
   return User;
 };
+
