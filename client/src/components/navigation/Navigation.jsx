@@ -52,17 +52,17 @@ class Navigation extends React.Component {
                                         ('')
                                     }
                                     </li>
-                                    {/* <li>
+                                    <li>
                                     {
                                         (isLoggedIn()) ?
                                         (
                                           <Link
                                             className="btn waves-effect waves-light white black-text"
-                                            to="/new/group">
+                                            to="/group/new">
                                                 New Group
-                                          </Link>):('')
+                                          </Link>) : ('')
                                     }
-                                    </li> */}
+                                    </li>
                                     <li>
                                       {
                                       (!isLoggedIn()) ?
