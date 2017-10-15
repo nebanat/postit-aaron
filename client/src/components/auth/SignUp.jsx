@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as userActions from '../../actions/userActions';
 
 
 /**
@@ -168,29 +165,5 @@ class SignUp extends Component {
   }
 }
 
-/**
- *
- * @param {state} state
- * @return {state} state
- */
-function mapStateToProps(state) {
-  return {
-    userSuccessMessage: state.userSuccessMessage,
-    userErrorMessage: state.userErrorMessage
-  };
-}
-/**
- *
- * @param {dispatch} dispatch
- * @return {object} actions
- */
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      userActions: bindActionCreators(userActions, dispatch),
-    }
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default SignUp;
 

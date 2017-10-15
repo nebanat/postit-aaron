@@ -21,9 +21,9 @@ class SignIn extends React.Component {
    */
   signInUser(event) {
     event.preventDefault();
-    // const username = this.refs.username.value;
-    // const password = this.refs.password.value;
-    // this.props.logUserIn(username, password);
+    const username = this.refs.username.value;
+    const password = this.refs.password.value;
+    this.props.actions.userActions.signInUser(username, password);
   }
 
   /**
@@ -41,8 +41,8 @@ class SignIn extends React.Component {
                             <div className="card">
                                 <div className="card-content">
                                     <p className='red-text center'>{
-                                        this.props.loginErrorMessage
-                                         ? this.props.loginErrorMessage : ''}
+                                        this.props.userErrorMessage
+                                         ? this.props.userErrorMessage : ''}
                                     </p><br/>
                                     <span className="card-title center">
                                       Sign In

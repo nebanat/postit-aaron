@@ -30,7 +30,7 @@ export function signUp(username, email, password) {
 export function signIn(username, password) {
   return axios({
     method: 'post',
-    url: 'http://localhost:3000/api/user/signin',
+    url: '/api/user/signin',
     headers: {
       'Content-type': 'application/json; charset=utf-8'
     },

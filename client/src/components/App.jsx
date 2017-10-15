@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as userActions from '../actions/userActions';
 import Navigation from './navigation/Navigation.jsx';
 
 /**
@@ -23,4 +26,30 @@ class App extends Component {
 // App.propTypes = {
 //   children: PropTypes.object.isRequired
 // };
-export default App;
+/**
+ *
+ * @param {state} state
+ * @return {state} state
+ */
+function mapStateToProps(state) {
+  return {
+    userSuccessMessage: state.userSuccessMessage,
+    userErrorMessage: state.userErrorMessage,
+    authenticatedUser: state.authenticatedUser
+  };
+}
+/**
+ *
+ * @param {dispatch} dispatch
+ * @return {object} actions
+ */
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      userActions: bindActionCreators(userActions, dispatch),
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+

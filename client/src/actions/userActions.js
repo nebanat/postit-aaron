@@ -78,6 +78,7 @@ export function signInUser(username, password) {
   return dispatch => api.signIn(username, password)
     .then((response) => {
       dispatch(signInSuccess(response.data.user));
+
       localStorage.setItem('POSTIT_ACCESS_TOKEN', response.data.token);
 
       // redirect to dashboard
