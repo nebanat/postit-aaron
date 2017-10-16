@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from '../actions/userActions';
 import * as groupActions from '../actions/groupActions';
+import * as passwordActions from '../actions/passwordActions';
 import Navigation from './navigation/Navigation.jsx';
 
 /**
@@ -39,7 +40,11 @@ function mapStateToProps(state) {
     authenticatedUser: state.authenticatedUser,
     groups: state.groups,
     createGroupError: state.createGroupError,
-    createGroupMessage: state.createGroupMessage
+    createGroupMessage: state.createGroupMessage,
+    sendResetSuccessMessage: state.sendResetSuccessMessage,
+    sendResetFailureMessage: state.sendResetFailureMessage,
+    resetSuccessMessage: state.resetSuccessMessage,
+    resetFailureMessage: state.resetFailureMessage
   };
 }
 /**
@@ -51,7 +56,8 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       userActions: bindActionCreators(userActions, dispatch),
-      groupActions: bindActionCreators(groupActions, dispatch)
+      groupActions: bindActionCreators(groupActions, dispatch),
+      passwordActions: bindActionCreators(passwordActions, dispatch)
     }
   };
 }

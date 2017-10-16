@@ -29,9 +29,9 @@ export default (app) => {
     '/api/password/reset',
     resetPasswordValidation, passwordController.resetPassword
   );
-  app.use(authenticate); // check if a user has a valid token
+  // app.use(authenticate); // check if a user has a valid token
   app.post(
-    '/api/group', createGroupValidation, groupAlreadyExist,
+    '/api/group', authenticate, createGroupValidation, groupAlreadyExist,
     groupController.createNewGroup
   );
 };

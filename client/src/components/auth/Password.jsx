@@ -12,19 +12,18 @@ class Password extends Component {
    */
   handleResetOnSubmit(event) {
     event.preventDefault();
-    //  let email = this.refs.email.value;
+    const email = this.refs.email.value;
 
 
-    //  this.props.sendResetPassword(email);
+    this.props.actions.passwordActions.sendResetPassword(email);
 
-    //  this.refs.passResetForm.reset();
+    this.refs.passResetForm.reset();
   }
   /**
    * @returns {jsx} jsx
    */
   render() {
-    // const errorMessage = this.props.resetPasswordErrorMessage;
-    // const successMessage = this.props.resetPasswordSuccessMessage;
+    const { sendResetFailureMessage, sendResetSuccessMessage } = this.props;
     return (
             <div>
           {/*
@@ -40,10 +39,10 @@ class Password extends Component {
                         <div className="card">
                             <div className="card-content">
                              <p className='red-text center'>
-                                 {/* { (errorMessage) || ''} */}
+                                 { (sendResetFailureMessage) || ''}
                              </p><br/>
                              <p className='green-text center'>
-                                 {/* { successMessage || ''} */}
+                                 { (sendResetSuccessMessage) || ''}
                              </p><br/>
                                 <span className="card-title center">
                                   Recover Password

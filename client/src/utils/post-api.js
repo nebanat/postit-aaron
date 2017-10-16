@@ -69,12 +69,31 @@ export function createGroup(groupName, groupDescription) {
 export function sendResetPasswordLink(email) {
   return axios({
     method: 'post',
-    url: 'api/user/password',
+    url: '/api/password',
     headers: {
       'Content-type': 'application/json; charset=utf-8'
     },
     data: JSON.stringify({
       email,
+    })
+  });
+}
+/**
+ *
+ * @param {resetToken} resetToken
+ * @param {password} password
+ * @return {promise} promise
+ */
+export function resetPassword(resetToken, password) {
+  return axios({
+    method: 'post',
+    url: '/api/password/reset',
+    headers: {
+      'Content-type': 'application/json; charset=utf-8'
+    },
+    data: JSON.stringify({
+      resetToken,
+      password
     })
   });
 }

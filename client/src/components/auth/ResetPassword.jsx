@@ -13,22 +13,38 @@ class ResetPassword extends Component {
   constructor(props) {
     super(props);
     this.handleSubmitPasswordReset = this.handleSubmitPasswordReset.bind(this);
+    this.state = {
+      confirmPasswordError: '',
+    };
+  }
+  componentWillMount() {
+    console.log(this.props.params.resetToken);
   }
   /**
    *
-   * @param {event} event
-   * @return {password} password
+   * @param { event } event
+   * @return { password } password
    */
   handleSubmitPasswordReset(event) {
     event.preventDefault();
-    // const password = this.refs.password.value;
-    // const password_confirm = this.refs.password_confirm.value;
+    const password = this.refs.password.value;
+    const passwordConfirm = this.refs.password_confirm.value;
+    const { resetToken } = this.props.params;
 
-    // alert('touched');
+    if (password !== passwordConfirm) {
+      return this.setState({ confirmPasswordError: 'Passwords do not match' });
+    }
 
-    // check if
+    if (password.length < 6) {
+      return this.setState({ confirmPasswordError: 'Passwords must be a least 6 characters' });
+    }
 
-    // this.refs.reset_form.reset();
+
+    this.props.actions.passwordActions.resetPassword(resetToken, password);
+
+    this.setState({ confirmPasswordError: '' });
+
+    this.refs.resetForm.reset();
   }
   /**
    * @return {jsx} jsx
@@ -44,12 +60,19 @@ class ResetPassword extends Component {
                         <div className="col s12 m6 offset-m3">
                             <div className="card">
                                 <div className="card-content">
+                                <p className='red-text center'>
+                                 { (this.state.confirmPasswordError) || ''}
+                                 { (this.props.resetFailureMessage) || ''}
+                                </p><br/>
+                                <p className='green-text center'>
+                                 { (this.props.resetSuccessMessage) || ''}
+                                </p><br/>
                                     <span
                                       className="card-title center">
                                       Reset Password
                                     </span>
                                     <form
-                                      ref="reset_form"
+                                      ref="resetForm"
                                       onSubmit={this.handleSubmitPasswordReset}>
                                         <div className='row'>
                                             <div
