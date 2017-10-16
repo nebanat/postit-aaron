@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SideNav from '../navigation/SideNav.jsx';
 
 
 /**
@@ -12,7 +13,7 @@ class Dashboard extends Component {
   render() {
     return (
             <div>
-               <h2>Welcome {this.props.authenticatedUser.username}</h2>
+                <SideNav/>
             </div>
 
     );
