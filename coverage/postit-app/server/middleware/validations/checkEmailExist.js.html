@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for postit-app/server/middleware/validations/signInValidation.js</title>
+    <title>Code coverage report for postit-app/server/middleware/validations/checkEmailExist.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -16,28 +16,28 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../../../index.html">All files</a> / <a href="index.html">postit-app/server/middleware/validations</a> signInValidation.js
+      <a href="../../../../index.html">All files</a> / <a href="index.html">postit-app/server/middleware/validations</a> checkEmailExist.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">83.33% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>7/7</span>
+        <span class='fraction'>5/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>8/8</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/1</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">83.33% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>7/7</span>
+        <span class='fraction'>5/6</span>
       </div>
     </div>
   </div>
@@ -64,47 +64,56 @@
 19
 20
 21
-22</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+22
+23
+24
+25</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import models from '../../models';
+/**
  *
- * @param {req} req
- * @param {res} res
- * @param {next} next
- * @return {json} validations
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @return {user} user
  */
-export default function signInValidation(req, res, next) {
-  const { username, password } = req.body;
-  // validates user entries
-  if (!username || username.trim() === '') {
-    return res.status(400).send({
-      message: 'Please enter username'
+export default function checkEmailExist(req, res, next) {
+  // checks if username already exist
+  const { email } = req.body;
+&nbsp;
+  models.User
+    .findOne({ where: { email } })
+    .then((user) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (!user) {
+        return res.status(400).send({
+          message: 'User does not exist in our records'
+        });
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      next();</span>
     });
-  } else if (!password || password.trim() === '') {
-    return res.status(400).send({
-      message: 'Please enter password'
-    });
-  }
-  next();
 }
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -112,7 +121,7 @@ export default function signInValidation(req, res, next) {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 16 2017 10:29:07 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 16 2017 00:47:34 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>
