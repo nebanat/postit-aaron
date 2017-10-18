@@ -28,7 +28,7 @@ describe('Reset Password', () => {
   describe('Send reset password link route', () => {
     it('should throw an error if email is empty', (done) => {
       chai.request(app)
-        .post('/api/password')
+        .post('/api/user/password')
         .send({})
         .end((err, res) => {
           expect(res.status).toEqual(400);
@@ -38,7 +38,7 @@ describe('Reset Password', () => {
     });
     it('should throw an error if email entered does not exist in database', (done) => {
       chai.request(app)
-        .post('/api/password')
+        .post('/api/user/password')
         .send({
           email: 'testuser5@gmail.com'
         })
@@ -52,7 +52,7 @@ describe('Reset Password', () => {
   describe('Reset Password route', () => {
     it('should throw an error when a token is not provided', (done) => {
       chai.request(app)
-        .post('/api/password/reset')
+        .post('/api/user/password/reset')
         .send({})
         .end((err, res) => {
           expect(res.status).toEqual(400);
@@ -62,7 +62,7 @@ describe('Reset Password', () => {
     });
     it('should throw an error when a new password is not provided', (done) => {
       chai.request(app)
-        .post('/api/password/reset')
+        .post('/api/user/password/reset')
         .send({
           resetToken: 'hdd8ddd0w3jdjdn'
         })

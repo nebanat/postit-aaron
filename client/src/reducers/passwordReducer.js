@@ -22,7 +22,7 @@ export function sendResetSuccessMessage(state = [], action) {
  */
 export function sendResetFailureMessage(state = [], action) {
   switch (action.type) {
-    case types.SIGN_UP_SUCCESS:
+    case types.PASSWORD_EMAIL_LINK_FAILURE:
       return action.sendResetFailureMessage;
     default:
       return state;

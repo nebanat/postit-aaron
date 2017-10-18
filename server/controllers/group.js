@@ -28,7 +28,33 @@ export default {
           group
         });
       })
-      .catch(error => res.status(500).send({ message: 'Internal server error.please try again' }));
+      .catch(error => res.status(500).send({ error: error.message }));
+  },
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return {groups} groups
+   */
+  getAuthUserGroups(req, res) {
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    // decodes token//
+    const access = decode(token);
+    const userId = access.user.id;
+
+    models.User
+      .findById(userId)
+      .then((user) => {
+      /* Checks to see if the user exist */
+        if (!user) {
+          return res.status(404).send({
+            message: 'User does not exist'
+          });
+        }
+
+        user.getGroups().then(userGroups => res.status(200).send(userGroups));
+      })
+      .catch(error => res.status(500).send({ error: error.message }));
   }
 };
 
