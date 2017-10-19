@@ -25,9 +25,6 @@ class App extends Component {
   }
 }
 
-// App.propTypes = {
-//   children: PropTypes.object.isRequired
-// };
 /**
  *
  * @param {state} state
@@ -45,7 +42,6 @@ function mapStateToProps(state) {
     sendResetFailureMessage: state.sendResetFailureMessage,
     resetSuccessMessage: state.resetSuccessMessage,
     resetFailureMessage: state.resetFailureMessage,
-    userGroups: state.userGroups,
     fetchUserGroupsError: state.fetchUserGroupsError
   };
 }

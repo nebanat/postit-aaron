@@ -7,6 +7,8 @@ import * as types from '../actions/actionTypes';
  */
 export function groups(state = [], action) {
   switch (action.type) {
+    case types.FETCH_USER_GROUPS_SUCCESS:
+      return action.groups;
     case types.CREATE_GROUP_SUCCESS:
       return [...state,
         Object.assign({}, action.group)];
@@ -39,20 +41,6 @@ export function createGroupMessage(state = [], action) {
   switch (action.type) {
     case types.CREATE_GROUP_SUCCESS_MESSAGE:
       return action.createGroupMessage;
-    default:
-      return state;
-  }
-}
-/**
- *
- * @param {state} state
- * @param {action} action
- * @return {userGroups} userGroups
- */
-export function userGroups(state = [], action) {
-  switch (action.type) {
-    case types.FETCH_USER_GROUPS_SUCCESS:
-      return action.userGroups;
     default:
       return state;
   }

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as passwordActions from '../../actions/passwordActions';
+import Navigation from '../navigation/Navigation.jsx';
 // import Loader from '../loader/Loader.jsx'
 
 /**
@@ -30,6 +34,7 @@ class Password extends Component {
             {
                 (this.props.groupIsLoading) ? (<Loader/>) : ('')
             } */}
+            <Navigation/>
             <div className="section purple darken-4">
                 <div className="container">
                     <h4 className="center white-text">PostIt-Messaging</h4>
@@ -82,5 +87,29 @@ class Password extends Component {
     );
   }
 }
+/**
+ *
+ * @param {state} state
+ * @return {state} state
+ */
+function mapStateToProps(state) {
+  return {
+    sendResetSuccessMessage: state.sendResetSuccessMessage,
+    sendResetFailureMessage: state.sendResetFailureMessage,
+  };
+}
+/**
+ *
+ * @param {dispatch} dispatch
+ * @return {object} actions
+ */
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      passwordActions: bindActionCreators(passwordActions, dispatch)
+    }
+  };
+}
 
-export default Password;
+export default connect(mapStateToProps, mapDispatchToProps)(Password);
+

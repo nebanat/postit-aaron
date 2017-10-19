@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import SideNav from '../navigation/SideNav.jsx';
+import * as userActions from '../../actions/userActions';
+import * as groupActions from '../../actions/groupActions';
+import Navigation from '../navigation/Navigation.jsx';
 
 
 /**
@@ -8,17 +13,25 @@ import SideNav from '../navigation/SideNav.jsx';
  */
 class Dashboard extends Component {
   /**
+   * @return {userData} userData
+   */
+  componentWillMount() {
+    // loads user groups
+    this.props.actions.groupActions.fetchUserGroups();
+  }
+  /**
    * @return { jsx } jsx
    */
   render() {
     return (
             <div>
-              <div className="row">
+               <Navigation/>
+               <div className="row">
                   <div className="col s3">
                       <SideNav/>
                   </div>
                   <div className="col s9">
-                      <h1>Hello Dashboard</h1>
+                      { React.cloneElement(this.props.children, this.props) }
                   </div>
               </div>
             </div>
@@ -26,7 +39,34 @@ class Dashboard extends Component {
     );
   }
 }
+/**
+ *
+ * @param {state} state
+ * @return {state} state
+ */
+function mapStateToProps(state) {
+  return {
+    userSuccessMessage: state.userSuccessMessage,
+    userErrorMessage: state.userErrorMessage,
+    authenticatedUser: state.authenticatedUser,
+    groups: state.groups,
+    createGroupError: state.createGroupError,
+    createGroupMessage: state.createGroupMessage,
+    fetchUserGroupsError: state.fetchUserGroupsError
+  };
+}
+/**
+ *
+ * @param {dispatch} dispatch
+ * @return {object} actions
+ */
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      userActions: bindActionCreators(userActions, dispatch),
+      groupActions: bindActionCreators(groupActions, dispatch),
+    }
+  };
+}
 
-
-export default Dashboard;
-
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

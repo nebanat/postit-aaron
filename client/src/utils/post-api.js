@@ -103,7 +103,7 @@ export function resetPassword(resetToken, password) {
 export function getUserGroups() {
   return axios({
     method: 'GET',
-    url: 'http://localhost:3000/api/user/groups',
+    url: '/api/group/user',
     headers: {
       'Content-type': 'application/json; charset=utf-8',
       'id-token': getAccessId(),

@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as userActions from '../../actions/userActions';
+import Navigation from '../navigation/Navigation.jsx';
 
 
 /**
@@ -38,20 +42,13 @@ class SignUp extends Component {
     this.props.actions.userActions.signUpUser(username, email, password);
     this.refs.signUpForm.reset();
   }
-  // /**
-  //  * @return { actions } actions
-  //  */
-  // componentWillMount() {
-  //   this.props.signUpUserSuccess('');
-  //   this.props.signUpUserError('');
-  // }
   /**
    * @return {jsx} jsx
    */
   render() {
     return (
            <div>
-                {/* <Navigation/> */}
+                <Navigation/>
                 <div className="section purple darken-4">
                 <div className="container">
                     <h4 className="center white-text">PostIt-Messaging</h4>
@@ -164,6 +161,30 @@ class SignUp extends Component {
     );
   }
 }
+/**
+ *
+ * @param {state} state
+ * @return {state} state
+ */
+function mapStateToProps(state) {
+  return {
+    userSuccessMessage: state.userSuccessMessage,
+    userErrorMessage: state.userErrorMessage,
+    authenticatedUser: state.authenticatedUser,
+  };
+}
+/**
+ *
+ * @param {dispatch} dispatch
+ * @return {object} actions
+ */
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      userActions: bindActionCreators(userActions, dispatch),
+    }
+  };
+}
 
-export default SignUp;
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
 

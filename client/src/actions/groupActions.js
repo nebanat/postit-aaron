@@ -55,13 +55,13 @@ export function createGroup(groupName, groupDescription) {
 }
 /**
  *
- * @param {userGroups} userGroups
+ * @param {groups} groups
  * @return {actionObject} actionObject
  */
-export function fetchUserGroupsSuccess(userGroups) {
+export function fetchUserGroupsSuccess(groups) {
   return {
     type: types.FETCH_USER_GROUPS_SUCCESS,
-    userGroups
+    groups
   };
 }
 /**
@@ -81,10 +81,11 @@ export function fetchUserGroupsFailure(fetchGroupErrorMessage) {
 export function fetchUserGroups() {
   return dispatch => api.getUserGroups()
     .then((response) => {
-      dispatch(fetchUserGroupsSuccess(response.data.userGroups));
+      dispatch(fetchUserGroupsSuccess(response.data));
     })
     .catch((error) => {
       if (error) {
+        console.log(error);
         dispatch(fetchUserGroupsFailure(error.response.data.message));
       }
     });

@@ -1,5 +1,9 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as userActions from '../../actions/userActions';
+import Navigation from '../navigation/Navigation.jsx';
 
 /**
  * @class
@@ -32,6 +36,7 @@ class SignIn extends React.Component {
   render() {
     return (
            <div>
+              <Navigation/>
                <div className="section purple darken-4">
                 <div className="container">
                     <h4 className="center white-text">PostIt-Messaging</h4>
@@ -98,6 +103,28 @@ class SignIn extends React.Component {
     );
   }
 }
+/**
+ *
+ * @param {state} state
+ * @return {state} state
+ */
+function mapStateToProps(state) {
+  return {
+    userSuccessMessage: state.userSuccessMessage,
+    userErrorMessage: state.userErrorMessage,
+  };
+}
+/**
+ *
+ * @param {dispatch} dispatch
+ * @return {object} actions
+ */
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      userActions: bindActionCreators(userActions, dispatch),
+    }
+  };
+}
 
-export default withRouter(SignIn);
-
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
