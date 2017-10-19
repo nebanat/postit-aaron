@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAccessToken } from './authservice';
+import { getAccessToken, getAccessId } from './authservice';
 /**
  *
  * @param {username} username
@@ -95,5 +95,19 @@ export function resetPassword(resetToken, password) {
       resetToken,
       password
     })
+  });
+}
+/**
+ * @return {promise} promise
+ */
+export function getUserGroups() {
+  return axios({
+    method: 'GET',
+    url: 'http://localhost:3000/api/user/groups',
+    headers: {
+      'Content-type': 'application/json; charset=utf-8',
+      'id-token': getAccessId(),
+      'x-access-token': getAccessToken()
+    }
   });
 }

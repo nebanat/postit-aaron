@@ -43,3 +43,32 @@ export function createGroupMessage(state = [], action) {
       return state;
   }
 }
+/**
+ *
+ * @param {state} state
+ * @param {action} action
+ * @return {userGroups} userGroups
+ */
+export function userGroups(state = [], action) {
+  switch (action.type) {
+    case types.FETCH_USER_GROUPS_SUCCESS:
+      return action.userGroups;
+    default:
+      return state;
+  }
+}
+
+/**
+ *
+ * @param {state} state
+ * @param {action} action
+ * @return {fetchGroupError} fetchGroupError
+ */
+export function fetchUserGroupsError(state = [], action) {
+  switch (action.type) {
+    case types.FETCH_USER_GROUPS_ERROR:
+      return action.fetchGroupErrorMessage;
+    default:
+      return state;
+  }
+}

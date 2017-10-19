@@ -44,7 +44,9 @@ function mapStateToProps(state) {
     sendResetSuccessMessage: state.sendResetSuccessMessage,
     sendResetFailureMessage: state.sendResetFailureMessage,
     resetSuccessMessage: state.resetSuccessMessage,
-    resetFailureMessage: state.resetFailureMessage
+    resetFailureMessage: state.resetFailureMessage,
+    userGroups: state.userGroups,
+    fetchUserGroupsError: state.fetchUserGroupsError
   };
 }
 /**

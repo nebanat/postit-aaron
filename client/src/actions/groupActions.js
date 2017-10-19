@@ -53,4 +53,39 @@ export function createGroup(groupName, groupDescription) {
       }
     });
 }
-
+/**
+ *
+ * @param {userGroups} userGroups
+ * @return {actionObject} actionObject
+ */
+export function fetchUserGroupsSuccess(userGroups) {
+  return {
+    type: types.FETCH_USER_GROUPS_SUCCESS,
+    userGroups
+  };
+}
+/**
+ *
+ * @param {fetchGroupErrorMessage} fetchGroupErrorMessage
+ * @return {actionObject} actionObject
+ */
+export function fetchUserGroupsFailure(fetchGroupErrorMessage) {
+  return {
+    type: types.FETCH_USER_GROUPS_ERROR,
+    fetchGroupErrorMessage
+  };
+}
+/**
+ * @return { userGroups } userGroups
+ */
+export function fetchUserGroups() {
+  return dispatch => api.getUserGroups()
+    .then((response) => {
+      dispatch(fetchUserGroupsSuccess(response.data.userGroups));
+    })
+    .catch((error) => {
+      if (error) {
+        dispatch(fetchUserGroupsFailure(error.response.data.message));
+      }
+    });
+}

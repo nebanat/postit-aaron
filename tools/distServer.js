@@ -11,17 +11,7 @@ import GroupRoutes from '../server/routes/groups';
 
 const port = 3000;
 const app = express();
-// const compiler = webpack(config);
 
-
-// app.use(require('webpack-dev-middleware')(compiler, {
-//   noInfo: true,
-//   publicPath: config.output.publicPath
-// }));
-
-// app.use(require('webpack-hot-middleware')(compiler));
-
-// app.use(logger('dev'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

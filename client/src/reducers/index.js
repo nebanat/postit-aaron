@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import { userSuccessMessage,
   userErrorMessage, authenticatedUser } from './userReducer';
-import { groups, createGroupError, createGroupMessage } from './groupReducer';
+import { groups, createGroupError,
+  createGroupMessage, userGroups, fetchUserGroupsError } from './groupReducer';
 import { sendResetSuccessMessage,
   sendResetFailureMessage, resetSuccessMessage,
   resetFailureMessage } from './passwordReducer';
@@ -16,7 +17,9 @@ const rootReducers = combineReducers({
   sendResetSuccessMessage,
   sendResetFailureMessage,
   resetSuccessMessage,
-  resetFailureMessage
+  resetFailureMessage,
+  userGroups,
+  fetchUserGroupsError
 });
 
 export default rootReducers;
