@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router';
 import * as types from './actionTypes';
 import * as api from '../utils/post-api';
 
@@ -46,6 +47,10 @@ export function createGroup(groupName, groupDescription) {
     .then((response) => {
       dispatch(createGroupSuccess(response.data.group));
       dispatch(createGroupSuccessMessage(response.data.message));
+      
+      browserHistory.push({
+        pathname: '/groups',
+      });
     })
     .catch((error) => {
       if (error) {
