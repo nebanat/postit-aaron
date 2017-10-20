@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAccessToken } from './authservice';
+import { getAccessToken, getAccessId } from './authservice';
 /**
  *
  * @param {username} username
@@ -69,7 +69,7 @@ export function createGroup(groupName, groupDescription) {
 export function sendResetPasswordLink(email) {
   return axios({
     method: 'post',
-    url: '/api/password',
+    url: '/api/user/password',
     headers: {
       'Content-type': 'application/json; charset=utf-8'
     },
@@ -87,7 +87,7 @@ export function sendResetPasswordLink(email) {
 export function resetPassword(resetToken, password) {
   return axios({
     method: 'post',
-    url: '/api/password/reset',
+    url: '/api/user/password/reset',
     headers: {
       'Content-type': 'application/json; charset=utf-8'
     },
@@ -95,5 +95,19 @@ export function resetPassword(resetToken, password) {
       resetToken,
       password
     })
+  });
+}
+/**
+ * @return {promise} promise
+ */
+export function getUserGroups() {
+  return axios({
+    method: 'GET',
+    url: '/api/group/user',
+    headers: {
+      'Content-type': 'application/json; charset=utf-8',
+      'id-token': getAccessId(),
+      'x-access-token': getAccessToken()
+    }
   });
 }

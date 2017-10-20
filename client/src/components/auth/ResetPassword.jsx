@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as passwordActions from '../../actions/passwordActions';
+import Navigation from '../navigation/Navigation.jsx';
 /**
  * @class
  * @extends component
@@ -17,9 +20,7 @@ class ResetPassword extends Component {
       confirmPasswordError: '',
     };
   }
-  componentWillMount() {
-    console.log(this.props.params.resetToken);
-  }
+ 
   /**
    *
    * @param { event } event
@@ -52,6 +53,7 @@ class ResetPassword extends Component {
   render() {
     return (
             <div>
+              <Navigation/>
                <div className="section purple darken-4">
                     <div className="container">
                         <h4 className="center white-text">PostIt-Messaging</h4>
@@ -120,5 +122,29 @@ class ResetPassword extends Component {
     );
   }
 }
+/**
+ *
+ * @param {state} state
+ * @return {state} state
+ */
+function mapStateToProps(state) {
+  return {
+    resetSuccessMessage: state.resetSuccessMessage,
+    resetFailureMessage: state.resetFailureMessage,
+  };
+}
+/**
+ *
+ * @param {dispatch} dispatch
+ * @return {object} actions
+ */
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      passwordActions: bindActionCreators(passwordActions, dispatch)
+    }
+  };
+}
 
-export default ResetPassword;
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword);
+

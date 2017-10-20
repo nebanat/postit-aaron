@@ -1,12 +1,21 @@
 // const path = require('path');
 import webpack from 'webpack';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
+const GLOBALS = {
+  'process.env.NODE_ENV': JSON.stringify('production')
+};
 module.exports = {
-  entry: ['webpack-hot-middleware/client', './client/src/index.js'],
+  devtool: 'source-maps',
+  entry: './client/src/index.js',
   output: {
     path: `${__dirname}/dist`, // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: '/',
     filename: 'bundle.js'
+  },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './dist',
   },
   module: {
     loaders: [
@@ -24,11 +33,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: [
-          'style-loader',
-          'css-loader?importLoaders=1',
-          'font-loader?format[]=truetype&format[]=woff&format[]=embedded-opentype'
-        ]
+        loader: ExtractTextPlugin.extract('css?sourceMap')
       },
       {
         test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
@@ -45,13 +50,10 @@ module.exports = {
   },
   // devtool: '#eval-source-map',
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.DefinePlugin(GLOBALS),
+    new ExtractTextPlugin('./client/css/style.css'),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin()
   ],
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './',
-    hot: true
-  },
 };

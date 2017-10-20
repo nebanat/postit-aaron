@@ -36,7 +36,7 @@ class Navigation extends React.Component {
                                     <li>
                                         <Link to="/"
                                           className="black-text"
-                                          activeClassName = "active">
+                                          activeClassName = "orange white-text">
                                           Home
                                         </Link>
                                     </li>

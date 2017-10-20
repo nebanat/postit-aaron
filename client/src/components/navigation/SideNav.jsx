@@ -26,7 +26,7 @@ class SideNav extends Component {
                         Your Groups
                       </Link>
                       <Link
-                        to="/message"
+                        to="/group/new"
                         className="white-text">
                         New Group
                       </Link>

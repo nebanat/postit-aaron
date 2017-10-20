@@ -25,7 +25,7 @@ class CreateGroup extends Component {
    */
   render() {
     return (
-            <div className='container'>
+            <div className="container">
                 <h2>New Group</h2>
                 <p className='red-text center col s12'>
                       {

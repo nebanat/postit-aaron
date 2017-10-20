@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router';
 import * as types from './actionTypes';
 import * as api from '../utils/post-api';
 
@@ -46,6 +47,10 @@ export function createGroup(groupName, groupDescription) {
     .then((response) => {
       dispatch(createGroupSuccess(response.data.group));
       dispatch(createGroupSuccessMessage(response.data.message));
+      
+      browserHistory.push({
+        pathname: '/groups',
+      });
     })
     .catch((error) => {
       if (error) {
@@ -53,4 +58,40 @@ export function createGroup(groupName, groupDescription) {
       }
     });
 }
-
+/**
+ *
+ * @param {groups} groups
+ * @return {actionObject} actionObject
+ */
+export function fetchUserGroupsSuccess(groups) {
+  return {
+    type: types.FETCH_USER_GROUPS_SUCCESS,
+    groups
+  };
+}
+/**
+ *
+ * @param {fetchGroupErrorMessage} fetchGroupErrorMessage
+ * @return {actionObject} actionObject
+ */
+export function fetchUserGroupsFailure(fetchGroupErrorMessage) {
+  return {
+    type: types.FETCH_USER_GROUPS_ERROR,
+    fetchGroupErrorMessage
+  };
+}
+/**
+ * @return { userGroups } userGroups
+ */
+export function fetchUserGroups() {
+  return dispatch => api.getUserGroups()
+    .then((response) => {
+      dispatch(fetchUserGroupsSuccess(response.data));
+    })
+    .catch((error) => {
+      if (error) {
+        console.log(error);
+        dispatch(fetchUserGroupsFailure(error.response.data.message));
+      }
+    });
+}

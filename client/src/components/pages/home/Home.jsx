@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Jumbotron from './Jumbotron.jsx';
 import Instuctions from './Instructions.jsx';
+import Navigation from '../../navigation/Navigation.jsx';
 
 
 /**
@@ -14,6 +15,7 @@ class Home extends Component {
   render() {
     return (
             <div>
+              <Navigation/>
                 {/* jumbotron component */}
                 <Jumbotron/>
                 <div className="container">

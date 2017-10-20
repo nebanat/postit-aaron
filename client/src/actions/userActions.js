@@ -40,6 +40,7 @@ export function signUpUser(username, email, password) {
     })
     .catch((error) => {
       if (error) {
+        console.log(error);
         dispatch(signUpFailure(error.response.data.message));
       }
     });
