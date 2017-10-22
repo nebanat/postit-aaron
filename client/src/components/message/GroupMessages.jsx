@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import SingleGroupMessage from './SingleGroupMessage.jsx';
+import GroupSideBar from '../group/GroupSideBar.jsx';
 
 /**
  * @class
@@ -13,7 +14,7 @@ class GroupMessages extends Component {
   componentWillMount() {
     this.props.actions.messageActions.fetchGroupMessages(this.props.params.id);
 
-    // this.props.fetchGroupUsers(this.props.params.id);
+    this.props.actions.groupActions.fetchGroupUsers(this.props.params.id);
   }
   /**
    * @returns {jsx} jsx
@@ -40,8 +41,8 @@ class GroupMessages extends Component {
                         </ul>
                     </div>
                     <div className="col s4">
-                      {/* <GroupSideBar {...this.props}
-                                    group={group}/> */}
+                      <GroupSideBar {...this.props}
+                                    group={group}/>
                     </div>
                 </div>
 

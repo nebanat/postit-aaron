@@ -37,9 +37,9 @@ export function createGroupFailure(createGroupError) {
 }
 /**
  *
- * @param {groupName} groupName
- * @param {groupDescription} groupDescription
- * @return {group} group
+ * @param { groupName } groupName
+ * @param { groupDescription } groupDescription
+ * @return { group } group
  *
  */
 export function createGroup(groupName, groupDescription) {
@@ -47,7 +47,7 @@ export function createGroup(groupName, groupDescription) {
     .then((response) => {
       dispatch(createGroupSuccess(response.data.group));
       dispatch(createGroupSuccessMessage(response.data.message));
-      
+
       browserHistory.push({
         pathname: '/groups',
       });
@@ -90,8 +90,44 @@ export function fetchUserGroups() {
     })
     .catch((error) => {
       if (error) {
-        console.log(error);
         dispatch(fetchUserGroupsFailure(error.response.data.message));
+      }
+    });
+}
+/**
+ *
+ * @param {groupUsers} groupUsers
+ * @return { groupUsersObject } groupUsersObject
+ */
+export function fetchGroupUsersSuccess(groupUsers) {
+  return {
+    type: types.FETCH_GROUP_USERS_SUCCESS,
+    groupUsers
+  };
+}
+/**
+ *
+ * @param {fetchGroupUsersError} fetchGroupUsersError
+ * @return { errorMessageObject } errorMessageObject
+ */
+export function fetchGroupUsersFailure(fetchGroupUsersError) {
+  return {
+    type: types.FETCH_GROUP_USERS_FAILURE,
+    fetchGroupUsersError
+  };
+}
+/**
+ * @param { groupId } groupId
+ * @return { groupUsers } groupUsers
+ */
+export function fetchGroupUsers(groupId) {
+  return dispatch => api.getGroupUsers(groupId)
+    .then((response) => {
+      dispatch(fetchGroupUsersSuccess(response.data));
+    })
+    .catch((error) => {
+      if (error) {
+        dispatch(fetchGroupUsersFailure(error.response.data.message));
       }
     });
 }

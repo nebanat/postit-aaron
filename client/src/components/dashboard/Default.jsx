@@ -12,7 +12,7 @@ class Default extends Component {
   render() {
     return (
             <div>
-              <h1>Hello Dashboard</h1>
+              <h2>Welcome to PostIt Application</h2>
             </div>
 
     );
