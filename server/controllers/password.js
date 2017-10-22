@@ -35,7 +35,7 @@ export default {
               subject: 'PostIt test',
               text: `Hello ${updatedUser.username}! 
                   The link to reset your password is below
-                  http://localhost:3001/reset/${token}`
+                  ${process.env.APP_URL}/reset/${token}`
             };
             transporter.sendMail(mailOptions, (error, info) => {
               if (error) {
@@ -82,7 +82,8 @@ export default {
         }).then(updatedUser => res.status(200).send({
           message: `Password reset successful for ${updatedUser.username}`
         }));
-      });
+      })
+      .catch(error => res.status(500).send({ error: error.message }));
   }
 };
 

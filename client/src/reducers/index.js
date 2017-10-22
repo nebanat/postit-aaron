@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 // user reducer
-import { userSuccessMessage,
-  userErrorMessage, authenticatedUser, authIsLoading } from './userReducer';
+import { signUpSuccessMessage,
+  signUpErrorMessage, signInErrorMessage,
+  authenticatedUser, authIsLoading } from './userReducer';
 // group reducer
 import { groups, createGroupError,
   createGroupMessage, fetchUserGroupsError,
@@ -15,8 +16,9 @@ import { postSuccessMessage, postFailureMessage,
   messages, fetchMessagesError, messageIsLoading } from './messageReducer';
 
 const rootReducers = combineReducers({
-  userSuccessMessage,
-  userErrorMessage,
+  signUpSuccessMessage,
+  signUpErrorMessage,
+  signInErrorMessage,
   authenticatedUser,
   groups,
   createGroupError,

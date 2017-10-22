@@ -51,8 +51,8 @@ class SignIn extends React.Component {
                             <div className="card">
                                 <div className="card-content">
                                     <p className='red-text center'>{
-                                        this.props.userErrorMessage
-                                         ? this.props.userErrorMessage : ''}
+                                        this.props.signInErrorMessage
+                                         ? this.props.signInErrorMessage : ''}
                                     </p><br/>
                                     <span className="card-title center">
                                       Sign In
@@ -118,9 +118,9 @@ class SignIn extends React.Component {
  */
 function mapStateToProps(state) {
   return {
-    userSuccessMessage: state.userSuccessMessage,
-    userErrorMessage: state.userErrorMessage,
-    authIsLoading: state.authIsLoading
+    signInErrorMessage: state.signInErrorMessage,
+    authIsLoading: state.authIsLoading,
+    authenticatedUser: state.authenticatedUser,
   };
 }
 /**

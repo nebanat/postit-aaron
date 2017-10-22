@@ -41,7 +41,7 @@ class SignUp extends Component {
     }
 
     this.props.actions.userActions.signUpUser(username, email, password);
-    this.refs.signUpForm.reset();
+    // this.refs.signUpForm.reset();
   }
   /**
    * @return {jsx} jsx
@@ -66,21 +66,21 @@ class SignUp extends Component {
                                     <p className='red-text center col s12'>
                                       { this.state.passwordMatchError }
                                       {
-                                        (this.props.userErrorMessage)
-                                        ? this.props.userErrorMessage : ''
+                                        (this.props.signUpErrorMessage)
+                                        ? this.props.signUpErrorMessage : ''
                                        }
                                       </p><br/>
                                     <p className='green-text center col s12'>
-                                      {(this.props.userSuccessMessage)
-                                         ? this.props.userSuccessMessage
+                                      {(this.props.signUpSuccessMessage)
+                                         ? this.props.signUpSuccessMessage
                                          : ''}
                                     <span>
                                       {/* link to login */}
                                       <Link href='/signin'>
-                                        {/* {
-                                          (this.props.userSuccessMessage)
+                                        {
+                                          (this.props.signUpSuccessMessage)
                                           ? ' Login here' : ' '
-                                        } */}
+                                        }
                                         </Link></span></p>
                                     <br/><br/>
                                     <span className="card-title center">
@@ -173,8 +173,8 @@ class SignUp extends Component {
  */
 function mapStateToProps(state) {
   return {
-    userSuccessMessage: state.userSuccessMessage,
-    userErrorMessage: state.userErrorMessage,
+    signUpSuccessMessage: state.signUpSuccessMessage,
+    signUpErrorMessage: state.signUpErrorMessage,
     authenticatedUser: state.authenticatedUser,
     authIsLoading: state.authIsLoading
   };

@@ -15,33 +15,33 @@ export function authIsLoading(bool) {
 }
 /**
  *
- * @param { userSucessMessage } userSuccessMessage
+ * @param { signUpSucessMessage } signUpSuccessMessage
  * @return { object } action
  */
-export function signUpSuccess(userSuccessMessage) {
+export function signUpSuccess(signUpSuccessMessage) {
   return {
     type: types.SIGN_UP_SUCCESS,
-    userSuccessMessage
+    signUpSuccessMessage
   };
 }
 /**
  *
- * @param {errorMessage} userErrorMessage
+ * @param { signUpErrorMessage } signUpErrorMessage
  * @return {object} action
  */
-export function signUpFailure(userErrorMessage) {
+export function signUpFailure(signUpErrorMessage) {
   return {
     type: types.SIGN_UP_FAILURE,
-    userErrorMessage
+    signUpErrorMessage
   };
 }
 
 /**
  *
- * @param {username} username
- * @param {email} email
- * @param {password} password
- * @return {object} user
+ * @param { username } username
+ * @param { email } email
+ * @param { password } password
+ * @return { object } user
  *
  */
 export function signUpUser(username, email, password) {
@@ -73,22 +73,22 @@ export function signInSuccess(authenticatedUser) {
 }
 /**
  *
- * @param {message} message
+ * @param { signInErrorMessage } signInErrorMessage
  * @return {object} action
  */
-export function signInFailure(message) {
+export function signInFailure(signInErrorMessage) {
   return {
     type: types.SIGN_IN_FAILURE,
-    message
+    signInErrorMessage
   };
 }
 
 
 /**
  *
- * @param {username} username
- * @param {password} password
- * @return {Object} user
+ * @param { username } username
+ * @param { password } password
+ * @return { Object } user
  */
 export function signInUser(username, password) {
   return (dispatch) => {
@@ -106,6 +106,7 @@ export function signInUser(username, password) {
       })
       .catch((error) => {
         if (error) {
+          console.log(error.response.status);
           dispatch(signInFailure(error.response.data.message));
           dispatch(authIsLoading(false));
         }
