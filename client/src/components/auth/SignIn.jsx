@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from '../../actions/userActions';
 import Navigation from '../navigation/Navigation.jsx';
+import Loader from '../loaders/Loader.jsx';
 
 /**
  * @class
@@ -34,9 +35,13 @@ class SignIn extends React.Component {
  * @return {jsx} jsx
  */
   render() {
+    const { authIsLoading } = this.props;
     return (
            <div>
               <Navigation/>
+              {
+                (authIsLoading) ? (<Loader/>) : ('')
+              }
                <div className="section purple darken-4">
                 <div className="container">
                     <h4 className="center white-text">PostIt-Messaging</h4>
@@ -54,18 +59,21 @@ class SignIn extends React.Component {
                                      </span>
                                     <form onSubmit={this.signInUser}>
                                         <div className='row'>
-                                        <div className="input-field col s8 offset-s2">
+                                        <div
+                                        className="input-field col s8 offset-s2">
                                             <input
                                               id="username"
                                               ref='username'
-                                              type="text" className="validate" required/>
+                                              type="text" className="validate"
+                                              required/>
                                             <label>Username</label>
                                         </div>
                                     </div>
                                     <div className='row'>
                                         <div className="input-field col s8 offset-s2">
                                             <input id="password" ref='password'
-                                            type="password" className="validate" required/>
+                                            type="password" className="validate"
+                                            required/>
                                             <label>Password</label>
                                         </div>
                                     </div>
@@ -112,6 +120,7 @@ function mapStateToProps(state) {
   return {
     userSuccessMessage: state.userSuccessMessage,
     userErrorMessage: state.userErrorMessage,
+    authIsLoading: state.authIsLoading
   };
 }
 /**

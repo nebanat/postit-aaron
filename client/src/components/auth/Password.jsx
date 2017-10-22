@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as passwordActions from '../../actions/passwordActions';
 import Navigation from '../navigation/Navigation.jsx';
-// import Loader from '../loader/Loader.jsx'
+import Loader from '../loaders/Loader.jsx';
 
 /**
  * @class
@@ -27,14 +27,18 @@ class Password extends Component {
    * @returns {jsx} jsx
    */
   render() {
-    const { sendResetFailureMessage, sendResetSuccessMessage } = this.props;
+    const {
+      sendResetFailureMessage, sendResetSuccessMessage,
+      passwordIsLoading
+    } = this.props;
     return (
             <div>
-          {/*
-            {
-                (this.props.groupIsLoading) ? (<Loader/>) : ('')
-            } */}
+
             <Navigation/>
+
+            {
+                (passwordIsLoading) ? (<Loader/>) : ('')
+            }
             <div className="section purple darken-4">
                 <div className="container">
                     <h4 className="center white-text">PostIt-Messaging</h4>
@@ -96,6 +100,7 @@ function mapStateToProps(state) {
   return {
     sendResetSuccessMessage: state.sendResetSuccessMessage,
     sendResetFailureMessage: state.sendResetFailureMessage,
+    passwordIsLoading: state.passwordIsLoading
   };
 }
 /**

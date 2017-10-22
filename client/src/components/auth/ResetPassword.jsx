@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as passwordActions from '../../actions/passwordActions';
 import Navigation from '../navigation/Navigation.jsx';
+import Loader from '../loaders/Loader.jsx';
 /**
  * @class
  * @extends component
@@ -10,8 +11,8 @@ import Navigation from '../navigation/Navigation.jsx';
 class ResetPassword extends Component {
   /**
    *
-   * @param {props} props
-   * @return {functionInitialization} functionInitialization
+   * @param { props } props
+   * @return { functionInitialization } functionInitialization
    */
   constructor(props) {
     super(props);
@@ -20,7 +21,7 @@ class ResetPassword extends Component {
       confirmPasswordError: '',
     };
   }
- 
+
   /**
    *
    * @param { event } event
@@ -48,12 +49,16 @@ class ResetPassword extends Component {
     this.refs.resetForm.reset();
   }
   /**
-   * @return {jsx} jsx
+   * @return { jsx } jsx
    */
   render() {
+    const { passwordIsLoading } = this.props;
     return (
-            <div>
+         <div>
               <Navigation/>
+              {
+                (passwordIsLoading) ? (<Loader/>) : ('')
+            }
                <div className="section purple darken-4">
                     <div className="container">
                         <h4 className="center white-text">PostIt-Messaging</h4>
@@ -118,7 +123,7 @@ class ResetPassword extends Component {
                     </div>
                     <br/><br/><br/><br/><br/><br/><br/>
                 </div>
-            </div>
+          </div>
     );
   }
 }
@@ -131,6 +136,7 @@ function mapStateToProps(state) {
   return {
     resetSuccessMessage: state.resetSuccessMessage,
     resetFailureMessage: state.resetFailureMessage,
+    passwordIsLoading: state.passwordIsLoading
   };
 }
 /**

@@ -4,6 +4,17 @@ import * as api from '../utils/post-api';
 
 /**
  *
+ * @param {bool} bool
+ * @return { groupLoadingObject } groupLoadingObject
+ */
+export function groupIsLoading(bool) {
+  return {
+    type: types.GROUP_IS_LOADING,
+    bool
+  };
+}
+/**
+ *
  * @param {group} group
  * @return {group} group
  */
@@ -43,20 +54,25 @@ export function createGroupFailure(createGroupError) {
  *
  */
 export function createGroup(groupName, groupDescription) {
-  return dispatch => api.createGroup(groupName, groupDescription)
-    .then((response) => {
-      dispatch(createGroupSuccess(response.data.group));
-      dispatch(createGroupSuccessMessage(response.data.message));
+  return (dispatch) => {
+    dispatch(groupIsLoading(true));
+    api.createGroup(groupName, groupDescription)
+      .then((response) => {
+        dispatch(createGroupSuccess(response.data.group));
+        dispatch(createGroupSuccessMessage(response.data.message));
+        dispatch(groupIsLoading(false));
 
-      browserHistory.push({
-        pathname: '/groups',
+        browserHistory.push({
+          pathname: '/groups',
+        });
+      })
+      .catch((error) => {
+        if (error) {
+          dispatch(createGroupFailure(error.response.data.message));
+          dispatch(groupIsLoading(false));
+        }
       });
-    })
-    .catch((error) => {
-      if (error) {
-        dispatch(createGroupFailure(error.response.data.message));
-      }
-    });
+  };
 }
 /**
  *
@@ -84,15 +100,20 @@ export function fetchUserGroupsFailure(fetchGroupErrorMessage) {
  * @return { userGroups } userGroups
  */
 export function fetchUserGroups() {
-  return dispatch => api.getUserGroups()
-    .then((response) => {
-      dispatch(fetchUserGroupsSuccess(response.data));
-    })
-    .catch((error) => {
-      if (error) {
-        dispatch(fetchUserGroupsFailure(error.response.data.message));
-      }
-    });
+  return (dispatch) => {
+    dispatch(groupIsLoading(true));
+    api.getUserGroups()
+      .then((response) => {
+        dispatch(fetchUserGroupsSuccess(response.data));
+        dispatch(groupIsLoading(false));
+      })
+      .catch((error) => {
+        if (error) {
+          dispatch(fetchUserGroupsFailure(error.response.data.message));
+          dispatch(groupIsLoading(false));
+        }
+      });
+  };
 }
 /**
  *

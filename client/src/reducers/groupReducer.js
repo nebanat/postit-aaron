@@ -89,3 +89,17 @@ export function fetchGroupUsersError(state = [], action) {
       return state;
   }
 }
+/**
+ *
+ * @param { state } state
+ * @param { action } action
+ * @return { groupLoading } groupLoading
+ */
+export function groupIsLoading(state = false, action) {
+  switch (action.type) {
+    case types.GROUP_IS_LOADING:
+      return action.bool;
+    default:
+      return state;
+  }
+}
