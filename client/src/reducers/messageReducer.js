@@ -56,3 +56,17 @@ export function fetchMessagesError(state = [], action) {
       return state;
   }
 }
+/**
+ *
+ * @param { state } state
+ * @param { action } action
+ * @return { messageLoading } messageLoading
+ */
+export function messageIsLoading(state = false, action) {
+  switch (action.type) {
+    case types.MESSAGE_IS_LOADING:
+      return action.bool;
+    default:
+      return state;
+  }
+}

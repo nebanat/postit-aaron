@@ -6,6 +6,7 @@ import * as userActions from '../../actions/userActions';
 import * as groupActions from '../../actions/groupActions';
 import * as messageActions from '../../actions/messageActions';
 import Navigation from '../navigation/Navigation.jsx';
+import Loader from '../loaders/Loader.jsx';
 
 
 /**
@@ -14,7 +15,7 @@ import Navigation from '../navigation/Navigation.jsx';
  */
 class Dashboard extends Component {
   /**
-   * @return {userData} userData
+   * @return { userGroups} userGroups
    */
   componentWillMount() {
     // loads user groups
@@ -24,9 +25,13 @@ class Dashboard extends Component {
    * @return { jsx } jsx
    */
   render() {
+    const { groupIsLoading } = this.props;
     return (
             <div>
                <Navigation/>
+               {
+                 (groupIsLoading) ? (<Loader/>) : ('')
+               }
                <div className="row">
                   <div className="col s3">
                       <SideNav/>
@@ -59,7 +64,9 @@ function mapStateToProps(state) {
     messages: state.messages,
     fetchMessagesError: state.fetchMessagesError,
     groupUsers: state.groupUsers,
-    fetchGroupUsersError: state.fetchGroupUsersError
+    fetchGroupUsersError: state.fetchGroupUsersError,
+    groupIsLoading: state.groupIsLoading,
+    messageIsLoading: state.messageIsLoading
   };
 }
 /**

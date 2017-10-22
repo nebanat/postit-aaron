@@ -4,7 +4,18 @@ import * as api from '../utils/post-api';
 
 /**
  *
- * @param {userSucessMessage} userSuccessMessage
+ * @param {bool} bool
+ * @return { authLoadingObject } authLoadingObject
+ */
+export function authIsLoading(bool) {
+  return {
+    type: types.AUTH_IS_LOADING,
+    bool
+  };
+}
+/**
+ *
+ * @param { userSucessMessage } userSuccessMessage
  * @return { object } action
  */
 export function signUpSuccess(userSuccessMessage) {
@@ -34,16 +45,20 @@ export function signUpFailure(userErrorMessage) {
  *
  */
 export function signUpUser(username, email, password) {
-  return dispatch => api.signUp(username, email, password)
-    .then((response) => {
-      dispatch(signUpSuccess(response.data.message));
-    })
-    .catch((error) => {
-      if (error) {
-        console.log(error);
-        dispatch(signUpFailure(error.response.data.message));
-      }
-    });
+  return (dispatch) => {
+    dispatch(authIsLoading(true));
+    api.signUp(username, email, password)
+      .then((response) => {
+        dispatch(signUpSuccess(response.data.message));
+        dispatch(authIsLoading(false));
+      })
+      .catch((error) => {
+        if (error) {
+          dispatch(signUpFailure(error.response.data.message));
+          dispatch(authIsLoading(false));
+        }
+      });
+  };
 }
 /**
  *
@@ -76,20 +91,24 @@ export function signInFailure(message) {
  * @return {Object} user
  */
 export function signInUser(username, password) {
-  return dispatch => api.signIn(username, password)
-    .then((response) => {
-      dispatch(signInSuccess(response.data.user));
+  return (dispatch) => {
+    dispatch(authIsLoading(true));
+    api.signIn(username, password)
+      .then((response) => {
+        dispatch(signInSuccess(response.data.user));
 
-      localStorage.setItem('POSTIT_ACCESS_TOKEN', response.data.token);
-
-      // redirect to dashboard
-      browserHistory.push({
-        pathname: '/dashboard',
+        localStorage.setItem('POSTIT_ACCESS_TOKEN', response.data.token);
+        dispatch(authIsLoading(false));
+        // redirect to dashboard
+        browserHistory.push({
+          pathname: '/dashboard',
+        });
+      })
+      .catch((error) => {
+        if (error) {
+          dispatch(signInFailure(error.response.data.message));
+          dispatch(authIsLoading(false));
+        }
       });
-    })
-    .catch((error) => {
-      if (error) {
-        dispatch(signInFailure(error.response.data.message));
-      }
-    });
+  };
 }

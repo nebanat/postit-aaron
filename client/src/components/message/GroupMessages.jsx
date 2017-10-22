@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import SingleGroupMessage from './SingleGroupMessage.jsx';
 import GroupSideBar from '../group/GroupSideBar.jsx';
+import Loader from '../loaders/Loader.jsx';
 
 /**
  * @class
@@ -25,12 +26,16 @@ class GroupMessages extends Component {
             id);
 
     const group = this.props.groups[index];
+    const { messageIsLoading } = this.props;
 
 
     return (
             <div>
                 <div className="row">
                     <div className="col s8">
+                      {
+                        (messageIsLoading) ? (<Loader/>) : ('')
+                      }
                         <h4>{group.name}</h4>
                         <ul className="collection">
                             {

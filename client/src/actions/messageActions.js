@@ -3,6 +3,17 @@ import * as types from './actionTypes';
 import * as api from '../utils/post-api';
 /**
  *
+ * @param {bool} bool
+ * @return { messageLoadingObject } passwordLoadingObject
+ */
+export function messageIsLoading(bool) {
+  return {
+    type: types.MESSAGE_IS_LOADING,
+    bool
+  };
+}
+/**
+ *
  * @param {postSuccessMessage} postSuccessMessage
  * @return {actionObject} actionObject
  */
@@ -32,19 +43,24 @@ export function postMessageFailure(postFailureMessage) {
  *
  */
 export function postMessage(message, priority, groupId) {
-  return dispatch => api.postNewMessage(message, priority, groupId)
-    .then((response) => {
-      dispatch(postMessageSuccess(response.data.message));
+  return (dispatch) => {
+    dispatch(messageIsLoading(true));
+    api.postNewMessage(message, priority, groupId)
+      .then((response) => {
+        dispatch(postMessageSuccess(response.data.message));
+        dispatch(messageIsLoading(false));
 
-      browserHistory.push({
-        pathname: `/group/${groupId}/messages`,
+        browserHistory.push({
+          pathname: `/group/${groupId}/messages`,
+        });
+      })
+      .catch((error) => {
+        if (error) {
+          dispatch(postMessageFailure(error.response.data.message));
+          dispatch(messageIsLoading);
+        }
       });
-    })
-    .catch((error) => {
-      if (error) {
-        dispatch(postMessageFailure(error.response.data.message));
-      }
-    });
+  };
 }
 /**
  *
@@ -75,13 +91,18 @@ export function fetchGroupMessageFailure(fetchMessagesError) {
  *
  */
 export function fetchGroupMessages(id) {
-  return dispatch => api.getGroupMessages(id)
-    .then((response) => {
-      dispatch(fetchGroupMessageSuccess(response.data.messages));
-    })
-    .catch((error) => {
-      if (error) {
-        dispatch(fetchGroupMessageFailure(error.response.data.message));
-      }
-    });
+  return (dispatch) => {
+    dispatch(messageIsLoading(true));
+    api.getGroupMessages(id)
+      .then((response) => {
+        dispatch(fetchGroupMessageSuccess(response.data.messages));
+        dispatch(messageIsLoading(false));
+      })
+      .catch((error) => {
+        if (error) {
+          dispatch(fetchGroupMessageFailure(error.response.data.message));
+          dispatch(messageIsLoading(false));
+        }
+      });
+  };
 }

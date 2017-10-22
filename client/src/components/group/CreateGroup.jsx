@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loader from '../loaders/Loader.jsx';
 
 /**
  * @class
@@ -15,7 +16,7 @@ class CreateGroup extends Component {
 
     const name = this.refs.name.value;
     const description = this.refs.description.value;
-    
+
     this.props.actions.groupActions.createGroup(name, description);
 
     this.refs.groupForm.reset();
@@ -24,8 +25,13 @@ class CreateGroup extends Component {
    * @return {jsx} jsx
    */
   render() {
+    const { groupIsLoading } = this.props;
     return (
-            <div className="container">
+          <div className="container">
+                
+            {
+                (groupIsLoading) ? (<Loader/>) : ('')
+            }
                 <h2>New Group</h2>
                 <p className='red-text center col s12'>
                       {

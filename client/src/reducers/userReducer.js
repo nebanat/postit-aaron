@@ -43,3 +43,18 @@ export function authenticatedUser(state = [], action) {
       return state;
   }
 }
+/**
+ *
+ * @param { state } state
+ * @param { action } action
+ * @return { authIsLoading } passwordLoading
+ */
+export function authIsLoading(state = false, action) {
+  switch (action.type) {
+    case types.AUTH_IS_LOADING:
+      return action.bool;
+    default:
+      return state;
+  }
+}
+

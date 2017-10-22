@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from '../../actions/userActions';
 import Navigation from '../navigation/Navigation.jsx';
+import Loader from '../loaders/Loader.jsx';
 
 
 /**
@@ -46,9 +47,13 @@ class SignUp extends Component {
    * @return {jsx} jsx
    */
   render() {
+    const { authIsLoading } = this.props;
     return (
            <div>
                 <Navigation/>
+                {
+                   (authIsLoading) ? (<Loader/>) : ('')
+                 }
                 <div className="section purple darken-4">
                 <div className="container">
                     <h4 className="center white-text">PostIt-Messaging</h4>
@@ -171,6 +176,7 @@ function mapStateToProps(state) {
     userSuccessMessage: state.userSuccessMessage,
     userErrorMessage: state.userErrorMessage,
     authenticatedUser: state.authenticatedUser,
+    authIsLoading: state.authIsLoading
   };
 }
 /**

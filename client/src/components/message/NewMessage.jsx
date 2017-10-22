@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loader from '../loaders/Loader.jsx';
 
 
 /**
@@ -25,7 +26,7 @@ class NewMessage extends Component {
 
     const message = this.refs.content.value;
     const priority = document.getElementById('priority').value;
-    const groupId = document.getElementById('group').value;
+    const groupId =  document.getElementById('group').value;
 
     this.props.actions.messageActions.postMessage(message, priority, groupId);
 
@@ -35,8 +36,12 @@ class NewMessage extends Component {
    * @returns { jsx } jsx
    */
   render() {
+    const { messageIsLoading } = this.props;
     return (
             <div className="container">
+              {
+                 (messageIsLoading) ? (<Loader/>) : ('')
+              }
                 <h3>New Message</h3>
                 <p className='green-text center col s12'>
                     {

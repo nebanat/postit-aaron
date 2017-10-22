@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
 // user reducer
 import { userSuccessMessage,
-  userErrorMessage, authenticatedUser } from './userReducer';
+  userErrorMessage, authenticatedUser, authIsLoading } from './userReducer';
 // group reducer
 import { groups, createGroupError,
   createGroupMessage, fetchUserGroupsError,
-  groupUsers, fetchGroupUsersError } from './groupReducer';
+  groupUsers, fetchGroupUsersError, groupIsLoading } from './groupReducer';
 // password reducer
 import { sendResetSuccessMessage,
   sendResetFailureMessage, resetSuccessMessage,
-  resetFailureMessage } from './passwordReducer';
+  resetFailureMessage, passwordIsLoading } from './passwordReducer';
 // message reducer
 import { postSuccessMessage, postFailureMessage,
-  messages, fetchMessagesError } from './messageReducer';
+  messages, fetchMessagesError, messageIsLoading } from './messageReducer';
 
 const rootReducers = combineReducers({
   userSuccessMessage,
@@ -31,7 +31,11 @@ const rootReducers = combineReducers({
   messages,
   fetchMessagesError,
   groupUsers,
-  fetchGroupUsersError
+  fetchGroupUsersError,
+  passwordIsLoading,
+  authIsLoading,
+  groupIsLoading,
+  messageIsLoading
 });
 
 export default rootReducers;
