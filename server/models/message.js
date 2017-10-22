@@ -20,6 +20,16 @@ export default (sequelize, DataTypes) => {
         }
       }
     },
+    author: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Username of the author is required'
+        }
+      }
+    },
     groupId: {
       type: DataTypes.INTEGER,
       allowNull: false,
