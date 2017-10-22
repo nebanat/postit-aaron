@@ -37,5 +37,18 @@ export default {
         console.log(error);
       });
   },
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return {groupMessages} groupMessages
+   */
+  getGroupMessages(req, res) {
+    // retrieve all group messages
+    models.Message
+      .findAll({ where: { groupId: req.params.id } })
+      .then(messages => res.status(200).send(messages))
+      .catch(error => res.status(400).send(error));
+  },
 };
 
