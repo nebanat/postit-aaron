@@ -24,7 +24,10 @@ export default {
       userId,
       groupId
     }).then((newMessage) => {
-      sendMailToGroup(groupId, newMessage.content);
+      // send email notification
+      if (parseInt(priority) === 2 || parseInt(priority) === 3) {
+        sendMailToGroup(groupId, newMessage.content);
+      }
       return res.status(201).send({
         message: 'Message sent successfully',
         newMessage

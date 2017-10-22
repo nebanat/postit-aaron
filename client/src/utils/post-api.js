@@ -111,3 +111,25 @@ export function getUserGroups() {
     }
   });
 }
+
+/**
+ *
+ * @param { message } message
+ * @param { priority } priority
+ * @param { groupId } groupId
+ * @returns { promise } promise
+ */
+export function postNewMessage(message, priority, groupId) {
+  return axios({
+    method: 'post',
+    url: `http://localhost:3000/api/group/${groupId}/message`,
+    headers: {
+      'Content-type': 'application/json; charset=utf-8',
+      'x-access-token': getAccessToken()
+    },
+    data: JSON.stringify({
+      content: message,
+      priority
+    })
+  });
+}

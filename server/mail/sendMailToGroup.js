@@ -20,7 +20,7 @@ export default function (id, message) {
           from: '"Post It" <noreply@postit.com',
           to: userEmails,
           subject: 'PostIt Message notification',
-          text: `Hello ${message} was posted in ${group.name}`
+          text: `Hello ${message} was posted in your ${group.name}`
         };
         // sends the email to all memnbers of the group
         transporter.sendMail(mailOptions, (error, info) => {

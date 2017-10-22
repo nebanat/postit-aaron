@@ -30,7 +30,7 @@ class SideNav extends Component {
                         className="white-text">
                         New Group
                       </Link>
-                      <Link to="/test" className="white-text">New Message</Link>
+                      <Link to="/message" className="white-text">New Message</Link>
                       <a href='#'
                         className="btn-small waves-effect waves-light orange white-text">
                         Go Back
