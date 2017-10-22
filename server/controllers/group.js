@@ -55,6 +55,23 @@ export default {
         user.getGroups().then(userGroups => res.status(200).send(userGroups));
       })
       .catch(error => res.status(500).send({ error: error.message }));
+  },
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return {groupMembers} groupMembers
+   */
+  getGroupMembers(req, res) {
+    const groupId = req.params.id;
+
+    models.Group
+      .findById(groupId)
+      .then((group) => {
+        group.getUsers({ attributes: ['username', 'email'] })
+          .then(groupUsers => res.status(200).send(groupUsers));
+      })
+      .catch(error => res.status(500).send({ error: error.message }));
   }
 };
 

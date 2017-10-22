@@ -33,4 +33,9 @@ app.get(
   groupExist, checkUserGroupMembership, messageController.getGroupMessages
 );
 
+app.get(
+  '/:id/users', authenticate,
+  groupExist, checkUserGroupMembership, groupController.getGroupMembers
+);
+
 export default app;
