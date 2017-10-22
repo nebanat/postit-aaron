@@ -9,7 +9,7 @@ import UserRoutes from './routes/users';
 import GroupRoutes from './routes/groups';
 
 
-const port = 3001;
+const port = 3000;
 const app = express();
 const compiler = webpack(config);
 

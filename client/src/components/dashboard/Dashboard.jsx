@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import SideNav from '../navigation/SideNav.jsx';
 import * as userActions from '../../actions/userActions';
 import * as groupActions from '../../actions/groupActions';
+import * as messageActions from '../../actions/messageActions';
 import Navigation from '../navigation/Navigation.jsx';
 
 
@@ -52,7 +53,9 @@ function mapStateToProps(state) {
     groups: state.groups,
     createGroupError: state.createGroupError,
     createGroupMessage: state.createGroupMessage,
-    fetchUserGroupsError: state.fetchUserGroupsError
+    fetchUserGroupsError: state.fetchUserGroupsError,
+    postSuccessMessage: state.postSuccessMessage,
+    postFailureMessage: state.postFailureMessage
   };
 }
 /**
@@ -63,6 +66,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
+      messageActions: bindActionCreators(messageActions, dispatch),
       userActions: bindActionCreators(userActions, dispatch),
       groupActions: bindActionCreators(groupActions, dispatch),
     }
