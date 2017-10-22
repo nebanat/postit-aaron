@@ -12,6 +12,7 @@ import Default from './components/dashboard/Default.jsx';
 import CreateGroup from './components/group/CreateGroup.jsx';
 import UserGroups from './components/group/UserGroups.jsx';
 import NewMessage from './components/message/NewMessage.jsx';
+import GroupMessages from './components/message/GroupMessages.jsx';
 // import Groups from './components/group/Groups.jsx';
 import { requireAuth, noRequireAuth } from './utils/authservice';
 // import App from './components/App.jsx';
@@ -28,6 +29,7 @@ const Root = () => (
           <Route path='/group/new' component = { CreateGroup } onEnter={ requireAuth }></Route>
           <Route path='/groups' component = { UserGroups } onEnter={ requireAuth }></Route>
           <Route path='/message' component = { NewMessage } onEnter={ requireAuth }></Route>
+          <Route path='/group/:id/messages' component = { GroupMessages } onEnter={ requireAuth }></Route>
         </Route>
         <Route path='/signup' component = { SignUp } onEnter={ noRequireAuth }>
         </Route>

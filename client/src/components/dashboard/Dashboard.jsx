@@ -55,7 +55,9 @@ function mapStateToProps(state) {
     createGroupMessage: state.createGroupMessage,
     fetchUserGroupsError: state.fetchUserGroupsError,
     postSuccessMessage: state.postSuccessMessage,
-    postFailureMessage: state.postFailureMessage
+    postFailureMessage: state.postFailureMessage,
+    messages: state.messages,
+    fetchMessagesError: state.fetchMessagesError
   };
 }
 /**

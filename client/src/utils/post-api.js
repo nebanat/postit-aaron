@@ -2,10 +2,10 @@ import axios from 'axios';
 import { getAccessToken, getAccessId } from './authservice';
 /**
  *
- * @param {username} username
- * @param {email} email
- * @param {password} password
- * @return {promise} promise
+ * @param { username } username
+ * @param { email } email
+ * @param { password } password
+ * @return { promise } promise
  */
 export function signUp(username, email, password) {
   return axios({
@@ -131,5 +131,21 @@ export function postNewMessage(message, priority, groupId) {
       content: message,
       priority
     })
+  });
+}
+/**
+ *
+ * @param { groupId } groupId
+ * @returns { promise } promise
+ */
+export function getGroupMessages(groupId) {
+  return axios({
+    method: 'GET',
+    url: `http://localhost:3000/api/group/${groupId}/message`,
+    headers: {
+      'Content-type': 'application/json; charset=utf-8',
+      'id-token': getAccessId(),
+      'x-access-token': getAccessToken()
+    }
   });
 }

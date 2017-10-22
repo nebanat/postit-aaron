@@ -6,7 +6,8 @@ import { groups, createGroupError,
 import { sendResetSuccessMessage,
   sendResetFailureMessage, resetSuccessMessage,
   resetFailureMessage } from './passwordReducer';
-import { postSuccessMessage, postFailureMessage } from './messageReducer';
+import { postSuccessMessage, postFailureMessage,
+  messages, fetchMessagesError } from './messageReducer';
 
 const rootReducers = combineReducers({
   userSuccessMessage,
@@ -21,7 +22,9 @@ const rootReducers = combineReducers({
   resetFailureMessage,
   fetchUserGroupsError,
   postSuccessMessage,
-  postFailureMessage
+  postFailureMessage,
+  messages,
+  fetchMessagesError
 });
 
 export default rootReducers;

@@ -22,6 +22,7 @@ export default {
       content,
       priority,
       userId,
+      author: access.user.username,
       groupId
     }).then((newMessage) => {
       // send email notification
@@ -33,9 +34,22 @@ export default {
         newMessage
       });
     })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch(error => res.status(500).send(error));
+  },
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return {groupMessages} groupMessages
+   */
+  getGroupMessages(req, res) {
+    // retrieve all group messages
+    models.Message
+      .findAll({ where: { groupId: req.params.id } })
+      .then(messages => res.status(201).send({
+        messages
+      }))
+      .catch(error => res.status(400).send(error));
   },
 };
 

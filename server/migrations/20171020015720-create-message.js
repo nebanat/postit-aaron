@@ -16,6 +16,10 @@ module.exports = {
       type: Sequelize.INTEGER,
       allowNull: false
     },
+    author: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
     groupId: {
       type: Sequelize.INTEGER,
       allowNull: false

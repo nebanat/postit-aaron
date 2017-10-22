@@ -28,4 +28,9 @@ app.post(
   messageController.postMessageToGroup
 );
 
+app.get(
+  '/:id/message', authenticate,
+  groupExist, checkUserGroupMembership, messageController.getGroupMessages
+);
+
 export default app;
