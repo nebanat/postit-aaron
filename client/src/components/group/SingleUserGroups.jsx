@@ -21,16 +21,11 @@ class SingleUserGroup extends Component {
                                   className="purple-text darken-4">{group.name}
                                 </Link>
                             </span>
-                                <p>{group.description}</p>
+                                <p>{ group.description }</p>
                         </div>
                             <div className="card-action">
                                 <div className="stats">
-                                    {/* <i className="tiny material-icons purple-text darken-4">
-                                      access_time
-                                    </i>  Created */}
-                                        {/* <span className="purple-text darken-4">
-                                          { new Date(group.createdAt).toDateString()}
-                                        </span> */}
+                                    
                                 </div>
                             </div>
                     </div>

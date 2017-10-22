@@ -60,3 +60,32 @@ export function fetchUserGroupsError(state = [], action) {
       return state;
   }
 }
+/**
+ *
+ * @param { state } state
+ * @param { action } action
+ * @return { groupUsers } groupUsers
+ */
+export function groupUsers(state = [], action) {
+  switch (action.type) {
+    case types.FETCH_GROUP_USERS_SUCCESS:
+      return action.groupUsers;
+    default:
+      return state;
+  }
+}
+
+/**
+ *
+ * @param {state} state
+ * @param {action} action
+ * @return {fetchGroupUsersError} fetchGroupUsersError
+ */
+export function fetchGroupUsersError(state = [], action) {
+  switch (action.type) {
+    case types.FETCH_USER_GROUPS_FAILURE:
+      return action.fetchGroupUsersError;
+    default:
+      return state;
+  }
+}

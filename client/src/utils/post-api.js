@@ -80,9 +80,9 @@ export function sendResetPasswordLink(email) {
 }
 /**
  *
- * @param {resetToken} resetToken
- * @param {password} password
- * @return {promise} promise
+ * @param { resetToken } resetToken
+ * @param { password } password
+ * @return { promise } promise
  */
 export function resetPassword(resetToken, password) {
   return axios({
@@ -98,7 +98,7 @@ export function resetPassword(resetToken, password) {
   });
 }
 /**
- * @return {promise} promise
+ * @return { promise } promise
  */
 export function getUserGroups() {
   return axios({
@@ -122,7 +122,7 @@ export function getUserGroups() {
 export function postNewMessage(message, priority, groupId) {
   return axios({
     method: 'post',
-    url: `http://localhost:3000/api/group/${groupId}/message`,
+    url: `/api/group/${groupId}/message`,
     headers: {
       'Content-type': 'application/json; charset=utf-8',
       'x-access-token': getAccessToken()
@@ -141,7 +141,22 @@ export function postNewMessage(message, priority, groupId) {
 export function getGroupMessages(groupId) {
   return axios({
     method: 'GET',
-    url: `http://localhost:3000/api/group/${groupId}/message`,
+    url: `/api/group/${groupId}/message`,
+    headers: {
+      'Content-type': 'application/json; charset=utf-8',
+      'id-token': getAccessId(),
+      'x-access-token': getAccessToken()
+    }
+  });
+}/**
+ *
+ * @param {groupId} groupId
+ * @returns {groupUsers} groupUsers
+ */
+export function getGroupUsers(groupId) {
+  return axios({
+    method: 'GET',
+    url: `/api/group/${groupId}/users`,
     headers: {
       'Content-type': 'application/json; charset=utf-8',
       'id-token': getAccessId(),
