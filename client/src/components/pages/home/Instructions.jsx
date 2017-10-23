@@ -22,8 +22,7 @@ class Instructions extends Component {
                     </h2>
                     <h5 className="center">Create Group</h5>
                     <p className="black-text">
-                      Create broadcast groups
-                      and invite friends to join.
+                      Create groups and invite friends to connect
                     </p>
                 </div>
           </div>
@@ -36,8 +35,7 @@ class Instructions extends Component {
                   </h2>
                   <h5 className="center">Post Message</h5>
                   <p className="black-text">
-                    Send and receive messages from
-                    friends and group members.
+                    Send and receive messages from your groups
                   </p>
               </div>
           </div>
@@ -50,8 +48,7 @@ class Instructions extends Component {
                 </h2>
                 <h5 className="center">Add Users</h5>
                 <p className="black-text">
-                  Add friends to your groups and enjoy
-                  the ride
+                  Add and connect with friends on your group
                 </p>
              </div>
           </div>

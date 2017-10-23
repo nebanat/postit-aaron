@@ -1,5 +1,6 @@
 import express from 'express';
 import webpack from 'webpack';
+import favicon from 'serve-favicon';
 import path from 'path';
 import logger from 'morgan';
 import cors from 'cors';
@@ -27,6 +28,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
+app.use(favicon(path.join(__dirname, '../client/favicon.ico')));
 
 app.use('/api/user', UserRoutes);
 app.use('/api/group', GroupRoutes);
