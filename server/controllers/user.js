@@ -28,7 +28,7 @@ export default {
         username: user.username,
         email: user.email,
       }))
-      .catch(error => res.status(500).send({ message: error }));
+      .catch(error => res.status(500).send({ error: error.message }));
   },
   /**
    *
@@ -64,6 +64,7 @@ export default {
           token,
           user
         });
-      });
+      })
+      .catch(error => res.status(500).send({ error: error.message }));
   },
 };

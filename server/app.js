@@ -9,6 +9,7 @@ import config from '../webpack.config.dev';
 import UserRoutes from './routes/users';
 import GroupRoutes from './routes/groups';
 
+require('dotenv').config();
 
 const port = 3000;
 const app = express();
