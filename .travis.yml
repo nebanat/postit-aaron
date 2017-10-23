@@ -15,4 +15,4 @@ env:
         -NODE_ENV=test
 notifications:
   webhooks: https://coveralls.io/webhook?repo_token=AzdK44rts9EXNrbG1Qo0WdVATGmAvty8Z
-email: false        
+       
