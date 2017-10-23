@@ -38,9 +38,10 @@ export const insertSeedData = () => {
 };
 
 export const generateToken = (id, user) => {
+  const jwtSecret = process.env.SECRET || 'PrivateKey';
   const token = jwt.sign({
     user: { id, name: user.username, email: user.email }
-  }, process.env.SECRET, {
+  }, jwtSecret, {
     expiresIn: '24h'
   });
 

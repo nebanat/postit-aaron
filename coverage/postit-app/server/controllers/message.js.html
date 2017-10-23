@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">17.65% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>2/3</span>
+        <span class='fraction'>3/17</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>0/7</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/1</span>
+        <span class='fraction'>0/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">17.65% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>2/3</span>
+        <span class='fraction'>3/17</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -60,8 +60,81 @@
 15
 16
 17
-18</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -73,25 +146,66 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import decode from 'jwt-decode';
 import models from '../models';
+import sendMailToGroup from '../mail/sendMailToGroup';
 &nbsp;
-export default <span class="fstat-no" title="function not covered" >{</span>
+export default <span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
   /**
    *
    * @param {req} req
    * @param {res} res
    * @return {groupMessage} groupMessage
    */
-  postMessageToGroup(req, res) {
-<span class="cstat-no" title="statement not covered" >    return res.send({</span>
-      message: 'Post message touched'
-    });
-  }
+  postMessageToGroup(req, res) <span class="cstat-no" title="statement not covered" >{</span>
+    const token = <span class="cstat-no" title="statement not covered" >req.body.token || req.query.token || req.headers['x-access-token'];</span>
+    const { content, priority } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+    const groupId = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
+&nbsp;
+    // decodes token//
+    const access = <span class="cstat-no" title="statement not covered" >decode(token);</span>
+    const userId = <span class="cstat-no" title="statement not covered" >access.user.id;</span>
+    // creates message
+<span class="cstat-no" title="statement not covered" >    models.Message.create({</span>
+      content,
+      priority,
+      userId,
+      author: access.user.username,
+      groupId
+    }).then(<span class="fstat-no" title="function not covered" >(</span>newMessage) =&gt; {
+      // send email notification
+<span class="cstat-no" title="statement not covered" >      if (parseInt(priority) === 2 || parseInt(priority) === 3) {</span>
+<span class="cstat-no" title="statement not covered" >        sendMailToGroup(groupId, newMessage.content);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return res.status(201).send({</span>
+        message: 'Message sent successfully',
+        newMessage
+      });
+    })
+      .catch(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >error =&gt; res.status(500).send(error));</span></span>
+  },
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return {groupMessages} groupMessages
+   */
+  getGroupMessages(req, res) {
+    // retrieve all group messages
+<span class="cstat-no" title="statement not covered" >    models.Message</span>
+      .findAll({ where: { groupId: req.params.id } })
+      .then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >messages =&gt; res.status(201).send({</span></span>
+        messages
+      }))
+      .catch(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >error =&gt; res.status(400).send(error));</span></span>
+  },
 };
 &nbsp;
 &nbsp;</pre></td></tr>
@@ -100,7 +214,7 @@ export default <span class="fstat-no" title="function not covered" >{</span>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Oct 20 2017 03:18:24 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 23 2017 19:03:50 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
