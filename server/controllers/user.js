@@ -66,7 +66,7 @@ export default {
           token,
           user
         });
-      });
-    // .catch(error => res.status(500).send({ error: error.message }));
+      })
+      .catch(error => res.status(500).send({ error: error.message }));
   },
 };
