@@ -17,7 +17,7 @@
     "username": "mrdbjhapkcjucl",
     "password": "eb8236ad69c8fd49f992b2441ad5e8249305e4eccfe597d3244df7443e3a6c57",
     "database": "dc5mktt42l2g41",
-    "host": "ec2-54-225-88-191.compute-1.amazonaws.com",
+    "host": "ec2-54-225-88-191.compute-1.amazonaws.com:5432",
     "dialect": "postgres"
   }
 }
