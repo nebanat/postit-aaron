@@ -3,7 +3,7 @@ node_js:
     - "6"
 before_script:
     - npm install sequelize-cli -g
-    - createdb post-test --username=postgres
+    - psql -c 'create database post_dev_test;' -U postgres
     - sequelize db:migrate
 script: npm test
 after_success:
@@ -13,3 +13,6 @@ services:
 env:
     global:
         -NODE_ENV=test
+notifications:
+  webhooks: https://coveralls.io/webhook?repo_token=AzdK44rts9EXNrbG1Qo0WdVATGmAvty8Z
+email: false        
