@@ -26,7 +26,7 @@ class NewMessage extends Component {
 
     const message = this.refs.content.value;
     const priority = document.getElementById('priority').value;
-    const groupId =  document.getElementById('group').value;
+    const groupId = document.getElementById('group').value;
 
     this.props.actions.messageActions.postMessage(message, priority, groupId);
 
@@ -43,18 +43,7 @@ class NewMessage extends Component {
                  (messageIsLoading) ? (<Loader/>) : ('')
               }
                 <h3>New Message</h3>
-                <p className='green-text center col s12'>
-                    {
-                      (this.props.postSuccessMessage)
-                      ? this.props.postSuccessMessage : ''
-                    }
-                </p><br/>
-                <p className='red-text center col s12'>
-                    {
-                      (this.props.postFailureMessage)
-                      ? this.props.postFailureMessage : ''
-                    }
-                </p><br/>
+
                 <form
                   ref="messageForm"
                   onSubmit={ this.handleOnSubmitMessage }

@@ -50,10 +50,6 @@ class SignIn extends React.Component {
                         <div className="col s12 m6 offset-m3">
                             <div className="card">
                                 <div className="card-content">
-                                    <p className='red-text center'>{
-                                        this.props.signInErrorMessage
-                                         ? this.props.signInErrorMessage : ''}
-                                    </p><br/>
                                     <span className="card-title center">
                                       Sign In
                                      </span>
@@ -96,7 +92,9 @@ class SignIn extends React.Component {
                                                 <i className="material-icons left">lock
                                                 </i>Forgot Password
                                               </Link>
-                                            <Link to='/signup' className="right">Sign Up</Link>
+                                          <Link to='/signup' className="right">
+                                            Sign Up
+                                          </Link>
                                         </div>
                                     </div>
                                 </div>

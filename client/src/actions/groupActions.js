@@ -55,11 +55,17 @@ export function createGroupFailure(createGroupError) {
  */
 export function createGroup(groupName, groupDescription) {
   return (dispatch) => {
+    const Materialize = window.Materialize;
+
     dispatch(groupIsLoading(true));
     api.createGroup(groupName, groupDescription)
       .then((response) => {
         dispatch(createGroupSuccess(response.data.group));
+
         dispatch(createGroupSuccessMessage(response.data.message));
+
+        Materialize.toast(response.data.message, 2500, 'green');
+
         dispatch(groupIsLoading(false));
 
         browserHistory.push({
@@ -69,6 +75,9 @@ export function createGroup(groupName, groupDescription) {
       .catch((error) => {
         if (error) {
           dispatch(createGroupFailure(error.response.data.message));
+
+          Materialize.toast(error.response.data.message, 2500, 'red');
+
           dispatch(groupIsLoading(false));
         }
       });

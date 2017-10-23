@@ -28,23 +28,12 @@ class CreateGroup extends Component {
     const { groupIsLoading } = this.props;
     return (
           <div className="container">
-                
+
             {
                 (groupIsLoading) ? (<Loader/>) : ('')
             }
                 <h2>New Group</h2>
-                <p className='red-text center col s12'>
-                      {
-                       (this.props.createGroupError)
-                          ? this.props.createGroupError : ''
-                       }
-                 </p><br/>
-                 <p className='green-text center col s12'>
-                      {
-                       (this.props.createGroupMessage)
-                          ? this.props.createGroupMessage : ''
-                       }
-                 </p><br/>
+
                 <form
                   ref="groupForm"
                   onSubmit={this.handleGroupSubmit.bind(this)}

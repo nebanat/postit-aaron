@@ -44,11 +44,16 @@ export function postMessageFailure(postFailureMessage) {
  */
 export function postMessage(message, priority, groupId) {
   return (dispatch) => {
+    const Materialize = window.Materialize;
+
     dispatch(messageIsLoading(true));
     api.postNewMessage(message, priority, groupId)
       .then((response) => {
         dispatch(postMessageSuccess(response.data.message));
+
         dispatch(messageIsLoading(false));
+
+        Materialize.toast(response.data.message, 2500, 'green');
 
         browserHistory.push({
           pathname: `/group/${groupId}/messages`,
@@ -57,7 +62,10 @@ export function postMessage(message, priority, groupId) {
       .catch((error) => {
         if (error) {
           dispatch(postMessageFailure(error.response.data.message));
-          dispatch(messageIsLoading);
+
+          Materialize.toast(error.response.data.message, 2500, 'red');
+
+          dispatch(messageIsLoading(false));
         }
       });
   };
