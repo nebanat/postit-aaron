@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 app.use(compression());
-app.use(favicon(path.join(__dirname, '../client/favicon.ico')));
 app.use(express.static('dist'));
+app.use(favicon(path.join(__dirname, '../client/favicon.ico')));
 
 app.use('/api/user', UserRoutes);
 app.use('/api/group', GroupRoutes);
