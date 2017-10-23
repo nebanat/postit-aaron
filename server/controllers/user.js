@@ -4,6 +4,8 @@ import models from '../models';
 
 require('dotenv').config();
 
+const jwtSecret = process.env.SECRET || 'PrivateKey';
+
 export default {
   /**
    *
@@ -55,7 +57,7 @@ export default {
             message: 'Invalid username or password'
           });
         }
-        const token = jwt.sign({ user }, process.env.SECRET, {
+        const token = jwt.sign({ user }, jwtSecret, {
           expiresIn: '24h'
         });
 
@@ -64,7 +66,7 @@ export default {
           token,
           user
         });
-      })
-      .catch(error => res.status(500).send({ error: error.message }));
+      });
+    // .catch(error => res.status(500).send({ error: error.message }));
   },
 };
