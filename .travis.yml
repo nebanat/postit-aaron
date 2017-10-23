@@ -7,7 +7,7 @@ before_script:
     - sequelize db:migrate
 script: npm test
 after_success:
-    -npm run coveralls
+    - npm run coveralls
 services:
     - postgres        
 env:
