@@ -4,6 +4,8 @@
   "description": "Postit is a group messaging app for any group individuals with similar interest ",
   "main": "index.js",
   "scripts": {
+    "migrate":"sequelize db:migrate",
+    "unmigrate":"sequelize db:migrate:undo:all",
     "start": "nodemon --exec babel-node server/app.js",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -12,10 +14,10 @@
     "lint:watch": "npm run lint -- --watch",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "node_modules/.bin/rimraf ./dist",
-    "build:html": "babel-node tools/buildHtml.js",
-    "prebuild": "npm-run-all clean-dist build:html",
-    "build": "babel-node tools/build.js",
-    "postbuild": "babel-node tools/distServer.js"
+    "clean:html": "babel-node tools/buildHtml.js",
+    "build:html": "npm-run-all clean-dist clean:html",
+    "heroku-postbuild": "babel-node tools/build.js && build:html",
+    "exec": "babel-node tools/distServer.js"
   },
   "keywords": [
     "PostIt",
