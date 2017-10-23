@@ -46,15 +46,27 @@ export function signUpFailure(signUpErrorMessage) {
  */
 export function signUpUser(username, email, password) {
   return (dispatch) => {
+    const Materialize = window.Materialize;
+
     dispatch(authIsLoading(true));
     api.signUp(username, email, password)
       .then((response) => {
         dispatch(signUpSuccess(response.data.message));
+
+        Materialize.toast(response.data.message, 2500, 'green');
+
         dispatch(authIsLoading(false));
+
+        browserHistory.push({
+          pathname: '/signin',
+        });
       })
       .catch((error) => {
         if (error) {
           dispatch(signUpFailure(error.response.data.message));
+
+          Materialize.toast(error.response.data.message, 2500, 'green');
+
           dispatch(authIsLoading(false));
         }
       });
@@ -92,13 +104,19 @@ export function signInFailure(signInErrorMessage) {
  */
 export function signInUser(username, password) {
   return (dispatch) => {
+    const Materialize = window.Materialize;
+
     dispatch(authIsLoading(true));
+
     api.signIn(username, password)
       .then((response) => {
         dispatch(signInSuccess(response.data.user));
 
         localStorage.setItem('POSTIT_ACCESS_TOKEN', response.data.token);
+
         dispatch(authIsLoading(false));
+
+        Materialize.toast(response.data.message, 3000, 'green');
         // redirect to dashboard
         browserHistory.push({
           pathname: '/dashboard',
@@ -106,8 +124,10 @@ export function signInUser(username, password) {
       })
       .catch((error) => {
         if (error) {
-          console.log(error.response.status);
           dispatch(signInFailure(error.response.data.message));
+
+          Materialize.toast(error.response.data.message, 3000, 'red');
+
           dispatch(authIsLoading(false));
         }
       });

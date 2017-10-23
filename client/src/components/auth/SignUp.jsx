@@ -65,24 +65,8 @@ class SignUp extends Component {
                                 <div className="card-content">
                                     <p className='red-text center col s12'>
                                       { this.state.passwordMatchError }
-                                      {
-                                        (this.props.signUpErrorMessage)
-                                        ? this.props.signUpErrorMessage : ''
-                                       }
-                                      </p><br/>
-                                    <p className='green-text center col s12'>
-                                      {(this.props.signUpSuccessMessage)
-                                         ? this.props.signUpSuccessMessage
-                                         : ''}
-                                    <span>
-                                      {/* link to login */}
-                                      <Link href='/signin'>
-                                        {
-                                          (this.props.signUpSuccessMessage)
-                                          ? ' Login here' : ' '
-                                        }
-                                        </Link></span></p>
-                                    <br/><br/>
+                                    </p><br/>
+                                  <br/>
                                     <span className="card-title center">
                                       Register
                                     </span>

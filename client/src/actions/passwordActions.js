@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router';
 import * as types from './actionTypes';
 import * as api from '../utils/post-api';
 
@@ -41,15 +42,24 @@ export function sendResetPasswordFailure(sendResetFailureMessage) {
  */
 export function sendResetPassword(email) {
   return (dispatch) => {
+    const Materialize = window.Materialize;
+
     dispatch(passwordIsLoading(true));
+
     api.sendResetPasswordLink(email)
       .then((response) => {
         dispatch(sendResetPasswordSuccess(response.data.message));
+
+        Materialize.toast(response.data.message, 2500, 'green');
+
         dispatch(passwordIsLoading(false));
       })
       .catch((error) => {
         if (error) {
           dispatch(sendResetPasswordFailure(error.response.data.message));
+
+          Materialize.toast(error.response.data.message, 2500, 'red');
+
           dispatch(passwordIsLoading(false));
         }
       });
@@ -85,15 +95,28 @@ export function resetPasswordFailure(resetFailureMessage) {
  */
 export function resetPassword(resetToken, password) {
   return (dispatch) => {
+    const Materialize = window.Materialize;
+
     dispatch(passwordIsLoading(true));
+
     api.resetPassword(resetToken, password)
       .then((response) => {
         dispatch(resetPasswordSuccess(response.data.message));
+
+        Materialize.toast(response.data.message, 2500, 'green');
+
         dispatch(passwordIsLoading(false));
+
+        browserHistory.push({
+          pathname: '/signin',
+        });
       })
       .catch((error) => {
         if (error) {
           dispatch(resetPasswordFailure(error.response.data.message));
+
+          Materialize.toast(error.response.data.message, 2500, 'green');
+
           dispatch(passwordIsLoading(false));
         }
       });

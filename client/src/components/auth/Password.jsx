@@ -27,10 +27,7 @@ class Password extends Component {
    * @returns {jsx} jsx
    */
   render() {
-    const {
-      sendResetFailureMessage, sendResetSuccessMessage,
-      passwordIsLoading
-    } = this.props;
+    const { passwordIsLoading } = this.props;
     return (
             <div>
 
@@ -47,12 +44,7 @@ class Password extends Component {
                     <div className="col s12 m6 offset-m3">
                         <div className="card">
                             <div className="card-content">
-                             <p className='red-text center'>
-                                 { (sendResetFailureMessage) || ''}
-                             </p><br/>
-                             <p className='green-text center'>
-                                 { (sendResetSuccessMessage) || ''}
-                             </p><br/>
+
                                 <span className="card-title center">
                                   Recover Password
                                 </span>
