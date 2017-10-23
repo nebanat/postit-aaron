@@ -6,7 +6,7 @@
   "scripts": {
     "migrate": "sequelize db:migrate",
     "unmigrate": "sequelize db:migrate:undo:all",
-    "start": "nodemon --exec babel-node server/app.js",
+    "start:dev": "nodemon --exec babel-node server/app.js",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "node_modules/.bin/esw webpack.config.* server client",
@@ -17,7 +17,7 @@
     "clean:html": "babel-node tools/buildHtml.js",
     "build:html": "npm-run-all clean-dist clean:html",
     "heroku-postbuild": "babel-node tools/build.js && npm run build:html",
-    "exec": "babel-node tools/distServer.js"
+    "start": "babel-node tools/distServer.js"
   },
   "keywords": [
     "PostIt",
