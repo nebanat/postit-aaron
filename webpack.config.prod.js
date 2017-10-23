@@ -1,22 +1,25 @@
 // const path = require('path');
 import webpack from 'webpack';
+import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 const GLOBALS = {
-  'process.env.NODE_ENV': JSON.stringify('production')
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
 };
 module.exports = {
-  devtool: 'source-maps',
+  devtool: 'source-map',
   entry: './client/src/index.js',
   output: {
-    path: `${__dirname}/dist`, // Note: Physical files are only output by the production build task `npm run build`.
+    path: path.resolve(__dirname, './dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './dist',
-  },
+  // devServer: {
+  //   historyApiFallback: true,
+  //   contentBase: './dist',
+  // },
   module: {
     loaders: [
       {
@@ -53,7 +56,7 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin(GLOBALS),
     new ExtractTextPlugin('./client/css/style.css'),
-    new webpack.optimize.DedupePlugin(),
+    // new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin()
   ],
 };
