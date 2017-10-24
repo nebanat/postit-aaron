@@ -11,7 +11,7 @@ script:
 after_success:
     - npm run coverage
 services:
-    - postgresql        
+    - postgresql         
 env:
     global:
         -NODE_ENV=test

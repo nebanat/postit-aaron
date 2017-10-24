@@ -22,16 +22,16 @@ describe('Group routes', () => {
       });
   });
   describe('Create group routes', () => {
-    // it('should throw an error if a valid JWT token is not provided', (done) => {
-    //   chai.request(app)
-    //     .post('/api/group')
-    //     .send({})
-    //     .end((err, res) => {
-    //       expect(res.status).toEqual(403);
-    //       expect(res.body.message).toEqual('No token provided');
-    //       done();
-    //     });
-    // });
+    it('should throw an error if a valid JWT token is not provided', (done) => {
+      chai.request(app)
+        .post('/api/group')
+        .send({})
+        .end((err, res) => {
+          expect(res.status).toEqual(403);
+          expect(res.body.message).toEqual('No token provided');
+          done();
+        });
+    });
     // it('should throw an error if a group name is not provided', (done) => {
     //   chai.request(app)
     //     .post('/api/group')
