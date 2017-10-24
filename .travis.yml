@@ -6,7 +6,7 @@ before_script:
     - createdb post-dev-test -U postgres
     - sequelize db:migrate
 script: npm test
-after_success:
+after_script:
     - npm run coveralls
 services:
     - postgres        
