@@ -6,16 +6,14 @@ install:
 before_script:
     - createdb post-dev-test -U postgres
     - sequelize db:migrate
-script: npm test
+script: 
+    - npm test
 after_success:
-    - npm run coveralls
-after_script:
-    - nyc report --reporter=text-lcov | coveralls    
+    - npm run coverage
 services:
     - postgresql        
 env:
     global:
         -NODE_ENV=test
-notifications:
-  webhooks: https://coveralls.io/webhook?repo_token=AzdK44rts9EXNrbG1Qo0WdVATGmAvty8Z
+
        
