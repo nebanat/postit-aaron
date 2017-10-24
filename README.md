@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/nebanat/postit-aaron.svg?branch=master)](https://travis-ci.org/nebanat/posit-aaron)
-[![Coverage Status](https://coveralls.io/repos/github/nebanat/postit-aaron/badge.svg?branch=master)](https://coveralls.io/github/nebanat/postit-aaron?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/nebanat/postit-aaron/badge.svg?branch=develop)](https://coveralls.io/github/nebanat/postit-aaron?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/69b24810c071027dde76/maintainability)](https://codeclimate.com/github/nebanat/postit-aaron/maintainability)
 
 # POSTIT
