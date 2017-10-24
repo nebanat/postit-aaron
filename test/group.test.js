@@ -32,19 +32,19 @@ describe('Group routes', () => {
           done();
         });
     });
-    // it('should throw an error if a group name is not provided', (done) => {
-    //   chai.request(app)
-    //     .post('/api/group')
-    //     .set('x-access-token', user1token)
-    //     .send({
-    //       name: ''
-    //     })
-    //     .end((err, res) => {
-    //       expect(res.status).toEqual(400);
-    //       expect(res.body.message).toEqual('Please enter a group name');
-    //       done();
-    //     });
-    // });
+    it('should throw an error if a group name is not provided', (done) => {
+      chai.request(app)
+        .post('/api/group')
+        .set('x-access-token', user1token)
+        .send({
+          name: ''
+        })
+        .end((err, res) => {
+          expect(res.status).toEqual(400);
+          expect(res.body.message).toEqual('Please enter a group name');
+          done();
+        });
+    });
     // it('should allow registered users to create new group', (done) => {
     //   chai.request(app)
     //     .post('/api/group')

@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/nebanat/postit-aaron.svg?branch=master)](https://travis-ci.org/nebanat/posit-aaron)
-
 [![Coverage Status](https://coveralls.io/repos/github/nebanat/postit-aaron/badge.svg?branch=master)](https://coveralls.io/github/nebanat/postit-aaron?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/69b24810c071027dde76/maintainability)](https://codeclimate.com/github/nebanat/postit-aaron/maintainability)
 
 # POSTIT
 PostIt is modern web application that allows users to create groups and send and receive broadcast messages from their groups
