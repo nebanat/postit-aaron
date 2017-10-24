@@ -6,9 +6,9 @@ import transporter from '../mail/nodemailer';
 export default {
   /**
    *
-   * @param {req} req
-   * @param {res} res
-   * @return {successMessage} successMessage
+   * @param { req } req
+   * @param { res } res
+   * @return { successMessage } successMessage
    */
   sendPasswordResetLinkEmail(req, res) {
     const { email } = req.body;

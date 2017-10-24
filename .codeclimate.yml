@@ -1,0 +1,23 @@
+engines:
+  duplication:
+    enabled: true
+    checks:
+      Similar code:
+        enabled: false
+    config:
+      languages:
+      - javascript
+  fixme:
+    enabled: true
+    config:
+      strings:
+      - FIXME
+      - BUG
+ratings:
+  paths:
+  - "server/*.js"
+  - "server/**/*.js"
+  - "client/**/*.jsx"
+exclude_paths:
+- node_modules/
+- /test/

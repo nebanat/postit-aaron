@@ -1,15 +1,19 @@
 language: node_js
 node_js:
     - "6"
+install:
+    - npm install    
 before_script:
-    - npm install sequelize-cli -g
-    - createdb post-test --username=postgres
+    - createdb post-dev-test -U postgres
     - sequelize db:migrate
-script: npm test
+script: 
+    - npm test
 after_success:
-    -npm run coveralls
+    - npm run coverage
 services:
-    - postgres        
+    - postgresql         
 env:
     global:
         -NODE_ENV=test
+
+       

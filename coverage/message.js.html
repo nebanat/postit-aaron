@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for postit-app/server/models/user.js</title>
+    <title>Code coverage report for message.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../../prettify.css" />
-    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../../sort-arrow-sprite.png);
+            background-image: url(sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../../index.html">All files</a> / <a href="index.html">postit-app/server/models</a> user.js
+      <a href="index.html">All files</a> message.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>5/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>5/5</span>
       </div>
     </div>
   </div>
@@ -106,8 +106,7 @@
 61
 62
 63
-64
-65</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+64</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -166,85 +165,83 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export default (sequelize, DataTypes) =&gt; {
-  const User = sequelize.define('User', {
-    username: {
-      type: DataTypes.STRING,
-      unique: true,
+  const Message = sequelize.define('Message', {
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
       validate: {
-        // validates that the username doesnt already exist//
         notEmpty: {
           args: true,
-          msg: 'username cannot be empty'
+          msg: 'Message body cannot be empty'
         }
       }
     },
-    email: {
-      type: DataTypes.STRING,
-      unique: true,
-      // validations for the email field defined//
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
       validate: {
-        // validates that the email doesnt already exist//
-        isEmail: {
-          args: true,
-          msg: 'A valid email is required',
-        },
         notEmpty: {
           args: true,
-          msg: 'Email cannot be empty'
+          msg: 'User has to create a message'
         }
-&nbsp;
       }
-&nbsp;
     },
-    resetPassToken: {
+    author: {
       type: DataTypes.STRING,
-      unique: true
-    },
-    expirePassToken: {
-      type: DataTypes.STRING,
-      unique: false
-    },
-    password: {
-      type: DataTypes.STRING,
+      allowNull: false,
       validate: {
-        min: {
-          args: 5,
-          msg: 'Password must be at least 5 characters'
-        },
         notEmpty: {
           args: true,
-          msg: 'Password cannot be empty'
+          msg: 'Username of the author is required'
         }
-&nbsp;
+      }
+    },
+    groupId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'A message has to be posted to a group'
+        }
+      }
+    },
+    priority: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Set message priority'
+        }
       }
     }
+&nbsp;
   });
-  User.associate = function (models) {
-    // relationship between users and groups//
-    User.belongsToMany(models.Group, { through: 'UsersGroups', foreignKey: 'userId' });
+  Message.associate = function (models) {
+    // relationship between messages and user//
+    Message.belongsTo(models.User, { foreignKey: 'userId', as: 'message' });
 &nbsp;
-    // relationship between user and messages//
-    // User.hasMany(models.Message, { foreignKey: 'userId' });
+    // relationship between messages and group//
+    Message.belongsTo(models.Group, { foreignKey: 'groupId', as: 'user' });
   };
-  return User;
+  return Message;
 };
-&nbsp;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 24 2017 12:51:48 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 24 2017 12:23:02 GMT+0100 (WAT)
 </div>
 </div>
-<script src="../../../prettify.js"></script>
+<script src="prettify.js"></script>
 <script>
 window.onload = function () {
         if (typeof prettyPrint === 'function') {
@@ -252,6 +249,6 @@ window.onload = function () {
         }
 };
 </script>
-<script src="../../../sorter.js"></script>
+<script src="sorter.js"></script>
 </body>
 </html>

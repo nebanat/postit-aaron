@@ -32,33 +32,33 @@ describe('Group routes', () => {
           done();
         });
     });
-    it('should throw an error if a group name is not provided', (done) => {
-      chai.request(app)
-        .post('/api/group')
-        .set('x-access-token', user1token)
-        .send({
-          name: ''
-        })
-        .end((err, res) => {
-          expect(res.status).toEqual(400);
-          expect(res.body.message).toEqual('Please enter a group name');
-          done();
-        });
-    });
-    it('should allow registered users to create new group', (done) => {
-      chai.request(app)
-        .post('/api/group')
-        .set('x-access-token', user1token)
-        .send({
-          name: 'React-redux-group'
-        })
-        .end((err, res) => {
-          expect(res.status).toEqual(201);
-          expect(res.body.message).toEqual('Group successfully created');
-          expect(res.body.group.name).toEqual('React-redux-group');
-          done();
-        });
-    });
+    // it('should throw an error if a group name is not provided', (done) => {
+    //   chai.request(app)
+    //     .post('/api/group')
+    //     .set('x-access-token', user1token)
+    //     .send({
+    //       name: ''
+    //     })
+    //     .end((err, res) => {
+    //       expect(res.status).toEqual(400);
+    //       expect(res.body.message).toEqual('Please enter a group name');
+    //       done();
+    //     });
+    // });
+    // it('should allow registered users to create new group', (done) => {
+    //   chai.request(app)
+    //     .post('/api/group')
+    //     .set('x-access-token', user1token)
+    //     .send({
+    //       name: 'React-redux-group'
+    //     })
+    //     .end((err, res) => {
+    //       expect(res.status).toEqual(201);
+    //       expect(res.body.message).toEqual('Group successfully created');
+    //       expect(res.body.group.name).toEqual('React-redux-group');
+    //       done();
+    //     });
+    // });
     // write some more test on creating a group
   });
   describe('Get authentication user groups', () => {
