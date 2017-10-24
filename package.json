@@ -7,7 +7,7 @@
     "migrate": "sequelize db:migrate",
     "unmigrate": "sequelize db:migrate:undo:all",
     "start:dev": "nodemon --exec babel-node server/app.js",
-    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test | coveralls",
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "node_modules/.bin/esw webpack.config.* server client",
     "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && nyc --reporter=html --reporter=text mocha --compilers js:babel-register --timeout 10000 ",
