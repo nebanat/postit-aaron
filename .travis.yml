@@ -7,17 +7,12 @@ node_js:
 services:
   - postgresql
 
-postgres:
-  adapter: postgresql
-  database: post_dev_test
-  username: postgres
-  
 before_script:
-  - psql -c 'create database post_dev_test;' -U postgres
+  - psql -c 'create database postit_test;' -U postgres
   - npm install sequelize-cli -g
 
 script:
-  - npm test 
+  - npm test  
 env:
     global:
         -NODE_ENV=test
