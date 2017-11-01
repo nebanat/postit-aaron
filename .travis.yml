@@ -1,18 +1,23 @@
+sudo: required
+dist: trusty
 language: node_js
 node_js:
-    - "iojs"
-    - "7"
-install:
-    - npm install    
-before_script:
-    - createdb post-dev-test -U postgres
-    - sequelize db:migrate
-script: 
-    - npm test
-after_success:
-    - npm run coverage
+  - node
+
 services:
-    - postgresql         
+  - postgresql
+
+postgres:
+  adapter: postgresql
+  database: post_dev_test
+  username: postgres
+  
+before_script:
+  - psql -c 'create database post_dev_test;' -U postgres
+  - npm install sequelize-cli -g
+
+script:
+  - npm test 
 env:
     global:
         -NODE_ENV=test
