@@ -1,13 +1,13 @@
 import models from '../../models';
 /**
  *
- * @param {*} req
- * @param {*} res
- * @param {*} next
- * @return {user} user
+ * @param { req } req
+ * @param { res } res
+ * @param { next } next
+ * @return {messageObject} messageObject
  */
 export default function emailExist(req, res, next) {
-  // checks if username already exist
+  // checks if email already exist
   const { email } = req.body;
 
   models.User

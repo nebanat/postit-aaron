@@ -40,7 +40,7 @@ export const insertSeedData = () => {
 export const generateToken = (id, user) => {
   const jwtSecret = process.env.SECRET || 'PrivateKey';
   const token = jwt.sign({
-    user: { id, name: user.username, email: user.email }
+    user: { id, username: user.username, email: user.email }
   }, jwtSecret, {
     expiresIn: '24h'
   });
@@ -56,9 +56,9 @@ export const newGroup = {
   name: 'Europeans'
 };
 
-export const updatedGroup = {
-  name: 'Africans'
-};
+// export const updatedGroup = {
+//   name: 'Africans'
+// };
 
 export const newMessage = {
   content: 'Maiores ut enim ratione voluptas accusamus lorem.',
