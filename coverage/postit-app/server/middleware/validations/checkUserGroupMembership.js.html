@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">18.18% </span>
+        <span class="strong">90.91% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>2/11</span>
+        <span class='fraction'>10/11</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>4/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/3</span>
+        <span class='fraction'>3/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">18.18% </span>
+        <span class="strong">90.91% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>2/11</span>
+        <span class='fraction'>10/11</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -82,22 +82,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -110,23 +110,23 @@ import models from '../../models';
  * @param {*} next
  * @return {group} group
  */
-export default function <span class="fstat-no" title="function not covered" >checkUserGroupMembership(req, res, next) {</span>
-  const token = <span class="cstat-no" title="statement not covered" >req.body.token || req.query.token || req.headers['x-access-token'];</span>
+export default function checkUserGroupMembership(req, res, next) {
+  const token = req.body.token || req.query.token || req.headers['x-access-token'];
   // decodes token//
-  const access = <span class="cstat-no" title="statement not covered" >decode(token);</span>
-  const userId = <span class="cstat-no" title="statement not covered" >access.user.id;</span>
-  const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
+  const access = decode(token);
+  const userId = access.user.id;
+  const { id } = req.params;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  models.Group</span>
+  models.Group
     .findById(id)
-    .then(<span class="fstat-no" title="function not covered" >(</span>group) =&gt; {
-<span class="cstat-no" title="statement not covered" >      group.hasUser(userId).then(<span class="fstat-no" title="function not covered" >(</span>result) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        if (!result) {</span>
+    .then((group) =&gt; {
+      group.hasUser(userId).then((result) =&gt; {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!result) {
 <span class="cstat-no" title="statement not covered" >          return res.status(403).send({</span>
             message: 'User does not belong to this group'
           });
         }
-<span class="cstat-no" title="statement not covered" >        next();</span>
+        next();
       });
     });
 }
@@ -136,7 +136,7 @@ export default function <span class="fstat-no" title="function not covered" >che
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 24 2017 12:51:48 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 01 2017 19:31:04 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

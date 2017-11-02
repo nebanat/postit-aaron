@@ -47,8 +47,8 @@ class Dashboard extends Component {
 }
 /**
  *
- * @param {state} state
- * @return {state} state
+ * @param { state } state
+ * @return { state } state
  */
 function mapStateToProps(state) {
   return {

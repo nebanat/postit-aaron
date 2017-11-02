@@ -10,7 +10,7 @@
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "node_modules/.bin/esw webpack.config.* server client",
-    "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha --compilers js:babel-register -t 10000 ",
+    "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha --compilers js:babel-register test/**/*.test.js -t 10000 ",
     "lint:watch": "npm run lint -- --watch",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "node_modules/.bin/rimraf ./dist",

@@ -1,17 +1,15 @@
-import decode from 'jwt-decode';
 import models from '../models';
+import { decodeUser } from '../middleware/authenticate';
 
 export default {
   /**
    *
-   * @param {req} req
-   * @param {res} res
-   * @return {group} group
+   * @param { req } req
+   * @param { res } res
+   * @return { group } group
    */
   createNewGroup(req, res) {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-    const access = decode(token);
+    const authUser = decodeUser(req);
 
     models.Group
       .create({
@@ -20,7 +18,7 @@ export default {
       })
       .then((group) => {
         /** adds group creator to group */
-        group.addUser(access.user.id);
+        group.addUser(authUser.id);
 
 
         return res.status(201).send({
@@ -37,10 +35,8 @@ export default {
    * @return {groups} groups
    */
   getAuthUserGroups(req, res) {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
-    // decodes token//
-    const access = decode(token);
-    const userId = access.user.id;
+    const authUser = decodeUser(req);
+    const userId = authUser.id;
 
     models.User
       .findById(userId)

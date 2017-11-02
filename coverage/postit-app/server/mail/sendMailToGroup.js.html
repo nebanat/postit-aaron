@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">18.18% </span>
+        <span class="strong">81.82% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>2/11</span>
+        <span class='fraction'>9/11</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -30,18 +30,18 @@
         <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>3/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">18.18% </span>
+        <span class="strong">81.82% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>2/11</span>
+        <span class='fraction'>9/11</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -84,24 +84,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -117,24 +117,24 @@ import transporter from './nodemailer';
  * @return {message} message
  */
 export default function (id, message) {
-  const userEmails = <span class="cstat-no" title="statement not covered" >[];</span>
-<span class="cstat-no" title="statement not covered" >  models.Group</span>
+  const userEmails = [];
+  models.Group
     .findById(id)
-    .then(<span class="fstat-no" title="function not covered" >(</span>group) =&gt; {
-<span class="cstat-no" title="statement not covered" >      group.getUsers({ attributes: ['email'] }).then(<span class="fstat-no" title="function not covered" >(</span>groupUsers) =&gt; {</span>
+    .then((group) =&gt; {
+      group.getUsers({ attributes: ['email'] }).then((groupUsers) =&gt; {
         // get all the emails of users in the group
-<span class="cstat-no" title="statement not covered" >        groupUsers.forEach(<span class="fstat-no" title="function not covered" >(</span>user) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >          userEmails.push(user.email);</span>
+        groupUsers.forEach((user) =&gt; {
+          userEmails.push(user.email);
         });
         // mail options
-        const mailOptions = <span class="cstat-no" title="statement not covered" >{</span>
+        const mailOptions = {
           from: '"Post It" &lt;noreply@postit.com',
           to: userEmails,
           subject: 'PostIt Message notification',
           text: `Hello ${message} was posted in your ${group.name}`
         };
         // sends the email to all memnbers of the group
-<span class="cstat-no" title="statement not covered" >        transporter.sendMail(mailOptions, <span class="fstat-no" title="function not covered" >(</span>error, info) =&gt; {</span>
+        transporter.sendMail(mailOptions, <span class="fstat-no" title="function not covered" >(</span>error, info) =&gt; {
 <span class="cstat-no" title="statement not covered" >          if (error) {</span>
 <span class="cstat-no" title="statement not covered" >            console.log(error);</span>
           }
@@ -148,7 +148,7 @@ export default function (id, message) {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 24 2017 12:51:48 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 01 2017 19:31:04 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
