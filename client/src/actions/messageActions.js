@@ -44,7 +44,7 @@ export function postMessageFailure(postFailureMessage) {
  */
 export function postMessage(message, priority, groupId) {
   return (dispatch) => {
-    const Materialize = window.Materialize;
+    const { Materialize } = window;
 
     dispatch(messageIsLoading(true));
     api.postNewMessage(message, priority, groupId)

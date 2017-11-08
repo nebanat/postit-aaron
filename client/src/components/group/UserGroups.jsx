@@ -1,22 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import SingleUserGroup from './SingleUserGroups.jsx';
 
 /**
- * @class
- * @extends component
+ * @param { groups } groupsarray
+ * @return { jsx } jsx
  */
-class UserGroups extends Component {
-  /**
-   * @return { jsx } jsx
-   */
-  render() {
-    return (
+const UserGroups = ({ groups }) =>
+  (
             <div>
                 <h4>Your Groups</h4>
 
                 <div className="row">
                     {
-                        this.props.groups.map((group, i) =>
+                        groups.map((group, i) =>
                             <SingleUserGroup key={i} i={i} group={group}/>)
                     }
 
@@ -24,8 +20,7 @@ class UserGroups extends Component {
 
 
             </div>
-    );
-  }
-}
+  );
+
 
 export default UserGroups;

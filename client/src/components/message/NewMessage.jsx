@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loader from '../loaders/Loader.jsx';
+import NewMessageForm from './NewMessageForm.jsx';
 
 
 /**
@@ -15,6 +16,33 @@ class NewMessage extends Component {
   constructor(props) {
     super(props);
     this.handleOnSubmitMessage = this.handleOnSubmitMessage.bind(this);
+    this.onMessageChange = this.onMessageChange.bind(this);
+    this.onSelectChange = this.onSelectChange.bind(this);
+    this.validateSelection = this.validateSelection.bind(this);
+    this.state = {
+      select: {
+        group: '',
+        priority: ''
+      },
+      message: '',
+    };
+  }
+  /**
+   *
+   * @param { select } select
+   * @return { validation } validation
+   */
+  validateSelection(select) {
+    const { Materialize } = window;
+    if (!select.priority) {
+      Materialize.toast('Please select a message priority', 3000, 'red');
+      return false;
+    }
+    if (!select.group) {
+      Materialize.toast('Please select a group', 3000, 'red');
+      return false;
+    }
+    return true;
   }
   /**
    *
@@ -23,71 +51,56 @@ class NewMessage extends Component {
    */
   handleOnSubmitMessage(event) {
     event.preventDefault();
-
-    const message = this.refs.content.value;
-    const priority = document.getElementById('priority').value;
-    const groupId = document.getElementById('group').value;
-
-    this.props.actions.messageActions.postMessage(message, priority, groupId);
-
-    this.refs.messageForm.reset();
+    const { message, select } = this.state;
+    // this.validateSelection(select);
+    if (this.validateSelection(select)) {
+      this.props.actions.messageActions.postMessage(message, select.priority, select.group);
+    }
   }
+  /**
+   *
+   * @param {event} event
+   * @return {message} message
+   */
+  onMessageChange(event) {
+    return this.setState({ message: event.target.value });
+  }
+  /**
+   *
+   * @param {event} event
+   * @return {message} message
+   */
+  onSelectChange(event) {
+    const field = event.target.name;
+    const { value } = event.target;
+    this.state.select[field] = value;
+
+    return this.setState({ select: this.state.select });
+  }
+
   /**
    * @returns { jsx } jsx
    */
   render() {
-    const { messageIsLoading } = this.props;
+    const { messageIsLoading, groups } = this.props;
+
     return (
-            <div className="container">
+        <div className="container">
               {
                  (messageIsLoading) ? (<Loader/>) : ('')
               }
                 <h3>New Message</h3>
 
-                <form
-                  ref="messageForm"
-                  onSubmit={ this.handleOnSubmitMessage }
-                  className="col s12">
-                    <div className="row">
-                        <div className="input-field col s12">
-                            <input
-                              id="content" ref="content"
-                              type="text" className="validate" required/>
-                            <label>Content</label>
-                        </div>
-                    </div>
-                     <div className="row">
-                       <label>Select group</label>
-                     <select className="browser-default" id='group'
-                            placeholder="select group" required>
-                     {
-                      this.props.groups.map((group, i) =>
-                        <option value={group.id} key={i}>
-                          {
-                            group.name
-                          }</option>)
-                      }
-                    </select>
-                    </div>
-                    <div className="row">
-                      <select className="browser-default" id='priority'
-                            placeholder="select group" required>
-                          <option value='3'>Critical</option>
-                          <option value='2'>Urgent</option>
-                          <option value='1'>Normal</option>
-                      </select>
-                    </div>
-                    <div className="row">
-                        <div className="col m3">
-                            <button type='submit' name='action'
-                                    className='purple darken-4 btn col s12'>
-                                        PostIt
-                                </button>
-                        </div>
-
-                    </div>
-                </form>
+                <NewMessageForm
+                    message = { this.state.message }
+                    groups = { groups }
+                    onMessageChange = {this.onMessageChange}
+                    onSelectChange = {this.onSelectChange}
+                    onSubmit = { this.handleOnSubmitMessage }
+                    priorityValue={this.state.select.priority}
+                    groupValue={this.state.select.group}/>
             </div>
+
 
     );
   }

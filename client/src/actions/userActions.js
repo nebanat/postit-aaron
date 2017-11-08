@@ -38,18 +38,16 @@ export function signUpFailure(signUpErrorMessage) {
 
 /**
  *
- * @param { username } username
- * @param { email } email
- * @param { password } password
+ * @param { user } user
  * @return { object } user
  *
  */
-export function signUpUser(username, email, password) {
+export function signUpUser(user) {
   return (dispatch) => {
-    const Materialize = window.Materialize;
+    const { Materialize } = window;
 
     dispatch(authIsLoading(true));
-    api.signUp(username, email, password)
+    api.signUp(user)
       .then((response) => {
         dispatch(signUpSuccess(response.data.message));
 
@@ -65,7 +63,7 @@ export function signUpUser(username, email, password) {
         if (error) {
           dispatch(signUpFailure(error.response.data.message));
 
-          Materialize.toast(error.response.data.message, 2500, 'green');
+          Materialize.toast(error.response.data.message, 2500, 'red');
 
           dispatch(authIsLoading(false));
         }
@@ -98,17 +96,16 @@ export function signInFailure(signInErrorMessage) {
 
 /**
  *
- * @param { username } username
- * @param { password } password
+ * @param { user } user object
  * @return { Object } user
  */
-export function signInUser(username, password) {
+export function signInUser(user) {
   return (dispatch) => {
-    const Materialize = window.Materialize;
+    const { Materialize } = window;
 
     dispatch(authIsLoading(true));
 
-    api.signIn(username, password)
+    api.signIn(user)
       .then((response) => {
         dispatch(signInSuccess(response.data.user));
 

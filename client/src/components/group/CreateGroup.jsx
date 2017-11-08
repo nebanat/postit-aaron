@@ -1,73 +1,63 @@
 import React, { Component } from 'react';
 import Loader from '../loaders/Loader.jsx';
+import CreateGroupForm from './CreateGroupForm.jsx';
 
 /**
  * @class
- * @extends conponent
+ * @extends component
  */
 class CreateGroup extends Component {
   /**
+   * @constructor
+   * @param { props }  props
+   */
+  constructor(props) {
+    super(props);
+    this.handleGroupSubmit = this.handleGroupSubmit.bind(this);
+    this.setGroupDetail = this.setGroupDetail.bind(this);
+    this.state = {
+      group: {
+        name: '',
+        description: ''
+      }
+    };
+  }
+  /**
    *
-   * @param {event} event
-   * @return {group} group
+   * @param { event } event
+   * @return { group } group
    */
   handleGroupSubmit(event) {
     event.preventDefault();
-
-    const name = this.refs.name.value;
-    const description = this.refs.description.value;
-
-    this.props.actions.groupActions.createGroup(name, description);
-
-    this.refs.groupForm.reset();
+    this.props.actions.groupActions.createGroup(this.state.group);
   }
   /**
-   * @return {jsx} jsx
+   * @param { event } event
+   * @returns { state } state
+   */
+  setGroupDetail(event) {
+    const field = event.target.name;
+    const { value } = event.target;
+    this.state.group[field] = value;
+
+    return this.setState({ group: this.state.group });
+  }
+  /**
+   * @return { jsx } jsx
    */
   render() {
     const { groupIsLoading } = this.props;
+
     return (
           <div className="container">
-
-            {
-                (groupIsLoading) ? (<Loader/>) : ('')
-            }
-                <h2>New Group</h2>
-
-                <form
-                  ref="groupForm"
-                  onSubmit={this.handleGroupSubmit.bind(this)}
-                  className="col s12">
-                    <div className="row">
-                        <div className="input-field col s12">
-                            <input
-                                id="content"
-                                ref="name" type="text"
-                                className="validate" required/>
-                            <label>Name</label>
-                        </div>
-                    </div>
-                     <div className="row">
-                        <div className="input-field col s12">
-                            <textarea
-                                id="description"
-                                ref='description'
-                                className="materialize-textarea">
-                            </textarea>
-                            <label>Description (optional)</label>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col m3">
-                            <button type='submit' name='action'
-                                    className='purple darken-4 btn col s12'>
-                                        Create Group
-                            </button>
-                        </div>
-
-                    </div>
-                </form>
+              {
+                  (groupIsLoading) ? (<Loader/>) : ('')
+              }
+              <h2>New Group</h2>
+              <CreateGroupForm
+                group = { this.state.group }
+                onChange = { this.setGroupDetail }
+                onSubmit = {this.handleGroupSubmit }/>
             </div>
     );
   }

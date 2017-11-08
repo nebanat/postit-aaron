@@ -1,19 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 /**
- * @class
- * @extends component
+ * @return { jsx } jsx
  */
-class Loader extends Component {
-  /**
-   * @return { jsx } jsx
-   */
-  render() {
-    return (
-            <div className="progress">
-                <div className="indeterminate"></div>
-            </div>
-    );
-  }
-}
-
+const Loader = () =>
+  (
+      <div className="progress">
+          <div className="indeterminate"></div>
+      </div>
+  );
 export default Loader;

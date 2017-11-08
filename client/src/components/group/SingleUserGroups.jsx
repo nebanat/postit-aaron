@@ -1,38 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
+import Card from '../common/Card.jsx';
 
 /**
- * @class
- * @extends component
+ * @param { group } group object
+ * @return { jsx } jsx
  */
-class SingleUserGroup extends Component {
-  /**
-   * @return {jsx} jsx
-   */
-  render() {
-    const { group } = this.props;
-    return (
-            <div>
-                <div className="col s12 m4">
-                    <div className="card white darken-1">
-                        <div className="card-content black-text">
-                            <span className="card-title">
-                                <Link to={`/group/${group.id}/messages`}
-                                  className="purple-text darken-4">{group.name}
-                                </Link>
-                            </span>
-                                <p>{ group.description }</p>
-                        </div>
-                            <div className="card-action">
-                                <div className="stats">
-                                    
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-    );
-  }
-}
+const SingleUserGroup = ({ group }) => {
+  const cardClass = 'card white purple-text darken-4';
+  const cardWrapperClass = 'col s12 m4';
+  const cardContentClass = 'card-content black-text';
+  const cardTitleClass = 'card-title';
+
+  return (
+    <div>
+        <Card
+          cardClass ={ cardClass }
+          wrapperClass= { cardWrapperClass }
+          cardContentClass ={ cardContentClass }
+          cardTitleClass = { cardTitleClass }>
+
+              <span className="card-title">
+                <Link to={`/group/${group.id}/messages`}
+                  className="purple-text darken-4">{group.name}
+                </Link>
+             </span>
+
+             <p>{ group.description }</p>
+
+        </Card>
+    </div>
+  );
+};
+
 
 export default SingleUserGroup;

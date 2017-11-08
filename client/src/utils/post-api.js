@@ -2,12 +2,10 @@ import axios from 'axios';
 import { getAccessToken, getAccessId } from './authservice';
 /**
  *
- * @param { username } username
- * @param { email } email
- * @param { password } password
+ * @param { user } user object
  * @return { promise } promise
  */
-export function signUp(username, email, password) {
+export function signUp(user) {
   return axios({
     method: 'post',
     url: '/api/user/signup',
@@ -15,20 +13,19 @@ export function signUp(username, email, password) {
       'Content-type': 'application/json; charset=utf-8'
     },
     data: JSON.stringify({
-      username,
-      email,
-      password
+      username: user.username,
+      email: user.email,
+      password: user.password
     })
   });
 }
 
 /**
  *
- * @param {username} username
- * @param {password} password
- * @return {promise} promise
+ * @param { user } user object
+ * @return { promise } promise
  */
-export function signIn(username, password) {
+export function signIn(user) {
   return axios({
     method: 'post',
     url: '/api/user/signin',
@@ -36,18 +33,17 @@ export function signIn(username, password) {
       'Content-type': 'application/json; charset=utf-8'
     },
     data: JSON.stringify({
-      username,
-      password
+      username: user.username,
+      password: user.password
     })
   });
 }
 /**
  *
- * @param {groupName} groupName
- * @param {groupDescription} groupDescription
- * @return {promise} promise
+ * @param { group } group
+ * @return { promise } promise
  */
-export function createGroup(groupName, groupDescription) {
+export function createGroup(group) {
   return axios({
     method: 'post',
     url: '/api/group',
@@ -56,8 +52,8 @@ export function createGroup(groupName, groupDescription) {
       'x-access-token': getAccessToken()
     },
     data: JSON.stringify({
-      name: groupName,
-      description: groupDescription
+      name: group.name,
+      description: group.description
     })
   });
 }

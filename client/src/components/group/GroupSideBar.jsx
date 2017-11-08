@@ -1,30 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Collapsible, CollapsibleItem } from 'react-materialize';
 import GroupUsers from './GroupUsers.jsx';
 
 
 /**
- * @class
- * @extends component
+ * @param { props } props
+ * @return { jsx } jsx
  */
-class GroupSideBar extends Component {
-  /**
-   * @return { jsx } jsx
-   */
-  render() {
-    return (
+const GroupSideBar = props =>
+
+  (
             <div>
                 <Collapsible>
                     <CollapsibleItem header='Members' icon='group'>
-                        <GroupUsers {...this.props}/>
+                        <GroupUsers {...props}/>
                     </CollapsibleItem>
                     <CollapsibleItem header='Add Member' icon='add_circle'>
-                        
+
                     </CollapsibleItem>
                 </Collapsible>
             </div>
-    );
-  }
-}
+  );
+
 
 export default GroupSideBar;
