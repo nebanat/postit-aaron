@@ -1,24 +1,15 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 
 /**
- * @class
- * @extends component
+ *@returns { jsx } jsx
  */
-class Default extends Component {
-  /**
-   * @return { jsx } jsx
-   */
-  render() {
-    return (
-            <div>
-              <h2>Welcome to PostIt Application</h2>
-            </div>
+const Default = () =>
+  (
+      <div>
+        <h2>Welcome to PostIt Application</h2>
+      </div>
 
-    );
-  }
-}
-
+  );
 
 export default Default;
 

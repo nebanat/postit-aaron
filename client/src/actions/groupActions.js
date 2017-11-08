@@ -4,7 +4,7 @@ import * as api from '../utils/post-api';
 
 /**
  *
- * @param {bool} bool
+ * @param { bool } bool
  * @return { groupLoadingObject } groupLoadingObject
  */
 export function groupIsLoading(bool) {
@@ -15,8 +15,8 @@ export function groupIsLoading(bool) {
 }
 /**
  *
- * @param {group} group
- * @return {group} group
+ * @param { group } group
+ * @return { group } group
  */
 export function createGroupSuccess(group) {
   return {
@@ -26,8 +26,8 @@ export function createGroupSuccess(group) {
 }
 /**
  *
- * @param {createGroupMessage} createGroupMessage
- * @return {object} action
+ * @param { createGroupMessage } createGroupMessage
+ * @return { object } action
  */
 export function createGroupSuccessMessage(createGroupMessage) {
   return {
@@ -37,8 +37,8 @@ export function createGroupSuccessMessage(createGroupMessage) {
 }
 /**
  *
- * @param {createGroupError} createGroupError
- * @return {object} action
+ * @param { createGroupError } createGroupError
+ * @return { object } action
  */
 export function createGroupFailure(createGroupError) {
   return {
@@ -48,17 +48,16 @@ export function createGroupFailure(createGroupError) {
 }
 /**
  *
- * @param { groupName } groupName
- * @param { groupDescription } groupDescription
+ * @param { group } group
  * @return { group } group
  *
  */
-export function createGroup(groupName, groupDescription) {
+export function createGroup(group) {
   return (dispatch) => {
-    const Materialize = window.Materialize;
+    const { Materialize } = window;
 
     dispatch(groupIsLoading(true));
-    api.createGroup(groupName, groupDescription)
+    api.createGroup(group)
       .then((response) => {
         dispatch(createGroupSuccess(response.data.group));
 
@@ -85,8 +84,8 @@ export function createGroup(groupName, groupDescription) {
 }
 /**
  *
- * @param {groups} groups
- * @return {actionObject} actionObject
+ * @param { groups } groups
+ * @return { actionObject } actionObject
  */
 export function fetchUserGroupsSuccess(groups) {
   return {
@@ -96,8 +95,8 @@ export function fetchUserGroupsSuccess(groups) {
 }
 /**
  *
- * @param {fetchGroupErrorMessage} fetchGroupErrorMessage
- * @return {actionObject} actionObject
+ * @param { fetchGroupErrorMessage } fetchGroupErrorMessage
+ * @return { actionObject } actionObject
  */
 export function fetchUserGroupsFailure(fetchGroupErrorMessage) {
   return {

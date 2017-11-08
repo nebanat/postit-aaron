@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 /**
- * @class
- * @extends component
+ * @param { message } object
+ * @return { jsx } jsx
  */
-class SingleGroupMessage extends Component {
+const SingleGroupMessage = ({ message, i }) => {
   /**
    *
-   * @param {value} value
+   * @param { value } value
    * @return { messageBadge } messageBadge
    */
-  messageTypeColor(value) {
+  const messageTypeColor = (value) => {
     if (value === 1) {
       return 'new badge blue darken-4 left secondary-content';
     } else if (value === 2) {
@@ -18,13 +18,13 @@ class SingleGroupMessage extends Component {
     } else if (value === 3) {
       return 'new badge red darken-4 left secondary-content';
     }
-  }
+  };
   /**
  *
  * @param { value } value
- * @return {messageType} messageType
+ * @return { messageType } messageType
  */
-  messageType(value) {
+  const messageType = (value) => {
     if (value === 1) {
       return 'normal';
     } else if (value === 2) {
@@ -32,13 +32,9 @@ class SingleGroupMessage extends Component {
     } else if (value === 3) {
       return 'critical';
     }
-  }
-  /**
-   * @return {jsx} jsx
-   */
-  render() {
-    const { message, i } = this.props;
-    return (
+  };
+
+  return (
           <li className="collection-item avatar">
               <img alt="" className="circle"/>
               <strong className="title">@{message.author} <small>
@@ -47,11 +43,11 @@ class SingleGroupMessage extends Component {
               </strong>
               <br/>
               <p>{message.content}</p>
-              <span className={this.messageTypeColor(message.priority)}
-                    data-badge-caption={this.messageType(message.priority)}>
+              <span className={messageTypeColor(message.priority)}
+                    data-badge-caption={messageType(message.priority)}>
               </span>
            </li>
-    );
-  }
-}
+  );
+};
+
 export default SingleGroupMessage;
