@@ -16,6 +16,7 @@ import signInValidation from '../middleware/validations/signInValidation';
 // };
 const app = express.Router();
 
+
 app.post(
   '/signup',
   signUpValidation, emailExist, usernameExist,
@@ -34,5 +35,6 @@ app.post(
   '/password/reset',
   resetPasswordValidation, passwordController.resetPassword
 );
+
 
 export default app;

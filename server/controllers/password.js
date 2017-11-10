@@ -1,7 +1,9 @@
 import randomstring from 'randomstring';
-import md5 from 'md5';
+import bcrypt from 'bcrypt';
 import models from '../models';
 import transporter from '../mail/nodemailer';
+
+const salt = bcrypt.genSaltSync(8);
 
 export default {
   /**
@@ -76,7 +78,7 @@ export default {
 
         // updates the password and garbage collects the token
         user.update({
-          password: md5(password),
+          password: bcrypt.hashSync(password, salt, null),
           resetPassToken: '',
           expiryPassToken: ''
         }).then(updatedUser => res.status(200).send({

@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.89% </span>
+        <span class="strong">85.71% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>16/18</span>
+        <span class='fraction'>18/21</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">66.67% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>3/4</span>
+        <span class='fraction'>4/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">66.67% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>4/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.89% </span>
+        <span class="strong">85.71% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>16/18</span>
+        <span class='fraction'>18/21</span>
       </div>
     </div>
   </div>
@@ -115,12 +115,24 @@
 70
 71
 72
-73</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -170,6 +182,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,6 +197,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -187,13 +209,14 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import md5 from 'md5';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import models from '../models';
 &nbsp;
 require('dotenv').config();
 &nbsp;
 const jwtSecret = process.env.SECRET || <span class="branch-1 cbranch-no" title="branch not covered" >'PrivateKey';</span>
+const salt = bcrypt.genSaltSync(8);
 &nbsp;
 export default {
   /**
@@ -212,7 +235,7 @@ export default {
       .create({
         username,
         email,
-        password: md5(password)
+        password: bcrypt.hashSync(password, salt, null)
       })
       .then(user =&gt; res.status(201).send({
         message: 'Signup successful',
@@ -233,17 +256,23 @@ export default {
     models.User
       .findOne({
         where: {
-          username, password: md5(password)
+          username
         },
         attributes: {
-          exclude: ['password', 'resetPassToken', 'expirePassToken']
+          exclude: ['resetPassToken', 'expirePassToken']
         }
       })
       .then((user) =&gt; {
         // Checks to see if the user exist//
-        if (!user) {
-          return res.status(400).send({
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!user) {
+<span class="cstat-no" title="statement not covered" >          return res.status(400).send({</span>
             message: 'Invalid username or password'
+          });
+        }
+        // checks the password
+        if (!bcrypt.compareSync(password, user.password)) {
+          return res.status(400).send({
+            message: 'Invalid password'
           });
         }
         const token = jwt.sign({ user }, jwtSecret, {
@@ -253,11 +282,15 @@ export default {
         return res.status(200).send({
           message: `Welcome ${user.username}`,
           token,
-          user
+          user: {
+            id: user.id,
+            username: user.username,
+            email: user.email
+          }
         });
       })
       .catch(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >error =&gt; res.status(500).send({ error: error.message }));</span></span>
-  },
+  }
 };
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -265,7 +298,7 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 08 2017 20:13:41 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Nov 10 2017 17:14:45 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

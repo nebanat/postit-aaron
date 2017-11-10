@@ -121,7 +121,7 @@ describe('SIGNIN API - /api/user/signin', () => {
       })
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.message).toEqual('Invalid username or password');
+        expect(res.body.message).toEqual('Invalid password');
         done();
       });
   });
