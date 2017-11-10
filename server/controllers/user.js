@@ -1,10 +1,11 @@
-import md5 from 'md5';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import models from '../models';
 
 require('dotenv').config();
 
 const jwtSecret = process.env.SECRET || 'PrivateKey';
+const salt = bcrypt.genSaltSync(8);
 
 export default {
   /**
@@ -23,7 +24,7 @@ export default {
       .create({
         username,
         email,
-        password: md5(password)
+        password: bcrypt.hashSync(password, salt, null)
       })
       .then(user => res.status(201).send({
         message: 'Signup successful',
@@ -44,10 +45,10 @@ export default {
     models.User
       .findOne({
         where: {
-          username, password: md5(password)
+          username
         },
         attributes: {
-          exclude: ['password', 'resetPassToken', 'expirePassToken']
+          exclude: ['resetPassToken', 'expirePassToken']
         }
       })
       .then((user) => {
@@ -57,6 +58,12 @@ export default {
             message: 'Invalid username or password'
           });
         }
+        // checks the password
+        if (!bcrypt.compareSync(password, user.password)) {
+          return res.status(400).send({
+            message: 'Invalid password'
+          });
+        }
         const token = jwt.sign({ user }, jwtSecret, {
           expiresIn: '24h'
         });
@@ -64,9 +71,13 @@ export default {
         return res.status(200).send({
           message: `Welcome ${user.username}`,
           token,
-          user
+          user: {
+            id: user.id,
+            username: user.username,
+            email: user.email
+          }
         });
       })
       .catch(error => res.status(500).send({ error: error.message }));
-  },
+  }
 };
