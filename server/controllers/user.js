@@ -79,5 +79,16 @@ export default {
         });
       })
       .catch(error => res.status(500).send({ error: error.message }));
+  },
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return {users} users searched
+   */
+  searchUsers(req, res) {
+    return res.status(200).send({
+      message: 'search users touched'
+    });
   }
 };

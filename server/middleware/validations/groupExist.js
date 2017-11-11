@@ -7,7 +7,7 @@ import models from '../../models';
  * @return {group} group
  */
 export default function groupExist(req, res, next) {
-  const { id } = req.params;
+  const { id } = req.params || req.body;
 
   models.Group
     .findById(id)

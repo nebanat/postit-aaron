@@ -2,6 +2,7 @@ import express from 'express';
 import userController from '../controllers/user';
 import passwordController from '../controllers/password';
 import signUpValidation from '../middleware/validations/signUpValidation';
+import authenticate from '../middleware/authenticate';
 import passwordResetValidation from
   '../middleware/validations/passwordResetValidation';
 import resetPasswordValidation from
@@ -34,6 +35,11 @@ app.post(
 app.post(
   '/password/reset',
   resetPasswordValidation, passwordController.resetPassword
+);
+
+app.post(
+  '/search',
+  authenticate, userController.searchUsers
 );
 
 
