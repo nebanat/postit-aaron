@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import db from '../../server/models';

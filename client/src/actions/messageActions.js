@@ -1,6 +1,6 @@
 import { browserHistory } from 'react-router';
 import * as types from './actionTypes';
-import * as api from '../utils/post-api';
+import * as api from '../utils/postItApi';
 /**
  *
  * @param {bool} bool

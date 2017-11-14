@@ -105,5 +105,84 @@ describe('Group API', () => {
         });
     });
   });
+  describe('SEARCH API - api/user/search', () => {
+    it('should throw an error if user has no token', (done) => {
+      chai.request(app)
+        .post('/api/user/search')
+        .send({})
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('No token provided');
+          done();
+        });
+    });
+    it('should throw an error if group Id is not passed', (done) => {
+      chai.request(app)
+        .post('/api/user/search')
+        .set('x-access-token', user1token)
+        .send({})
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('Please enter group');
+          done();
+        });
+    });
+    it('should throw an error if search query is not passed', (done) => {
+      chai.request(app)
+        .post('/api/user/search')
+        .set('x-access-token', user1token)
+        .send({
+          groupId: '1'
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('Please enter search query');
+          done();
+        });
+    });
+    it('should throw an error if group does not exist', (done) => {
+      chai.request(app)
+        .post('/api/user/search')
+        .set('x-access-token', user1token)
+        .send({
+          groupId: '100',
+          query: 'patience'
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('Group does not exist');
+          done();
+        });
+    });
+    it('should return an empty array if no users found with search query ', (done) => {
+      chai.request(app)
+        .post('/api/user/search')
+        .set('x-access-token', user1token)
+        .send({
+          groupId: '1',
+          query: 'xyshhss'
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('No user found');
+          done();
+        });
+    });
+    it('should return an array of users matching the search query ', (done) => {
+      chai.request(app)
+        .post('/api/user/search')
+        .set('x-access-token', user1token)
+        .send({
+          groupId: '1',
+          query: 'patience'
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.length).to.equal(1);
+          expect(res.body).to.be.an('array');
+          done();
+        });
+    });
+  });
 });
 

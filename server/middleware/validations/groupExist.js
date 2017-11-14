@@ -7,10 +7,14 @@ import models from '../../models';
  * @return {group} group
  */
 export default function groupExist(req, res, next) {
-  const { id } = req.params;
+  let groupId = '';
+  /* eslint-disable no-unused-expressions */
+  req.params.id
+    ? (groupId = req.params.id)
+    : ({ groupId } = req.body);
 
   models.Group
-    .findById(id)
+    .findById(groupId)
     .then((group) => {
       if (!group) {
         return res.status(404).send({

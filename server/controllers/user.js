@@ -79,5 +79,52 @@ export default {
         });
       })
       .catch(error => res.status(500).send({ error: error.message }));
+  },
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return {users} users searched
+   */
+  searchUsersNotInGroup(req, res) {
+    const { groupId, query } = req.body;
+
+    models.Group
+      .findById(groupId)
+      .then((group) => {
+        if (!group) {
+          return res.status(404).send({
+            message: 'Group does not exist'
+          });
+        }
+
+        group.getUsers().then((users) => {
+          const members = users.map(user => user.id);
+
+          models.User.findAll({
+            where: {
+              username: {
+                $like: `%${query}%`,
+              },
+              $not: [
+                { id: members }
+              ]
+            },
+            attributes: {
+              exclude: ['password', 'resetPassToken',
+                'expirePassToken', 'updatedAt']
+            }
+          })
+          // nusers represent users not in a group
+            .then((nUsers) => {
+              if (!nUsers.length) {
+                return res.status(404).send({
+                  message: 'No user found'
+                });
+              }
+              return res.status(200).send(nUsers);
+            });
+        });
+      });
   }
 };
