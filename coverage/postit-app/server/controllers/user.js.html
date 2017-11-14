@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">85.71% </span>
+        <span class="strong">90.91% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>18/21</span>
+        <span class='fraction'>30/33</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>8/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">81.82% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>9/11</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">85.71% </span>
+        <span class="strong">90.63% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>18/21</span>
+        <span class='fraction'>29/32</span>
       </div>
     </div>
   </div>
@@ -126,7 +126,54 @@
 81
 82
 83
-84</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -207,6 +254,53 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import bcrypt from 'bcrypt';
@@ -290,6 +384,53 @@ export default {
         });
       })
       .catch(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >error =&gt; res.status(500).send({ error: error.message }));</span></span>
+  },
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return {users} users searched
+   */
+  searchUsersNotInGroup(req, res) {
+    const { groupId, query } = req.body;
+&nbsp;
+    models.Group
+      .findById(groupId)
+      .then((group) =&gt; {
+        if (!group) {
+          return res.status(404).send({
+            message: 'Group does not exist'
+          });
+        }
+&nbsp;
+        group.getUsers().then((users) =&gt; {
+          const members = users.map(user =&gt; user.id);
+&nbsp;
+          models.User.findAll({
+            where: {
+              username: {
+                $like: `%${query}%`,
+              },
+              $not: [
+                { id: members }
+              ]
+            },
+            attributes: {
+              exclude: ['password', 'resetPassToken',
+                'expirePassToken', 'updatedAt']
+            }
+          })
+          // nusers represent users not in a group
+            .then((nUsers) =&gt; {
+              if (!nUsers.length) {
+                return res.status(404).send({
+                  message: 'No user found'
+                });
+              }
+              return res.status(200).send(nUsers);
+            });
+        });
+      });
   }
 };
 &nbsp;</pre></td></tr>
@@ -298,7 +439,7 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Nov 10 2017 17:14:45 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Nov 13 2017 11:41:16 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

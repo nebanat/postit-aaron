@@ -10,11 +10,10 @@ import resetPasswordValidation from
 import emailExist from '../middleware/validations/emailExist';
 import usernameExist from '../middleware/validations/usernameExist';
 import signInValidation from '../middleware/validations/signInValidation';
+import searchUsersValidation from
+  '../middleware/validations/searchUsersValidation';
 
 
-// export default (app) => {
-
-// };
 const app = express.Router();
 
 
@@ -39,7 +38,7 @@ app.post(
 
 app.post(
   '/search',
-  authenticate, userController.searchUsers
+  authenticate, searchUsersValidation, userController.searchUsersNotInGroup
 );
 
 

@@ -6,4 +6,26 @@
   main {
     flex: 1 0 auto;
   }
-   
+  #closeModal {
+    float: right
+  }
+  .user-avatar {
+    background-color: purple;
+    height:30px;
+    width: 30px;
+    margin: 10px;
+    border-radius: 5px;
+    float: left;
+    /* padding-top: 50%; 
+    border: 1px solid purple;
+    border-radius: 50% */
+
+  }
+  #profile-letter {
+    margin-top:3px;
+  }
+  .profile-name {
+    padding-top:10px;
+    font-size: 20px;
+  } 
+  

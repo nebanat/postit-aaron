@@ -160,3 +160,24 @@ export function getGroupUsers(groupId) {
     }
   });
 }
+/**
+ *
+ * @param { groupId } groupId
+ * @param { quey } query
+ * @return { promise } promise
+ */
+export function searchUsersNotInGroup(groupId, query) {
+  return axios({
+    method: 'post',
+    url: '/api/user/search',
+    headers: {
+      'Content-type': 'application/json; charset=utf-8',
+      'id-token': getAccessId(),
+      'x-access-token': getAccessToken()
+    },
+    data: JSON.stringify({
+      groupId,
+      query
+    })
+  });
+}

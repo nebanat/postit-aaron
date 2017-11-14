@@ -1,8 +1,9 @@
-
 import React, { Component } from 'react';
 import SingleGroupMessage from './SingleGroupMessage.jsx';
 import GroupSideBar from '../group/GroupSideBar.jsx';
 import Loader from '../loaders/Loader.jsx';
+import { searchUsersNotInGroup } from '../../utils/postItApi';
+
 
 /**
  * @class
@@ -10,12 +11,72 @@ import Loader from '../loaders/Loader.jsx';
  */
 class GroupMessages extends Component {
   /**
+   * @constructor
+   * @param {props} props
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      search: '',
+      searchLoading: false,
+      searchResults: [],
+      searchErrorMessage: ''
+    };
+    this.onSearchChange = this.onSearchChange.bind(this);
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
+    this.isSearchLoading = this.isSearchLoading.bind(this);
+  }
+  /**
     * @returns {messages} messages
     */
   componentWillMount() {
     this.props.actions.messageActions.fetchGroupMessages(this.props.params.id);
 
     this.props.actions.groupActions.fetchGroupUsers(this.props.params.id);
+  }
+  /**
+   * @return { dom } dom
+   */
+  componentDidMount() {
+    $('.modal').modal({
+      opacity: 0.5,
+    });
+  }
+  /**
+   * @param { bool } bool
+   * @returns {searchLoading} searchLoading
+   */
+  isSearchLoading(bool) {
+    return this.setState({ searchLoading: bool });
+  }
+  /**
+   *
+   * @param { event } event
+   * @return { state } state
+   */
+  onSearchChange(event) {
+    return this.setState({ search: event.target.value });
+  }
+  /**
+   * @param {event} event
+   * @returns { searchResult } searchResult
+   */
+  onSearchSubmit(event) {
+    event.preventDefault();
+    const { id } = this.props.params;
+    // get search results
+    this.isSearchLoading(true);
+    searchUsersNotInGroup(id, this.state.search)
+      .then((response) => {
+        this.setState({ searchResults: response.data });
+        this.setState({ searchErrorMessage: '' });
+        this.isSearchLoading(false);
+      })
+      .catch((error) => {
+        this.setState({ searchErrorMessage: error.response.data.message });
+        this.setState({ searchResults: [] });
+        this.isSearchLoading(false);
+      });
   }
   /**
    * @returns {jsx} jsx
@@ -46,8 +107,15 @@ class GroupMessages extends Component {
                         </ul>
                     </div>
                     <div className="col s4">
-                      <GroupSideBar {...this.props}
-                                    group={group}/>
+                      <GroupSideBar
+                          groupUsers = {this.props.groupUsers}
+                          search = {this.state.search}
+                          onSearchChange={this.onSearchChange}
+                          onSearchSubmit={this.onSearchSubmit}
+                          searchLoading ={this.state.searchLoading}
+                          searchResult={this.state.searchResults}
+                          searchErrorMessage={this.state.searchErrorMessage}
+                          group={group}/>
                     </div>
                 </div>
 
