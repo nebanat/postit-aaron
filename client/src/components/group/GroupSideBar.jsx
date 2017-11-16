@@ -9,8 +9,8 @@ import SearchModal from '../search/SearchModal.jsx';
  * @return { jsx } jsx
  */
 const GroupSideBar = ({
-  groupUsers, search, onSearchChange, onSearchSubmit, searchLoading,
-  searchResult, searchErrorMessage
+  groupUsers, search, onSearchChange, searchLoading,
+  searchResult, searchErrorMessage, onAddUser
 }) =>
 
   (
@@ -23,10 +23,10 @@ const GroupSideBar = ({
                     <SearchModal
                         search ={search}
                         onSearchChange={onSearchChange}
-                        onSearchSubmit={onSearchSubmit }
                         searchLoading={ searchLoading }
                         searchResult={searchResult}
-                        searchErrorMessage={searchErrorMessage}/><br/>
+                        searchErrorMessage={searchErrorMessage}
+                        onAddUser={onAddUser}/><br/>
                 </CollapsibleItem>
             </Collapsible>
         </div>

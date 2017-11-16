@@ -21,6 +21,7 @@ export default function groupExist(req, res, next) {
           message: 'Group not found'
         });
       }
+      req.group = group;
       next();
     });
 }

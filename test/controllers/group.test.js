@@ -184,5 +184,83 @@ describe('Group API', () => {
         });
     });
   });
+  describe('ADD USER TO A GROUP: /api/group/:id/user', () => {
+    it('should throw an error if user Id is not passed', (done) => {
+      chai.request(app)
+        .post('/api/group/1/user')
+        .set('x-access-token', user1token)
+        .send({})
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('Please enter a valid user');
+          done();
+        });
+    });
+    it('should throw an error if user Id is not a number', (done) => {
+      chai.request(app)
+        .post('/api/group/1/user')
+        .set('x-access-token', user1token)
+        .send({
+          userId: 'andela'
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('Please enter a valid user');
+          done();
+        });
+    });
+    it('should throw an error if group Id is not a number', (done) => {
+      chai.request(app)
+        .post('/api/group/andela/user')
+        .set('x-access-token', user1token)
+        .send({
+          userId: 2
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('Please enter a valid group');
+          done();
+        });
+    });
+    it('should throw an error if user does not exist', (done) => {
+      chai.request(app)
+        .post('/api/group/1/user')
+        .set('x-access-token', user1token)
+        .send({
+          userId: 200
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('This user does not exist');
+          done();
+        });
+    });
+    it('should throw an error if user is already a group member', (done) => {
+      chai.request(app)
+        .post('/api/group/1/user')
+        .set('x-access-token', user1token)
+        .send({
+          userId: 1
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.body.message).to.equal('User is already a group member');
+          done();
+        });
+    });
+    it('should successfully add the user to the group', (done) => {
+      chai.request(app)
+        .post('/api/group/1/user')
+        .set('x-access-token', user1token)
+        .send({
+          userId: 2
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(201);
+          expect(res.body.message).to.equal('User successfully added to group');
+          done();
+        });
+    });
+  });
 });
 

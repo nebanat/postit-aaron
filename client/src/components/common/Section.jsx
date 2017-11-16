@@ -12,8 +12,7 @@ const Section = ({
                 { children }
             </div>
         </div>
-        <br/><br/><br/><br/><br/><br/>
-   </div>
+    </div>
 
   );
 // proptype validation

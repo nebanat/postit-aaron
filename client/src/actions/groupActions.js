@@ -160,3 +160,32 @@ export function fetchGroupUsers(groupId) {
       }
     });
 }
+/**
+ *
+ * @param { groupUser } groupUser
+ * @return { groupUsersObject } groupUsersObject
+ */
+export function addUserToGroupSuccess(groupUser) {
+  return {
+    type: types.ADD_USER_TO_GROUP,
+    groupUser
+  };
+}
+/**
+ * @param { groupId } groupId
+ * @param { userId } userId
+ * @return { groupUsers } groupUsers
+ */
+export function addUserToGroup(groupId, userId) {
+  const { Materialize } = window;
+  return dispatch => api.addUserToGroup(groupId, userId)
+    .then((response) => {
+      dispatch(addUserToGroupSuccess(response.data));
+      Materialize.toast(response.data.message, 3000, 'green');
+    })
+    .catch((error) => {
+      if (error) {
+        Materialize.toast(error.response.data.message, 3000, 'red');
+      }
+    });
+}

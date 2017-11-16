@@ -68,6 +68,31 @@ export default {
           .then(groupUsers => res.status(200).send(groupUsers));
       })
       .catch(error => res.status(500).send({ error: error.message }));
+  },
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return {user} user
+   */
+  addUserToGroup(req, res) {
+    const { userId } = req.body;
+    const { user, group } = req;
+
+    group.hasUser(user).then((result) => {
+      if (result) {
+        return res.status(409).send({
+          message: 'User is already a group member'
+        });
+      }
+      group.addUser(userId);
+
+      return res.status(201).send({
+        message: 'User successfully added to group',
+        user: { username: user.username, email: user.email }
+      });
+    })
+      .catch(error => res.status(500).send({ error: error.message }));
   }
 };
 

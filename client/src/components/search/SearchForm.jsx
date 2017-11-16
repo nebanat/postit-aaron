@@ -5,12 +5,12 @@ import InputField from '../common/InputField.jsx';
  * @param { * } object
  * @returns { jsx } jsx
  */
-const SearchForm = ({ onSearchChange, search, onSearchSubmit }) => {
+const SearchForm = ({ onSearchChange, search }) => {
   const inputFieldWrapperClass = 'input-field col s12';
 
   return (
         <div>
-            <form onSubmit={ onSearchSubmit }>
+            <form>
                 <div className='row'>
                   <InputField
                     wrapperClass={ inputFieldWrapperClass }

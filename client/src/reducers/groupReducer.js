@@ -11,7 +11,7 @@ export function groups(state = [], action) {
       return action.groups;
     case types.CREATE_GROUP_SUCCESS:
       return [...state,
-        Object.assign({}, action.group)];
+        action.group];
     default:
       return state;
   }
@@ -70,6 +70,12 @@ export function groupUsers(state = [], action) {
   switch (action.type) {
     case types.FETCH_GROUP_USERS_SUCCESS:
       return action.groupUsers;
+    case types.ADD_USER_TO_GROUP:
+      return [...state,
+        {
+          username: action.groupUser.user.username,
+          email: action.groupUser.user.email
+        }];
     default:
       return state;
   }

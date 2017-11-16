@@ -11,6 +11,11 @@ import groupExist from
 import authenticate from '../middleware/authenticate';
 import postMessageValidation from
   '../middleware/validations/postMessageValidation';
+import addUserToGroupValidation from
+  '../middleware/validations/addUserToGroupValidation';
+import userExist from
+  '../middleware/validations/userExist';
+
 
 const app = express.Router();
 
@@ -36,6 +41,12 @@ app.get(
 app.get(
   '/:id/users', authenticate,
   groupExist, checkUserGroupMembership, groupController.getGroupMembers
+);
+
+app.post(
+  '/:id/user', authenticate,
+  addUserToGroupValidation, userExist, groupExist, checkUserGroupMembership,
+  groupController.addUserToGroup
 );
 
 export default app;

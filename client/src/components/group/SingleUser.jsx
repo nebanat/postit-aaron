@@ -4,21 +4,21 @@ import React from 'react';
  * @param { user } userObject
  * @returns {jsx} jsx
  */
-const SingleUser = ({ user }) => {
+const SingleUser = ({ user, children }) => {
   const userString = user.username;
   const userFirstCharacter = userString.slice('')[0].toUpperCase();
   return (
-    <div>
-        <div>
+    <div className="user">
         <div className="user-avatar">
-            <h5 id="profile-letter" className="center-align white-text">
-              { userFirstCharacter }
-            </h5>
-          </div>
-          <p className="profile-name"><strong>{user.username}</strong></p>
+          <h5 id="profile-letter" className="center-align white-text">
+            { userFirstCharacter }
+          </h5>
+        </div>
+        <div className="profile-name"><strong>{user.username}</strong>
+          { children }
         </div>
     </div>
   );
-}
-  
+};
+
 export default SingleUser;

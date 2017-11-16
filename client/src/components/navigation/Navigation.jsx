@@ -78,10 +78,10 @@ class Navigation extends React.Component {
                                     {
                                       (!isLoggedIn()) ?
                                         (<Link
-                                          className="btn white black-text"
-                                          activeClassName = "active"
+                                          className="black-text"
+                                          activeClassName = "orange white-text"
                                           to="/signup">
-                                          Get Started
+                                          SignUp
                                         </Link>) : ('')
                                     }
                                     </li>

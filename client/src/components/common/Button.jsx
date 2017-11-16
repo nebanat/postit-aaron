@@ -20,7 +20,7 @@ const Button = ({
   );
 // proptype validation
 Button.propTypes = {
-  wrapperClass: PropTypes.string.isRequired,
+  wrapperClass: PropTypes.string,
   label: PropTypes.string.isRequired,
   buttonClassName: PropTypes.string.isRequired,
   name: PropTypes.string,
