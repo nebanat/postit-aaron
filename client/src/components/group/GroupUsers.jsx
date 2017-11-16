@@ -7,20 +7,20 @@ import SingleUser from './SingleUser.jsx';
 const GroupUsers = ({ groupUsers }) =>
 
   (
-            <div>
-                <div className="row">
-                    <div className="col s12">
-                        <ul className="collection">
-                            {
-                                groupUsers.map((user, i) =>
-                                    <SingleUser key={i} i={i} user={ user }/>)
-                            }
-                        </ul>
-
-                    </div>
+        <div>
+            <div className="row">
+                <div className="col s12">
+                    <ul className="collection">
+                        {
+                            groupUsers.map((user, i) =>
+                            <SingleUser key={i} i={i} user={ user }>
+                                </SingleUser>)
+                        }
+                    </ul>
                 </div>
-
             </div>
+
+        </div>
   );
 
 

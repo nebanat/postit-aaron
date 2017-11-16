@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 /**
  * @class
@@ -9,15 +10,9 @@ class Test2 extends Component {
    */
   render() {
     return (
-         <div>
-           <div>
-            <div className="user-avatar">
-                <h5 id="profile-letter" className="center-align white-text">A</h5>
-              </div>
-              <p className="profile-name"><strong>Aaron</strong></p>
-           </div>
-            
-        </div>
+        <div>
+            <p>Hello Test page</p>
+       </div>
     );
   }
 }

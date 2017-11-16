@@ -181,3 +181,23 @@ export function searchUsersNotInGroup(groupId, query) {
     })
   });
 }
+/**
+ *
+ * @param { groupId } groupId
+ * @param { userId } userId
+ * @return { promise } promise
+ */
+export function addUserToGroup(groupId, userId) {
+  return axios({
+    method: 'post',
+    url: `/api/group/${groupId}/user`,
+    headers: {
+      'Content-type': 'application/json; charset=utf-8',
+      'id-token': getAccessId(),
+      'x-access-token': getAccessToken()
+    },
+    data: JSON.stringify({
+      userId,
+    })
+  });
+}

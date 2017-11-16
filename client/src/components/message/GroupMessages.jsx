@@ -23,8 +23,9 @@ class GroupMessages extends Component {
       searchErrorMessage: ''
     };
     this.onSearchChange = this.onSearchChange.bind(this);
-    this.onSearchSubmit = this.onSearchSubmit.bind(this);
+    // this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.isSearchLoading = this.isSearchLoading.bind(this);
+    this.onAddUser = this.onAddUser.bind(this);
   }
   /**
     * @returns {messages} messages
@@ -50,20 +51,27 @@ class GroupMessages extends Component {
     return this.setState({ searchLoading: bool });
   }
   /**
+   * @param { userId } userId
+   * @return { user } user
+   */
+  onAddUser(userId) {
+    const { searchResults } = this.state;
+    const { id } = this.props.params;
+    const newUsers = searchResults.filter(user => user.id !== userId);
+
+    this.setState({ searchResults: newUsers });
+    this.props.actions.groupActions.addUserToGroup(id, userId);
+  }
+  /**
    *
    * @param { event } event
    * @return { state } state
    */
   onSearchChange(event) {
-    return this.setState({ search: event.target.value });
-  }
-  /**
-   * @param {event} event
-   * @returns { searchResult } searchResult
-   */
-  onSearchSubmit(event) {
     event.preventDefault();
     const { id } = this.props.params;
+    this.setState({ search: event.target.value });
+
     // get search results
     this.isSearchLoading(true);
     searchUsersNotInGroup(id, this.state.search)
@@ -78,6 +86,7 @@ class GroupMessages extends Component {
         this.isSearchLoading(false);
       });
   }
+
   /**
    * @returns {jsx} jsx
    */
@@ -111,10 +120,11 @@ class GroupMessages extends Component {
                           groupUsers = {this.props.groupUsers}
                           search = {this.state.search}
                           onSearchChange={this.onSearchChange}
-                          onSearchSubmit={this.onSearchSubmit}
+                          /* onSearchSubmit={this.onSearchSubmit} */
                           searchLoading ={this.state.searchLoading}
                           searchResult={this.state.searchResults}
                           searchErrorMessage={this.state.searchErrorMessage}
+                          onAddUser={this.onAddUser}
                           group={group}/>
                     </div>
                 </div>

@@ -13,13 +13,9 @@
     background-color: purple;
     height:30px;
     width: 30px;
-    margin: 10px;
+    margin: 5px;
     border-radius: 5px;
     float: left;
-    /* padding-top: 50%; 
-    border: 1px solid purple;
-    border-radius: 50% */
-
   }
   #profile-letter {
     margin-top:3px;
@@ -27,5 +23,25 @@
   .profile-name {
     padding-top:10px;
     font-size: 20px;
-  } 
+  }
+  #add_user {
+    margin-top:0px;
+    float: left;
+    padding-top: 0px
+  }
+  li.user-list {
+    display: inline;
+  }
+  .move_right {
+    float: right;
+  }
+  .user {
+    padding-bottom: 3px
+  }
+  .home_message {
+    padding-top: 200px
+  }
+  .home-container {
+    padding-bottom: 400px
+  }
   

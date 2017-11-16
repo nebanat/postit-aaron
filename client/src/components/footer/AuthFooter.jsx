@@ -20,7 +20,7 @@ const AuthFooter = () =>
         </div>
         <div className="footer-copyright white-text">
           <div className="container">
-          © 2014 Copyright Text
+          © 2017 Copyright
           <a className="white-text text-lighten-4 right" href="#!"></a>
           </div>
         </div>
