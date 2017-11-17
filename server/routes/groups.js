@@ -49,4 +49,7 @@ app.post(
   groupController.addUserToGroup
 );
 
+app.post('/:id/exit', authenticate, groupExist, groupController.exitGroup);
+
+
 export default app;

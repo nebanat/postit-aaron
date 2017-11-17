@@ -189,3 +189,36 @@ export function addUserToGroup(groupId, userId) {
       }
     });
 }
+/**
+ *
+ * @param { index } index
+ * @return { actionObject } actionObject
+ */
+export function leaveGroupSuccess(index) {
+  return {
+    type: types.EXIT_GROUP,
+    index
+  };
+}
+/**
+ * @param { groupId } groupId
+ * @param { groupIndex } groupIndex
+ * @return { groupUsers } groupUsers
+ */
+export function leaveGroup(groupId, groupIndex) {
+  const { Materialize } = window;
+  return dispatch => api.exitGroup(groupId)
+    .then((response) => {
+      dispatch(leaveGroupSuccess(groupIndex));
+      Materialize.toast(response.data.message, 3000, 'green');
+
+      browserHistory.push({
+        pathname: '/groups',
+      });
+    })
+    .catch((error) => {
+      if (error) {
+        Materialize.toast(error.response.data.message, 3000, 'red');
+      }
+    });
+}

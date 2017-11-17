@@ -66,7 +66,7 @@ class SignUp extends Component {
   render() {
     const { authIsLoading } = this.props;
     const cardClass = 'card';
-    const cardWrapperClass = 'col s12 m8 offset-m2';
+    const cardWrapperClass = 'col s12 m6 offset-m3';
     const sectionWrapperClass = 'section purple darken-3';
     const sectionHeaderClass = 'center white-text';
     const cardContentClass = 'card-content';

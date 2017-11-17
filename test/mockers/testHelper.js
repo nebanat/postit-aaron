@@ -3,11 +3,13 @@ import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import db from '../../server/models';
 
+export const salt = bcrypt.genSaltSync(8);
+
 export const users = [
   {
     email: 'douglas@gmail.com',
     username: 'douglas1995',
-    password: md5('douglaspass'),
+    password: bcrypt.hashSync('douglaspass', salt, null),
     resetPassToken: null,
     expirePassToken: null,
     createdAt: Date.now(),
@@ -16,7 +18,16 @@ export const users = [
   {
     email: 'patience@gmail.com',
     username: 'patience1987',
-    password: md5('patiencepass'),
+    password: bcrypt.hashSync('patiencepass', salt, null),
+    resetPasswordToken: null,
+    resetPasswordExpires: null,
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+  },
+  {
+    email: 'cynthia@gmail.com',
+    username: 'cynthia1987',
+    password: bcrypt.hashSync('cynthiapass', salt, null),
     resetPasswordToken: null,
     resetPasswordExpires: null,
     createdAt: Date.now(),
@@ -56,10 +67,6 @@ export const user2token = generateToken(2, users[1]);
 export const newGroup = {
   name: 'Europeans'
 };
-
-// export const updatedGroup = {
-//   name: 'Africans'
-// };
 
 export const newMessage = {
   content: 'Maiores ut enim ratione voluptas accusamus lorem.',

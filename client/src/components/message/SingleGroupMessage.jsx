@@ -1,4 +1,6 @@
 import React from 'react';
+import moment from 'moment';
+import SingleUser from '../group/SingleUser.jsx';
 
 /**
  * @param { message } object
@@ -12,11 +14,11 @@ const SingleGroupMessage = ({ message, i }) => {
    */
   const messageTypeColor = (value) => {
     if (value === 1) {
-      return 'new badge blue darken-4 left secondary-content';
+      return 'new badge green darken-4';
     } else if (value === 2) {
-      return 'new badge yellow darken-4 left secondary-content';
+      return 'new badge yellow darken-4';
     } else if (value === 3) {
-      return 'new badge red darken-4 left secondary-content';
+      return 'new badge red darken-4';
     }
   };
   /**
@@ -35,18 +37,21 @@ const SingleGroupMessage = ({ message, i }) => {
   };
 
   return (
-          <li className="collection-item avatar">
-              <img alt="" className="circle"/>
-              <strong className="title">@{message.author} <small>
-                <i className='purple-text darken-4'>
-                  { new Date(message.createdAt).toDateString()} </i></small>
-              </strong>
-              <br/>
-              <p>{message.content}</p>
-              <span className={messageTypeColor(message.priority)}
-                    data-badge-caption={messageType(message.priority)}>
-              </span>
-           </li>
+          <li>
+            <div className="row">
+                <div className="col s12 message">
+                    <SingleUser username = { message.author }>
+                        <span id='message-date'>
+                          { moment(message.createdAt).fromNow() }
+                        </span>
+                    </SingleUser>
+                    <p id='message'>{ message.content }</p>
+                    <span className={ messageTypeColor(message.priority) }
+                          data-badge-caption={ messageType(message.priority) }>
+                     </span>
+                    </div>
+            </div>
+          </li>
   );
 };
 

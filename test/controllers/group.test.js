@@ -99,6 +99,7 @@ describe('Group API', () => {
         .get('/api/group/1/users')
         .set('x-access-token', user1token)
         .end((err, res) => {
+          console.log(res.body);
           expect(res.status).to.equal(200);
           expect(res.body).to.be.an('array');
           done();
@@ -174,7 +175,7 @@ describe('Group API', () => {
         .set('x-access-token', user1token)
         .send({
           groupId: '1',
-          query: 'patience'
+          query: 'cynthia'
         })
         .end((err, res) => {
           expect(res.status).to.equal(200);
@@ -258,6 +259,20 @@ describe('Group API', () => {
         .end((err, res) => {
           expect(res.status).to.equal(201);
           expect(res.body.message).to.equal('User successfully added to group');
+          done();
+        });
+    });
+  });
+  describe('EXIT GROUP: /api/group/:id/exit', () => {
+    xit('should successfully remove a user from group', (done) => {
+      chai.request(app)
+        .post('/api/group/1/exit')
+        .set('x-access-token', user1token)
+        .send({})
+        .end((err, res) => {
+          // console.log(res.body);
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('You have successfully exited group');
           done();
         });
     });

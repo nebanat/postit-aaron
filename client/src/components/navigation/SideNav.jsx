@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-// import '../../../css/style.css';
 
 /**
  * @class
@@ -22,19 +21,21 @@ class SideNav extends Component {
                       </Link>
                       <Link
                         to="/groups"
-                        className="white-text">
+                        className="white-text"
+                        activeClassName = "orange white-text">
                         Your Groups
                       </Link>
                       <Link
                         to="/group/new"
-                        className="white-text">
+                        className="white-text"
+                        activeClassName = "orange white-text">
                         New Group
                       </Link>
-                      <Link to="/message" className="white-text">New Message</Link>
-                      <a href='#'
-                        className="btn-small waves-effect waves-light orange white-text">
-                        Go Back
-                      </a>
+                      <Link to="/message"
+                        className="white-text"
+                        activeClassName = "orange white-text">
+                        New Message
+                      </Link>
                     </li>
                   </ul>
                 <a href="#" data-activates="slide-out"

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import swal from 'sweetalert';
 import SingleGroupMessage from './SingleGroupMessage.jsx';
+import GroupHeader from './GroupHeader.jsx';
 import GroupSideBar from '../group/GroupSideBar.jsx';
 import Loader from '../loaders/Loader.jsx';
 import { searchUsersNotInGroup } from '../../utils/postItApi';
@@ -26,6 +28,7 @@ class GroupMessages extends Component {
     // this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.isSearchLoading = this.isSearchLoading.bind(this);
     this.onAddUser = this.onAddUser.bind(this);
+    this.onExitGroup = this.onExitGroup.bind(this);
   }
   /**
     * @returns {messages} messages
@@ -42,6 +45,31 @@ class GroupMessages extends Component {
     $('.modal').modal({
       opacity: 0.5,
     });
+  }
+  /**
+   * @returns { group } group
+   */
+  onExitGroup() {
+    const { id } = this.props.params;
+    const groupIndex = this.props.groups.findIndex(group => group.id ==
+      id);
+
+    swal({
+      title: 'Are you sure?',
+      text: 'You are about to leave this group!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((exitGroup) => {
+        if (exitGroup) {
+          this.props.actions.groupActions.leaveGroup(id, groupIndex);
+          // console.log(index);
+          swal('You have successfully exited the group', {
+            icon: 'success',
+          });
+        }
+      });
   }
   /**
    * @param { bool } bool
@@ -102,20 +130,26 @@ class GroupMessages extends Component {
     return (
             <div>
                 <div className="row">
-                    <div className="col s8">
+                    <div className="col s9">
                       {
                         (messageIsLoading) ? (<Loader/>) : ('')
                       }
-                        <h4>{group.name}</h4>
-                        <ul className="collection">
-                            {
-                                this.props.messages.map((message, i) =>
-                                    <SingleGroupMessage message={message}
-                                    key={i} i={i}/>)
-                            }
-                        </ul>
+                        {/* <h4>{ group.name }</h4> */}
+                        <GroupHeader
+                            headerText={ group.name }
+                            onExitGroup={ this.onExitGroup }/>
+                        <div className="overflowTest">
+                            <ul>
+                                {
+                                    this.props.messages.map((message, i) =>
+                                        <SingleGroupMessage message={message}
+                                        key={i} i={i}/>)
+                                }
+                            </ul>
+                        </div>
+                        
                     </div>
-                    <div className="col s4">
+                    <div className="col s3">
                       <GroupSideBar
                           groupUsers = {this.props.groupUsers}
                           search = {this.state.search}

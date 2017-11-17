@@ -201,3 +201,20 @@ export function addUserToGroup(groupId, userId) {
     })
   });
 }
+/**
+ *
+ * @param { groupId } groupId
+ * @param { userId } userId
+ * @return { promise } promise
+ */
+export function exitGroup(groupId) {
+  return axios({
+    method: 'post',
+    url: `/api/group/${groupId}/exit`,
+    headers: {
+      'Content-type': 'application/json; charset=utf-8',
+      'id-token': getAccessId(),
+      'x-access-token': getAccessToken()
+    }
+  });
+}

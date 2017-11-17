@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 const Button = ({
-  wrapperClass, name, type, buttonClassName, label, onClick
+  wrapperClass, name, type, buttonClassName, label, onClick, children
 }) =>
   (
     <div
@@ -13,6 +13,7 @@ const Button = ({
           name = {name}
           onClick = { onClick }
           className ={ buttonClassName } >
+          { children }
           { label }
         </button>
       </div>

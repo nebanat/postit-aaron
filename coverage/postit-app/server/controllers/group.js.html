@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">82.14% </span>
+        <span class="strong">63.89% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>23/28</span>
+        <span class='fraction'>23/36</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>3/4</span>
+        <span class='fraction'>3/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">71.43% </span>
+        <span class="strong">62.5% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>10/14</span>
+        <span class='fraction'>10/16</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">81.48% </span>
+        <span class="strong">62.86% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>22/27</span>
+        <span class='fraction'>22/35</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -141,7 +141,32 @@
 96
 97
 98
-99</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -239,10 +264,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import models from '../models';
 import { decodeUser } from '../middleware/authenticate';
 &nbsp;
-export default {
+export default <span class="fstat-no" title="function not covered" >{</span>
   /**
    *
    * @param { req } req
@@ -334,6 +384,31 @@ export default {
       });
     })
       .catch(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >error =&gt; res.status(500).send({ error: error.message }));</span></span>
+  },
+  /**
+   *
+   * @param { req } req
+   * @param { res } res
+   * @return { groupUser } groupUser
+   */
+  exitGroup(req, res) {
+    const { group } = <span class="cstat-no" title="statement not covered" >req;</span>
+    const authUser = <span class="cstat-no" title="statement not covered" >decodeUser(req);</span>
+    const userId = <span class="cstat-no" title="statement not covered" >authUser.id;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    group.hasUser(userId).then(<span class="fstat-no" title="function not covered" >(</span>result) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (!result) {</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(403).send({</span>
+          message: 'you are not a member of this group'
+        });
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      group.removeUser(userId);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return res.status(200).send({</span>
+        message: 'You have successfully exited group'
+      });
+    });
   }
 };
 &nbsp;
@@ -343,7 +418,7 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Nov 16 2017 09:26:22 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Nov 16 2017 12:08:38 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
