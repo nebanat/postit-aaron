@@ -93,6 +93,31 @@ export default {
       });
     })
       .catch(error => res.status(500).send({ error: error.message }));
+  },
+  /**
+   *
+   * @param { req } req
+   * @param { res } res
+   * @return { groupUser } groupUser
+   */
+  exitGroup(req, res) {
+    const { group } = req;
+    const authUser = decodeUser(req);
+    const userId = authUser.id;
+
+    group.hasUser(userId).then((result) => {
+      if (!result) {
+        return res.status(403).send({
+          message: 'you are not a member of this group'
+        });
+      }
+
+      group.removeUser(userId);
+
+      return res.status(200).send({
+        message: 'You have successfully exited group'
+      });
+    });
   }
 };
 

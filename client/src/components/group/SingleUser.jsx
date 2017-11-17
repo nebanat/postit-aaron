@@ -4,8 +4,8 @@ import React from 'react';
  * @param { user } userObject
  * @returns {jsx} jsx
  */
-const SingleUser = ({ user, children }) => {
-  const userString = user.username;
+const SingleUser = ({ username, children }) => {
+  const userString = username;
   const userFirstCharacter = userString.slice('')[0].toUpperCase();
   return (
     <div className="user">
@@ -14,7 +14,7 @@ const SingleUser = ({ user, children }) => {
             { userFirstCharacter }
           </h5>
         </div>
-        <div className="profile-name"><strong>{user.username}</strong>
+        <div className="profile-name"><strong>{ username }</strong>
           { children }
         </div>
     </div>

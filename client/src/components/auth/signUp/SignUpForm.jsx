@@ -7,9 +7,8 @@ import Button from '../../common/Button.jsx';
  * @returns { jsx } jsx
  */
 const SignUpForm = ({ user, onChange, onSubmit }) => {
-  const wrapperSplitClass = 'input-field col s6';
-  const wrapperClass = 'input-field col s12';
-  const buttonWrapperClass = 'col s10 offset-s1 center';
+  const wrapperClass = 'input-field col s10 offset-s1';
+  const buttonWrapperClass = 'col s6 offset-s3 center';
   const buttonClassName = 'purple darken-4 btn col s12';
 
   return (
@@ -17,7 +16,7 @@ const SignUpForm = ({ user, onChange, onSubmit }) => {
             <form onSubmit ={ onSubmit }>
                 <div className='row'>
                   <InputField
-                    wrapperClass={ wrapperSplitClass }
+                    wrapperClass={ wrapperClass }
                     name="username"
                     type="text"
                     validate="validate"
@@ -26,7 +25,7 @@ const SignUpForm = ({ user, onChange, onSubmit }) => {
                     value = { user.username }
                     required = "required"/>
                   <InputField
-                      wrapperClass = { wrapperSplitClass }
+                      wrapperClass = { wrapperClass }
                       name = "email"
                       type="email"
                       validate="validate"
@@ -47,8 +46,6 @@ const SignUpForm = ({ user, onChange, onSubmit }) => {
                         value = { user.password }
                         required="required"
                         label = "Password"/>
-                </div>
-                <div className='row'>
                     <InputField
                       wrapperClass = { wrapperClass }
                       name = "cpassword"

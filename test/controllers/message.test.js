@@ -2,7 +2,7 @@ import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../server/app';
 import models from '../../server/models';
-import { user1token } from '../mockers/testHelper';
+import { user1token, user2token } from '../mockers/testHelper';
 import token from '../mockers/token';
 
 chai.use(chaiHttp);
@@ -58,6 +58,7 @@ describe('MESSAGES API', () => {
         .set('x-access-token', user1token)
         .send({})
         .end((err, res) => {
+          console.log(res.body);
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('Please enter message');
           done();

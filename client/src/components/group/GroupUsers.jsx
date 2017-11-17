@@ -13,7 +13,7 @@ const GroupUsers = ({ groupUsers }) =>
                     <ul className="collection">
                         {
                             groupUsers.map((user, i) =>
-                            <SingleUser key={i} i={i} user={ user }>
+                            <SingleUser key={i} i={i} username = { user.username }>
                                 </SingleUser>)
                         }
                     </ul>
