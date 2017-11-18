@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import swal from 'sweetalert';
 import SingleGroupMessage from './SingleGroupMessage.jsx';
 import GroupHeader from './GroupHeader.jsx';
 import GroupSideBar from '../group/GroupSideBar.jsx';
 import Loader from '../loaders/Loader.jsx';
 import { searchUsersNotInGroup } from '../../utils/postItApi';
-
+import NewMessage from '../message/NewMessage.jsx';
 
 /**
  * @class
@@ -22,13 +21,14 @@ class GroupMessages extends Component {
       search: '',
       searchLoading: false,
       searchResults: [],
-      searchErrorMessage: ''
+      searchErrorMessage: '',
+      adminId: ''
     };
     this.onSearchChange = this.onSearchChange.bind(this);
-    // this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.isSearchLoading = this.isSearchLoading.bind(this);
     this.onAddUser = this.onAddUser.bind(this);
     this.onExitGroup = this.onExitGroup.bind(this);
+    this.onDeleteGroup = this.onDeleteGroup.bind(this);
   }
   /**
     * @returns {messages} messages
@@ -47,6 +47,16 @@ class GroupMessages extends Component {
     });
   }
   /**
+   * @return { swal } swalObject
+   */
+  onDeleteGroup() {
+    const { id } = this.props.params;
+    const groupIndex = this.props.groups.findIndex(group => group.id ==
+      id);
+
+    this.props.actions.groupActions.deleteGroup(id, groupIndex);
+  }
+  /**
    * @returns { group } group
    */
   onExitGroup() {
@@ -54,22 +64,7 @@ class GroupMessages extends Component {
     const groupIndex = this.props.groups.findIndex(group => group.id ==
       id);
 
-    swal({
-      title: 'Are you sure?',
-      text: 'You are about to leave this group!',
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true,
-    })
-      .then((exitGroup) => {
-        if (exitGroup) {
-          this.props.actions.groupActions.leaveGroup(id, groupIndex);
-          // console.log(index);
-          swal('You have successfully exited the group', {
-            icon: 'success',
-          });
-        }
-      });
+    this.props.actions.groupActions.leaveGroup(id, groupIndex);
   }
   /**
    * @param { bool } bool
@@ -125,6 +120,7 @@ class GroupMessages extends Component {
 
     const group = this.props.groups[index];
     const { messageIsLoading } = this.props;
+    // const adminId = this.props.groupUsers[0].id;
 
 
     return (
@@ -134,11 +130,10 @@ class GroupMessages extends Component {
                       {
                         (messageIsLoading) ? (<Loader/>) : ('')
                       }
-                        {/* <h4>{ group.name }</h4> */}
-                        <GroupHeader
+                       <GroupHeader
                             headerText={ group.name }
                             onExitGroup={ this.onExitGroup }/>
-                        <div className="overflowTest">
+                        <div id="messages" className="messageOverflow">
                             <ul>
                                 {
                                     this.props.messages.map((message, i) =>
@@ -147,20 +142,26 @@ class GroupMessages extends Component {
                                 }
                             </ul>
                         </div>
-                        
+                          <div className="messaging-area">
+                            <NewMessage
+                              groupId={this.props.params.id}
+                              {...this.props}/>
+                          </div>
+
                     </div>
                     <div className="col s3">
                       <GroupSideBar
                           groupUsers = {this.props.groupUsers}
                           search = {this.state.search}
                           onSearchChange={this.onSearchChange}
-                          /* onSearchSubmit={this.onSearchSubmit} */
                           searchLoading ={this.state.searchLoading}
                           searchResult={this.state.searchResults}
                           searchErrorMessage={this.state.searchErrorMessage}
                           onAddUser={this.onAddUser}
+                          onDeleteGroup={ this.onDeleteGroup }
                           group={group}/>
                     </div>
+
                 </div>
 
             </div>

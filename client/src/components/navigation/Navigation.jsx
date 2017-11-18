@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { isLoggedIn, logout } from '../../utils/authservice';
-// import SearchUser from '../dashboard/search/user/SearchUser'
+
 
 /**
  * @class

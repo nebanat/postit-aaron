@@ -120,13 +120,16 @@ class Test2 extends Component {
 
           </div>
         </div>
-        <div className="row">
-          <div className="col s12">
-              <div class="messaging-area">
-                This div element has position: fixed;
-              </div>
+          <div class="messaging-area">
+              <div class="row">
+                <div class="col s8">
+                  <input className="browser-default message-input" placeholder="Enter your message" id="first_name" type="text" />
+                </div>
+                <div class="col s4">
+                  
+                </div>
+            </div>
           </div>
-        </div>
     </div>
     );
   }

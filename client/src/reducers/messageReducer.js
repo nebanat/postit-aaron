@@ -38,6 +38,8 @@ export function messages(state = [], action) {
   switch (action.type) {
     case types.FETCH_MESSAGES_SUCCESS:
       return action.messages;
+    case types.POST_MESSAGE:
+      return [...state, action.newMessage];
     default:
       return state;
   }

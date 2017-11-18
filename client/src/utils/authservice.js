@@ -61,3 +61,14 @@ export function getAccessId() {
 
   return userAccessId;
 }
+/**
+ *
+ * @return {userAccessId} accessId
+ */
+export function getAuthUser() {
+  const token = decode(localStorage.getItem('POSTIT_ACCESS_TOKEN'));
+  const authUser = token.user;
+
+  return authUser;
+}
+

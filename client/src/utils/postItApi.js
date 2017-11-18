@@ -218,3 +218,21 @@ export function exitGroup(groupId) {
     }
   });
 }
+/**
+ *
+ * @param { groupId } groupId
+ * @param { userId } userId
+ * @return { promise } promise
+ */
+export function deleteGroup(groupId) {
+  return axios({
+    method: 'delete',
+    url: `/api/group/${groupId}`,
+    headers: {
+      'Content-type': 'application/json; charset=utf-8',
+      'id-token': getAccessId(),
+      'x-access-token': getAccessToken()
+    }
+  });
+}
+

@@ -31,13 +31,8 @@ class SideNav extends Component {
                         activeClassName = "orange white-text">
                         New Group
                       </Link>
-                      <Link to="/message"
-                        className="white-text"
-                        activeClassName = "orange white-text">
-                        New Message
-                      </Link>
-                    </li>
-                  </ul>
+                  </li>
+         </ul>
                 <a href="#" data-activates="slide-out"
                     className="button-collapse top-nav waves-effect waves-light circle hide-on-large-only">
                     <i className="material-icons">menu</i>
