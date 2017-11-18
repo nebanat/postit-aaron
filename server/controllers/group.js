@@ -64,7 +64,7 @@ export default {
     models.Group
       .findById(groupId)
       .then((group) => {
-        group.getUsers({ attributes: ['username', 'email'] })
+        group.getUsers({ attributes: ['id', 'username', 'email'] })
           .then(groupUsers => res.status(200).send(groupUsers));
       })
       .catch(error => res.status(500).send({ error: error.message }));
@@ -118,6 +118,20 @@ export default {
         message: 'You have successfully exited group'
       });
     });
+  },
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return { deleteMessageObject } deleteMessageObject
+   */
+  deleteGroup(req, res) {
+    const { group } = req;
+
+    group.destroy()
+      .then(() => res.status(200).send({
+        message: 'Group successfully deleted',
+      }));
   }
 };
 

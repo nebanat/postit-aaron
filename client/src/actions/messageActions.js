@@ -14,6 +14,17 @@ export function messageIsLoading(bool) {
 }
 /**
  *
+ * @param { newMessage } newMessage
+ * @return { newMessageObject } newMessageObject
+ */
+export function onPost(newMessage) {
+  return {
+    type: types.POST_MESSAGE,
+    newMessage
+  };
+}
+/**
+ *
  * @param {postSuccessMessage} postSuccessMessage
  * @return {actionObject} actionObject
  */
@@ -36,10 +47,10 @@ export function postMessageFailure(postFailureMessage) {
 }
 /**
  *
- * @param {message} message
- * @param {priority} priority
- * @param {groupId} groupId
- * @return {promise} promise
+ * @param { message } message
+ * @param { priority } priority
+ * @param { groupId } groupId
+ *  @return {promise} promise
  *
  */
 export function postMessage(message, priority, groupId) {
@@ -49,15 +60,16 @@ export function postMessage(message, priority, groupId) {
     dispatch(messageIsLoading(true));
     api.postNewMessage(message, priority, groupId)
       .then((response) => {
+        dispatch(onPost(response.data.newMessage));
         dispatch(postMessageSuccess(response.data.message));
 
         dispatch(messageIsLoading(false));
 
         Materialize.toast(response.data.message, 2500, 'green');
 
-        browserHistory.push({
-          pathname: `/group/${groupId}/messages`,
-        });
+        // browserHistory.push({
+        //   pathname: `/group/${groupId}/messages`,
+        // });
       })
       .catch((error) => {
         if (error) {

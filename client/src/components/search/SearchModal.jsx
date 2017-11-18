@@ -36,7 +36,7 @@ const SearchModal = ({
                             buttonClassName={ buttonClassName }
                             onClick= {() => onAddUser(user.id) }
                             label="add"/>
-                      </SingleUser>)
+                    </SingleUser>)
                 }
               </ul>
 

@@ -1,4 +1,5 @@
 import { browserHistory } from 'react-router';
+import swal from 'sweetalert';
 import * as types from './actionTypes';
 import * as api from '../utils/postItApi';
 
@@ -203,22 +204,71 @@ export function leaveGroupSuccess(index) {
 /**
  * @param { groupId } groupId
  * @param { groupIndex } groupIndex
- * @return { groupUsers } groupUsers
+ * @return { exitMessage } exitMessage
  */
 export function leaveGroup(groupId, groupIndex) {
   const { Materialize } = window;
-  return dispatch => api.exitGroup(groupId)
-    .then((response) => {
-      dispatch(leaveGroupSuccess(groupIndex));
-      Materialize.toast(response.data.message, 3000, 'green');
-
-      browserHistory.push({
-        pathname: '/groups',
-      });
+  return (dispatch) => {
+    swal({
+      title: 'Are you sure?',
+      text: 'You are about to exit this group!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
     })
-    .catch((error) => {
-      if (error) {
-        Materialize.toast(error.response.data.message, 3000, 'red');
-      }
-    });
+      .then((removeGroup) => {
+        if (removeGroup) {
+          api.exitGroup(groupId)
+            .then((response) => {
+              dispatch(leaveGroupSuccess(groupIndex));
+              Materialize.toast(response.data.message, 3000, 'green');
+
+              browserHistory.push({
+                pathname: '/groups',
+              });
+            })
+            .catch((error) => {
+              if (error) {
+                Materialize.toast(error.response.data.message, 3000, 'red');
+              }
+            });
+        }
+      });
+  };
+}
+/**
+ *
+ * @param { groupId } groupId
+ * @param { groupIndex } groupIndex
+ * @return { deleteMessage } deleteMessage
+ */
+export function deleteGroup(groupId, groupIndex) {
+  const { Materialize } = window;
+  return (dispatch) => {
+    swal({
+      title: 'Are you sure?',
+      text: 'You are about to delete this group!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((removeGroup) => {
+        if (removeGroup) {
+          api.deleteGroup(groupId)
+            .then((response) => {
+              dispatch(leaveGroupSuccess(groupIndex));
+              Materialize.toast(response.data.message, 3000, 'green');
+
+              browserHistory.push({
+                pathname: '/groups',
+              });
+            })
+            .catch((error) => {
+              if (error) {
+                Materialize.toast(error.response.data.message, 3000, 'red');
+              }
+            });
+        }
+      });
+  };
 }

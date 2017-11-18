@@ -1,42 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputField = ({
-  wrapperClass, name, onChange, value, label, type,
-  placeholder, validate, required, labelError, labelSuccess
+const InputLine = ({
+  wrapperClass, name, onChange, value, type, children,
+  placeholder, validate, required
 }) =>
   (
     <div
         className={ wrapperClass }>
-        <input id = { name }
+        <div className="col s9">
+          <input id = { name }
               name = { name }
               type = { type }
               className = { validate }
               placeholder = { placeholder }
               onChange = { onChange }
               value = { value }
-              required = { required }/>
-            <label
-              data-error = { labelError }
-              data-success = { labelSuccess } >
-              { label }
-            </label>
-    </div>
+              required = { required }
+              />
+        </div>
+        <div className="col s3">
+          { children }
+        </div>
+      </div>
 
   );
 // proptype validation
-InputField.propTypes = {
+InputLine.propTypes = {
   wrapperClass: PropTypes.string,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   validate: PropTypes.string,
   onChange: PropTypes.func,
-  label: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string,
   required: PropTypes.string,
-  labelError: PropTypes.string,
-  labelSuccess: PropTypes.string,
+
 };
 
-export default InputField;
+export default InputLine;

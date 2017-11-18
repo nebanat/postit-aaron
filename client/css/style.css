@@ -86,26 +86,46 @@
 }
 div.messaging-area {
   position: fixed;
-  bottom: 0;
-  /* right: 0; */
-  height:70px;
-  width: 700px;
-  max-width: 700px;
-  border: 3px solid #73AD21;
-  z-index: 3px;
+  bottom: 20px;
+  width: 50%;
+  height: 5vh;
+  /* border: 3px solid #bdbdbd; */
 }
 div.all-messages {
   height: 100px;
   overflow: scroll;
 }
-.overflowTest {
+.messageOverflow {
   background: white;
   color: black;
   padding: 15px;
   width: 90%;
-  height: 580px;
+  height: 70vh;
   overflow: scroll;
-  /* border: 1px solid #ccc; */
+}
+.message-input {
+  height:40px;
+  /* margin-top: 5px; */
+  padding-left:15px;
+  padding-right:15px;
+  margin-bottom: 5px;
+  width: 100%;
+  border-radius: 6px 0 0 6px;
+  border: 1px solid #bdbdbd;
+  display: inline-block;
+ }
+
+input.message-input:focus {
+  border: 1px solid #4a148c 
+}
+
+.priority {
+  width: 100%;
+  height:40px;
+  display: inline-block;
+  background: #4a148c ;
+  color: white;
+  border-radius: 6px 0 0 6px !important;
 }
  
 

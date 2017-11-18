@@ -15,7 +15,7 @@ import addUserToGroupValidation from
   '../middleware/validations/addUserToGroupValidation';
 import userExist from
   '../middleware/validations/userExist';
-
+import checkGroupAdmin from '../middleware/validations/checkGroupAdmin';
 
 const app = express.Router();
 
@@ -51,5 +51,9 @@ app.post(
 
 app.post('/:id/exit', authenticate, groupExist, groupController.exitGroup);
 
+app.delete(
+  '/:id',
+  authenticate, groupExist, checkGroupAdmin, groupController.deleteGroup
+);
 
 export default app;
