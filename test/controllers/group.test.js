@@ -2,7 +2,7 @@ import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../server/app';
 import models from '../../server/models';
-import { insertSeedData, user1token } from './../mockers/testHelper';
+import { insertSeedData, user1token, user2token } from './../mockers/testHelper';
 
 
 chai.use(chaiHttp);
@@ -54,7 +54,7 @@ describe('Group API', () => {
         .end((err, res) => {
           expect(res.status).to.equal(201);
           expect(res.body.message).to.equal('Group successfully created');
-          expect(res.body.group.name).to.equal('React-redux-group');
+          expect(res.body.group.name).to.equal('react-redux-group');
           done();
         });
     });
@@ -99,7 +99,6 @@ describe('Group API', () => {
         .get('/api/group/1/users')
         .set('x-access-token', user1token)
         .end((err, res) => {
-          console.log(res.body);
           expect(res.status).to.equal(200);
           expect(res.body).to.be.an('array');
           done();
@@ -263,16 +262,89 @@ describe('Group API', () => {
         });
     });
   });
-  describe('EXIT GROUP: /api/group/:id/exit', () => {
-    xit('should successfully remove a user from group', (done) => {
+  describe('REMOVE USER FROM GROUP: /api/group/:id/remove/member', () => {
+    it('should remove a member from group when removed by group admin', (done) => {
+      chai.request(app)
+        .post('/api/group/1/remove/member')
+        .set('x-access-token', user1token)
+        .send({
+          userId: 2
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('You have successfully removed user from group');
+          done();
+        });
+    });
+    it('should throw an error if admin tries to delete a user not in the group', (done) => {
+      chai.request(app)
+        .post('/api/group/1/remove/member')
+        .set('x-access-token', user1token)
+        .send({
+          userId: 2
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('User is not a member of this group');
+          done();
+        });
+    });
+    it('should throw an error if user tries to exit a group they do not belong to', (done) => {
       chai.request(app)
         .post('/api/group/1/exit')
-        .set('x-access-token', user1token)
-        .send({})
+        .set('x-access-token', user2token)
+        .send()
         .end((err, res) => {
-          // console.log(res.body);
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('you are not a member of this group');
+          done();
+        });
+    });
+    it('should successfully add the user to the group', (done) => {
+      chai.request(app)
+        .post('/api/group/1/user')
+        .set('x-access-token', user1token)
+        .send({
+          userId: 2
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(201);
+          expect(res.body.message).to.equal('User successfully added to group');
+          done();
+        });
+    });
+    it('should successfully exit a user from the group', (done) => {
+      chai.request(app)
+        .post('/api/group/1/exit')
+        .set('x-access-token', user2token)
+        .send()
+        .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.message).to.equal('You have successfully exited group');
+          done();
+        });
+    });
+  });
+  describe('GROUP - DELETE: /api/group/:id', () => {
+    it('should throw an error if not group admin tries to delete group', (done) => {
+      chai.request(app)
+        .del('/api/group/1')
+        .set('x-access-token', user2token)
+        .send()
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('You are not authorized to perform this action');
+          done();
+        });
+    });
+    it('should delete group when group admin deletes', (done) => {
+      chai.request(app)
+        .del('/api/group/2')
+        .set('x-access-token', user1token)
+        .send()
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('Group successfully deleted');
           done();
         });
     });

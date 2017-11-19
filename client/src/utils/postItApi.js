@@ -137,7 +137,7 @@ export function postNewMessage(message, priority, groupId) {
 export function getGroupMessages(groupId) {
   return axios({
     method: 'GET',
-    url: `/api/group/${groupId}/message`,
+    url: `/api/group/${groupId}/messages`,
     headers: {
       'Content-type': 'application/json; charset=utf-8',
       'id-token': getAccessId(),

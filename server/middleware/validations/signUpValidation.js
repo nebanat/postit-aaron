@@ -1,9 +1,9 @@
 /**
  *
- * @param {*} req
- * @param {*} res
- * @param {*} next
- * @return {json} validation messages
+ * @param { req } req
+ * @param { res } res
+ * @param { next } next
+ * @return { json } validation messages
  */
 export default function signUpValidation(req, res, next) {
   const { username, email, password } = req.body;
