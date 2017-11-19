@@ -77,7 +77,7 @@
   background-color: #4a148c;
   color: #ffffff;
   border-bottom: 1px solid #e0e0e0;
-  height:80px;
+  height:60px;
   text-align: center
 }
 .exit-group {
@@ -126,6 +126,19 @@ input.message-input:focus {
   background: #4a148c ;
   color: white;
   border-radius: 6px 0 0 6px !important;
+}
+.delete-user-button {
+  margin-left: 10px;
+}
+.delete-area {
+  border-top: 0.5px solid #e0e0e0;
+  padding:20px;
+}
+.delete-area:hover {
+  background-color: #fafafa
+}
+.small-text {
+  font-size:10px;
 }
  
 

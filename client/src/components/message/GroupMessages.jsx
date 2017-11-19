@@ -22,13 +22,17 @@ class GroupMessages extends Component {
       searchLoading: false,
       searchResults: [],
       searchErrorMessage: '',
-      adminId: ''
+      adminId: '',
+      showDelete: false
     };
     this.onSearchChange = this.onSearchChange.bind(this);
     this.isSearchLoading = this.isSearchLoading.bind(this);
     this.onAddUser = this.onAddUser.bind(this);
     this.onExitGroup = this.onExitGroup.bind(this);
     this.onDeleteGroup = this.onDeleteGroup.bind(this);
+    this.onMouseEnterDelete = this.onMouseEnterDelete.bind(this);
+    this.onMouseLeaveDelete = this.onMouseLeaveDelete.bind(this);
+    this.handleRemoveMember = this.handleRemoveMember.bind(this);
   }
   /**
     * @returns {messages} messages
@@ -45,6 +49,27 @@ class GroupMessages extends Component {
     $('.modal').modal({
       opacity: 0.5,
     });
+  }
+  /**
+   * @param { userId } userId
+   * @param { userIndex } userIndex
+   * @return { members } members
+   */
+  handleRemoveMember(userId, userIndex) {
+    const groupId = this.props.params.id;
+    this.props.actions.groupActions.deleteGroupMember(groupId, userId, userIndex);
+  }
+  /**
+   * @return {state} state
+   */
+  onMouseEnterDelete() {
+    return this.setState({ showDelete: true });
+  }
+  /**
+   * @return {state} state
+   */
+  onMouseLeaveDelete() {
+    return this.setState({ showDelete: false });
   }
   /**
    * @return { swal } swalObject
@@ -119,7 +144,7 @@ class GroupMessages extends Component {
             id);
 
     const group = this.props.groups[index];
-    const { messageIsLoading } = this.props;
+    const { messages, messageIsLoading } = this.props;
     // const adminId = this.props.groupUsers[0].id;
 
 
@@ -136,12 +161,19 @@ class GroupMessages extends Component {
                         <div id="messages" className="messageOverflow">
                             <ul>
                                 {
-                                    this.props.messages.map((message, i) =>
+                                    messages.map((message, i) =>
                                         <SingleGroupMessage message={message}
                                         key={i} i={i}/>)
                                 }
+                                 {
+                                    (messages.length === 0) ?
+                                    (<li><h5>No messages in this group</h5>
+                                    </li>)
+                                    : ''
+                                }
                             </ul>
                         </div>
+
                           <div className="messaging-area">
                             <NewMessage
                               groupId={this.props.params.id}
@@ -159,6 +191,10 @@ class GroupMessages extends Component {
                           searchErrorMessage={this.state.searchErrorMessage}
                           onAddUser={this.onAddUser}
                           onDeleteGroup={ this.onDeleteGroup }
+                          showDelete ={ this.state.showDelete }
+                          onMouseEnterDelete={this.onMouseEnterDelete}
+                          onMouseLeaveDelete={this.onMouseLeaveDelete}
+                          handleRemoveMember={this.handleRemoveMember}
                           group={group}/>
                     </div>
 

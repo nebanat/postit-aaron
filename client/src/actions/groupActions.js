@@ -272,3 +272,47 @@ export function deleteGroup(groupId, groupIndex) {
       });
   };
 }
+/**
+ *
+ * @param { userIndex } userIndex
+ * @return { actionObject } actionObject
+ */
+export function deleteGroupMemberSuccess(userIndex) {
+  return {
+    type: types.REMOVE_GROUP_MEMBER,
+    userIndex
+  };
+}
+/**
+*
+* @param { groupId } groupId
+* @param { userId } userId
+* @param { userIndex } userIndex
+* @return { deleteMessage } deleteMessage
+*/
+export function deleteGroupMember(groupId, userId, userIndex) {
+  const { Materialize } = window;
+  return (dispatch) => {
+    swal({
+      title: 'Are you sure?',
+      text: 'You are about to delete this group member!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((removeMember) => {
+        if (removeMember) {
+          api.deleteGroupMember(groupId, userId)
+            .then((response) => {
+              dispatch(deleteGroupMemberSuccess(userIndex));
+              Materialize.toast(response.data.message, 3000, 'green');
+            })
+            .catch((error) => {
+              if (error) {
+                Materialize.toast(error.response.data.message, 3000, 'red');
+              }
+            });
+        }
+      });
+  };
+}

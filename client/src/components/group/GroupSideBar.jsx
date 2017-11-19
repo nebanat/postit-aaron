@@ -11,7 +11,8 @@ import Button from '../common/Button.jsx';
  */
 const GroupSideBar = ({
   groupUsers, search, onSearchChange, searchLoading,
-  searchResult, searchErrorMessage, onAddUser, onDeleteGroup, authUser
+  searchResult, searchErrorMessage, onAddUser, onDeleteGroup, showDelete,
+  onMouseEnterDelete, onMouseLeaveDelete, handleRemoveMember
 }) => {
   const deleteButtonClass = 'btn col s12 red';
   /**
@@ -32,7 +33,12 @@ const GroupSideBar = ({
         <div>
             <Collapsible>
                 <CollapsibleItem header='Members' icon='group'>
-                    <GroupUsers groupUsers={ groupUsers } />
+                    <GroupUsers groupUsers={ groupUsers }
+                                showDelete={ showDelete }
+                                onMouseEnterDelete={onMouseEnterDelete}
+                                onMouseLeaveDelete={onMouseLeaveDelete}
+                                handleRemoveMember={handleRemoveMember}
+                                />
                 </CollapsibleItem>
                 <CollapsibleItem header='Add Member' icon='add_circle'>
                     <SearchModal
@@ -43,8 +49,10 @@ const GroupSideBar = ({
                         searchErrorMessage={searchErrorMessage}
                         onAddUser={onAddUser}/><br/>
                 </CollapsibleItem>
-                { showDeleteButton() }
-            </Collapsible>
+                  {
+                    showDeleteButton()
+                  }
+               </Collapsible>
         </div>
   );
 };

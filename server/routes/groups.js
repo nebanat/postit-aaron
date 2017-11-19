@@ -56,4 +56,10 @@ app.delete(
   authenticate, groupExist, checkGroupAdmin, groupController.deleteGroup
 );
 
+app.post(
+  '/:id/remove/member',
+  authenticate, userExist, groupExist, checkGroupAdmin,
+  groupController.removeGroupMember
+);
+
 export default app;
