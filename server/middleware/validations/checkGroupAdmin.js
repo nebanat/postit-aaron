@@ -13,7 +13,7 @@ export default function checkGroupAdmin(req, res, next) {
     .then((users) => {
       if (userId !== users[0].id) {
         return res.status(403).send({
-          message: 'You are not authorized to delete this group'
+          message: 'You are not authorized to perform this action'
         });
       }
       next();

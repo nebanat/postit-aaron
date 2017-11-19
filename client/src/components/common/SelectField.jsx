@@ -20,7 +20,7 @@ const SelectField = ({
             required = { required }
             value = { value }
             >
-            <option selected>{placeholder}</option>
+            <option defaultValue>{placeholder}</option>
             {
               optionEntries.map((entry, i) =>
                 <option value={entry.id} key={i}>

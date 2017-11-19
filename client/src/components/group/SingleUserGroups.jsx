@@ -26,7 +26,7 @@ const SingleUserGroup = ({ group }) => {
                 </Link>
              </span>
 
-             <p>{ group.description }</p>
+             {/* <p>{ group.description }</p> */}
 
         </Card>
     </div>

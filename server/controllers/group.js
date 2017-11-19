@@ -89,7 +89,7 @@ export default {
 
       return res.status(201).send({
         message: 'User successfully added to group',
-        user: { username: user.username, email: user.email }
+        user: { id: user.id, username: user.username, email: user.email }
       });
     })
       .catch(error => res.status(500).send({ error: error.message }));
@@ -132,6 +132,29 @@ export default {
       .then(() => res.status(200).send({
         message: 'Group successfully deleted',
       }));
+  },
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return { removeMemberMessageObject } removeMemberMessageObject
+   */
+  removeGroupMember(req, res) {
+    const { userId } = req.body;
+    const { group } = req;
+    
+    group.hasUser(userId).then((result) => {
+      if (!result) {
+        return res.status(404).send({
+          message: 'User is not a member of this group'
+        });
+      }
+
+      group.removeUser(userId);
+
+      return res.status(200).send({
+        message: 'You have successfully removed user from group'
+      });
+    });
   }
 };
-

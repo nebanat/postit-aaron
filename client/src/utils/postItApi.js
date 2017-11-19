@@ -236,3 +236,24 @@ export function deleteGroup(groupId) {
   });
 }
 
+/**
+ *
+ * @param { groupId } groupId
+ * @param { userId } userId
+ * @return { promise } promise
+ */
+export function deleteGroupMember(groupId, userId) {
+  return axios({
+    method: 'post',
+    url: `/api/group/${groupId}/remove/member`,
+    headers: {
+      'Content-type': 'application/json; charset=utf-8',
+      'id-token': getAccessId(),
+      'x-access-token': getAccessToken()
+    },
+    data: JSON.stringify({
+      userId,
+    })
+  });
+}
+

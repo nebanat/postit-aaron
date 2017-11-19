@@ -17,6 +17,7 @@ export const GROUP_IS_LOADING = 'GROUP_IS_LOADING';
 export const ADD_USER_TO_GROUP = 'ADD_USER_TO_GROUP';
 export const EXIT_GROUP = 'EXIT_GROUP';
 export const DELETE_GROUP = 'DELETE_GROUP';
+export const REMOVE_GROUP_MEMBER = 'REMOVE_GROUP_MEMBER';
 
 
 // password actions
