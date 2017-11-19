@@ -8,7 +8,7 @@ import models from '../../models';
  */
 export default function groupAlreadyExist(req, res, next) {
   // checks if group name already exist
-  const { name } = req.body;
+  const name = req.body.name.trim().toLowerCase();
 
   models.Group
     .findOne({ where: { name } })
@@ -18,7 +18,6 @@ export default function groupAlreadyExist(req, res, next) {
           message: 'Group name already exist'
         });
       }
-
       next();
     });
 }

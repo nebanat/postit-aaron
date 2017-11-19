@@ -16,7 +16,8 @@ export default {
    * @return {object} message,username,email
    */
   signup(req, res) {
-    const { username, email, password } = req.body;
+    const { username, password } = req.body;
+    const email = req.body.email.toLowerCase();
 
 
     // creates user
@@ -64,6 +65,7 @@ export default {
             message: 'Invalid password'
           });
         }
+        // generates the token
         const token = jwt.sign({ user }, jwtSecret, {
           expiresIn: '24h'
         });

@@ -19,46 +19,47 @@ import checkGroupAdmin from '../middleware/validations/checkGroupAdmin';
 
 const app = express.Router();
 
-// app.use(authenticate); // check if a user has a valid token
+app.use(authenticate); // check if a user has a valid token
+
 app.post(
-  '/', authenticate, createGroupValidation, groupAlreadyExist,
+  '/', createGroupValidation, groupAlreadyExist,
   groupController.createNewGroup
 );
 
-app.get('/user', authenticate, groupController.getAuthUserGroups);
+app.get('/user', groupController.getAuthUserGroups);
 
 app.post(
-  '/:id/message', authenticate,
+  '/:id/message',
   groupExist, checkUserGroupMembership, postMessageValidation,
   messageController.postMessageToGroup
 );
 
 app.get(
-  '/:id/message', authenticate,
+  '/:id/messages',
   groupExist, checkUserGroupMembership, messageController.getGroupMessages
 );
 
 app.get(
-  '/:id/users', authenticate,
+  '/:id/users',
   groupExist, checkUserGroupMembership, groupController.getGroupMembers
 );
 
 app.post(
-  '/:id/user', authenticate,
+  '/:id/user',
   addUserToGroupValidation, userExist, groupExist, checkUserGroupMembership,
   groupController.addUserToGroup
 );
 
-app.post('/:id/exit', authenticate, groupExist, groupController.exitGroup);
+app.post('/:id/exit', groupExist, groupController.exitGroup);
 
 app.delete(
   '/:id',
-  authenticate, groupExist, checkGroupAdmin, groupController.deleteGroup
+  groupExist, checkGroupAdmin, groupController.deleteGroup
 );
 
 app.post(
   '/:id/remove/member',
-  authenticate, userExist, groupExist, checkGroupAdmin,
+  userExist, groupExist, checkGroupAdmin,
   groupController.removeGroupMember
 );
 

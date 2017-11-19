@@ -10,11 +10,13 @@ export default {
    */
   createNewGroup(req, res) {
     const authUser = decodeUser(req);
+    const { description } = req.body;
+    const name = req.body.name.toLowerCase();
 
     models.Group
       .create({
-        name: req.body.name,
-        description: req.body.description,
+        name,
+        description
       })
       .then((group) => {
         /** adds group creator to group */
@@ -59,15 +61,10 @@ export default {
    * @return {groupMembers} groupMembers
    */
   getGroupMembers(req, res) {
-    const groupId = req.params.id;
+    const { group } = req;
 
-    models.Group
-      .findById(groupId)
-      .then((group) => {
-        group.getUsers({ attributes: ['id', 'username', 'email'] })
-          .then(groupUsers => res.status(200).send(groupUsers));
-      })
-      .catch(error => res.status(500).send({ error: error.message }));
+    group.getUsers({ attributes: ['id', 'username', 'email'] })
+      .then(groupUsers => res.status(200).send(groupUsers));
   },
   /**
    *
@@ -107,7 +104,7 @@ export default {
 
     group.hasUser(userId).then((result) => {
       if (!result) {
-        return res.status(403).send({
+        return res.status(404).send({
           message: 'you are not a member of this group'
         });
       }
@@ -142,7 +139,7 @@ export default {
   removeGroupMember(req, res) {
     const { userId } = req.body;
     const { group } = req;
-    
+
     group.hasUser(userId).then((result) => {
       if (!result) {
         return res.status(404).send({

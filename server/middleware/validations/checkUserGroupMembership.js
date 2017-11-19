@@ -1,4 +1,4 @@
-import decode from 'jwt-decode';
+import { decodeUser } from '../../middleware/authenticate';
 
 /**
  *
@@ -8,10 +8,8 @@ import decode from 'jwt-decode';
  * @return { group } group
  */
 export default function checkUserGroupMembership(req, res, next) {
-  const token = req.body.token || req.query.token || req.headers['x-access-token'];
-  // decodes token//
-  const access = decode(token);
-  const userId = access.user.id;
+  const authUser = decodeUser(req);
+  const userId = authUser.id;
   const { group } = req;
 
   group.hasUser(userId).then((result) => {

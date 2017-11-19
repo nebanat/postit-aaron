@@ -6,7 +6,7 @@
  * @return {message} message
  */
 export default function createGroupValidation(req, res, next) {
-  const { name } = req.body;
+  const name = req.body.name.toLowerCase();
   if (!name || name.trim() === '') {
     return res.status(400).send({
       message: 'Please enter a group name'

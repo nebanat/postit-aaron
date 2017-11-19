@@ -129,7 +129,7 @@ describe('MESSAGES API', () => {
   describe('GET MESSAGE API', () => {
     it('should throw an error if a token is not provided', (done) => {
       chai.request(app)
-        .get('/api/group/1/message')
+        .get('/api/group/1/messages')
         .end((err, res) => {
           expect(res.status).to.equal(403);
           expect(res.body.message).to.equal('No token provided');
@@ -138,7 +138,7 @@ describe('MESSAGES API', () => {
     });
     it('should throw an error if the group ID passed is invalid', (done) => {
       chai.request(app)
-        .get('/api/group/1000/message')
+        .get('/api/group/1000/messages')
         .set('x-access-token', user1token)
         .end((err, res) => {
           expect(res.status).to.equal(404);
@@ -148,7 +148,7 @@ describe('MESSAGES API', () => {
     });
     it('should get the group messages', (done) => {
       chai.request(app)
-        .get('/api/group/1/message')
+        .get('/api/group/1/messages')
         .set('x-access-token', user1token)
         .end((err, res) => {
           expect(res.status).to.equal(200);
