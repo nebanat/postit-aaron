@@ -37,7 +37,7 @@ const NewMessageForm = ({
                       className={ selectWrapperClass }
                       optionEntries={ priorityLevel }
                       required="required"
-                      placeholder="Select priority"
+                      
                       onChange={ onSelectChange }
                       value={ priorityValue }/>
 

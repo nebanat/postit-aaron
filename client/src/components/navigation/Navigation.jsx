@@ -1,112 +1,113 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { isLoggedIn, logout } from '../../utils/authservice';
+import React, { Component } from 'react';
+import NavBar from '../common/NavBar.jsx';
+import NavItem from '../common/NavItem.jsx';
+import Logo from '../common/Logo.jsx';
+import Logout from '../common/Logout.jsx';
+import { isLoggedIn } from '../../utils/authservice';
 
 
 /**
  * @class
- * @extends react.component
  */
-class Navigation extends React.Component {
+class Navigation extends Component {
   /**
-   * @return {jsx} jsx
+   * @constructor
+   * @param {props} props
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      navLinks: [],
+    };
+  }
+  /**
+   * @return { dom } dom
+   */
+  componentDidMount() {
+    $('.button-collapse').sideNav();
+
+    const userNav = [
+      { text: 'Home', link: '/' },
+      { text: 'Login', link: '/signin' },
+      { text: 'SignUp', link: '/signup' }
+    ];
+
+    const authUserNav = [
+      { text: 'Groups', link: '/dashboard' }
+    ];
+
+    return isLoggedIn() ?
+      this.setState({ navLinks: authUserNav })
+      : this.setState({ navLinks: userNav });
+  }
+  /**
+   * @returns {jsx} jsx
    */
   render() {
+    const navBarClassName = 'purple darken-4';
+    const navBarWrapperClass = 'nav-wrapper';
+    const navItemClass = 'white-text';
+    const navItemActive = 'purple darken-3 white-text';
+    const logoClassName = 'brand-logo';
+    const logoText = 'PostIt';
     return (
-            <div className="navbar-fixed">
+       <NavBar
+         navBarClassName = { navBarClassName }
+         navBarWrapperClass = { navBarWrapperClass }>
 
-            <ul id="dropdown1" className="dropdown-content">
-                <li><a href="#!" className="black-text">Profile</a></li>
-                <li className="divider"></li>
-                <li><Link className="black-text" onClick={() => logout()} to="/signin">Logout</Link></li> */}
-            </ul>
-                <nav className='white'>
+         <Logo
+         logoClassName={ logoClassName }
+         logoText={logoText}/>
 
-                    <div className="nav-wrapper">
-                        <div className="row">
+         <a href="#"
+            data-activates="mobile-demo"
+            className="button-collapse right">
+            <i className="material-icons">menu</i>
+         </a>
 
-
-                            <div className="col s8 push-s4">
-
-                                <ul id="nav-mobile"
-                                  className="right hide-on-med-and-down">
-                                    <li className="black-text">
-
-                                    </li>
-                                    <li>
-                                        <Link to="/"
-                                          className="black-text"
-                                          activeClassName = "orange white-text">
-                                          Home
-                                        </Link>
-                                    </li>
-                                    <li>
-                                    {
-                                        (isLoggedIn()) ?
-                                        (
-                                          <Link to="/dashboard"
-                                            className="black-text">
-                                        Dashboard
-                                        </Link>
-                                        ) :
-                                        ('')
-                                    }
-                                    </li>
-                                    <li>
-                                    {
-                                        (isLoggedIn()) ?
-                                        (
-                                          <Link
-                                            className="btn waves-effect waves-light white black-text"
-                                            to="/group/new">
-                                                New Group
-                                          </Link>) : ('')
-                                    }
-                                    </li>
-                                    <li>
-                                      {
-                                      (!isLoggedIn()) ?
-                                      (<Link
-                                          className="black-text"
-                                          activeClassName = "orange white-text"
-                                          to="/signin">
-                                          Login
-                                      </Link>) : ''
-                                      }
-                                   </li>
-                                    <li>
-                                    {
-                                      (!isLoggedIn()) ?
-                                        (<Link
-                                          className="black-text"
-                                          activeClassName = "orange white-text"
-                                          to="/signup">
-                                          SignUp
-                                        </Link>) : ('')
-                                    }
-                                    </li>
-                                    <li>
-                                    {
-                                        (isLoggedIn()) ?
-                                        (<a
-                                            className="dropdown-button black-text"
-                                            href="#!"
-                                            data-activates="dropdown1">
-                                            { this.props.authenticatedUser ? this.props.authenticatedUser.username : ''}
-                                            <i className="material-icons right">arrow_drop_down</i></a>) : ('')
-                                    }
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </div>
+         <ul className="purple darken-4 side-nav" id="mobile-demo">
+         {
+            this.state.navLinks.map((nlink, i) =>
+                <NavItem key={i} i={i}
+                navLink ={ nlink.link }
+                navClassName = { navItemClass }
+                navActiveClass={ navItemActive }
+                navText ={ nlink.text }/>)
+         }
+          
+          
+          {
+            (isLoggedIn()) ?
+              <Logout
+              navItemClass={ navItemClass }
+              navText ='Logout'/> : ''
+          }
+         </ul>
+         <ul className="right hide-on-med-and-down">
+         {
+            this.state.navLinks.map((nlink, i) =>
+                <NavItem key={i} i={i}
+                navLink ={ nlink.link }
+                navClassName = { navItemClass }
+                navActiveClass={ navItemActive }
+                navText ={ nlink.text }/>)
+          }
+          
+          
+          {
+            (isLoggedIn()) ?
+              <Logout
+              navItemClass={ navItemClass }
+              navText ='logout'/> : ''
+          }
+         </ul>
 
 
-                    </div>
-                </nav>
-            </div>
-
+       </NavBar>
     );
   }
 }
+
+
 export default Navigation;
+

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Loader from '../loaders/Loader.jsx';
-import CreateGroupForm from './CreateGroupForm.jsx';
+import CreateGroupModal from './CreateGroupModal.jsx';
 
 /**
  * @class
@@ -21,6 +20,14 @@ class CreateGroup extends Component {
         description: ''
       }
     };
+  }
+  /**
+   * @return { dom } dom
+   */
+  componentDidMount() {
+    $('.modal').modal({
+      opacity: 0.5,
+    });
   }
   /**
    *
@@ -50,15 +57,13 @@ class CreateGroup extends Component {
 
     return (
           <div className="container">
-              {
-                  (groupIsLoading) ? (<Loader/>) : ('')
-              }
-              <h2>New Group</h2>
-              <CreateGroupForm
-                group = { this.state.group }
-                onChange = { this.setGroupDetail }
-                onSubmit = {this.handleGroupSubmit }/>
-            </div>
+            <CreateGroupModal
+              {...this.props}
+              group = { this.state.group }
+              onChange={ this.setGroupDetail }
+              onSubmit={this.handleGroupSubmit}
+              groupIsLoading={ groupIsLoading }/>
+          </div>
     );
   }
 }

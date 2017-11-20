@@ -32,6 +32,7 @@ class SideNav extends Component {
                         New Group
                       </Link>
                   </li>
+                  
          </ul>
                 <a href="#" data-activates="slide-out"
                     className="button-collapse top-nav waves-effect waves-light circle hide-on-large-only">

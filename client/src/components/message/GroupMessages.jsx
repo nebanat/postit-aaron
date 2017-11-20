@@ -145,62 +145,62 @@ class GroupMessages extends Component {
 
     const group = this.props.groups[index];
     const { messages, messageIsLoading } = this.props;
-    // const adminId = this.props.groupUsers[0].id;
-
-
     return (
-            <div>
-                <div className="row">
-                    <div className="col s9">
-                      {
-                        (messageIsLoading) ? (<Loader/>) : ('')
-                      }
-                       <GroupHeader
-                            headerText={ group.name }
-                            onExitGroup={ this.onExitGroup }/>
-                        <div id="messages" className="messageOverflow">
-                            <ul>
-                                {
-                                    messages.map((message, i) =>
-                                        <SingleGroupMessage message={message}
-                                        key={i} i={i}/>)
-                                }
-                                 {
-                                    (messages.length === 0) ?
-                                    (<li><h5>No messages in this group</h5>
-                                    </li>)
-                                    : ''
-                                }
-                            </ul>
-                        </div>
-
-                          <div className="messaging-area">
-                            <NewMessage
-                              groupId={this.props.params.id}
-                              {...this.props}/>
-                          </div>
-
-                    </div>
-                    <div className="col s3">
-                      <GroupSideBar
-                          groupUsers = {this.props.groupUsers}
-                          search = {this.state.search}
-                          onSearchChange={this.onSearchChange}
-                          searchLoading ={this.state.searchLoading}
-                          searchResult={this.state.searchResults}
-                          searchErrorMessage={this.state.searchErrorMessage}
-                          onAddUser={this.onAddUser}
-                          onDeleteGroup={ this.onDeleteGroup }
-                          showDelete ={ this.state.showDelete }
-                          onMouseEnterDelete={this.onMouseEnterDelete}
-                          onMouseLeaveDelete={this.onMouseLeaveDelete}
-                          handleRemoveMember={this.handleRemoveMember}
-                          group={group}/>
-                    </div>
-
+      <div>
+        <div className="row">
+            <div className="col s12 m4 l3">
+                  <GroupSideBar
+                      groupUsers = {this.props.groupUsers}
+                      search = {this.state.search}
+                      onSearchChange={this.onSearchChange}
+                      searchLoading ={this.state.searchLoading}
+                      searchResult={this.state.searchResults}
+                      searchErrorMessage={this.state.searchErrorMessage}
+                      onAddUser={this.onAddUser}
+                      onDeleteGroup={ this.onDeleteGroup }
+                      showDelete ={ this.state.showDelete }
+                      onMouseEnterDelete={this.onMouseEnterDelete}
+                      onMouseLeaveDelete={this.onMouseLeaveDelete}
+                      handleRemoveMember={this.handleRemoveMember}
+                      group={group}/>
+                </div>
+            <div className="col s12 m8 l9">
+              {
+                (messageIsLoading) ? (<Loader/>) : ('')
+              }
+                <GroupHeader
+                    headerText={ group.name }
+                    onExitGroup={ this.onExitGroup }/>
+                <div id="messages" className="messageOverflow">
+                    <ul>
+                        {
+                            messages.map((message, i) =>
+                                <SingleGroupMessage message={message}
+                                key={i} i={i}/>)
+                        }
+                          {
+                            (messages.length === 0) ?
+                            (<div className="col s6 offset-s2 not-found center-align">
+                                <h5>No messages in this group</h5>
+                                <p>Post a message now</p>
+                            </div>)
+                            : ''
+                        }
+                    </ul>
                 </div>
 
+                  <div className="messaging-area">
+                    <NewMessage
+                      groupId={this.props.params.id}
+                      {...this.props}/>
+                  </div>
+
             </div>
+            
+
+        </div>
+
+      </div>
 
 
     );
