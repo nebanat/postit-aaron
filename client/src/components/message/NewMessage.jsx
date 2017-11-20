@@ -20,7 +20,7 @@ class NewMessage extends Component {
 
     this.state = {
       select: {
-        priority: ''
+        priority: '1'
       },
       message: '',
     };

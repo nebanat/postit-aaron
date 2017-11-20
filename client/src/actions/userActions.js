@@ -13,28 +13,7 @@ export function authIsLoading(bool) {
     bool
   };
 }
-/**
- *
- * @param { signUpSucessMessage } signUpSuccessMessage
- * @return { object } action
- */
-export function signUpSuccess(signUpSuccessMessage) {
-  return {
-    type: types.SIGN_UP_SUCCESS,
-    signUpSuccessMessage
-  };
-}
-/**
- *
- * @param { signUpErrorMessage } signUpErrorMessage
- * @return {object} action
- */
-export function signUpFailure(signUpErrorMessage) {
-  return {
-    type: types.SIGN_UP_FAILURE,
-    signUpErrorMessage
-  };
-}
+
 
 /**
  *
@@ -49,8 +28,6 @@ export function signUpUser(user) {
     dispatch(authIsLoading(true));
     api.signUp(user)
       .then((response) => {
-        dispatch(signUpSuccess(response.data.message));
-
         Materialize.toast(response.data.message, 2500, 'green');
 
         dispatch(authIsLoading(false));
@@ -61,8 +38,6 @@ export function signUpUser(user) {
       })
       .catch((error) => {
         if (error) {
-          dispatch(signUpFailure(error.response.data.message));
-
           Materialize.toast(error.response.data.message, 2500, 'red');
 
           dispatch(authIsLoading(false));
@@ -81,18 +56,6 @@ export function signInSuccess(authenticatedUser) {
     authenticatedUser
   };
 }
-/**
- *
- * @param { signInErrorMessage } signInErrorMessage
- * @return {object} action
- */
-export function signInFailure(signInErrorMessage) {
-  return {
-    type: types.SIGN_IN_FAILURE,
-    signInErrorMessage
-  };
-}
-
 
 /**
  *
@@ -121,8 +84,6 @@ export function signInUser(user) {
       })
       .catch((error) => {
         if (error) {
-          dispatch(signInFailure(error.response.data.message));
-
           Materialize.toast(error.response.data.message, 3000, 'red');
 
           dispatch(authIsLoading(false));

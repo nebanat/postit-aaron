@@ -54,7 +54,7 @@ class Password extends Component {
   render() {
     const { passwordIsLoading } = this.props;
     const cardClass = 'card';
-    const cardWrapperClass = 'col s12 m6 offset-m3';
+    const cardWrapperClass = 'col s12 m6 offset-m3 login-form';
     const sectionWrapperClass = 'section purple darken-3';
     const sectionHeaderClass = 'center white-text';
     const cardContentClass = 'card-content';

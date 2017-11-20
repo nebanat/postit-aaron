@@ -74,7 +74,7 @@
   position: sticky;
   top: 0;
   padding: 5px;
-  background-color: #4a148c;
+  background-color: #6a1b9a;
   color: #ffffff;
   border-bottom: 1px solid #e0e0e0;
   height:60px;
@@ -87,7 +87,7 @@
 div.messaging-area {
   position: fixed;
   bottom: 20px;
-  width: 50%;
+  width: 60%;
   height: 5vh;
   /* border: 3px solid #bdbdbd; */
 }
@@ -139,6 +139,12 @@ input.message-input:focus {
 }
 .small-text {
   font-size:10px;
+}
+.not-found {
+  background-color: #e0e0e0;
+  width: 50%;
+  margin-top: 100px;
+  border-radius: 6px;
 }
  
 

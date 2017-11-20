@@ -20,14 +20,13 @@ const SelectField = ({
             required = { required }
             value = { value }
             >
-            <option defaultValue>{placeholder}</option>
             {
               optionEntries.map((entry, i) =>
                 <option value={entry.id} key={i}>
                   {
                     entry.name
                   }</option>)
-              }
+            }
         </select>
 
       </div>
@@ -39,7 +38,7 @@ SelectField.propTypes = {
   wrapperClass: PropTypes.string,
   className: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   optionEntries: PropTypes.array,
   onChange: PropTypes.func,
   label: PropTypes.string,

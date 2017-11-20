@@ -25,28 +25,7 @@ export function createGroupSuccess(group) {
     group
   };
 }
-/**
- *
- * @param { createGroupMessage } createGroupMessage
- * @return { object } action
- */
-export function createGroupSuccessMessage(createGroupMessage) {
-  return {
-    type: types.CREATE_GROUP_SUCCESS_MESSAGE,
-    createGroupMessage
-  };
-}
-/**
- *
- * @param { createGroupError } createGroupError
- * @return { object } action
- */
-export function createGroupFailure(createGroupError) {
-  return {
-    type: types.CREATE_GROUP_FAILURE,
-    createGroupError
-  };
-}
+
 /**
  *
  * @param { group } group
@@ -62,20 +41,18 @@ export function createGroup(group) {
       .then((response) => {
         dispatch(createGroupSuccess(response.data.group));
 
-        dispatch(createGroupSuccessMessage(response.data.message));
-
         Materialize.toast(response.data.message, 2500, 'green');
 
-        dispatch(groupIsLoading(false));
+        $('#modal1').modal('close');
 
         browserHistory.push({
-          pathname: '/groups',
+          pathname: '/dashboard',
         });
+
+        dispatch(groupIsLoading(false));
       })
       .catch((error) => {
         if (error) {
-          dispatch(createGroupFailure(error.response.data.message));
-
           Materialize.toast(error.response.data.message, 2500, 'red');
 
           dispatch(groupIsLoading(false));
@@ -94,21 +71,12 @@ export function fetchUserGroupsSuccess(groups) {
     groups
   };
 }
-/**
- *
- * @param { fetchGroupErrorMessage } fetchGroupErrorMessage
- * @return { actionObject } actionObject
- */
-export function fetchUserGroupsFailure(fetchGroupErrorMessage) {
-  return {
-    type: types.FETCH_USER_GROUPS_ERROR,
-    fetchGroupErrorMessage
-  };
-}
+
 /**
  * @return { userGroups } userGroups
  */
 export function fetchUserGroups() {
+  const { Materialize } = window;
   return (dispatch) => {
     dispatch(groupIsLoading(true));
     api.getUserGroups()
@@ -118,7 +86,7 @@ export function fetchUserGroups() {
       })
       .catch((error) => {
         if (error) {
-          dispatch(fetchUserGroupsFailure(error.response.data.message));
+          Materialize.toast(error.response.data.message, 2500, 'red');
           dispatch(groupIsLoading(false));
         }
       });
@@ -135,29 +103,20 @@ export function fetchGroupUsersSuccess(groupUsers) {
     groupUsers
   };
 }
-/**
- *
- * @param {fetchGroupUsersError} fetchGroupUsersError
- * @return { errorMessageObject } errorMessageObject
- */
-export function fetchGroupUsersFailure(fetchGroupUsersError) {
-  return {
-    type: types.FETCH_GROUP_USERS_FAILURE,
-    fetchGroupUsersError
-  };
-}
+
 /**
  * @param { groupId } groupId
  * @return { groupUsers } groupUsers
  */
 export function fetchGroupUsers(groupId) {
+  const { Materialize } = window;
   return dispatch => api.getGroupUsers(groupId)
     .then((response) => {
       dispatch(fetchGroupUsersSuccess(response.data));
     })
     .catch((error) => {
       if (error) {
-        dispatch(fetchGroupUsersFailure(error.response.data.message));
+        Materialize.toast(error.response.data.message, 2500, 'red');
       }
     });
 }
@@ -224,7 +183,7 @@ export function leaveGroup(groupId, groupIndex) {
               Materialize.toast(response.data.message, 3000, 'green');
 
               browserHistory.push({
-                pathname: '/groups',
+                pathname: '/dashboard',
               });
             })
             .catch((error) => {
@@ -260,7 +219,7 @@ export function deleteGroup(groupId, groupIndex) {
               Materialize.toast(response.data.message, 3000, 'green');
 
               browserHistory.push({
-                pathname: '/groups',
+                pathname: '/dashboard',
               });
             })
             .catch((error) => {

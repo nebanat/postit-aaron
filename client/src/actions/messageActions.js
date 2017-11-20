@@ -1,4 +1,3 @@
-import { browserHistory } from 'react-router';
 import * as types from './actionTypes';
 import * as api from '../utils/postItApi';
 /**
@@ -23,28 +22,7 @@ export function onPost(newMessage) {
     newMessage
   };
 }
-/**
- *
- * @param {postSuccessMessage} postSuccessMessage
- * @return {actionObject} actionObject
- */
-export function postMessageSuccess(postSuccessMessage) {
-  return {
-    type: types.POST_MESSAGE_SUCCESS,
-    postSuccessMessage
-  };
-}
-/**
- *
- * @param {postFailureMessage} postFailureMessage
- * @return {actionObject} actionObject
- */
-export function postMessageFailure(postFailureMessage) {
-  return {
-    type: types.POST_MESSAGE_FAILURE,
-    postFailureMessage
-  };
-}
+
 /**
  *
  * @param { message } message
@@ -61,20 +39,13 @@ export function postMessage(message, priority, groupId) {
     api.postNewMessage(message, priority, groupId)
       .then((response) => {
         dispatch(onPost(response.data.newMessage));
-        dispatch(postMessageSuccess(response.data.message));
-
-        dispatch(messageIsLoading(false));
 
         Materialize.toast(response.data.message, 2500, 'green');
 
-        // browserHistory.push({
-        //   pathname: `/group/${groupId}/messages`,
-        // });
+        dispatch(messageIsLoading(false));
       })
       .catch((error) => {
         if (error) {
-          dispatch(postMessageFailure(error.response.data.message));
-
           Materialize.toast(error.response.data.message, 2500, 'red');
 
           dispatch(messageIsLoading(false));
@@ -93,17 +64,7 @@ export function fetchGroupMessageSuccess(messages) {
     messages
   };
 }
-/**
- *
- * @param {fetchMessagesError} fetchMessagesError
- * @return {actionObject} actionObject
- */
-export function fetchGroupMessageFailure(fetchMessagesError) {
-  return {
-    type: types.FETCH_MESSAGES_SUCCESS,
-    fetchMessagesError
-  };
-}
+
 /**
  *
  * @param { id } id
@@ -112,6 +73,8 @@ export function fetchGroupMessageFailure(fetchMessagesError) {
  */
 export function fetchGroupMessages(id) {
   return (dispatch) => {
+    const { Materialize } = window;
+
     dispatch(messageIsLoading(true));
     api.getGroupMessages(id)
       .then((response) => {
@@ -120,8 +83,8 @@ export function fetchGroupMessages(id) {
       })
       .catch((error) => {
         if (error) {
-          dispatch(fetchGroupMessageFailure(error.response.data.message));
           dispatch(messageIsLoading(false));
+          Materialize.toast(error.response.data.message, 2500, 'red');
         }
       });
   };
