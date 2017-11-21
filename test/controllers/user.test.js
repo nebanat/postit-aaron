@@ -48,7 +48,7 @@ describe('User Controllers', () => {
         .post('/api/user/signup')
         .send({
           username: 'testuser1',
-          email: 'testuserpassword'
+          email: 'testuserpassword@gmail.com'
         })
         .end((err, res) => {
           expect(res.status).toEqual(400);

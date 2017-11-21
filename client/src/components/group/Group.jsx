@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SingleGroupMessage from './SingleGroupMessage.jsx';
+import SingleGroupMessage from '../message/SingleGroupMessage.jsx';
 import GroupHeader from './GroupHeader.jsx';
 import GroupSideBar from '../group/GroupSideBar.jsx';
 import Loader from '../loaders/Loader.jsx';
@@ -10,7 +10,7 @@ import NewMessage from '../message/NewMessage.jsx';
  * @class
  * @extends component
  */
-class GroupMessages extends Component {
+class Group extends Component {
   /**
    * @constructor
    * @param {props} props
@@ -48,6 +48,14 @@ class GroupMessages extends Component {
   componentDidMount() {
     $('.modal').modal({
       opacity: 0.5,
+    });
+    $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false,
+      gutter: 0,
+      belowOrigin: false,
+      stopPropagation: false
     });
   }
   /**
@@ -170,7 +178,8 @@ class GroupMessages extends Component {
               }
                 <GroupHeader
                     headerText={ group.name }
-                    onExitGroup={ this.onExitGroup }/>
+                    onExitGroup={ this.onExitGroup }
+                    onDeleteGroup={ this.onDeleteGroup }/>
                 <div id="messages" className="messageOverflow">
                     <ul>
                         {
@@ -206,4 +215,4 @@ class GroupMessages extends Component {
     );
   }
 }
-export default GroupMessages;
+export default Group;

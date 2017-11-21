@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /**
  *
  * @param { req } req
@@ -7,6 +8,7 @@
  */
 export default function signUpValidation(req, res, next) {
   const { username, email, password } = req.body;
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 
   if (!username || username.trim() === '') {
     return res.status(400).send({
@@ -15,6 +17,10 @@ export default function signUpValidation(req, res, next) {
   } else if (!email || email.trim() === '') {
     return res.status(400).send({
       message: 'email is required'
+    });
+  } else if (!emailRegex.test(email)) {
+    return res.status(400).send({
+      message: 'Enter a valid email'
     });
   } else if (!password || password.trim() === '') {
     return res.status(400).send({
