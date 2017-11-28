@@ -25,18 +25,15 @@ export function sendResetPassword(email) {
 
     dispatch(passwordIsLoading(true));
 
-    api.sendResetPasswordLink(email)
+    return api.sendResetPasswordLink(email)
       .then((response) => {
         Materialize.toast(response.data.message, 2500, 'green');
 
         dispatch(passwordIsLoading(false));
       })
       .catch((error) => {
-        if (error) {
-          Materialize.toast(error.response.data.message, 2500, 'red');
-
-          dispatch(passwordIsLoading(false));
-        }
+        Materialize.toast(error.response.data.message, 2500, 'red');
+        dispatch(passwordIsLoading(false));
       });
   };
 }
@@ -54,7 +51,7 @@ export function resetPassword(resetToken, password) {
 
     dispatch(passwordIsLoading(true));
 
-    api.resetPassword(resetToken, password)
+    return api.resetPassword(resetToken, password)
       .then((response) => {
         Materialize.toast(response.data.message, 2500, 'green');
 
@@ -65,11 +62,8 @@ export function resetPassword(resetToken, password) {
         });
       })
       .catch((error) => {
-        if (error) {
-          Materialize.toast(error.response.data.message, 2500, 'green');
-
-          dispatch(passwordIsLoading(false));
-        }
+        Materialize.toast(error.response.data.message, 2500, 'green');
+        dispatch(passwordIsLoading(false));
       });
   };
 }

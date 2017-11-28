@@ -1,5 +1,4 @@
 import { browserHistory } from 'react-router';
-import swal from 'sweetalert';
 import * as types from './actionTypes';
 import * as api from '../utils/postItApi';
 
@@ -37,7 +36,8 @@ export function createGroup(group) {
     const { Materialize } = window;
 
     dispatch(groupIsLoading(true));
-    api.createGroup(group)
+
+    return api.createGroup(group)
       .then((response) => {
         dispatch(createGroupSuccess(response.data.group));
 
@@ -45,18 +45,11 @@ export function createGroup(group) {
 
         $('#modal1').modal('close');
 
-        browserHistory.push({
-          pathname: '/dashboard',
-        });
-
         dispatch(groupIsLoading(false));
       })
       .catch((error) => {
-        if (error) {
-          Materialize.toast(error.response.data.message, 2500, 'red');
-
-          dispatch(groupIsLoading(false));
-        }
+        Materialize.toast(error.response.data.message, 2500, 'red');
+        dispatch(groupIsLoading(false));
       });
   };
 }
@@ -79,16 +72,14 @@ export function fetchUserGroups() {
   const { Materialize } = window;
   return (dispatch) => {
     dispatch(groupIsLoading(true));
-    api.getUserGroups()
+    return api.getUserGroups()
       .then((response) => {
         dispatch(fetchUserGroupsSuccess(response.data));
         dispatch(groupIsLoading(false));
       })
       .catch((error) => {
-        if (error) {
-          Materialize.toast(error.response.data.message, 2500, 'red');
-          dispatch(groupIsLoading(false));
-        }
+        Materialize.toast(error.response.data.message, 2500, 'red');
+        dispatch(groupIsLoading(false));
       });
   };
 }
@@ -115,9 +106,7 @@ export function fetchGroupUsers(groupId) {
       dispatch(fetchGroupUsersSuccess(response.data));
     })
     .catch((error) => {
-      if (error) {
-        Materialize.toast(error.response.data.message, 2500, 'red');
-      }
+      Materialize.toast(error.response.data.message, 2500, 'red');
     });
 }
 /**
@@ -144,9 +133,7 @@ export function addUserToGroup(groupId, userId) {
       Materialize.toast(response.data.message, 3000, 'green');
     })
     .catch((error) => {
-      if (error) {
-        Materialize.toast(error.response.data.message, 3000, 'red');
-      }
+      Materialize.toast(error.response.data.message, 3000, 'red');
     });
 }
 /**
@@ -167,33 +154,18 @@ export function leaveGroupSuccess(index) {
  */
 export function leaveGroup(groupId, groupIndex) {
   const { Materialize } = window;
-  return (dispatch) => {
-    swal({
-      title: 'Are you sure?',
-      text: 'You are about to exit this group!',
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true,
-    })
-      .then((removeGroup) => {
-        if (removeGroup) {
-          api.exitGroup(groupId)
-            .then((response) => {
-              dispatch(leaveGroupSuccess(groupIndex));
-              Materialize.toast(response.data.message, 3000, 'green');
+  return dispatch => api.exitGroup(groupId)
+    .then((response) => {
+      dispatch(leaveGroupSuccess(groupIndex));
+      Materialize.toast(response.data.message, 3000, 'green');
 
-              browserHistory.push({
-                pathname: '/dashboard',
-              });
-            })
-            .catch((error) => {
-              if (error) {
-                Materialize.toast(error.response.data.message, 3000, 'red');
-              }
-            });
-        }
+      browserHistory.push({
+        pathname: '/dashboard',
       });
-  };
+    })
+    .catch((error) => {
+      Materialize.toast(error.response.data.message, 3000, 'red');
+    });
 }
 /**
  *
@@ -203,33 +175,18 @@ export function leaveGroup(groupId, groupIndex) {
  */
 export function deleteGroup(groupId, groupIndex) {
   const { Materialize } = window;
-  return (dispatch) => {
-    swal({
-      title: 'Are you sure?',
-      text: 'You are about to delete this group!',
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true,
-    })
-      .then((removeGroup) => {
-        if (removeGroup) {
-          api.deleteGroup(groupId)
-            .then((response) => {
-              dispatch(leaveGroupSuccess(groupIndex));
-              Materialize.toast(response.data.message, 3000, 'green');
+  return dispatch => api.deleteGroup(groupId)
+    .then((response) => {
+      dispatch(leaveGroupSuccess(groupIndex));
+      Materialize.toast(response.data.message, 3000, 'green');
 
-              browserHistory.push({
-                pathname: '/dashboard',
-              });
-            })
-            .catch((error) => {
-              if (error) {
-                Materialize.toast(error.response.data.message, 3000, 'red');
-              }
-            });
-        }
+      browserHistory.push({
+        pathname: '/dashboard',
       });
-  };
+    })
+    .catch((error) => {
+      Materialize.toast(error.response.data.message, 3000, 'red');
+    });
 }
 /**
  *
@@ -251,27 +208,12 @@ export function deleteGroupMemberSuccess(userIndex) {
 */
 export function deleteGroupMember(groupId, userId, userIndex) {
   const { Materialize } = window;
-  return (dispatch) => {
-    swal({
-      title: 'Are you sure?',
-      text: 'You are about to delete this group member!',
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true,
+  return dispatch => api.deleteGroupMember(groupId, userId)
+    .then((response) => {
+      dispatch(deleteGroupMemberSuccess(userIndex));
+      Materialize.toast(response.data.message, 3000, 'green');
     })
-      .then((removeMember) => {
-        if (removeMember) {
-          api.deleteGroupMember(groupId, userId)
-            .then((response) => {
-              dispatch(deleteGroupMemberSuccess(userIndex));
-              Materialize.toast(response.data.message, 3000, 'green');
-            })
-            .catch((error) => {
-              if (error) {
-                Materialize.toast(error.response.data.message, 3000, 'red');
-              }
-            });
-        }
-      });
-  };
+    .catch((error) => {
+      Materialize.toast(error.response.data.message, 3000, 'red');
+    });
 }

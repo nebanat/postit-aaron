@@ -36,7 +36,7 @@ export function postMessage(message, priority, groupId) {
     const { Materialize } = window;
 
     dispatch(messageIsLoading(true));
-    api.postNewMessage(message, priority, groupId)
+    return api.postNewMessage(message, priority, groupId)
       .then((response) => {
         dispatch(onPost(response.data.newMessage));
 
@@ -45,11 +45,8 @@ export function postMessage(message, priority, groupId) {
         dispatch(messageIsLoading(false));
       })
       .catch((error) => {
-        if (error) {
-          Materialize.toast(error.response.data.message, 2500, 'red');
-
-          dispatch(messageIsLoading(false));
-        }
+        Materialize.toast(error.response.data.message, 2500, 'red');
+        dispatch(messageIsLoading(false));
       });
   };
 }
@@ -76,16 +73,14 @@ export function fetchGroupMessages(id) {
     const { Materialize } = window;
 
     dispatch(messageIsLoading(true));
-    api.getGroupMessages(id)
+    return api.getGroupMessages(id)
       .then((response) => {
         dispatch(fetchGroupMessageSuccess(response.data.messages));
         dispatch(messageIsLoading(false));
       })
       .catch((error) => {
-        if (error) {
-          dispatch(messageIsLoading(false));
-          Materialize.toast(error.response.data.message, 2500, 'red');
-        }
+        dispatch(messageIsLoading(false));
+        Materialize.toast(error.response.data.message, 2500, 'red');
       });
   };
 }

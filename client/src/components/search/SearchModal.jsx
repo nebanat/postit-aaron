@@ -32,10 +32,10 @@ const SearchModal = ({
                 {
                   searchResult.map((user, index) =>
                     <SingleUser key={index} i={index} username = { user.username }>
-                          <Button wrapperClass={ buttonWrapperClass }
-                            buttonClassName={ buttonClassName }
-                            onClick= {() => onAddUser(user.id) }
-                            label="add"/>
+                      <Button wrapperClass={ buttonWrapperClass }
+                        buttonClassName={ buttonClassName }
+                        onClick= {() => onAddUser(user.id) }
+                        label="add"/>
                     </SingleUser>)
                 }
               </ul>

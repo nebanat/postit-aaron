@@ -14,7 +14,7 @@ const GroupHeader = ({ headerText, onExitGroup, onDeleteGroup }) => {
     <div>
       <Button
         buttonClassName ={ exitButtonClass}
-        label = ' Exit Group'
+        label = ' Exit'
         onClick={ onExitGroup }>
 
         <i className=" material-icons">exit_to_app</i>
@@ -24,13 +24,13 @@ const GroupHeader = ({ headerText, onExitGroup, onDeleteGroup }) => {
     </div>
   );
   /**
-  * @return { jsx } jsx
+   * @return { jsx } jsx
   */
   const showDeleteGroup = () => (
     <Button
       buttonClassName={ deleteButtonClass }
       onClick = { onDeleteGroup }
-      label =' Delete Group'>
+      label =' Delete'>
       <i className="material-icons">delete_forever</i>
 
     </Button>
@@ -60,9 +60,9 @@ const GroupHeader = ({ headerText, onExitGroup, onDeleteGroup }) => {
                   { showGroupLink() }
               </span>
 
-              <h4 className="group-header center-align">
+              <h5 className="group-header center-align">
                 { headerText }
-              </h4>
+              </h5>
 
             <ul id='dropdown1' className='dropdown-content'>
               <li>

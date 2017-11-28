@@ -1,74 +1,57 @@
 import { browserHistory } from 'react-router';
-import decode from 'jwt-decode';
 // check if the user is authenticated//
 // make sure pages other login,register are protected
 /**
  * @return { jwtToken } jwtTokn
  */
-export function getAccessToken() {
-  return localStorage.getItem('POSTIT_ACCESS_TOKEN');
-}
+export const getAccessToken = () => localStorage.getItem('POSTIT_ACCESS_TOKEN');
 /**
  * @return {boolean} boolean
  */
-export function isLoggedIn() {
+export const isLoggedIn = () => {
   // future check if token is expired//
   const accessToken = getAccessToken();
   return !!accessToken;
-}
+};
 /**
  *
  * @param {nextState} nextState
  * @param {replace} replace
  * @return { route } route
  */
-export function requireAuth(nextState, replace) {
+export const requireAuth = (nextState, replace) => {
   if (!isLoggedIn()) {
     replace({ pathname: '/signin' });
   }
-}
+};
 /**
  *
  * @param {nextState} nextState
  * @param {replace} replace
  * @return {route} route
  */
-export function noRequireAuth(nextState, replace) {
+export const noRequireAuth = (nextState, replace) => {
   if (isLoggedIn()) {
     replace({ pathname: '/dashboard' });
   }
-}
+};
 /**
  * @return {emptyToken} emptyToken
  */
-export function clearAccessToken() {
+export const clearAccessToken = () => {
   localStorage.removeItem('POSTIT_ACCESS_TOKEN');
-}
+  localStorage.removeItem('USER_ACCESS');
+};
 /**
- * @return {route} route
+ * @return { route } route
  */
-export function logout() {
+export const logout = () => {
   clearAccessToken();
   browserHistory.push('/signin');
-}
+};
 /**
  *
  * @return {userAccessId} accessId
  */
-export function getAccessId() {
-  const token = decode(localStorage.getItem('POSTIT_ACCESS_TOKEN'));
-  const userAccessId = token.user.id;
-
-  return userAccessId;
-}
-/**
- *
- * @return {userAccessId} accessId
- */
-export function getAuthUser() {
-  const token = decode(localStorage.getItem('POSTIT_ACCESS_TOKEN'));
-  const authUser = token.user;
-
-  return authUser;
-}
+export const getAuthUser = () => localStorage.getItem('USER_ACCESS');
 

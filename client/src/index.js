@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
@@ -12,7 +13,6 @@ import CreateGroup from './components/group/CreateGroup.jsx';
 import UserGroups from './components/group/UserGroups.jsx';
 import NewMessage from './components/message/NewMessage.jsx';
 import Group from './components/group/Group.jsx';
-import Test from './components/Test2.jsx';
 import { requireAuth, noRequireAuth } from './utils/authservice';
 import configureStore from './store/configureStore';
 
@@ -53,8 +53,6 @@ const Root = () => (
         </Route>
 
         <Route path="/" component={ Home }></Route>
-
-        <Route path="/test" component={ Test }></Route>
       </Router>
 </Provider>
 );

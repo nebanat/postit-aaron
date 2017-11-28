@@ -12,7 +12,7 @@ import AuthFooter from '../../footer/AuthFooter.jsx';
  * @class
  * @extends component
  */
-class ResetPassword extends Component {
+export class ResetPassword extends Component {
   /**
    *
    * @param { props } props
@@ -109,25 +109,21 @@ class ResetPassword extends Component {
  * @param {state} state
  * @return {state} state
  */
-function mapStateToProps(state) {
-  return {
-    resetSuccessMessage: state.resetSuccessMessage,
-    resetFailureMessage: state.resetFailureMessage,
-    passwordIsLoading: state.passwordIsLoading
-  };
-}
+const mapStateToProps = state => ({
+  resetSuccessMessage: state.resetSuccessMessage,
+  resetFailureMessage: state.resetFailureMessage,
+  passwordIsLoading: state.passwordIsLoading
+});
 /**
  *
  * @param {dispatch} dispatch
  * @return {object} actions
  */
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      passwordActions: bindActionCreators(passwordActions, dispatch)
-    }
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  actions: {
+    passwordActions: bindActionCreators(passwordActions, dispatch)
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword);
 

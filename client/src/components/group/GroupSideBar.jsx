@@ -11,16 +11,18 @@ import SearchModal from '../search/SearchModal.jsx';
 const GroupSideBar = ({
   groupUsers, search, onSearchChange, searchLoading,
   searchResult, searchErrorMessage, onAddUser, showDelete,
-  onMouseEnterDelete, onMouseLeaveDelete, handleRemoveMember
+  onMouseEnterDelete, onMouseLeaveDelete, handleRemoveMember, authUser
 }) => (
         <div>
-            <Collapsible>
+             <Collapsible>
               <CollapsibleItem header='Members' icon='group'>
                   <GroupUsers groupUsers={ groupUsers }
                               showDelete={ showDelete }
                               onMouseEnterDelete={onMouseEnterDelete}
                               onMouseLeaveDelete={onMouseLeaveDelete}
                               handleRemoveMember={handleRemoveMember}
+                              authUser={ authUser }
+
                               />
               </CollapsibleItem>
               <CollapsibleItem header='Add Member' icon='add_circle'>
