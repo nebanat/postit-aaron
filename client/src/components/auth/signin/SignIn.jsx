@@ -8,7 +8,7 @@ import SignInForm from './SignInForm.jsx';
 import SignInFooter from './SignInFooter.jsx';
 import Card from '../../common/Card.jsx';
 import Section from '../../common/Section.jsx';
-import AuthFooter from '../../footer/AuthFooter.jsx';
+import Footer from '../../footer/Footer.jsx';
 
 /**
  * @class
@@ -88,7 +88,7 @@ export class SignIn extends Component {
                       <SignInFooter/>
                     </Card>
                 </Section>
-              <AuthFooter/>
+              <Footer/>
               </div>
     );
   }
