@@ -7,7 +7,7 @@ import Loader from '../../loaders/Loader.jsx';
 import ResetPasswordForm from './ResetPasswordForm.jsx';
 import Card from '../../common/Card.jsx';
 import Section from '../../common/Section.jsx';
-import AuthFooter from '../../footer/AuthFooter.jsx';
+import Footer from '../../footer/Footer.jsx';
 /**
  * @class
  * @extends component
@@ -99,7 +99,7 @@ export class ResetPassword extends Component {
                               onChange={this.setUserPassword}/>
                     </Card>
                </Section>
-               <AuthFooter/>
+               <Footer/>
             </div>
     );
   }

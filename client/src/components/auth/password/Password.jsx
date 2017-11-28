@@ -7,7 +7,7 @@ import Navigation from '../../navigation/Navigation.jsx';
 import Loader from '../../loaders/Loader.jsx';
 import Card from '../../common/Card.jsx';
 import Section from '../../common/Section.jsx';
-import AuthFooter from '../../footer/AuthFooter.jsx';
+import Footer from '../../footer/Footer.jsx';
 
 /**
  * @class
@@ -84,7 +84,7 @@ export class Password extends Component {
 
                       </Card>
               </Section>
-              <AuthFooter/>
+              <Footer/>
           </div>
     );
   }
