@@ -80,13 +80,10 @@ class NewMessage extends Component {
    * @returns { jsx } jsx
    */
   render() {
-    const { groups } = this.props;
-
     return (
         <div>
           <NewMessageForm
               message = { this.state.message }
-              groups = { groups }
               onMessageChange = {this.onMessageChange}
               onSelectChange = {this.onSelectChange}
               onSubmit = { this.handleOnSubmitMessage }

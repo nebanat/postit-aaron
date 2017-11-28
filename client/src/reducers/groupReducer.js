@@ -1,9 +1,9 @@
 import * as types from '../actions/actionTypes';
 /**
  *
- * @param {state} state
- * @param {action} action
- * @return {object} state
+ * @param { state } state
+ * @param { action } action
+ * @return { object } state
  */
 export function groups(state = [], action) {
   switch (action.type) {

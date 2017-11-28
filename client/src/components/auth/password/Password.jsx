@@ -12,7 +12,7 @@ import AuthFooter from '../../footer/AuthFooter.jsx';
 /**
  * @class
  */
-class Password extends Component {
+export class Password extends Component {
   /**
    * @constructor
    * @param {props} props
@@ -69,7 +69,7 @@ class Password extends Component {
                   wrapperClass = { sectionWrapperClass }
                   headerText = "PostIt Messaging"
                   headerClass = { sectionHeaderClass }>
-                    <br/><br/><br/>
+
                       <Card
                         cardClass ={ cardClass }
                         wrapperClass= { cardWrapperClass }
@@ -94,25 +94,21 @@ class Password extends Component {
  * @param { state } state
  * @return { state } state
  */
-function mapStateToProps(state) {
-  return {
-    sendResetSuccessMessage: state.sendResetSuccessMessage,
-    sendResetFailureMessage: state.sendResetFailureMessage,
-    passwordIsLoading: state.passwordIsLoading
-  };
-}
+const mapStateToProps = state => ({
+  sendResetSuccessMessage: state.sendResetSuccessMessage,
+  sendResetFailureMessage: state.sendResetFailureMessage,
+  passwordIsLoading: state.passwordIsLoading
+});
 /**
  *
  * @param { dispatch } dispatch
  * @return { object } actions
  */
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      passwordActions: bindActionCreators(passwordActions, dispatch)
-    }
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  actions: {
+    passwordActions: bindActionCreators(passwordActions, dispatch)
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Password);
 

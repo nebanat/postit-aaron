@@ -46,7 +46,7 @@ const SingleGroupMessage = ({ message, i }) => {
                         </span>
                     </SingleUser>
                     <p id='message'>{ message.content }</p>
-                    <span className={ messageTypeColor(message.priority) }
+                      <span className={ messageTypeColor(message.priority) }
                           data-badge-caption={ messageType(message.priority) }>
                      </span>
                     </div>

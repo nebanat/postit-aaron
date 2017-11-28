@@ -12,7 +12,7 @@ import Loader from '../loaders/Loader.jsx';
  * @class
  * @extends component
  */
-class Dashboard extends Component {
+export class Dashboard extends Component {
   /**
    * @return { userGroups} userGroups
    */
@@ -31,17 +31,13 @@ class Dashboard extends Component {
                {
                  (groupIsLoading) ? (<Loader/>) : ('')
                }
-               <div className="container">
-               <div className="row">
-
-                  <div className="col s12">
-                      { React.cloneElement(this.props.children, this.props) }
+               <div className="container-fluid">
+                  <div className="row">
+                    <div className="col s12">
+                        { React.cloneElement(this.props.children, this.props) }
+                    </div>
                   </div>
-
               </div>
-
-               </div>
-
             </div>
 
     );
@@ -52,29 +48,25 @@ class Dashboard extends Component {
  * @param { state } state
  * @return { state } state
  */
-function mapStateToProps(state) {
-  return {
-    authenticatedUser: state.authenticatedUser,
-    groups: state.groups,
-    messages: state.messages,
-    groupUsers: state.groupUsers,
-    groupIsLoading: state.groupIsLoading,
-    messageIsLoading: state.messageIsLoading
-  };
-}
+const mapStateToProps = state => ({
+  authenticatedUser: state.authenticatedUser,
+  groups: state.groups,
+  messages: state.messages,
+  groupUsers: state.groupUsers,
+  groupIsLoading: state.groupIsLoading,
+  messageIsLoading: state.messageIsLoading
+});
 /**
  *
  * @param {dispatch} dispatch
  * @return {object} actions
  */
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      messageActions: bindActionCreators(messageActions, dispatch),
-      userActions: bindActionCreators(userActions, dispatch),
-      groupActions: bindActionCreators(groupActions, dispatch),
-    }
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  actions: {
+    messageActions: bindActionCreators(messageActions, dispatch),
+    userActions: bindActionCreators(userActions, dispatch),
+    groupActions: bindActionCreators(groupActions, dispatch),
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -74,8 +74,8 @@ class Navigation extends Component {
                 navActiveClass={ navItemActive }
                 navText ={ nlink.text }/>)
          }
-          
-          
+
+
           {
             (isLoggedIn()) ?
               <Logout
@@ -92,8 +92,8 @@ class Navigation extends Component {
                 navActiveClass={ navItemActive }
                 navText ={ nlink.text }/>)
           }
-          
-          
+
+
           {
             (isLoggedIn()) ?
               <Logout

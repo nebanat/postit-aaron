@@ -7,8 +7,7 @@ const SelectField = ({
 
 }) =>
   (
-    <div
-        className={ wrapperClass }>
+    <div className={ wrapperClass }>
           <label>
              { label }
           </label>
@@ -34,10 +33,10 @@ const SelectField = ({
   );
 // proptype validation
 SelectField.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   wrapperClass: PropTypes.string,
-  className: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  value: PropTypes.string,
   placeholder: PropTypes.string,
   optionEntries: PropTypes.array,
   onChange: PropTypes.func,

@@ -8,13 +8,13 @@ import Navigation from '../../navigation/Navigation.jsx';
 import Loader from '../../loaders/Loader.jsx';
 import Card from '../../common/Card.jsx';
 import Section from '../../common/Section.jsx';
-import AuthFooter from '../../footer/AuthFooter.jsx';
+import Footer from '../../footer/Footer.jsx';
 import '../../../../css/style.css';
 /**
  * @class
  * @extends component
  */
-class SignUp extends Component {
+export class SignUp extends Component {
   /**
    * @constructor
    * @param { object } props
@@ -30,7 +30,7 @@ class SignUp extends Component {
         password: '',
         cpassword: '',
       },
-      passwordMatchError: ''
+      passwordError: ''
     };
   }
   /**
@@ -42,12 +42,16 @@ class SignUp extends Component {
     event.preventDefault();
 
     if (this.state.user.password !== this.state.user.cpassword) {
-      this.setState({
-        passwordMatchError: 'Confirm password does not match password'
+      return this.setState({
+        passwordError: 'Confirm password does not match password'
       });
-      return;
     }
+    if (this.state.user.password.length < 6) {
+      return this.setState({ passwordError: 'Passwords must be at least 6 characters' });
+    }
+
     this.props.actions.userActions.signUpUser(this.state.user);
+    return this.setState({ passwordError: '' });
   }
   /**
    * @param { event } event
@@ -94,7 +98,7 @@ class SignUp extends Component {
                         title='Register'>
 
                             <p className='red-text center col s12'>
-                              { this.state.passwordMatchError }
+                              { this.state.passwordError }
                               </p><br/>
                             <br/>
 
@@ -107,7 +111,7 @@ class SignUp extends Component {
                   </Section>
             </main>
             <footer>
-                <AuthFooter/>
+                <Footer/>
             </footer>
          </div>
     );
@@ -118,26 +122,22 @@ class SignUp extends Component {
  * @param { state } state
  * @return { state } state
  */
-function mapStateToProps(state) {
-  return {
-    signUpSuccessMessage: state.signUpSuccessMessage,
-    signUpErrorMessage: state.signUpErrorMessage,
-    authenticatedUser: state.authenticatedUser,
-    authIsLoading: state.authIsLoading
-  };
-}
+const mapStateToProps = state => ({
+  signUpSuccessMessage: state.signUpSuccessMessage,
+  signUpErrorMessage: state.signUpErrorMessage,
+  authenticatedUser: state.authenticatedUser,
+  authIsLoading: state.authIsLoading
+});
 /**
  *
  * @param { dispatch } dispatch
  * @return { object } actions
  */
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      userActions: bindActionCreators(userActions, dispatch),
-    }
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  actions: {
+    userActions: bindActionCreators(userActions, dispatch),
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAccessToken, getAccessId } from './authservice';
+import { getAccessToken } from './authservice';
 /**
  *
  * @param { user } user object
@@ -102,7 +102,6 @@ export function getUserGroups() {
     url: '/api/group/user',
     headers: {
       'Content-type': 'application/json; charset=utf-8',
-      'id-token': getAccessId(),
       'x-access-token': getAccessToken()
     }
   });
@@ -140,7 +139,6 @@ export function getGroupMessages(groupId) {
     url: `/api/group/${groupId}/messages`,
     headers: {
       'Content-type': 'application/json; charset=utf-8',
-      'id-token': getAccessId(),
       'x-access-token': getAccessToken()
     }
   });
@@ -155,7 +153,6 @@ export function getGroupUsers(groupId) {
     url: `/api/group/${groupId}/users`,
     headers: {
       'Content-type': 'application/json; charset=utf-8',
-      'id-token': getAccessId(),
       'x-access-token': getAccessToken()
     }
   });
@@ -172,7 +169,6 @@ export function searchUsersNotInGroup(groupId, query) {
     url: '/api/user/search',
     headers: {
       'Content-type': 'application/json; charset=utf-8',
-      'id-token': getAccessId(),
       'x-access-token': getAccessToken()
     },
     data: JSON.stringify({
@@ -193,7 +189,6 @@ export function addUserToGroup(groupId, userId) {
     url: `/api/group/${groupId}/user`,
     headers: {
       'Content-type': 'application/json; charset=utf-8',
-      'id-token': getAccessId(),
       'x-access-token': getAccessToken()
     },
     data: JSON.stringify({
@@ -213,7 +208,6 @@ export function exitGroup(groupId) {
     url: `/api/group/${groupId}/exit`,
     headers: {
       'Content-type': 'application/json; charset=utf-8',
-      'id-token': getAccessId(),
       'x-access-token': getAccessToken()
     }
   });
@@ -230,7 +224,6 @@ export function deleteGroup(groupId) {
     url: `/api/group/${groupId}`,
     headers: {
       'Content-type': 'application/json; charset=utf-8',
-      'id-token': getAccessId(),
       'x-access-token': getAccessToken()
     }
   });
@@ -248,7 +241,6 @@ export function deleteGroupMember(groupId, userId) {
     url: `/api/group/${groupId}/remove/member`,
     headers: {
       'Content-type': 'application/json; charset=utf-8',
-      'id-token': getAccessId(),
       'x-access-token': getAccessToken()
     },
     data: JSON.stringify({

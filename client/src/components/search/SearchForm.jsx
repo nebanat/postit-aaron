@@ -22,8 +22,6 @@ const SearchForm = ({ onSearchChange, search }) => {
                     onChange={ onSearchChange }
                     value={search}/>
                 </div>
-                
-              <br/>
             </form>
         </div>
 

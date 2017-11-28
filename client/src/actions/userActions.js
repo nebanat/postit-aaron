@@ -26,7 +26,7 @@ export function signUpUser(user) {
     const { Materialize } = window;
 
     dispatch(authIsLoading(true));
-    api.signUp(user)
+    return api.signUp(user)
       .then((response) => {
         Materialize.toast(response.data.message, 2500, 'green');
 
@@ -37,11 +37,9 @@ export function signUpUser(user) {
         });
       })
       .catch((error) => {
-        if (error) {
-          Materialize.toast(error.response.data.message, 2500, 'red');
+        Materialize.toast(error.response.data.message, 2500, 'red');
 
-          dispatch(authIsLoading(false));
-        }
+        dispatch(authIsLoading(false));
       });
   };
 }
@@ -68,12 +66,13 @@ export function signInUser(user) {
 
     dispatch(authIsLoading(true));
 
-    api.signIn(user)
+    return api.signIn(user)
       .then((response) => {
         dispatch(signInSuccess(response.data.user));
 
-        localStorage.setItem('POSTIT_ACCESS_TOKEN', response.data.token);
-
+        window.localStorage.setItem('POSTIT_ACCESS_TOKEN', response.data.token);
+        window.localStorage.setItem('USER_ACCESS', response.data.user);
+       
         dispatch(authIsLoading(false));
 
         Materialize.toast(response.data.message, 3000, 'green');
@@ -83,11 +82,8 @@ export function signInUser(user) {
         });
       })
       .catch((error) => {
-        if (error) {
-          Materialize.toast(error.response.data.message, 3000, 'red');
-
-          dispatch(authIsLoading(false));
-        }
+        Materialize.toast(error.response.data.message, 3000, 'red');
+        dispatch(authIsLoading(false));
       });
   };
 }

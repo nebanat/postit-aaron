@@ -8,12 +8,12 @@ import SignInForm from './SignInForm.jsx';
 import SignInFooter from './SignInFooter.jsx';
 import Card from '../../common/Card.jsx';
 import Section from '../../common/Section.jsx';
-import AuthFooter from '../../footer/AuthFooter.jsx';
+import Footer from '../../footer/Footer.jsx';
 
 /**
  * @class
  */
-class SignIn extends Component {
+export class SignIn extends Component {
   /**
    *
    * @param {object} props
@@ -88,7 +88,7 @@ class SignIn extends Component {
                       <SignInFooter/>
                     </Card>
                 </Section>
-              <AuthFooter/>
+              <Footer/>
               </div>
     );
   }
@@ -98,24 +98,20 @@ class SignIn extends Component {
  * @param { state } state
  * @return { state } state
  */
-function mapStateToProps(state) {
-  return {
-    signInErrorMessage: state.signInErrorMessage,
-    authIsLoading: state.authIsLoading,
-    authenticatedUser: state.authenticatedUser,
-  };
-}
+export const mapStateToProps = state => ({
+  signInErrorMessage: state.signInErrorMessage,
+  authIsLoading: state.authIsLoading,
+  authenticatedUser: state.authenticatedUser,
+});
 /**
  *
  * @param {dispatch} dispatch
  * @return {object} actions
  */
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      userActions: bindActionCreators(userActions, dispatch),
-    }
-  };
-}
+export const mapDispatchToProps = dispatch => ({
+  actions: {
+    userActions: bindActionCreators(userActions, dispatch),
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
