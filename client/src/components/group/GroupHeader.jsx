@@ -13,6 +13,7 @@ const GroupHeader = ({ headerText, onExitGroup, onDeleteGroup }) => {
   const showExitGroup = () => (
     <div>
       <Button
+        id="exit-group"
         buttonClassName ={ exitButtonClass}
         label = ' Exit'
         onClick={ onExitGroup }>
@@ -28,6 +29,7 @@ const GroupHeader = ({ headerText, onExitGroup, onDeleteGroup }) => {
   */
   const showDeleteGroup = () => (
     <Button
+      id="delete-group"
       buttonClassName={ deleteButtonClass }
       onClick = { onDeleteGroup }
       label =' Delete'>

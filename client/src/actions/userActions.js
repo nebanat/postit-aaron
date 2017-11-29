@@ -75,7 +75,7 @@ export function signInUser(user) {
        
         dispatch(authIsLoading(false));
 
-        Materialize.toast(response.data.message, 3000, 'green');
+        Materialize.toast(response.data.message, 1500, 'green');
         // redirect to dashboard
         browserHistory.push({
           pathname: '/dashboard',

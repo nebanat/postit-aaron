@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 
 
 const Button = ({
-  wrapperClass, name, type, buttonClassName, label, onClick, children
+  id, wrapperClass, name, type, buttonClassName, label, onClick, children
 }) =>
   (
     <div
         className = { wrapperClass }>
         <button
+          id={ id }
           type = { type }
           name = {name}
           onClick = { onClick }

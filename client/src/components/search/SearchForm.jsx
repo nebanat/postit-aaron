@@ -14,7 +14,7 @@ const SearchForm = ({ onSearchChange, search }) => {
                 <div className='row'>
                   <InputField
                     wrapperClass={ inputFieldWrapperClass }
-                    name="message"
+                    name="search"
                     type="text"
                     validate="validate"
                     required = "required"

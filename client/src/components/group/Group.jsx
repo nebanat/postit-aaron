@@ -58,7 +58,8 @@ class Group extends Component {
       constrainWidth: false,
       gutter: 0,
       belowOrigin: false,
-      stopPropagation: false
+      stopPropagation: false,
+      alignment: 'left',
     });
   }
   /**

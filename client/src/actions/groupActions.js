@@ -41,7 +41,7 @@ export function createGroup(group) {
       .then((response) => {
         dispatch(createGroupSuccess(response.data.group));
 
-        Materialize.toast(response.data.message, 2500, 'green');
+        Materialize.toast(response.data.message, 3000, 'green');
 
         $('#modal1').modal('close');
 

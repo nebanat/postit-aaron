@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 const NavItem = ({
-  navLink, navClassName, navActiveClass, navText, onClick
+  id, navLink, navClassName, navActiveClass, navText, onClick
 }) =>
   (
       <li>
-        <Link to={ navLink }
+        <Link id={ id }
+          to={ navLink }
           className={ navClassName }
           onClick = { onClick }
           activeClassName = { navActiveClass }>

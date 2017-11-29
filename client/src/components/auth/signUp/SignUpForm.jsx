@@ -60,6 +60,7 @@ const SignUpForm = ({ user, onChange, onSubmit }) => {
                   <Button
                     wrapperClass={ buttonWrapperClass }
                     buttonClassName={ buttonClassName }
+                    id='register'
                     name="action"
                     type="submit"
                     label='Register'/>

@@ -23,7 +23,7 @@ const CreateGroupModal = ({
 
             <div className="row">
               <div className="col s10 offset-s1">
-                  <h3>New Group</h3><br/>
+                  <h3 id="modal-header">New Group</h3><br/>
                   <CreateGroupForm
                     group = { group }
                     onChange = { onChange }

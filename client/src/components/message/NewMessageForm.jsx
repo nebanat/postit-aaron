@@ -20,7 +20,7 @@ const NewMessageForm = ({
 
   return (
         <div>
-            <form onSubmit ={ onSubmit }>
+            <form id='new-message-form' onSubmit ={ onSubmit }>
                 <InputLine
                   wrapperClass={ inputFieldWrapperClass }
                   name="message"

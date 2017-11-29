@@ -40,7 +40,7 @@ class UserGroups extends Component {
               <div className="col s6">
                 <h4 className="center-align">Your Groups</h4>
               </div>
-              <div className="col s6">
+              <div className="col s6 center-align">
                 <br/>
                 <CreateGroup {...this.props}/>
               </div>
