@@ -15,26 +15,26 @@ const GroupSideBar = ({
 }) => (
         <div>
              <Collapsible>
-              <CollapsibleItem header='Members' icon='group'>
-                  <GroupUsers groupUsers={ groupUsers }
-                              showDelete={ showDelete }
-                              onMouseEnterDelete={onMouseEnterDelete}
-                              onMouseLeaveDelete={onMouseLeaveDelete}
-                              handleRemoveMember={handleRemoveMember}
-                              authUser={ authUser }
-
-                              />
-              </CollapsibleItem>
               <CollapsibleItem header='Add Member' icon='add_circle'>
-                  <SearchModal
-                      search ={search}
-                      onSearchChange={onSearchChange}
-                      searchLoading={ searchLoading }
-                      searchResult={searchResult}
-                      searchErrorMessage={searchErrorMessage}
-                      onAddUser={onAddUser}/><br/>
-              </CollapsibleItem>
-           </Collapsible>
+                    <SearchModal
+                        search ={search}
+                        onSearchChange={onSearchChange}
+                        searchLoading={ searchLoading }
+                        searchResult={searchResult}
+                        searchErrorMessage={searchErrorMessage}
+                        onAddUser={onAddUser}/><br/>
+                </CollapsibleItem>
+                <CollapsibleItem header='Members' icon='group'>
+                    <GroupUsers groupUsers={ groupUsers }
+                                showDelete={ showDelete }
+                                onMouseEnterDelete={onMouseEnterDelete}
+                                onMouseLeaveDelete={onMouseLeaveDelete}
+                                handleRemoveMember={handleRemoveMember}
+                                authUser={ authUser }
+
+                                />
+                </CollapsibleItem>
+          </Collapsible>
         </div>
 );
 

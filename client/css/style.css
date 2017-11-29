@@ -140,7 +140,7 @@ input.message-input:focus {
   font-size:10px;
 }
 .not-found {
-  background-color: #e0e0e0;
+  background-color: white;
   width: 50%;
   margin-top: 100px;
   border-radius: 6px;

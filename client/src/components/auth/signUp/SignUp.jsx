@@ -47,7 +47,7 @@ export class SignUp extends Component {
       });
     }
     if (this.state.user.password.length < 6) {
-      return this.setState({ passwordError: 'Passwords must be at least 6 characters' });
+      return this.setState({ passwordError: 'Password must be at least 6 characters' });
     }
 
     this.props.actions.userActions.signUpUser(this.state.user);
@@ -97,7 +97,8 @@ export class SignUp extends Component {
                         cardTitleClass = { cardTitleClass }
                         title='Register'>
 
-                            <p className='red-text center col s12'>
+                            <p id='password-error'
+                              className='red-text center col s12'>
                               { this.state.passwordError }
                               </p><br/>
                             <br/>

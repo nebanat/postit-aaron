@@ -39,6 +39,7 @@ const CreateGroupForm = ({ group, onChange, onSubmit }) => {
                 </div>
                 <div className='row'>
                   <Button
+                    id='create-group'
                     wrapperClass={ buttonWrapperClass }
                     buttonClassName={ buttonClassName }
                     name="action"

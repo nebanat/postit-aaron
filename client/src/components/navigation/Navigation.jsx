@@ -98,7 +98,7 @@ class Navigation extends Component {
             (isLoggedIn()) ?
               <Logout
               navItemClass={ navItemClass }
-              navText ='logout'/> : ''
+              navText ='Logout'/> : ''
           }
          </ul>
 

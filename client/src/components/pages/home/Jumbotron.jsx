@@ -27,7 +27,7 @@ class Jumbotron extends Component {
 
                 </div>
                 <div className='row center'>
-                    <Link to='/signup'
+                    <Link to='/signup' id="sign-up"
                         className="btn-large waves-effect waves-light orange">
                           Get Started
                     </Link>

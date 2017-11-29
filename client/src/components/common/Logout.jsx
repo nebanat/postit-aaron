@@ -5,6 +5,7 @@ import { logout } from '../../utils/authservice';
 const Logout = ({ navItemClass, navText }) =>
   (
     <NavItem
+       id="logout"
        onClick={ () => logout() }
        navClassName={ navItemClass }
        navText ={ navText } />
