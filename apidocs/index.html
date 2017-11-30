@@ -1,0 +1,879 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>PostIt API Docs</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;javascript&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication-endpoints" class="toc-h1 toc-link" data-title="Authentication Endpoints">Authentication Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#signup-a-user" class="toc-h2 toc-link" data-title="Signup a user">Signup a user</a>
+                  </li>
+                  <li>
+                    <a href="#login-a-user" class="toc-h2 toc-link" data-title="Login a user">Login a user</a>
+                  </li>
+                  <li>
+                    <a href="#forgot-password" class="toc-h2 toc-link" data-title="Forgot Password">Forgot Password</a>
+                  </li>
+                  <li>
+                    <a href="#reset-password" class="toc-h2 toc-link" data-title="Reset Password">Reset Password</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#group-endpoints" class="toc-h1 toc-link" data-title="Group Endpoints">Group Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-new-group" class="toc-h2 toc-link" data-title="Create a new group">Create a new group</a>
+                  </li>
+                  <li>
+                    <a href="#get-authenticated-user-groups" class="toc-h2 toc-link" data-title="Get authenticated user groups">Get authenticated user groups</a>
+                  </li>
+                  <li>
+                    <a href="#add-user-to-group" class="toc-h2 toc-link" data-title="Add user to group">Add user to group</a>
+                  </li>
+                  <li>
+                    <a href="#exit-group" class="toc-h2 toc-link" data-title="Exit group">Exit group</a>
+                  </li>
+                  <li>
+                    <a href="#delete-group" class="toc-h2 toc-link" data-title="Delete group">Delete group</a>
+                  </li>
+                  <li>
+                    <a href="#get-group-users" class="toc-h2 toc-link" data-title="Get group users">Get group users</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#message-endpoints" class="toc-h1 toc-link" data-title="Message Endpoints">Message Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#post-message-to-group" class="toc-h2 toc-link" data-title="Post message to group">Post message to group</a>
+                  </li>
+                  <li>
+                    <a href="#get-group-messages" class="toc-h2 toc-link" data-title="Get group messages">Get group messages</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#user-endpoints" class="toc-h1 toc-link" data-title="User Endpoints">User Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#search-for-users" class="toc-h2 toc-link" data-title="Search for users">Search for users</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/nebanat/postit-aaron'>Contribute to the PostIt App</a></li>
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Welcome to the PostIt Messaging API!</p>
+
+<p>PostIt is a modern group messaging application that allows users to communicate via groups. The application allows users to create account, create groups and add other users to groups. Group members can communicate by posting priority messages, members get email notification when higher priority messages are posted to the group. </p>
+<h1 id='authentication-endpoints'>Authentication Endpoints</h1><h2 id='signup-a-user'>Signup a user</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Signup successful."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoe"</span><span class="w"> </span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoe@gmail.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint handles user registration</p>
+<h3 id='endpoint'>Endpoint</h3>
+<p></code><code>&#39;[POST:/api/user/signup]&#39;</code></p>
+<h3 id='response'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;201&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>Required</td>
+<td>Username of the PostIt user.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Required</td>
+<td>Email of the PostIt user.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Required</td>
+<td>Password of the PostIt user.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Username and email are unique
+</aside>
+<h2 id='login-a-user'>Login a user</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Welcome tiesan"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJ1c2VybmFtZSI6InRpZXNhbiIsImVtYWlsIjoiYWJpbGl5b2tAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMDgka3FhS1pIR3QyM2VqWmFQOEdsU1F5dUM3a3J0WnM5OU0xcU5xL0pjTnM3WnA0eTBZLjlXS2EiLCJjcmVhdGVkQXQiOiIyMDE3LTExLTI5VDE5OjEwOjA3LjUzM1oiLCJ1cGRhdGVkQXQiOiIyMDE3LTExLTI5VDE5OjEwOjA3LjUzM1oifSwiaWF0IjoxNTEyMDMxNTUxLCJleHAiOjE1MTIxMTc5NTF9.UAFo1qAAa1uvkopCcCenvij_waCG_Ivu7tvkv6XATYo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tiesan"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abiliyok@gmail.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint login a user to their PostIt account</p>
+<h3 id='endpoint-2'>Endpoint</h3>
+<p></code><code>&#39;[POST:/api/user/signin]&#39;</code></p>
+<h3 id='response-2'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;200 ok&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>Required</td>
+<td>Username of the PostIt user.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Required</td>
+<td>Password of the PostIt user.</td>
+</tr>
+</tbody></table>
+<h2 id='forgot-password'>Forgot Password</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reset password link has been sent to your email"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint handles sending password reset link to the user</p>
+<h3 id='endpoint-3'>Endpoint</h3>
+<p></code><code>&#39;[POST:/api/user/password]&#39;</code></p>
+<h3 id='response-3'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;200&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+<h3 id='request-parameters-2'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>Required</td>
+<td>Email of the PostIt user.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+  A password reset link is sent to the user email with a reset token
+</aside>
+<h2 id='reset-password'>Reset Password</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Password reset successful for tiesan"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint handles resetting a user&#39;s password</p>
+<h3 id='endpoint-4'>Endpoint</h3>
+<p></code><code>&#39;[POST:/api/user/password/reset]&#39;</code></p>
+<h3 id='response-4'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;200&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+<h3 id='request-parameters-3'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>password</td>
+<td>Required</td>
+<td>new password for postit user.</td>
+</tr>
+</tbody></table>
+<h1 id='group-endpoints'>Group Endpoints</h1><h2 id='create-a-new-group'>Create a new group</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Group successfully created"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mortal kombat"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mortal kombat description"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:34:24.160Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:34:24.160Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint handles creating a new group</p>
+<h3 id='endpoint'>Endpoint</h3>
+<p></code><code>&#39;[POST:/api/group]&#39;</code></p>
+<h3 id='response'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;201&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Required</td>
+<td>group name.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Optional</td>
+<td>group description.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+  Group name is unique
+</aside>
+<h2 id='get-authenticated-user-groups'>Get authenticated user groups</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"laravel"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:33:12.307Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:33:12.307Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"UsersGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"groupId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:33:12.321Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:33:12.321Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street fighter"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:33:35.470Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:33:35.470Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"UsersGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"groupId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:33:35.480Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:33:35.480Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mortal kombat"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mortal kombat description"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:34:24.160Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:34:24.160Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"UsersGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"groupId"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:34:24.173Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:34:24.173Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint handles retrieving an authenticated user groups</p>
+<h3 id='endpoint-2'>Endpoint</h3>
+<p></code><code>&#39;[GET:/api/group/user]&#39;</code></p>
+<h3 id='response-2'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;200 ok&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+<h2 id='add-user-to-group'>Add user to group</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User successfully added to group"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"douglas"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"douglas@gmail.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint handles adding a user to a group</p>
+<h3 id='endpoint-3'>Endpoint</h3>
+<p></code><code>&#39;[POST:/api/group/:id/user]&#39;</code></p>
+<h3 id='response-3'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;201&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>groupId</td>
+<td>Required</td>
+<td>Id of the group.</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>Required</td>
+<td>Id of the user to be added to group.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+  Authenticated user must be a member of the group they are adding a user to
+</aside>
+<h2 id='exit-group'>Exit group</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully exited group"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint handles a user exiting a group</p>
+<h3 id='endpoint-4'>Endpoint</h3>
+<p></code><code>&#39;[POST:/api/group/:id/exit]&#39;</code></p>
+<h3 id='response-4'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;200&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+
+<aside class="notice">
+  User must already be a member of group to exit group
+</aside>
+<h2 id='delete-group'>Delete group</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have successfully deleted group"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint handles a user deleting a group</p>
+<h3 id='endpoint-5'>Endpoint</h3>
+<p></code><code>&#39;[DELETE:/api/group/:id]&#39;</code></p>
+<h3 id='response-5'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;200&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+
+<aside class="notice">
+  User must be the creator of group to be able to delete group
+</aside>
+<h2 id='get-group-users'>Get group users</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"biliyoka"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"biliyok@gmail.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"UsersGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"groupId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:33:35.480Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:33:35.480Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint handles retrieve members of a group</p>
+<h3 id='endpoint-6'>Endpoint</h3>
+<p></code><code>&#39;[GET:/api/group/:id/users]&#39;</code></p>
+<h3 id='response-6'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;200&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+
+<aside class="notice">
+  Only group members can view other members
+</aside>
+<h1 id='message-endpoints'>Message Endpoints</h1><h2 id='post-message-to-group'>Post message to group</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Message sent successfully"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"newMessage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new posted message by a group member"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"biliyoka"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"groupId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T10:19:49.301Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T10:19:49.301Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint handles posting a new message to a group</p>
+<h3 id='endpoint'>Endpoint</h3>
+<p></code><code>&#39;[POST:/api/group/:id/message]&#39;</code></p>
+<h3 id='response'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;201&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>content</td>
+<td>Required</td>
+<td>content of the message.</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>Required</td>
+<td>message priority [Normal, Urgent or Critical].</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+  Only group members can post messages to a group
+</aside>
+<h2 id='get-group-messages'>Get group messages</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new posted message by a group member"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"biliyoka"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"groupId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T10:19:49.301Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T10:19:49.301Z"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"howdy to all group members"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"biliyoka"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"groupId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T10:23:18.271Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T10:23:18.271Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint handles retrieving a group messages</p>
+<h3 id='endpoint-2'>Endpoint</h3>
+<p></code><code>&#39;[GET:/api/group/:id/messages]&#39;</code></p>
+<h3 id='response-2'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;200 ok&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+
+<aside class="notice">
+  Only group members can view a group messages
+</aside>
+<h1 id='user-endpoints'>User Endpoints</h1><h2 id='search-for-users'>Search for users</h2><pre class="highlight javascript tab-javascript"><code>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"douglas"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"douglas@gmail.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:52:52.273Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doug"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doug@gmail.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T09:52:52.273Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint handles searching for users</p>
+<h3 id='endpoint'>Endpoint</h3>
+<p></code><code>&#39;[POST:/api/user/search]&#39;</code></p>
+<h3 id='response'>Response</h3>
+<ul>
+<li>status: </code><code>&#39;200&#39;</code></li>
+<li>body: </code><code>&#39;application/json&#39;</code></li>
+</ul>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>query</td>
+<td>Required</td>
+<td>Search query.</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<p>The Posit Messaging API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is wrong.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your JWT key is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- The requested is hidden for administrators only.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The user/message/group could not be found.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
