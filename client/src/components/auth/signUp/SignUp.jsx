@@ -9,7 +9,7 @@ import Loader from '../../loaders/Loader.jsx';
 import Card from '../../common/Card.jsx';
 import Section from '../../common/Section.jsx';
 import Footer from '../../footer/Footer.jsx';
-
+import '../../../../css/style.scss';
 /**
  * @class
  * @extends component
