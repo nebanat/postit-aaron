@@ -1,7 +1,8 @@
 /* eslint-disable import/no-named-as-default */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { Router, Route,
+  browserHistory, IndexRoute, Redirect } from 'react-router';
 import { Provider } from 'react-redux';
 import Home from './components/pages/home/Home.jsx';
 import SignUp from './components/auth/signUp/SignUp.jsx';
@@ -12,6 +13,7 @@ import Dashboard from './components/dashboard/Dashboard.jsx';
 import CreateGroup from './components/group/CreateGroup.jsx';
 import UserGroups from './components/group/UserGroups.jsx';
 import NewMessage from './components/message/NewMessage.jsx';
+import GenericNotFound from '../src/components/pages/GenericNotFound.jsx';
 import Group from './components/group/Group.jsx';
 import { requireAuth, noRequireAuth } from './utils/authservice';
 import configureStore from './store/configureStore';
@@ -36,6 +38,7 @@ const Root = () => (
             <Route path='/group/:id/messages' component = { Group }
               onEnter={ requireAuth }>
             </Route>
+            <Redirect from="*" component={ GenericNotFound } />
 
         </Route>
         <Route path='/signup' component = { SignUp } onEnter={ noRequireAuth }>
@@ -53,6 +56,8 @@ const Root = () => (
         </Route>
 
         <Route path="/" component={ Home }></Route>
+
+        <Route path='*' component={ GenericNotFound } />
       </Router>
 </Provider>
 );

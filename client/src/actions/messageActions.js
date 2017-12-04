@@ -5,23 +5,19 @@ import * as api from '../utils/postItApi';
  * @param {bool} bool
  * @return { messageLoadingObject } passwordLoadingObject
  */
-export function messageIsLoading(bool) {
-  return {
-    type: types.MESSAGE_IS_LOADING,
-    bool
-  };
-}
+export const messageIsLoading = bool => ({
+  type: types.MESSAGE_IS_LOADING,
+  bool
+});
 /**
  *
  * @param { newMessage } newMessage
  * @return { newMessageObject } newMessageObject
  */
-export function onPost(newMessage) {
-  return {
-    type: types.POST_MESSAGE,
-    newMessage
-  };
-}
+export const onPost = newMessage => ({
+  type: types.POST_MESSAGE,
+  newMessage
+});
 
 /**
  *
@@ -31,36 +27,32 @@ export function onPost(newMessage) {
  *  @return {promise} promise
  *
  */
-export function postMessage(message, priority, groupId) {
-  return (dispatch) => {
-    const { Materialize } = window;
+export const postMessage = (message, priority, groupId) => (dispatch) => {
+  const { Materialize } = window;
 
-    dispatch(messageIsLoading(true));
-    return api.postNewMessage(message, priority, groupId)
-      .then((response) => {
-        dispatch(onPost(response.data.newMessage));
+  dispatch(messageIsLoading(true));
+  return api.postNewMessage(message, priority, groupId)
+    .then((response) => {
+      dispatch(onPost(response.data.newMessage));
 
-        Materialize.toast(response.data.message, 2500, 'green');
+      Materialize.toast(response.data.message, 2500, 'green');
 
-        dispatch(messageIsLoading(false));
-      })
-      .catch((error) => {
-        Materialize.toast(error.response.data.message, 2500, 'red');
-        dispatch(messageIsLoading(false));
-      });
-  };
-}
+      dispatch(messageIsLoading(false));
+    })
+    .catch((error) => {
+      Materialize.toast(error.response.data.message, 2500, 'red');
+      dispatch(messageIsLoading(false));
+    });
+};
 /**
  *
  * @param {messages} messages
  * @return {actionObject} actionObject
  */
-export function fetchGroupMessageSuccess(messages) {
-  return {
-    type: types.FETCH_MESSAGES_SUCCESS,
-    messages
-  };
-}
+export const fetchGroupMessageSuccess = messages => ({
+  type: types.FETCH_MESSAGES_SUCCESS,
+  messages
+});
 
 /**
  *
@@ -68,19 +60,17 @@ export function fetchGroupMessageSuccess(messages) {
  * @return {promise} promise
  *
  */
-export function fetchGroupMessages(id) {
-  return (dispatch) => {
-    const { Materialize } = window;
+export const fetchGroupMessages = id => (dispatch) => {
+  const { Materialize } = window;
 
-    dispatch(messageIsLoading(true));
-    return api.getGroupMessages(id)
-      .then((response) => {
-        dispatch(fetchGroupMessageSuccess(response.data.messages));
-        dispatch(messageIsLoading(false));
-      })
-      .catch((error) => {
-        dispatch(messageIsLoading(false));
-        Materialize.toast(error.response.data.message, 2500, 'red');
-      });
-  };
-}
+  dispatch(messageIsLoading(true));
+  return api.getGroupMessages(id)
+    .then((response) => {
+      dispatch(fetchGroupMessageSuccess(response.data.messages));
+      dispatch(messageIsLoading(false));
+    })
+    .catch((error) => {
+      dispatch(messageIsLoading(false));
+      Materialize.toast(error.response.data.message, 2500, 'red');
+    });
+};

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const InputLine = ({
   wrapperClass, name, onChange, value, type, children,
-  placeholder, validate, required
+  placeholder, validate, required, maxlength
 }) =>
   (
     <div
@@ -17,6 +17,7 @@ const InputLine = ({
               onChange = { onChange }
               value = { value }
               required = { required }
+              maxLength = { maxlength }
               />
         </div>
         <div className="col s3">
@@ -35,6 +36,7 @@ InputLine.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   required: PropTypes.string,
+  maxlength: PropTypes.string
 
 };
 

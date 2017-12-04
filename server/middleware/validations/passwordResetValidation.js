@@ -5,7 +5,7 @@
  * @param {res} next
  * @return {message} message
  */
-export default function passwordResetValidation(req, res, next) {
+export default (req, res, next) => {
   const { email } = req.body;
   if (!email || email.trim() === '') {
     return res.status(400).send({
@@ -13,4 +13,4 @@ export default function passwordResetValidation(req, res, next) {
     });
   }
   next();
-}
+};

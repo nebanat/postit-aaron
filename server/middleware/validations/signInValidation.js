@@ -5,7 +5,7 @@
  * @param {next} next
  * @return {json} validations
  */
-export default function signInValidation(req, res, next) {
+export default (req, res, next) => {
   const { username, password } = req.body;
   // validates user entries
   if (!username || username.trim() === '') {
@@ -18,4 +18,4 @@ export default function signInValidation(req, res, next) {
     });
   }
   next();
-}
+};

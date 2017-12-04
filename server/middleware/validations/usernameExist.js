@@ -6,7 +6,7 @@ import models from '../../models';
  * @param {*} next
  * @return {user} user
  */
-export default function usernameExist(req, res, next) {
+export default (req, res, next) => {
   // checks if username already exist
   const { username } = req.body;
 
@@ -21,4 +21,4 @@ export default function usernameExist(req, res, next) {
 
       next();
     });
-}
+};

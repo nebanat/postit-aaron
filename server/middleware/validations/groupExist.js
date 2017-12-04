@@ -6,7 +6,7 @@ import models from '../../models';
  * @param {*} next
  * @return {group} group
  */
-export default function groupExist(req, res, next) {
+export default (req, res, next) => {
   let groupId = '';
   /* eslint-disable no-unused-expressions */
   req.params.id
@@ -24,4 +24,4 @@ export default function groupExist(req, res, next) {
       req.group = group;
       next();
     });
-}
+};

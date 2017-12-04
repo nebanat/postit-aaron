@@ -7,23 +7,19 @@ import * as api from '../utils/postItApi';
  * @param { bool } bool
  * @return { groupLoadingObject } groupLoadingObject
  */
-export function groupIsLoading(bool) {
-  return {
-    type: types.GROUP_IS_LOADING,
-    bool
-  };
-}
+export const groupIsLoading = bool => ({
+  type: types.GROUP_IS_LOADING,
+  bool
+});
 /**
  *
  * @param { group } group
  * @return { group } group
  */
-export function createGroupSuccess(group) {
-  return {
-    type: types.CREATE_GROUP_SUCCESS,
-    group
-  };
-}
+export const createGroupSuccess = group => ({
+  type: types.CREATE_GROUP_SUCCESS,
+  group
+});
 
 /**
  *
@@ -31,44 +27,40 @@ export function createGroupSuccess(group) {
  * @return { group } group
  *
  */
-export function createGroup(group) {
-  return (dispatch) => {
-    const { Materialize } = window;
+export const createGroup = group => (dispatch) => {
+  const { Materialize } = window;
 
-    dispatch(groupIsLoading(true));
+  dispatch(groupIsLoading(true));
 
-    return api.createGroup(group)
-      .then((response) => {
-        dispatch(createGroupSuccess(response.data.group));
+  return api.createGroup(group)
+    .then((response) => {
+      dispatch(createGroupSuccess(response.data.group));
 
-        Materialize.toast(response.data.message, 3000, 'green');
+      Materialize.toast(response.data.message, 3000, 'green');
 
-        $('#modal1').modal('close');
+      $('#modal1').modal('close');
 
-        dispatch(groupIsLoading(false));
-      })
-      .catch((error) => {
-        Materialize.toast(error.response.data.message, 2500, 'red');
-        dispatch(groupIsLoading(false));
-      });
-  };
-}
+      dispatch(groupIsLoading(false));
+    })
+    .catch((error) => {
+      Materialize.toast(error.response.data.message, 2500, 'red');
+      dispatch(groupIsLoading(false));
+    });
+};
 /**
  *
  * @param { groups } groups
  * @return { actionObject } actionObject
  */
-export function fetchUserGroupsSuccess(groups) {
-  return {
-    type: types.FETCH_USER_GROUPS_SUCCESS,
-    groups
-  };
-}
+export const fetchUserGroupsSuccess = groups => ({
+  type: types.FETCH_USER_GROUPS_SUCCESS,
+  groups
+});
 
 /**
  * @return { userGroups } userGroups
  */
-export function fetchUserGroups() {
+export const fetchUserGroups = () => {
   const { Materialize } = window;
   return (dispatch) => {
     dispatch(groupIsLoading(true));
@@ -82,24 +74,22 @@ export function fetchUserGroups() {
         dispatch(groupIsLoading(false));
       });
   };
-}
+};
 /**
  *
  * @param {groupUsers} groupUsers
  * @return { groupUsersObject } groupUsersObject
  */
-export function fetchGroupUsersSuccess(groupUsers) {
-  return {
-    type: types.FETCH_GROUP_USERS_SUCCESS,
-    groupUsers
-  };
-}
+export const fetchGroupUsersSuccess = groupUsers => ({
+  type: types.FETCH_GROUP_USERS_SUCCESS,
+  groupUsers
+});
 
 /**
  * @param { groupId } groupId
  * @return { groupUsers } groupUsers
  */
-export function fetchGroupUsers(groupId) {
+export const fetchGroupUsers = (groupId) => {
   const { Materialize } = window;
   return dispatch => api.getGroupUsers(groupId)
     .then((response) => {
@@ -108,24 +98,22 @@ export function fetchGroupUsers(groupId) {
     .catch((error) => {
       Materialize.toast(error.response.data.message, 2500, 'red');
     });
-}
+};
 /**
  *
  * @param { groupUser } groupUser
  * @return { groupUsersObject } groupUsersObject
  */
-export function addUserToGroupSuccess(groupUser) {
-  return {
-    type: types.ADD_USER_TO_GROUP,
-    groupUser
-  };
-}
+export const addUserToGroupSuccess = groupUser => ({
+  type: types.ADD_USER_TO_GROUP,
+  groupUser
+});
 /**
  * @param { groupId } groupId
  * @param { userId } userId
  * @return { groupUsers } groupUsers
  */
-export function addUserToGroup(groupId, userId) {
+export const addUserToGroup = (groupId, userId) => {
   const { Materialize } = window;
   return dispatch => api.addUserToGroup(groupId, userId)
     .then((response) => {
@@ -135,24 +123,22 @@ export function addUserToGroup(groupId, userId) {
     .catch((error) => {
       Materialize.toast(error.response.data.message, 3000, 'red');
     });
-}
+};
 /**
  *
  * @param { index } index
  * @return { actionObject } actionObject
  */
-export function leaveGroupSuccess(index) {
-  return {
-    type: types.EXIT_GROUP,
-    index
-  };
-}
+export const leaveGroupSuccess = index => ({
+  type: types.EXIT_GROUP,
+  index
+});
 /**
  * @param { groupId } groupId
  * @param { groupIndex } groupIndex
  * @return { exitMessage } exitMessage
  */
-export function leaveGroup(groupId, groupIndex) {
+export const leaveGroup = (groupId, groupIndex) => {
   const { Materialize } = window;
   return dispatch => api.exitGroup(groupId)
     .then((response) => {
@@ -166,14 +152,14 @@ export function leaveGroup(groupId, groupIndex) {
     .catch((error) => {
       Materialize.toast(error.response.data.message, 3000, 'red');
     });
-}
+};
 /**
  *
  * @param { groupId } groupId
  * @param { groupIndex } groupIndex
  * @return { deleteMessage } deleteMessage
  */
-export function deleteGroup(groupId, groupIndex) {
+export const deleteGroup = (groupId, groupIndex) => {
   const { Materialize } = window;
   return dispatch => api.deleteGroup(groupId)
     .then((response) => {
@@ -187,18 +173,16 @@ export function deleteGroup(groupId, groupIndex) {
     .catch((error) => {
       Materialize.toast(error.response.data.message, 3000, 'red');
     });
-}
+};
 /**
  *
  * @param { userIndex } userIndex
  * @return { actionObject } actionObject
  */
-export function deleteGroupMemberSuccess(userIndex) {
-  return {
-    type: types.REMOVE_GROUP_MEMBER,
-    userIndex
-  };
-}
+export const deleteGroupMemberSuccess = userIndex => ({
+  type: types.REMOVE_GROUP_MEMBER,
+  userIndex
+});
 /**
 *
 * @param { groupId } groupId
@@ -206,7 +190,7 @@ export function deleteGroupMemberSuccess(userIndex) {
 * @param { userIndex } userIndex
 * @return { deleteMessage } deleteMessage
 */
-export function deleteGroupMember(groupId, userId, userIndex) {
+export const deleteGroupMember = (groupId, userId, userIndex) => {
   const { Materialize } = window;
   return dispatch => api.deleteGroupMember(groupId, userId)
     .then((response) => {
@@ -216,4 +200,4 @@ export function deleteGroupMember(groupId, userId, userIndex) {
     .catch((error) => {
       Materialize.toast(error.response.data.message, 3000, 'red');
     });
-}
+};

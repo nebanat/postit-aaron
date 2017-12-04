@@ -5,7 +5,7 @@
  * @param { next } next
  * @return { json } validations
  */
-export default function searchUsersValidation(req, res, next) {
+export default (req, res, next) => {
   const { groupId, query } = req.body;
   // validates user entries
   if (!groupId || groupId.trim() === '') {
@@ -18,4 +18,4 @@ export default function searchUsersValidation(req, res, next) {
     });
   }
   next();
-}
+};

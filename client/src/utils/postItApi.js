@@ -5,107 +5,95 @@ import { getAccessToken } from './authservice';
  * @param { user } user object
  * @return { promise } promise
  */
-export function signUp(user) {
-  return axios({
-    method: 'post',
-    url: '/api/user/signup',
-    headers: {
-      'Content-type': 'application/json; charset=utf-8'
-    },
-    data: JSON.stringify({
-      username: user.username,
-      email: user.email,
-      password: user.password
-    })
-  });
-}
+export const signUp = user => axios({
+  method: 'post',
+  url: '/api/user/signup',
+  headers: {
+    'Content-type': 'application/json; charset=utf-8'
+  },
+  data: JSON.stringify({
+    username: user.username,
+    email: user.email,
+    password: user.password
+  })
+});
 
 /**
  *
  * @param { user } user object
  * @return { promise } promise
  */
-export function signIn(user) {
-  return axios({
-    method: 'post',
-    url: '/api/user/signin',
-    headers: {
-      'Content-type': 'application/json; charset=utf-8'
-    },
-    data: JSON.stringify({
-      username: user.username,
-      password: user.password
-    })
-  });
-}
+export const signIn = user => axios({
+  method: 'post',
+  url: '/api/user/signin',
+  headers: {
+    'Content-type': 'application/json; charset=utf-8'
+  },
+  data: JSON.stringify({
+    username: user.username,
+    password: user.password
+  })
+});
 /**
  *
  * @param { group } group
  * @return { promise } promise
  */
-export function createGroup(group) {
-  return axios({
-    method: 'post',
-    url: '/api/group',
-    headers: {
-      'Content-type': 'application/json; charset=utf-8',
-      'x-access-token': getAccessToken()
-    },
-    data: JSON.stringify({
-      name: group.name,
-      description: group.description
-    })
-  });
-}
+export const createGroup = group => axios({
+  method: 'post',
+  url: '/api/group',
+  headers: {
+    'Content-type': 'application/json; charset=utf-8',
+    'x-access-token': getAccessToken()
+  },
+  data: JSON.stringify({
+    name: group.name,
+    description: group.description
+  })
+});
 /**
  *
  * @param {email} email
  * @return {promise} promise
  */
-export function sendResetPasswordLink(email) {
-  return axios({
-    method: 'post',
-    url: '/api/user/password',
-    headers: {
-      'Content-type': 'application/json; charset=utf-8'
-    },
-    data: JSON.stringify({
-      email,
-    })
-  });
-}
+export const sendResetPasswordLink = email => axios({
+  method: 'post',
+  url: '/api/user/password',
+  headers: {
+    'Content-type': 'application/json; charset=utf-8'
+  },
+  data: JSON.stringify({
+    email,
+  })
+});
 /**
  *
  * @param { resetToken } resetToken
  * @param { password } password
  * @return { promise } promise
  */
-export function resetPassword(resetToken, password) {
-  return axios({
-    method: 'post',
-    url: '/api/user/password/reset',
-    headers: {
-      'Content-type': 'application/json; charset=utf-8'
-    },
-    data: JSON.stringify({
-      resetToken,
-      password
-    })
-  });
-}
+export const resetPassword = (resetToken, password) => axios({
+  method: 'post',
+  url: '/api/user/password/reset',
+  headers: {
+    'Content-type': 'application/json; charset=utf-8'
+  },
+  data: JSON.stringify({
+    resetToken,
+    password
+  })
+});
 /**
  * @return { promise } promise
  */
-export function getUserGroups() {
-  return axios({
-    method: 'GET',
-    url: '/api/group/user',
-    headers: {
-      'Content-type': 'application/json; charset=utf-8',
-      'x-access-token': getAccessToken()
-    }
-  });
-}
+export const getUserGroups = () => axios({
+  method: 'GET',
+  url: '/api/group/user',
+  headers: {
+    'Content-type': 'application/json; charset=utf-8',
+    'x-access-token': getAccessToken()
+  }
+});
 
 /**
  *
@@ -114,120 +102,106 @@ export function getUserGroups() {
  * @param { groupId } groupId
  * @returns { promise } promise
  */
-export function postNewMessage(message, priority, groupId) {
-  return axios({
-    method: 'post',
-    url: `/api/group/${groupId}/message`,
-    headers: {
-      'Content-type': 'application/json; charset=utf-8',
-      'x-access-token': getAccessToken()
-    },
-    data: JSON.stringify({
-      content: message,
-      priority
-    })
-  });
-}
+export const postNewMessage = (message, priority, groupId) => axios({
+  method: 'post',
+  url: `/api/group/${groupId}/message`,
+  headers: {
+    'Content-type': 'application/json; charset=utf-8',
+    'x-access-token': getAccessToken()
+  },
+  data: JSON.stringify({
+    content: message,
+    priority
+  })
+});
 /**
  *
  * @param { groupId } groupId
  * @returns { promise } promise
  */
-export function getGroupMessages(groupId) {
-  return axios({
-    method: 'GET',
-    url: `/api/group/${groupId}/messages`,
-    headers: {
-      'Content-type': 'application/json; charset=utf-8',
-      'x-access-token': getAccessToken()
-    }
-  });
-}/**
+export const getGroupMessages = groupId => axios({
+  method: 'GET',
+  url: `/api/group/${groupId}/messages`,
+  headers: {
+    'Content-type': 'application/json; charset=utf-8',
+    'x-access-token': getAccessToken()
+  }
+});/**
  *
  * @param {groupId} groupId
  * @returns {groupUsers} groupUsers
  */
-export function getGroupUsers(groupId) {
-  return axios({
-    method: 'GET',
-    url: `/api/group/${groupId}/users`,
-    headers: {
-      'Content-type': 'application/json; charset=utf-8',
-      'x-access-token': getAccessToken()
-    }
-  });
-}
+export const getGroupUsers = groupId => axios({
+  method: 'GET',
+  url: `/api/group/${groupId}/users`,
+  headers: {
+    'Content-type': 'application/json; charset=utf-8',
+    'x-access-token': getAccessToken()
+  }
+});
 /**
  *
  * @param { groupId } groupId
  * @param { quey } query
  * @return { promise } promise
  */
-export function searchUsersNotInGroup(groupId, query) {
-  return axios({
-    method: 'post',
-    url: '/api/user/search',
-    headers: {
-      'Content-type': 'application/json; charset=utf-8',
-      'x-access-token': getAccessToken()
-    },
-    data: JSON.stringify({
-      groupId,
-      query
-    })
-  });
-}
+export const searchUsersNotInGroup = (groupId, query) => axios({
+  method: 'post',
+  url: '/api/user/search',
+  headers: {
+    'Content-type': 'application/json; charset=utf-8',
+    'x-access-token': getAccessToken()
+  },
+  data: JSON.stringify({
+    groupId,
+    query
+  })
+});
 /**
  *
  * @param { groupId } groupId
  * @param { userId } userId
  * @return { promise } promise
  */
-export function addUserToGroup(groupId, userId) {
-  return axios({
-    method: 'post',
-    url: `/api/group/${groupId}/user`,
-    headers: {
-      'Content-type': 'application/json; charset=utf-8',
-      'x-access-token': getAccessToken()
-    },
-    data: JSON.stringify({
-      userId,
-    })
-  });
-}
+export const addUserToGroup = (groupId, userId) => axios({
+  method: 'post',
+  url: `/api/group/${groupId}/user`,
+  headers: {
+    'Content-type': 'application/json; charset=utf-8',
+    'x-access-token': getAccessToken()
+  },
+  data: JSON.stringify({
+    userId,
+  })
+});
 /**
  *
  * @param { groupId } groupId
  * @param { userId } userId
  * @return { promise } promise
  */
-export function exitGroup(groupId) {
-  return axios({
-    method: 'post',
-    url: `/api/group/${groupId}/exit`,
-    headers: {
-      'Content-type': 'application/json; charset=utf-8',
-      'x-access-token': getAccessToken()
-    }
-  });
-}
+export const exitGroup = groupId => axios({
+  method: 'post',
+  url: `/api/group/${groupId}/exit`,
+  headers: {
+    'Content-type': 'application/json; charset=utf-8',
+    'x-access-token': getAccessToken()
+  }
+});
 /**
  *
  * @param { groupId } groupId
  * @param { userId } userId
  * @return { promise } promise
  */
-export function deleteGroup(groupId) {
-  return axios({
-    method: 'delete',
-    url: `/api/group/${groupId}`,
-    headers: {
-      'Content-type': 'application/json; charset=utf-8',
-      'x-access-token': getAccessToken()
-    }
-  });
-}
+export const deleteGroup = groupId => axios({
+  method: 'delete',
+  url: `/api/group/${groupId}`,
+  headers: {
+    'Content-type': 'application/json; charset=utf-8',
+    'x-access-token': getAccessToken()
+  }
+});
 
 /**
  *
@@ -235,17 +209,15 @@ export function deleteGroup(groupId) {
  * @param { userId } userId
  * @return { promise } promise
  */
-export function deleteGroupMember(groupId, userId) {
-  return axios({
-    method: 'post',
-    url: `/api/group/${groupId}/remove/member`,
-    headers: {
-      'Content-type': 'application/json; charset=utf-8',
-      'x-access-token': getAccessToken()
-    },
-    data: JSON.stringify({
-      userId,
-    })
-  });
-}
+export const deleteGroupMember = (groupId, userId) => axios({
+  method: 'post',
+  url: `/api/group/${groupId}/remove/member`,
+  headers: {
+    'Content-type': 'application/json; charset=utf-8',
+    'x-access-token': getAccessToken()
+  },
+  data: JSON.stringify({
+    userId,
+  })
+});
 

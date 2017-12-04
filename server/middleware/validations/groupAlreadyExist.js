@@ -6,7 +6,7 @@ import models from '../../models';
  * @param {*} next
  * @return {user} user
  */
-export default function groupAlreadyExist(req, res, next) {
+export default (req, res, next) => {
   // checks if group name already exist
   const name = req.body.name.trim().toLowerCase();
 
@@ -20,4 +20,4 @@ export default function groupAlreadyExist(req, res, next) {
       }
       next();
     });
-}
+};

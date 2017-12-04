@@ -6,7 +6,7 @@ import models from '../../models';
  * @param {next} next
  * @return {user} user
  */
-export default function userExist(req, res, next) {
+export default (req, res, next) => {
   let userId = '';
   /* eslint-disable no-unused-expressions */
   req.params.userId
@@ -24,4 +24,4 @@ export default function userExist(req, res, next) {
       req.user = user;
       next();
     });
-}
+};

@@ -62,7 +62,7 @@ export default {
         // checks the password
         if (!bcrypt.compareSync(password, user.password)) {
           return res.status(400).send({
-            message: 'Invalid password'
+            message: 'Invalid username or password'
           });
         }
         // generates the token
