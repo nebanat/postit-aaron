@@ -7,7 +7,7 @@ import * as types from '../actions/actionTypes';
  * @param { action } action
  * @return { groupMessages } groupMessages
  */
-export function messages(state = [], action) {
+export const messages = (state = [], action) => {
   switch (action.type) {
     case types.FETCH_MESSAGES_SUCCESS:
       return action.messages;
@@ -16,18 +16,18 @@ export function messages(state = [], action) {
     default:
       return state;
   }
-}
+};
 /**
  *
  * @param { state } state
  * @param { action } action
  * @return { messageLoading } messageLoading
  */
-export function messageIsLoading(state = false, action) {
+export const messageIsLoading = (state = false, action) => {
   switch (action.type) {
     case types.MESSAGE_IS_LOADING:
       return action.bool;
     default:
       return state;
   }
-}
+};

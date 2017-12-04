@@ -9,7 +9,7 @@ require('dotenv').config();
  * @param {next} next
  * @return {message} message
  */
-export default function authenticate(req, res, next) {
+export default (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
   if (token) {
@@ -27,18 +27,18 @@ export default function authenticate(req, res, next) {
       message: 'No token provided'
     });
   }
-}
+};
 /**
  *
  * @param {req} req
  * @param {res} res
  * @return {userId} userId
  */
-export function decodeUser(req) {
+export const decodeUser = (req) => {
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
   const access = decode(token);
 
   return access.user;
-}
+};
 

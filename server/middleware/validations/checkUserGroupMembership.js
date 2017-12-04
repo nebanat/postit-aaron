@@ -7,7 +7,7 @@ import { decodeUser } from '../../middleware/authenticate';
  * @param { next } next
  * @return { group } group
  */
-export default function checkUserGroupMembership(req, res, next) {
+export default (req, res, next) => {
   const authUser = decodeUser(req);
   const userId = authUser.id;
   const { group } = req;
@@ -20,4 +20,4 @@ export default function checkUserGroupMembership(req, res, next) {
     }
     next();
   });
-}
+};

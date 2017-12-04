@@ -5,7 +5,7 @@ import * as types from '../actions/actionTypes';
  * @param { action } action
  * @return { object } state
  */
-export function groups(state = [], action) {
+export const groups = (state = [], action) => {
   switch (action.type) {
     case types.FETCH_USER_GROUPS_SUCCESS:
       return action.groups;
@@ -20,7 +20,7 @@ export function groups(state = [], action) {
     default:
       return state;
   }
-}
+};
 
 /**
  *
@@ -28,7 +28,7 @@ export function groups(state = [], action) {
  * @param { action } action
  * @return { groupUsers } groupUsers
  */
-export function groupUsers(state = [], action) {
+export const groupUsers = (state = [], action) => {
   switch (action.type) {
     case types.FETCH_GROUP_USERS_SUCCESS:
       return action.groupUsers;
@@ -47,7 +47,7 @@ export function groupUsers(state = [], action) {
     default:
       return state;
   }
-}
+};
 
 /**
  *
@@ -55,11 +55,11 @@ export function groupUsers(state = [], action) {
  * @param { action } action
  * @return { groupLoading } groupLoading
  */
-export function groupIsLoading(state = false, action) {
+export const groupIsLoading = (state = false, action) => {
   switch (action.type) {
     case types.GROUP_IS_LOADING:
       return action.bool;
     default:
       return state;
   }
-}
+};

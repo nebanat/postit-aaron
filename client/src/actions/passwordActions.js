@@ -7,36 +7,32 @@ import * as api from '../utils/postItApi';
  * @param {bool} bool
  * @return { passwordLoadingObject } passwordLoadingObject
  */
-export function passwordIsLoading(bool) {
-  return {
-    type: types.PASSWORD_IS_LOADING,
-    bool
-  };
-}
+export const passwordIsLoading = bool => ({
+  type: types.PASSWORD_IS_LOADING,
+  bool
+});
 
 /**
  *
  * @param { email } email
  * @return { action } action
  */
-export function sendResetPassword(email) {
-  return (dispatch) => {
-    const { Materialize } = window;
+export const sendResetPassword = email => (dispatch) => {
+  const { Materialize } = window;
 
-    dispatch(passwordIsLoading(true));
+  dispatch(passwordIsLoading(true));
 
-    return api.sendResetPasswordLink(email)
-      .then((response) => {
-        Materialize.toast(response.data.message, 2500, 'green');
+  return api.sendResetPasswordLink(email)
+    .then((response) => {
+      Materialize.toast(response.data.message, 2500, 'green');
 
-        dispatch(passwordIsLoading(false));
-      })
-      .catch((error) => {
-        Materialize.toast(error.response.data.message, 2500, 'red');
-        dispatch(passwordIsLoading(false));
-      });
-  };
-}
+      dispatch(passwordIsLoading(false));
+    })
+    .catch((error) => {
+      Materialize.toast(error.response.data.message, 2500, 'red');
+      dispatch(passwordIsLoading(false));
+    });
+};
 
 
 /**
@@ -45,25 +41,23 @@ export function sendResetPassword(email) {
  * @param { password } password
  * @return { action } action
  */
-export function resetPassword(resetToken, password) {
-  return (dispatch) => {
-    const { Materialize } = window;
+export const resetPassword = (resetToken, password) => (dispatch) => {
+  const { Materialize } = window;
 
-    dispatch(passwordIsLoading(true));
+  dispatch(passwordIsLoading(true));
 
-    return api.resetPassword(resetToken, password)
-      .then((response) => {
-        Materialize.toast(response.data.message, 2500, 'green');
+  return api.resetPassword(resetToken, password)
+    .then((response) => {
+      Materialize.toast(response.data.message, 2500, 'green');
 
-        dispatch(passwordIsLoading(false));
+      dispatch(passwordIsLoading(false));
 
-        browserHistory.push({
-          pathname: '/signin',
-        });
-      })
-      .catch((error) => {
-        Materialize.toast(error.response.data.message, 2500, 'green');
-        dispatch(passwordIsLoading(false));
+      browserHistory.push({
+        pathname: '/signin',
       });
-  };
-}
+    })
+    .catch((error) => {
+      Materialize.toast(error.response.data.message, 2500, 'green');
+      dispatch(passwordIsLoading(false));
+    });
+};

@@ -6,13 +6,17 @@
  * @param { next } next
  * @return { json } validation messages
  */
-export default function signUpValidation(req, res, next) {
+export default (req, res, next) => {
   const { username, email, password } = req.body;
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
 
   if (!username || username.trim() === '') {
     return res.status(400).send({
       message: 'username is required'
+    });
+  } else if (username.length < 3) {
+    return res.status(400).send({
+      message: 'username must be at least 3 characters'
     });
   } else if (!email || email.trim() === '') {
     return res.status(400).send({
@@ -32,5 +36,5 @@ export default function signUpValidation(req, res, next) {
     });
   }
   next();
-}
+};
 

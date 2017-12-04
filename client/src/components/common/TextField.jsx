@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TextField = ({
-  wrapperClass, name, className, onChange, value, label
+  wrapperClass, name, className, onChange, value, label, maxlength
 }) =>
   (
     <div
@@ -11,7 +11,8 @@ const TextField = ({
             className = { className }
             name = { name }
             onChange = { onChange }
-            value = { value }>
+            value = { value }
+            maxLength={ maxlength }>
         </textarea>
           <label>
             { label }
@@ -27,6 +28,7 @@ TextField.propTypes = {
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string,
   value: PropTypes.string,
+  maxlength: PropTypes.string
 };
 
 export default TextField;

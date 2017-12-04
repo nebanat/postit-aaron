@@ -122,7 +122,7 @@ describe('User Controllers', () => {
         })
         .end((err, res) => {
           expect(res.status).toEqual(400);
-          expect(res.body.message).toEqual('Invalid password');
+          expect(res.body.message).toEqual('Invalid username or password');
           done();
         });
     });

@@ -5,7 +5,7 @@
  * @param {res} next
  * @return {message} message
  */
-export default function resetPasswordValidation(req, res, next) {
+export default (req, res, next) => {
   const { resetToken, password } = req.body;
   if (!resetToken || resetToken.trim() === '') {
     return res.status(400).send({
@@ -17,4 +17,4 @@ export default function resetPasswordValidation(req, res, next) {
     });
   }
   next();
-}
+};

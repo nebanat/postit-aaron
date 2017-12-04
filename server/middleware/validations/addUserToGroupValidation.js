@@ -5,7 +5,7 @@
  * @param {res} next
  * @return {message} message
  */
-export default function addUserToGroupValidation(req, res, next) {
+export default (req, res, next) => {
   const { userId } = req.body;
   const { id } = req.params;
 
@@ -26,4 +26,4 @@ export default function addUserToGroupValidation(req, res, next) {
     });
   }
   next();
-}
+};

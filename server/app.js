@@ -38,6 +38,10 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/src/index.html'));
 });
 
+// default catch-all route
+app.all('/*', (req, res) => res.status(404).send({
+  message: 'Resource not found!',
+}));
 // routes(app);
 
 app.listen(port, (err) => {

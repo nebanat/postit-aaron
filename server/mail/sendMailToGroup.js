@@ -5,7 +5,7 @@ import transporter from './nodemailer';
  * @param { message } message
  * @return { message } message
  */
-export default function (req, senderId, message) {
+export default (req, senderId, message) => {
   const userEmails = [];
   const { group } = req;
 
@@ -35,4 +35,4 @@ export default function (req, senderId, message) {
       }
     });
   });
-}
+};

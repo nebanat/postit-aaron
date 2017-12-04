@@ -35,7 +35,8 @@ const CreateGroupForm = ({ group, onChange, onSubmit }) => {
                     name = "description"
                     onChange ={ onChange }
                     value = { group.description }
-                    label = "Description (optional)"/>
+                    maxlength = "140"
+                    label = "Description (optional 140 characters max)"/>
                 </div>
                 <div className='row'>
                   <Button

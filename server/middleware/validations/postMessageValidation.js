@@ -5,7 +5,7 @@
  * @param {res} next
  * @return {message} message
  */
-export default function postMessageValidation(req, res, next) {
+export default (req, res, next) => {
   const { content, priority } = req.body;
   const priorityArray = [1, 2, 3];
   if (!content || content.trim() === '') {
@@ -24,4 +24,4 @@ export default function postMessageValidation(req, res, next) {
     });
   }
   next();
-}
+};

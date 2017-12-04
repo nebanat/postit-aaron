@@ -6,7 +6,7 @@ import models from '../../models';
  * @param { next } next
  * @return { messageObject } messageObject
  */
-export default function emailExist(req, res, next) {
+export default (req, res, next) => {
   // checks if email already exist
   const email = req.body.email.toLowerCase();
 
@@ -20,4 +20,4 @@ export default function emailExist(req, res, next) {
       }
       next();
     });
-}
+};

@@ -5,7 +5,7 @@
  * @param {*} next
  * @return {group} group
  */
-export default function checkGroupAdmin(req, res, next) {
+export default (req, res, next) => {
   const userId = req.decoded.user.id;
   const { group } = req;
 
@@ -18,4 +18,4 @@ export default function checkGroupAdmin(req, res, next) {
       }
       next();
     });
-}
+};
