@@ -5,7 +5,7 @@ import InputField from '../common/InputField.jsx';
  * @param { * } object
  * @returns { jsx } jsx
  */
-const SearchForm = ({ onSearchChange, search }) => {
+const SearchForm = ({ onSearchChange, onSearch, search }) => {
   const inputFieldWrapperClass = 'input-field col s12';
 
   return (
@@ -20,7 +20,8 @@ const SearchForm = ({ onSearchChange, search }) => {
                     required = "required"
                     placeholder="Search Users"
                     onChange={ onSearchChange }
-                    value={search}/>
+                    onKeyUp = { onSearch }
+                    value={ search }/>
                 </div>
             </form>
         </div>

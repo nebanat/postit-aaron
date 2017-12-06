@@ -142,10 +142,11 @@ export const getGroupUsers = groupId => axios({
 /**
  *
  * @param { groupId } groupId
- * @param { quey } query
+ * @param { query } query
+ * @param {  offset } offset
  * @return { promise } promise
  */
-export const searchUsersNotInGroup = (groupId, query) => axios({
+export const searchUsersNotInGroup = (groupId, query, offset) => axios({
   method: 'post',
   url: '/api/user/search',
   headers: {
@@ -154,7 +155,8 @@ export const searchUsersNotInGroup = (groupId, query) => axios({
   },
   data: JSON.stringify({
     groupId,
-    query
+    query,
+    offset
   })
 });
 /**

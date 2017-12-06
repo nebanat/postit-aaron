@@ -89,7 +89,10 @@ export default {
    * @return {users} users searched
    */
   searchUsersNotInGroup(req, res) {
-    const { groupId, query } = req.body;
+    const {
+      groupId, query, limit, offset
+    } = req.body;
+    let pageNumber;
 
     models.Group
       .findById(groupId)
@@ -103,7 +106,7 @@ export default {
         group.getUsers().then((users) => {
           const members = users.map(user => user.id);
 
-          models.User.findAll({
+          models.User.findAndCountAll({
             where: {
               username: {
                 $like: `%${query}%`,
@@ -115,16 +118,22 @@ export default {
             attributes: {
               exclude: ['password', 'resetPassToken',
                 'expirePassToken', 'updatedAt']
-            }
+            },
+            limit: limit || 5,
+            offset: offset || 0
           })
           // nusers represent users not in a group
             .then((nUsers) => {
-              if (!nUsers.length) {
+              if (nUsers.rows.length === 0) {
                 return res.status(404).send({
                   message: 'No user found'
                 });
               }
-              return res.status(200).send(nUsers);
+              pageNumber = parseInt(nUsers.count, 10) / parseInt(limit || 5, 10);
+              return res.status(200).send({
+                nUsers,
+                pages: Math.ceil(pageNumber)
+              });
             });
         });
       });

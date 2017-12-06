@@ -12,7 +12,8 @@ export default (req, res, next) => {
     return res.status(400).send({
       message: 'Please enter group'
     });
-  } else if (!query || query.trim() === '') {
+  }
+  if (!query || query.trim() === '') {
     return res.status(400).send({
       message: 'Please enter search query'
     });

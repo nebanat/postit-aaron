@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 const InputField = ({
   wrapperClass, name, onChange, value, label, type,
-  placeholder, validate, required, labelError, labelSuccess, maxlength
+  placeholder, validate, required, labelError, labelSuccess, maxlength,
+  onKeyDown, onKeyUp
 }) =>
   (
     <div
@@ -16,6 +17,8 @@ const InputField = ({
               onChange = { onChange }
               value = { value }
               required = { required }
+              onKeyDown ={ onKeyDown }
+              onKeyUp = { onKeyUp }
               maxLength={ maxlength }/>
             <label
               data-error = { labelError }
