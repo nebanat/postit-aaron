@@ -14,7 +14,9 @@ const SingleUser = ({ username, children }) => {
             { userFirstCharacter }
           </h5>
         </div>
-        <div className="profile-name"><strong id="user-name">{ username }</strong>
+        <div className="profile-name">
+          <strong id="user-name">{ username }
+          </strong>
           { children }
         </div>
     </div>

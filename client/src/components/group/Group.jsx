@@ -1,3 +1,4 @@
+/*  eslint-disable eqeqeq */
 import React, { Component } from 'react';
 import swal from 'sweetalert';
 import SingleGroupMessage from '../message/SingleGroupMessage.jsx';
@@ -7,6 +8,7 @@ import Loader from '../loaders/Loader.jsx';
 import { searchUsersNotInGroup } from '../../utils/postItApi';
 import NewMessage from '../message/NewMessage.jsx';
 import { getAuthUser } from '../../utils/authservice';
+import NotFound from '../common/NotFound.jsx';
 
 /**
  * @class
@@ -25,16 +27,21 @@ class Group extends Component {
       searchResults: [],
       searchErrorMessage: '',
       adminId: '',
-      showDelete: false
+      showDelete: false,
+      totalSearchResult: 0,
+      totalSearchPages: 0,
+      currentPaginatePage: 1
     };
+    this.searchUsers = this.searchUsers.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.isSearchLoading = this.isSearchLoading.bind(this);
     this.onAddUser = this.onAddUser.bind(this);
     this.onExitGroup = this.onExitGroup.bind(this);
     this.onDeleteGroup = this.onDeleteGroup.bind(this);
-    this.onMouseEnterDelete = this.onMouseEnterDelete.bind(this);
-    this.onMouseLeaveDelete = this.onMouseLeaveDelete.bind(this);
+    this.onMouseEnterDeleteMember = this.onMouseEnterDeleteMember.bind(this);
+    this.onMouseLeaveDeleteMember = this.onMouseLeaveDeleteMember.bind(this);
     this.handleRemoveMember = this.handleRemoveMember.bind(this);
+    this.onPaginateClick = this.onPaginateClick.bind(this);
   }
   /**
     * @returns {messages} messages
@@ -72,27 +79,30 @@ class Group extends Component {
 
     swal({
       title: 'Are you sure?',
-      text: 'You are about to remove this group member. This action cannot be undone',
+      text: 'You are about to remove this group member.',
       icon: 'warning',
       buttons: true,
       dangerMode: true,
     })
       .then((removeMember) => {
         if (removeMember) {
-          this.props.actions.groupActions.deleteGroupMember(groupId, userId, userIndex);
+          this.props
+            .actions
+            .groupActions
+            .deleteGroupMember(groupId, userId, userIndex);
         }
       });
   }
   /**
    * @return {state} state
    */
-  onMouseEnterDelete() {
+  onMouseEnterDeleteMember() {
     return this.setState({ showDelete: true });
   }
   /**
    * @return {state} state
    */
-  onMouseLeaveDelete() {
+  onMouseLeaveDeleteMember() {
     return this.setState({ showDelete: false });
   }
   /**
@@ -151,26 +161,24 @@ class Group extends Component {
   onAddUser(userId) {
     const { searchResults } = this.state;
     const { id } = this.props.params;
-    const newUsers = searchResults.filter(user => user.id !== userId);
+    const newSearchResult = searchResults.filter(user => user.id !== userId);
 
-    this.setState({ searchResults: newUsers });
+    this.setState({ searchResults: newSearchResult });
     this.props.actions.groupActions.addUserToGroup(id, userId);
   }
   /**
-   *
-   * @param { event } event
-   * @return { state } state
+   * @return { users } users
    */
-  onSearchChange(event) {
-    event.preventDefault();
+  searchUsers() {
     const { id } = this.props.params;
-    this.setState({ search: event.target.value });
+    const offset = 5 * (this.state.currentPaginatePage - 1);
 
-    // get search results
     this.isSearchLoading(true);
-    searchUsersNotInGroup(id, this.state.search)
+    searchUsersNotInGroup(id, this.state.search, offset)
       .then((response) => {
-        this.setState({ searchResults: response.data });
+        this.setState({ searchResults: response.data.nUsers.rows });
+        this.setState({ totalSearchPages: response.data.pages });
+        this.setState({ totalSearchResult: response.data.nUsers.count });
         this.setState({ searchErrorMessage: '' });
         this.isSearchLoading(false);
       })
@@ -179,6 +187,26 @@ class Group extends Component {
         this.setState({ searchResults: [] });
         this.isSearchLoading(false);
       });
+  }
+  /**
+   *
+   * @param { event } event
+   * @param { offset } offset
+   * @return { state } state
+   */
+  onSearchChange(event) {
+    event.preventDefault();
+    this.setState({ search: event.target.value });
+  }
+  /**
+   *
+   * @param { page } page
+   * @return { currentPaginatePage } currentPaginatePage
+   */
+  onPaginateClick(page) {
+    this.setState({ currentPaginatePage: page }, () => {
+      this.searchUsers();
+    });
   }
 
   /**
@@ -200,15 +228,20 @@ class Group extends Component {
                 groupUsers = {this.props.groupUsers}
                 search = {this.state.search}
                 onSearchChange={this.onSearchChange}
+                onSearch = { this.searchUsers }
                 searchLoading ={this.state.searchLoading}
                 searchResult={this.state.searchResults}
                 searchErrorMessage={this.state.searchErrorMessage}
                 onAddUser={this.onAddUser}
                 onDeleteGroup={ this.onDeleteGroup }
                 showDelete ={ this.state.showDelete }
-                onMouseEnterDelete={this.onMouseEnterDelete}
-                onMouseLeaveDelete={this.onMouseLeaveDelete}
+                onMouseEnterDelete={this.onMouseEnterDeleteMember}
+                onMouseLeaveDelete={this.onMouseLeaveDeleteMember}
                 handleRemoveMember={this.handleRemoveMember}
+                searchPages = {this.state.totalSearchPages}
+                searchCount = {this.state.totalSearchResult}
+                currentPaginatePage={ this.state.currentPaginatePage }
+                onPaginateClick={ this.onPaginateClick }
                 authUser = { getAuthUser() }
                 />
               </div>
@@ -230,9 +263,9 @@ class Group extends Component {
                     }
                     {
                       (messages.length === 0) ?
-                      (<div className="col s6 offset-s2 not-found center-align">
-                          <h5>No messages in this group</h5>
-                          <p>Post a message now</p>
+                      (<div className="col s8 offset-s2 center-align">
+                          <NotFound header='No messages in this group'
+                            body="Post a message now"/>
                       </div>)
                       : ''
                     }

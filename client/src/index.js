@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route,
-  browserHistory, IndexRoute, Redirect } from 'react-router';
+  browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import Home from './components/pages/home/Home.jsx';
 import SignUp from './components/auth/signUp/SignUp.jsx';
@@ -17,6 +17,7 @@ import GenericNotFound from '../src/components/pages/GenericNotFound.jsx';
 import Group from './components/group/Group.jsx';
 import { requireAuth, noRequireAuth } from './utils/authservice';
 import configureStore from './store/configureStore';
+
 
 const store = configureStore();
 
@@ -38,8 +39,6 @@ const Root = () => (
             <Route path='/group/:id/messages' component = { Group }
               onEnter={ requireAuth }>
             </Route>
-            <Redirect from="*" component={ GenericNotFound } />
-
         </Route>
         <Route path='/signup' component = { SignUp } onEnter={ noRequireAuth }>
         </Route>

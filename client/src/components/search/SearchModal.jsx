@@ -4,16 +4,34 @@ import SearchForm from './SearchForm.jsx';
 import CircleLoader from '../loaders/CircleLoader.jsx';
 import SingleUser from '../group/SingleUser.jsx';
 import Button from '../common/Button.jsx';
+import Pagination from '../common/Pagination.jsx';
 
 
 const SearchModal = ({
   search, onSearchChange, searchLoading, searchResult,
-  searchErrorMessage, onAddUser
+  searchErrorMessage, onAddUser, searchPages, searchCount, currentPaginatePage,
+  onPaginateClick, onSearch
 }) => {
   const modalButtonClass = 'purple darken-4 btn col s12 modal-trigger';
   const modalButtonText = 'Add users';
   const buttonClassName = 'btn-small btn-flat';
   const buttonWrapperClass = 'move_right';
+
+  const showSearchDetails = () => (
+      <div className="grey-text left-align">
+        Results: { searchCount } pages: { searchPages }
+      </div>
+  );
+
+  const showSearchResult = () => (
+    searchResult.map((user, index) =>
+      <SingleUser key={index} i={index} username = { user.username }>
+        <Button wrapperClass={ buttonWrapperClass }
+          buttonClassName={ buttonClassName }
+          onClick= {() => onAddUser(user.id) }
+          label="add"/>
+      </SingleUser>)
+  );
 
   return (
     <div>
@@ -26,18 +44,13 @@ const SearchModal = ({
             </p>
             <SearchForm
               search={search}
-              onSearchChange={ onSearchChange }/>
+              onSearchChange={ onSearchChange }
+              onSearch = { onSearch }/>
+
+              { search ? showSearchDetails() : '' }
 
               <ul>
-                {
-                  searchResult.map((user, index) =>
-                    <SingleUser key={index} i={index} username = { user.username }>
-                      <Button wrapperClass={ buttonWrapperClass }
-                        buttonClassName={ buttonClassName }
-                        onClick= {() => onAddUser(user.id) }
-                        label="add"/>
-                    </SingleUser>)
-                }
+                { search ? showSearchResult() : '' }
               </ul>
 
 
@@ -45,7 +58,12 @@ const SearchModal = ({
                 {
                   (searchLoading) ? (<CircleLoader/>) : ''
                 }
-                <p className="red-text">{searchErrorMessage}</p>
+                <p className="red-text">{ searchErrorMessage }</p>
+               {
+                (search && searchResult.length > 0) ?
+               <Pagination pageNumber = { searchPages }
+                  currentPaginatePage = { currentPaginatePage }
+                  onPaginateClick = { onPaginateClick }/> : '' }
               </div>
            </Modal>
       </div>
