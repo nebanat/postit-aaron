@@ -1,6 +1,7 @@
 import { decodeUser } from '../../middleware/authenticate';
 
 /**
+ * @description checks for user group membership
  *
  * @param { req } req
  * @param { res } res

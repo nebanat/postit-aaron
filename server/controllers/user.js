@@ -9,6 +9,7 @@ const salt = bcrypt.genSaltSync(8);
 
 export default {
   /**
+   *@description handles signup
    *
    * @param {req} req
    * @param {res} res
@@ -35,6 +36,7 @@ export default {
       .catch(error => res.status(500).send({ error: error.message }));
   },
   /**
+   *@description handles signin
    *
    * @param {req} req
    * @param {res} res
@@ -83,6 +85,7 @@ export default {
       .catch(error => res.status(500).send({ error: error.message }));
   },
   /**
+   *@description handles searching for users
    *
    * @param {req} req
    * @param {res} res

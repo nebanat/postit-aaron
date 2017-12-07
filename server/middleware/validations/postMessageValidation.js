@@ -1,13 +1,14 @@
 /**
+ *@description handles validation for posting a message
  *
- * @param {req} req
- * @param {res} res
- * @param {res} next
+ * @param { req } req
+ * @param { res } res
+ * @param { next } next
  * @return {message} message
  */
 export default (req, res, next) => {
   const { content, priority } = req.body;
-  const priorityArray = [1, 2, 3];
+  const priorityArray = ['normal', 'urgent', 'critical'];
   if (!content || content.trim() === '') {
     return res.status(400).send({
       message: 'Please enter message'
@@ -18,7 +19,7 @@ export default (req, res, next) => {
       message: 'Please enter message priority'
     });
   }
-  if (!priorityArray.includes(parseInt(priority, 10))) {
+  if (!priorityArray.includes(priority)) {
     return res.status(400).send({
       message: 'Please enter a valid message priority'
     });

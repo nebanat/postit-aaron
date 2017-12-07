@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @description defines InputField component
+ *
+ * @param { props } props
+ * @return { jsx } jsx
+ */
 const InputField = ({
   wrapperClass, name, onChange, value, label, type,
   placeholder, validate, required, labelError, labelSuccess, maxlength,

@@ -3,10 +3,12 @@ import { Link } from 'react-router';
 import Card from '../common/Card.jsx';
 
 /**
- * @param { group } group object
+ *@description displays a single group
+ *
+ * @param { props } props
  * @return { jsx } jsx
  */
-const SingleUserGroup = ({ group }) => {
+const SingleGroup = ({ group }) => {
   const cardClass = 'card white purple-text darken-4';
   const cardWrapperClass = 'col s12 m4';
   const cardContentClass = 'card-content black-text';
@@ -26,12 +28,10 @@ const SingleUserGroup = ({ group }) => {
                 </Link>
              </span>
 
-             {/* <p>{ group.description }</p> */}
-
         </Card>
     </div>
   );
 };
 
 
-export default SingleUserGroup;
+export default SingleGroup;

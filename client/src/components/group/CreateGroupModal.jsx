@@ -3,7 +3,12 @@ import Modal from '../common/Modal.jsx';
 import CreateGroupForm from './CreateGroupForm.jsx';
 import Loader from '../loaders/Loader.jsx';
 
-
+/**
+ *@description displays create group modal with form
+ *
+ * @param { props } props
+ * @returns { jsx } jsx
+ */
 const CreateGroupModal = ({
   group, onChange, onSubmit, groupIsLoading
 }) => {

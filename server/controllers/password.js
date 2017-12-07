@@ -7,6 +7,7 @@ const salt = bcrypt.genSaltSync(8);
 
 export default {
   /**
+   *@description handles email sending with password reset link
    *
    * @param { req } req
    * @param { res } res
@@ -53,10 +54,11 @@ export default {
       });
   },
   /**
+   *@description handles resetting a user password
    *
-   * @param {req} req
-   * @param {res} res
-   * @return {password} password
+   * @param { req } req
+   * @param { res } res
+   * @return { password } password
    */
   resetPassword(req, res) {
     const { resetToken, password } = req.body;

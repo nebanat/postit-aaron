@@ -2,9 +2,11 @@ import React from 'react';
 
 
 /**
- * @return {jsx} jsx
+ * @description shows page footer
+ *
+ * @return { jsx } jsx
  */
-const AuthFooter = () =>
+const Footer = () =>
   (
     <div>
         <footer className="page-footer purple darken-4 white-text">
@@ -27,4 +29,4 @@ const AuthFooter = () =>
      </footer>
     </div>
   );
-export default AuthFooter;
+export default Footer;

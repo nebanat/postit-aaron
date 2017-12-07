@@ -1,24 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Jumbotron from './Jumbotron.jsx';
 import Navigation from '../../navigation/Navigation.jsx';
 
 /**
- * @class
- * @extends component
+ *@description shows home page
+ *
+ * @returns { jsx } jsx
  */
-class Home extends Component {
-  /**
-   * @return {jsx} jsx
-   */
-  render() {
-    return (
-            <div>
-                <Navigation/>
-                {/* jumbotron component */}
-                <Jumbotron/>
-            </div>
-    );
-  }
-}
-
+const Home = () =>
+  (
+    <div>
+        <Navigation/>
+        <Jumbotron/>
+    </div>
+  );
 export default Home;

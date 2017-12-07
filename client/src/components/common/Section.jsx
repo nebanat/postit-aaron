@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @description defines Section component
+ *
+ * @param { props } props
+ * @return { jsx } jsx
+ */
 const Section = ({
   wrapperClass, headerText, headerClass, children
 }) =>

@@ -1,10 +1,11 @@
 import models from '../../models';
 /**
+ * @description handles validation for group name taken
  *
- * @param {*} req
- * @param {*} res
- * @param {*} next
- * @return {user} user
+ * @param { req } req
+ * @param { res } res
+ * @param { next } next
+ * @return { user } user
  */
 export default (req, res, next) => {
   // checks if group name already exist

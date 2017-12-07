@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @description defines Modal component
+ *
+ * @param { props } props
+ * @return { jsx } jsx
+ */
 const Modal = ({ modalButtonClass, modalButtonText, children }) => (
     <div>
       <a className= { modalButtonClass } href="#modal1">

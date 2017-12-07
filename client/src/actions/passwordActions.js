@@ -4,7 +4,7 @@ import * as api from '../utils/postItApi';
 
 /**
  *
- * @param {bool} bool
+ * @param { bool } bool
  * @return { passwordLoadingObject } passwordLoadingObject
  */
 export const passwordIsLoading = bool => ({

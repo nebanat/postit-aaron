@@ -2,9 +2,14 @@ import React from 'react';
 import NotFound from '../common/NotFound.jsx';
 import Navigation from '../navigation/Navigation.jsx';
 
-const GenericNotFound = () => {
+/**
+ *@description handles 404
+ *
+ * @returns { jsx } jsx
+ */
+const PageNotFound = () => {
   const header = '404';
-  const body = 'The page is you are requesting does not exist';
+  const body = 'The page you are requesting does not exist';
   return (
     <div className="row">
         <Navigation/>
@@ -16,4 +21,4 @@ const GenericNotFound = () => {
   );
 };
 
-export default GenericNotFound;
+export default PageNotFound;

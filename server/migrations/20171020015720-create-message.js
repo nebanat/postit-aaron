@@ -25,8 +25,9 @@ module.exports = {
       allowNull: false
     },
     priority: {
-      type: Sequelize.INTEGER,
-      allowNull: false
+      type: Sequelize.ENUM,
+      values: ['normal', 'urgent', 'critical'],
+      allowNull: false,
     },
     createdAt: {
       allowNull: false,

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import NewMessageForm from './NewMessageForm.jsx';
 
 /**
+ *@description handle posting a message to a group
+ *
  *@class
  *@extends component
  */
@@ -20,7 +22,7 @@ class NewMessage extends Component {
 
     this.state = {
       select: {
-        priority: '1'
+        priority: 'normal'
       },
       message: '',
     };
@@ -50,7 +52,11 @@ class NewMessage extends Component {
     const { groupId } = this.props;
 
     if (this.validateSelection(select)) {
-      this.props.actions.messageActions.postMessage(message, select.priority, groupId);
+      this.props
+        .actions
+        .messageActions
+        .postMessage(message, select.priority, groupId);
+
       event.target.message.value = '';
       return this.setState({ message: '' });
     }

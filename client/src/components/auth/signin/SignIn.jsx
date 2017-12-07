@@ -11,12 +11,15 @@ import Section from '../../common/Section.jsx';
 import Footer from '../../footer/Footer.jsx';
 
 /**
+ * @description handles user sign in
+ *
  * @class
+ * @extends Component
  */
 export class SignIn extends Component {
   /**
    *
-   * @param {object} props
+   * @param { props } props
    *
    */
   constructor(props) {
@@ -31,15 +34,18 @@ export class SignIn extends Component {
     };
   }
   /**
+   *@description fires an action to sign in a user
    *
-   * @param { object } event
-   * @return { object } method
+   * @param { event } event
+   * @return { action } action
    */
   signInUser(event) {
     event.preventDefault();
     this.props.actions.userActions.signInUser(this.state.user);
   }
   /**
+   *@description set users details onchange
+   *
    * @param { event } event
    * @returns { state } state
    */
@@ -88,7 +94,7 @@ export class SignIn extends Component {
                       <SignInFooter/>
                     </Card>
                 </Section>
-              <Footer/>
+                <Footer/>
               </div>
     );
   }
@@ -96,7 +102,7 @@ export class SignIn extends Component {
 /**
  *
  * @param { state } state
- * @return { state } state
+ * @return { states } states
  */
 export const mapStateToProps = state => ({
   signInErrorMessage: state.signInErrorMessage,
@@ -105,8 +111,8 @@ export const mapStateToProps = state => ({
 });
 /**
  *
- * @param {dispatch} dispatch
- * @return {object} actions
+ * @param {  dispatch } dispatch
+ * @return { actions } actions
  */
 export const mapDispatchToProps = dispatch => ({
   actions: {

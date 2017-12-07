@@ -1,4 +1,5 @@
 /**
+ *@description handles validation for searching users
  *
  * @param { req } req
  * @param { res } res

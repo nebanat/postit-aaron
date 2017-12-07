@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Button from '../common/Button.jsx';
-// import PropTypes from 'prop-types';
 
 
+/**
+ * @description displays group header
+ *
+ * @param { props } props
+ * @returns { jsx } jsx
+ */
 const GroupHeader = ({ headerText, onExitGroup, onDeleteGroup }) => {
   const exitButtonClass = 'btn-flat col s12 exit-group';
   const deleteButtonClass = 'btn-flat col s12';

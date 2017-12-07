@@ -3,10 +3,11 @@ import { decodeUser } from '../middleware/authenticate';
 
 export default {
   /**
+   *@description handles creating new group
    *
    * @param { req } req
    * @param { res } res
-   * @return { group } group
+   * @return { newGroup } newGroup
    */
   createNewGroup(req, res) {
     const authUser = decodeUser(req);
@@ -31,10 +32,11 @@ export default {
       .catch(error => res.status(500).send({ error: error.message }));
   },
   /**
+   *@description handles getting authusers groups
    *
-   * @param {req} req
-   * @param {res} res
-   * @return {groups} groups
+   * @param { req } req
+   * @param { res } res
+   * @return { groups } groups
    */
   getAuthUserGroups(req, res) {
     const authUser = decodeUser(req);
@@ -55,10 +57,11 @@ export default {
       .catch(error => res.status(500).send({ error: error.message }));
   },
   /**
+   *@description handles retrieving group members
    *
-   * @param {req} req
-   * @param {res} res
-   * @return {groupMembers} groupMembers
+   * @param { req } req
+   * @param { res } res
+   * @return { groupMembers } groupMembers
    */
   getGroupMembers(req, res) {
     const { group } = req;
@@ -67,10 +70,11 @@ export default {
       .then(groupUsers => res.status(200).send(groupUsers));
   },
   /**
+   *@description handles adding a user to a group
    *
    * @param {req} req
    * @param {res} res
-   * @return {user} user
+   * @return { newMember} newMember
    */
   addUserToGroup(req, res) {
     const { userId } = req.body;
@@ -92,6 +96,7 @@ export default {
       .catch(error => res.status(500).send({ error: error.message }));
   },
   /**
+   *@description handles user exiting a group
    *
    * @param { req } req
    * @param { res } res
@@ -117,10 +122,11 @@ export default {
     });
   },
   /**
+   *@description handles deleting a group
    *
    * @param {req} req
    * @param {res} res
-   * @return { deleteMessageObject } deleteMessageObject
+   * @return { deleteMessage } deleteMessage
    */
   deleteGroup(req, res) {
     const { group } = req;
@@ -131,10 +137,11 @@ export default {
       }));
   },
   /**
+   *@description handles removing a user from a group
    *
    * @param {req} req
    * @param {res} res
-   * @return { removeMemberMessageObject } removeMemberMessageObject
+   * @return { removeMemberMessage } removeMemberMessage
    */
   removeGroupMember(req, res) {
     const { userId } = req.body;

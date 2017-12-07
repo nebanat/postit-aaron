@@ -1,5 +1,7 @@
 import transporter from './nodemailer';
 /**
+ *@description sends email to members of a group
+ *
  * @param { req } req
  * @param { senderId } senderId
  * @param { message } message

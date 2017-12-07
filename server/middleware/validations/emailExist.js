@@ -1,5 +1,6 @@
 import models from '../../models';
 /**
+ *@description handles validation for email
  *
  * @param { req } req
  * @param { res } res

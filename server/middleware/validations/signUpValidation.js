@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-escape */
 /**
+ *@description handles validation for sign up
  *
  * @param { req } req
  * @param { res } res

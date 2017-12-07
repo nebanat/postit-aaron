@@ -1,6 +1,11 @@
 import React from 'react';
 
-
+/**
+ * @description defines Pagination component
+ *
+ * @param { props } props
+ * @return { jsx } jsx
+ */
 const Pagination = ({ pageNumber, currentPaginatePage, onPaginateClick }) => {
   /**
    * @param { page } page

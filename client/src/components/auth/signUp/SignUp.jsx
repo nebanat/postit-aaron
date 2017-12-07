@@ -10,7 +10,9 @@ import Card from '../../common/Card.jsx';
 import Section from '../../common/Section.jsx';
 import Footer from '../../footer/Footer.jsx';
 import '../../../../css/style.scss';
-/**
+
+/** @description handles signing up a user
+ *
  * @class
  * @extends component
  */
@@ -36,7 +38,7 @@ export class SignUp extends Component {
   /**
    *
    * @param {object} event
-   * @return {*} method
+   * @return { action } action
    */
   registerUser(event) {
     event.preventDefault();
@@ -53,7 +55,8 @@ export class SignUp extends Component {
     this.props.actions.userActions.signUpUser(this.state.user);
     return this.setState({ passwordError: '' });
   }
-  /**
+  /** @description sets user details onchange
+   *
    * @param { event } event
    * @returns { state } state
    */
@@ -107,6 +110,7 @@ export class SignUp extends Component {
                               user ={this.state.user}
                               onChange = { this.setUserDetails }
                               onSubmit = { this.registerUser }/>
+
                           <SignUpFooter/>
                       </Card>
                   </Section>
@@ -132,7 +136,7 @@ const mapStateToProps = state => ({
 /**
  *
  * @param { dispatch } dispatch
- * @return { object } actions
+ * @return { actions } actions
  */
 const mapDispatchToProps = dispatch => ({
   actions: {

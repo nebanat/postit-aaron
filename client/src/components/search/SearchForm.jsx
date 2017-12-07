@@ -2,7 +2,9 @@ import React from 'react';
 import InputField from '../common/InputField.jsx';
 
 /**
- * @param { * } object
+ *@description displays a search form
+ *
+ * @param { props} props
  * @returns { jsx } jsx
  */
 const SearchForm = ({ onSearchChange, onSearch, search }) => {

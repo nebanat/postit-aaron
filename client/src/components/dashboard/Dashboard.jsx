@@ -5,10 +5,10 @@ import * as userActions from '../../actions/userActions';
 import * as groupActions from '../../actions/groupActions';
 import * as messageActions from '../../actions/messageActions';
 import Navigation from '../navigation/Navigation.jsx';
-import Loader from '../loaders/Loader.jsx';
-
 
 /**
+ *@description HOC for dashboard components
+ *
  * @class
  * @extends component
  */
@@ -24,21 +24,18 @@ export class Dashboard extends Component {
    * @return { jsx } jsx
    */
   render() {
-    const { groupIsLoading } = this.props;
     return (
-            <div>
-               <Navigation/>
-               {
-                 (groupIsLoading) ? (<Loader/>) : ('')
-               }
-               <div className="container-fluid">
-                  <div className="row">
-                    <div className="col s12">
-                        { React.cloneElement(this.props.children, this.props) }
-                    </div>
+          <div>
+              <Navigation/>
+
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col s12">
+                      { React.cloneElement(this.props.children, this.props) }
                   </div>
-              </div>
+                </div>
             </div>
+          </div>
 
     );
   }
@@ -58,8 +55,8 @@ const mapStateToProps = state => ({
 });
 /**
  *
- * @param {dispatch} dispatch
- * @return {object} actions
+ * @param { dispatch } dispatch
+ * @return { object } actions
  */
 const mapDispatchToProps = dispatch => ({
   actions: {

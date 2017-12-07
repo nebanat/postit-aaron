@@ -2,7 +2,7 @@ import * as types from './actionTypes';
 import * as api from '../utils/postItApi';
 /**
  *
- * @param {bool} bool
+ * @param { bool } bool
  * @return { messageLoadingObject } passwordLoadingObject
  */
 export const messageIsLoading = bool => ({
@@ -24,7 +24,7 @@ export const onPost = newMessage => ({
  * @param { message } message
  * @param { priority } priority
  * @param { groupId } groupId
- *  @return {promise} promise
+ *  @return { dispatch } dispatch
  *
  */
 export const postMessage = (message, priority, groupId) => (dispatch) => {
@@ -46,8 +46,8 @@ export const postMessage = (message, priority, groupId) => (dispatch) => {
 };
 /**
  *
- * @param {messages} messages
- * @return {actionObject} actionObject
+ * @param { messages } messages
+ * @return { actionObject } actionObject
  */
 export const fetchGroupMessageSuccess = messages => ({
   type: types.FETCH_MESSAGES_SUCCESS,
@@ -57,7 +57,7 @@ export const fetchGroupMessageSuccess = messages => ({
 /**
  *
  * @param { id } id
- * @return {promise} promise
+ * @return { dispatch } dispatch
  *
  */
 export const fetchGroupMessages = id => (dispatch) => {

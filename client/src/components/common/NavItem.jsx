@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
+/**
+ * @description defines NavItem component
+ *
+ * @param { props } props
+ * @return { jsx } jsx
+ */
 const NavItem = ({
   id, navLink, navClassName, navActiveClass, navText, onClick
 }) =>

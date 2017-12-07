@@ -1,4 +1,5 @@
 /**
+ *@description handles validation for adding users to groups
  *
  * @param {req} req
  * @param {res} res

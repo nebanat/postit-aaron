@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import CreateGroupModal from './CreateGroupModal.jsx';
 
 /**
+ *@description handles creating a new group
+ *
  * @class
  * @extends component
  */
@@ -22,7 +24,7 @@ class CreateGroup extends Component {
     };
   }
   /**
-   * @return { dom } dom
+   * @return { modal } modal
    */
   componentDidMount() {
     $('.modal').modal({

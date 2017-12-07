@@ -9,6 +9,8 @@ import Card from '../../common/Card.jsx';
 import Section from '../../common/Section.jsx';
 import Footer from '../../footer/Footer.jsx';
 /**
+ * @description handles resetting user password
+ *
  * @class
  * @extends component
  */
@@ -16,7 +18,7 @@ export class ResetPassword extends Component {
   /**
    *
    * @param { props } props
-   * @return { functionInitialization } functionInitialization
+   *
    */
   constructor(props) {
     super(props);
@@ -71,7 +73,7 @@ export class ResetPassword extends Component {
   render() {
     const { passwordIsLoading } = this.props;
     const cardClass = 'card';
-    const cardWrapperClass = 'col s12 m6 offset-m3 login-form';
+    const cardWrapperClass = 'col s12 m6 offset-m3 reset-form';
     const sectionWrapperClass = 'section purple darken-3';
     const sectionHeaderClass = 'center white-text';
     const cardContentClass = 'card-content';
@@ -106,8 +108,8 @@ export class ResetPassword extends Component {
 }
 /**
  *
- * @param {state} state
- * @return {state} state
+ * @param { state } state
+ * @return { state } state
  */
 const mapStateToProps = state => ({
   resetSuccessMessage: state.resetSuccessMessage,
@@ -116,8 +118,8 @@ const mapStateToProps = state => ({
 });
 /**
  *
- * @param {dispatch} dispatch
- * @return {object} actions
+ * @param { dispatch } dispatch
+ * @return { object } actions
  */
 const mapDispatchToProps = dispatch => ({
   actions: {

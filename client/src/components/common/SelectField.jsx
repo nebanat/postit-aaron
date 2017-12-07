@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @description defines SelectField component
+ *
+ * @param { props } props
+ * @return { jsx } jsx
+ */
 const SelectField = ({
   id, wrapperClass, name, className, onChange, optionEntries,
   label, placeholder, value, required
@@ -20,8 +26,8 @@ const SelectField = ({
             value = { value }
             >
             {
-              optionEntries.map((entry, i) =>
-                <option value={entry.id} key={i}>
+              optionEntries.map((entry, index) =>
+                <option value={entry.value} key={ index }>
                   {
                     entry.name
                   }</option>)

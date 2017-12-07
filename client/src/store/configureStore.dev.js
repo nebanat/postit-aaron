@@ -5,7 +5,7 @@ import rootReducer from '../reducers';
 
 /**
  * @param { initialState } initialState
- * @return {object} store
+ * @return { store } store
  */
 export default function configureStore(initialState) {
   return createStore(

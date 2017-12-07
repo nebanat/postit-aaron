@@ -55,9 +55,6 @@ export default (sequelize, DataTypes) => {
   User.associate = function (models) {
     // relationship between users and groups//
     User.belongsToMany(models.Group, { through: 'UsersGroups', foreignKey: 'userId' });
-
-    // relationship between user and messages//
-    // User.hasMany(models.Message, { foreignKey: 'userId' });
   };
   return User;
 };

@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @description defines InputLine component
+ *
+ * @param { props } props
+ * @return { jsx } jsx
+ */
 const InputLine = ({
   wrapperClass, name, onChange, value, type, children,
   placeholder, validate, required, maxlength

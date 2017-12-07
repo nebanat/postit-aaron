@@ -2,6 +2,12 @@ import React from 'react';
 import NavItem from './NavItem.jsx';
 import { logout } from '../../utils/authservice';
 
+/**
+ * @description defines Logout component
+ *
+ * @param { props } props
+ * @return { jsx } jsx
+ */
 const Logout = ({ navItemClass, navText }) =>
   (
     <NavItem
