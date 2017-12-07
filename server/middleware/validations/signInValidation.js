@@ -1,9 +1,10 @@
 /**
+ *@description handles validation for sign in
  *
- * @param {req} req
- * @param {res} res
- * @param {next} next
- * @return {json} validations
+ * @param { req } req
+ * @param { res } res
+ * @param { next } next
+ * @return { json } validations
  */
 export default (req, res, next) => {
   const { username, password } = req.body;

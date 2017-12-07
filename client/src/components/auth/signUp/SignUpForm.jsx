@@ -3,7 +3,9 @@ import InputField from '../../common/InputField.jsx';
 import Button from '../../common/Button.jsx';
 
 /**
- * @param { * } object
+ *@description displays signup form
+ *
+ * @param { props } props
  * @returns { jsx } jsx
  */
 const SignUpForm = ({ user, onChange, onSubmit }) => {

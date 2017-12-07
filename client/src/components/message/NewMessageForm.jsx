@@ -3,7 +3,9 @@ import InputLine from '../common/InputLine.jsx';
 import SelectField from '../common/SelectField.jsx';
 
 /**
- * @param { * } object
+ *@description shows new message form
+ *
+ * @param { props } props
  * @returns { jsx } jsx
  */
 const NewMessageForm = ({
@@ -14,9 +16,9 @@ const NewMessageForm = ({
   const selectWrapperClass = 'browser-default priority';
   const inputClassName = 'browser-default message-input';
   const priorityLevel = [
-    { id: 1, name: 'Normal' },
-    { id: 2, name: 'Urgent' },
-    { id: 3, name: 'Critical' }];
+    { name: 'Normal', value: 'normal' },
+    { name: 'Urgent', value: 'urgent' },
+    { name: 'Critical', value: 'critical' }];
 
   return (
         <div>

@@ -1,10 +1,11 @@
 import models from '../../models';
 /**
+ * @description checks if username exist already
  *
- * @param {*} req
- * @param {*} res
- * @param {*} next
- * @return {user} user
+ * @param { req } req
+ * @param { res } res
+ * @param { next } next
+ * @return { user } user
  */
 export default (req, res, next) => {
   // checks if username already exist

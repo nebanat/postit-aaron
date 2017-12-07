@@ -13,7 +13,7 @@ import Dashboard from './components/dashboard/Dashboard.jsx';
 import CreateGroup from './components/group/CreateGroup.jsx';
 import UserGroups from './components/group/UserGroups.jsx';
 import NewMessage from './components/message/NewMessage.jsx';
-import GenericNotFound from '../src/components/pages/GenericNotFound.jsx';
+import PageNotFound from '../src/components/pages/PageNotFound.jsx';
 import Group from './components/group/Group.jsx';
 import { requireAuth, noRequireAuth } from './utils/authservice';
 import configureStore from './store/configureStore';
@@ -21,7 +21,11 @@ import configureStore from './store/configureStore';
 
 const store = configureStore();
 
-
+/**
+ * @description shows all routes for the application
+ *
+ * @return { routes } routes
+ */
 const Root = () => (
   <Provider store={store}>
       <Router history ={ browserHistory }>
@@ -56,7 +60,7 @@ const Root = () => (
 
         <Route path="/" component={ Home }></Route>
 
-        <Route path='*' component={ GenericNotFound } />
+        <Route path='*' component={ PageNotFound } />
       </Router>
 </Provider>
 );

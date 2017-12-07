@@ -128,8 +128,8 @@ export const getGroupMessages = groupId => axios({
   }
 });/**
  *
- * @param {groupId} groupId
- * @returns {groupUsers} groupUsers
+ * @param { groupId } groupId
+ * @returns { groupUsers } groupUsers
  */
 export const getGroupUsers = groupId => axios({
   method: 'GET',

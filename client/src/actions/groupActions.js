@@ -5,7 +5,7 @@ import * as api from '../utils/postItApi';
 /**
  *
  * @param { bool } bool
- * @return { groupLoadingObject } groupLoadingObject
+ * @return { groupLoading } groupLoading
  */
 export const groupIsLoading = bool => ({
   type: types.GROUP_IS_LOADING,

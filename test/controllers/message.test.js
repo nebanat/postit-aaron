@@ -97,7 +97,7 @@ describe('MESSAGES API', () => {
         .set('x-access-token', user1token)
         .send({
           content: 'Hello my group, how are you',
-          priority: '1'
+          priority: 'normal'
         })
         .end((err, res) => {
           expect(res.body).to.be.an('object');
@@ -114,7 +114,7 @@ describe('MESSAGES API', () => {
         .set('x-access-token', user1token)
         .send({
           content: 'Hello my group, another message for emails',
-          priority: '2'
+          priority: 'urgent'
         })
         .end((err, res) => {
           expect(res.body).to.be.an('object');

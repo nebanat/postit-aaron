@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router';
  */
 export const getAccessToken = () => localStorage.getItem('POSTIT_ACCESS_TOKEN');
 /**
- * @return {boolean} boolean
+ * @return { boolean } boolean
  */
 export const isLoggedIn = () => {
   // future check if token is expired//
@@ -15,8 +15,8 @@ export const isLoggedIn = () => {
 };
 /**
  *
- * @param {nextState} nextState
- * @param {replace} replace
+ * @param { nextState } nextState
+ * @param { replace } replace
  * @return { route } route
  */
 export const requireAuth = (nextState, replace) => {
@@ -26,9 +26,9 @@ export const requireAuth = (nextState, replace) => {
 };
 /**
  *
- * @param {nextState} nextState
- * @param {replace} replace
- * @return {route} route
+ * @param { nextState } nextState
+ * @param { replace } replace
+ * @return { route } route
  */
 export const noRequireAuth = (nextState, replace) => {
   if (isLoggedIn()) {
@@ -36,7 +36,7 @@ export const noRequireAuth = (nextState, replace) => {
   }
 };
 /**
- * @return {emptyToken} emptyToken
+ * @return { emptyToken } emptyToken
  */
 export const clearAccessToken = () => {
   localStorage.removeItem('POSTIT_ACCESS_TOKEN');
@@ -51,7 +51,7 @@ export const logout = () => {
 };
 /**
  *
- * @return {userAccessId} accessId
+ * @return { userAccessId } accessId
  */
 export const getAuthUser = () => localStorage.getItem('USER_ACCESS');
 

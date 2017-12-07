@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 
 /**
  * @class
  * @extends component
  */
-class Jumbotron extends Component {
+const Jumbotron = () =>
   /**
    * @returns {jsx} jsx
    */
-  render() {
-    return (
+
+  (
       <div>
           <div className='section purple darken-4'>
             <div className="home-container">
@@ -22,7 +22,7 @@ class Jumbotron extends Component {
                 </div>
                 <div className='row center'>
                     <h5 className="header col s12 white-text">
-                          A modern Group Messaging for you and your group
+                          A modern Group Messaging for you and your friends
                     </h5>
 
                 </div>
@@ -36,8 +36,6 @@ class Jumbotron extends Component {
           </div>
        </div>
 
-    );
-  }
-}
+  );
 export default Jumbotron;
 

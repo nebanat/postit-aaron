@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
+/**
+ * @description defines button component
+ *
+ * @param {props} props
+ * @return { jsx } jsx
+ */
 const Button = ({
   id, wrapperClass, name, type, buttonClassName, label, onClick, children
 }) =>

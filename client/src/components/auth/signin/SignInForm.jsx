@@ -2,8 +2,9 @@ import React from 'react';
 import InputField from '../../common/InputField.jsx';
 import Button from '../../common/Button.jsx';
 
-/**
- * @param { * } object
+/** @description displays sign in form
+ *
+ * @param { props } props
  * @returns { jsx } jsx
  */
 const SignInForm = ({ user, onChange, onSubmit }) => {

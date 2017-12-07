@@ -8,7 +8,6 @@ import { insertSeedData, user1token, user2token } from './../mockers/testHelper'
 chai.use(chaiHttp);
 
 describe('Group API', () => {
-  // let userToken;
   before((done) => {
     models.Group.destroy({
       truncate: true,

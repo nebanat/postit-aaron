@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import SingleUserGroup from './SingleUserGroups.jsx';
+import SingleGroup from './SingleGroup.jsx';
 import CreateGroup from './CreateGroup.jsx';
 import NotFound from '../common/NotFound.jsx';
 
 /**
+ *@description displays all user groups
+ *
  * @class
  * @extends Component
  */
@@ -57,7 +59,7 @@ class UserGroups extends Component {
           <div className="row">
               {
                   groups.map((group, i) =>
-                      <SingleUserGroup key={i} i={i} group={group}/>)
+                      <SingleGroup key={i} i={i} group={group}/>)
               }
 
           </div>

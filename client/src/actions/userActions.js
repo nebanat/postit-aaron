@@ -4,7 +4,7 @@ import * as api from '../utils/postItApi';
 
 /**
  *
- * @param {bool} bool
+ * @param { bool } bool
  * @return { authLoadingObject } authLoadingObject
  */
 export const authIsLoading = bool => ({
@@ -41,8 +41,8 @@ export const signUpUser = user => (dispatch) => {
 };
 /**
  *
- * @param {authenticatedUser} authenticatedUser
- * @return {object} action
+ * @param { authenticatedUser } authenticatedUser
+ * @return { object } action
  */
 export const signInSuccess = authenticatedUser => ({
   type: types.SIGN_IN_SUCCESS,

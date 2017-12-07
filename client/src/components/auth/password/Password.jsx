@@ -10,12 +10,15 @@ import Section from '../../common/Section.jsx';
 import Footer from '../../footer/Footer.jsx';
 
 /**
+ *@description handles sending password reset email link
+ *
  * @class
+ * @extends Component
  */
 export class Password extends Component {
   /**
    * @constructor
-   * @param {props} props
+   * @param { props } props
    */
   constructor(props) {
     super(props);
@@ -29,8 +32,8 @@ export class Password extends Component {
   }
   /**
    *
-   * @param {event} event
-   * @returns {event} method
+   * @param { event } event
+   * @returns { event } method
    */
   handleResetOnSubmit(event) {
     event.preventDefault();
@@ -49,12 +52,12 @@ export class Password extends Component {
     return this.setState({ user: this.state.user });
   }
   /**
-   * @returns {jsx} jsx
+   * @returns { jsx } jsx
    */
   render() {
     const { passwordIsLoading } = this.props;
     const cardClass = 'card';
-    const cardWrapperClass = 'col s12 m6 offset-m3 login-form';
+    const cardWrapperClass = 'col s12 m6 offset-m3 password-form';
     const sectionWrapperClass = 'section purple darken-3';
     const sectionHeaderClass = 'center white-text';
     const cardContentClass = 'card-content';
@@ -70,19 +73,19 @@ export class Password extends Component {
                   headerText = "PostIt Messaging"
                   headerClass = { sectionHeaderClass }>
 
-                      <Card
-                        cardClass ={ cardClass }
-                        wrapperClass= { cardWrapperClass }
-                        cardContentClass ={ cardContentClass }
-                        cardTitleClass = { cardTitleClass }
-                        title = "Recover Password">
+                  <Card
+                    cardClass ={ cardClass }
+                    wrapperClass= { cardWrapperClass }
+                    cardContentClass ={ cardContentClass }
+                    cardTitleClass = { cardTitleClass }
+                    title = "Recover Password">
 
-                          <PasswordForm
-                              user = { this.state.user }
-                              onSubmit = { this.handleResetOnSubmit }
-                              onChange = { this.setUserEmail }/>
+                      <PasswordForm
+                          user = { this.state.user }
+                          onSubmit = { this.handleResetOnSubmit }
+                          onChange = { this.setUserEmail }/>
 
-                      </Card>
+                  </Card>
               </Section>
               <Footer/>
           </div>
@@ -102,7 +105,7 @@ const mapStateToProps = state => ({
 /**
  *
  * @param { dispatch } dispatch
- * @return { object } actions
+ * @return { actions } actions
  */
 const mapDispatchToProps = dispatch => ({
   actions: {

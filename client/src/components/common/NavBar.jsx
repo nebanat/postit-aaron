@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
+/**
+ * @description defines NavBar component
+ *
+ * @param { props } props
+ * @return { jsx } jsx
+ */
 const NavBar = ({
   navBarClassName, navBarWrapperClass, children
 }) =>

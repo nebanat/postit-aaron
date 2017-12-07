@@ -11,6 +11,8 @@ import { getAuthUser } from '../../utils/authservice';
 import NotFound from '../common/NotFound.jsx';
 
 /**
+ *@description HOC for group components
+ *
  * @class
  * @extends component
  */
@@ -44,7 +46,7 @@ class Group extends Component {
     this.onPaginateClick = this.onPaginateClick.bind(this);
   }
   /**
-    * @returns {messages} messages
+    * @returns { actions } actions
     */
   componentWillMount() {
     this.props.actions.messageActions.fetchGroupMessages(this.props.params.id);
@@ -94,19 +96,19 @@ class Group extends Component {
       });
   }
   /**
-   * @return {state} state
+   * @return { newState } newtSate
    */
   onMouseEnterDeleteMember() {
     return this.setState({ showDelete: true });
   }
   /**
-   * @return {state} state
+   * @return { newState} newState
    */
   onMouseLeaveDeleteMember() {
     return this.setState({ showDelete: false });
   }
   /**
-   * @return { swal } swalObject
+   * @return { deleteGroup } deleteGroup
    */
   onDeleteGroup() {
     const { id } = this.props.params;
@@ -149,7 +151,7 @@ class Group extends Component {
   }
   /**
    * @param { bool } bool
-   * @returns {searchLoading} searchLoading
+   * @returns { searchLoading } searchLoading
    */
   isSearchLoading(bool) {
     return this.setState({ searchLoading: bool });

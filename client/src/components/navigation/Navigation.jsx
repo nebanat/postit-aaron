@@ -7,7 +7,10 @@ import { isLoggedIn } from '../../utils/authservice';
 
 
 /**
+ *@description handles app navigation
+ *
  * @class
+ * @extends Component
  */
 class Navigation extends Component {
   /**
@@ -83,27 +86,27 @@ class Navigation extends Component {
               navText ='Logout'/> : ''
           }
          </ul>
-         <ul className="right hide-on-med-and-down">
-         {
-            this.state.navLinks.map((nlink, i) =>
-                <NavItem key={i} i={i}
-                navLink ={ nlink.link }
-                navClassName = { navItemClass }
-                navActiveClass={ navItemActive }
-                navText ={ nlink.text }/>)
-          }
+            <div className="container">
+                <ul className="right hide-on-med-and-down">
+                 {
+                    this.state.navLinks.map((nlink, i) =>
+                        <NavItem key={i} i={i}
+                        navLink ={ nlink.link }
+                        navClassName = { navItemClass }
+                        navActiveClass={ navItemActive }
+                        navText ={ nlink.text }/>)
+                  }
 
 
-          {
-            (isLoggedIn()) ?
-              <Logout
-              navItemClass={ navItemClass }
-              navText ='Logout'/> : ''
-          }
-         </ul>
-
-
-       </NavBar>
+                  {
+                    (isLoggedIn()) ?
+                      <Logout
+                      navItemClass={ navItemClass }
+                      navText ='Logout'/> : ''
+                  }
+                </ul>
+          </div>
+        </NavBar>
     );
   }
 }

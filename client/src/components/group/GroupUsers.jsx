@@ -2,7 +2,7 @@ import React from 'react';
 import SingleUser from './SingleUser.jsx';
 
 /**
- * @param { groupUsers } groupUsers array
+ * @param { props } props
  * @return { jsx } jsx
  */
 const GroupUsers = ({
@@ -11,9 +11,9 @@ const GroupUsers = ({
 }) => {
   /**
    *
-   * @param {userId} userId
-   * @param {index} index
-   * @return {jsx} jsx
+   * @param { userId } userId
+   * @param { index } index
+   * @return { jsx } jsx
    */
   const removeMemberButton = (userId, index) =>
     (<i onClick={() => handleRemoveMember(userId, index)}

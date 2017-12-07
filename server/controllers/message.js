@@ -4,6 +4,7 @@ import { decodeUser } from '../middleware/authenticate';
 
 export default {
   /**
+   *@description handles posting messages to groups
    *
    * @param {req} req
    * @param {res} res
@@ -24,7 +25,7 @@ export default {
       groupId
     }).then((newMessage) => {
       // send email notification
-      if (parseInt(priority, 10) === 2 || parseInt(priority, 10) === 3) {
+      if (priority === 'urgent' || priority === 'critical') {
         sendMailToGroup(req, authUser.id, newMessage.content);
       }
       return res.status(201).send({
@@ -35,6 +36,7 @@ export default {
       .catch(error => res.status(500).send(error));
   },
   /**
+   *@description handles retrieving group messages
    *
    * @param { req } req
    * @param { res } res

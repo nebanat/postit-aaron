@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @description defines card component
+ *
+ * @param {props} props
+ * @return { jsx } jsx
+ */
 const Card = ({
   wrapperClass, children, title, cardContentClass, cardClass, cardTitleClass
 }) =>

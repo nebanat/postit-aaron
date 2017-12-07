@@ -1,9 +1,10 @@
 /**
+ * @description handles validation for group admin
  *
- * @param {*} req
- * @param {*} res
- * @param {*} next
- * @return {group} group
+ * @param { req } req
+ * @param { res } res
+ * @param { next } next
+ * @return { group } group
  */
 export default (req, res, next) => {
   const userId = req.decoded.user.id;

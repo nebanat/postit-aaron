@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @description defines TextField component
+ *
+ * @param { props } props
+ * @return { jsx } jsx
+ */
 const TextField = ({
   wrapperClass, name, className, onChange, value, label, maxlength
 }) =>

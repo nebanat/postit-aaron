@@ -41,15 +41,9 @@ export default (sequelize, DataTypes) => {
       }
     },
     priority: {
-      type: DataTypes.INTEGER,
-      defaultValue: 1,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: 'Set message priority'
-        }
-      }
-    }
+      type: DataTypes.ENUM,
+      values: ['normal', 'urgent', 'critical']
+    },
 
   });
   Message.associate = function (models) {

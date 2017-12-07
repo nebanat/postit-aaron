@@ -1,9 +1,10 @@
 import models from '../../models';
 /**
+ * @description handles validation for group existence
  *
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * @param { req } req
+ * @param { res } res
+ * @param { next } next
  * @return {group} group
  */
 export default (req, res, next) => {

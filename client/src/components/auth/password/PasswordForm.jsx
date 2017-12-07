@@ -4,7 +4,9 @@ import InputField from '../../common/InputField.jsx';
 import Button from '../../common/Button.jsx';
 
 /**
- * @param { * } object
+ *@description displays password form
+ *
+ * @param { props } props
  * @returns { jsx } jsx
  */
 const PasswordForm = ({ user, onChange, onSubmit }) => {
