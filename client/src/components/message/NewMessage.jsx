@@ -19,6 +19,7 @@ class NewMessage extends Component {
     this.onMessageChange = this.onMessageChange.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
     this.validateSelection = this.validateSelection.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
 
     this.state = {
       select: {
@@ -26,6 +27,28 @@ class NewMessage extends Component {
       },
       message: '',
     };
+  }
+  /**
+   *@description autoscrolls to the bottom of message area
+   *
+   *@return { dom } dom
+   */
+  handleScroll() {
+    /* eslint-disable no-unused-vars */
+    setTimeout(() => {
+      const messages = $('.messageOverflow');
+      const newMessage = messages.find('.post:last-child');
+      const scrollTop = messages.prop('scrollTop');
+      const scrollHeight = messages.prop('scrollHeight');
+      messages.scrollTop(scrollHeight);
+    }, 500);
+  }
+
+  /**
+   * @return { dom } dom
+   */
+  componentDidMount() {
+    this.handleScroll();
   }
 
   /**
@@ -57,6 +80,7 @@ class NewMessage extends Component {
         .messageActions
         .postMessage(message, select.priority, groupId);
 
+      this.handleScroll();
       event.target.message.value = '';
       return this.setState({ message: '' });
     }
