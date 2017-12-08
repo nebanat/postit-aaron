@@ -94,8 +94,12 @@
 div.messaging-area {
   position: fixed;
   bottom: 20px;
-  width: 60%;
+  width: 68%;
   height: 5vh;
+  @media screen and (max-width: 600px){
+    width: 100%;
+    padding-right: 30px;
+  }
 }
 div.all-messages {
   height: 100px;

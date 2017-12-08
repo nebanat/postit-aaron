@@ -3,15 +3,11 @@ import nodemailer from 'nodemailer';
 require('dotenv').config();
 
 export default nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
   auth: {
-    user: 'abiliyok@gmail.com',
-    pass: 'tiesan123'
-  },
-  tls: {
-    rejectUnauthorized: false
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 

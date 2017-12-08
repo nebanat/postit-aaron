@@ -16,7 +16,7 @@ export class Dashboard extends Component {
   /**
    * @return { userGroups} userGroups
    */
-  componentWillMount() {
+  componentDidMount() {
     // loads user groups
     this.props.actions.groupActions.fetchUserGroups();
   }
@@ -25,17 +25,17 @@ export class Dashboard extends Component {
    */
   render() {
     return (
-          <div>
-              <Navigation/>
+      <div>
+          <Navigation/>
 
-              <div className="container-fluid">
-                <div className="row">
-                  <div className="col s12">
-                      { React.cloneElement(this.props.children, this.props) }
-                  </div>
-                </div>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col s12">
+                  { React.cloneElement(this.props.children, this.props) }
+              </div>
             </div>
-          </div>
+        </div>
+      </div>
 
     );
   }

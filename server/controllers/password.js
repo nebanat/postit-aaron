@@ -2,6 +2,7 @@ import randomstring from 'randomstring';
 import bcrypt from 'bcrypt';
 import models from '../models';
 import transporter from '../mail/nodemailer';
+import passwordResetTemplate from '../mail/templates/passwordResetTemplate';
 
 const salt = bcrypt.genSaltSync(8);
 
@@ -35,10 +36,11 @@ export default {
             const mailOptions = {
               from: '"Post It" <noreply@postit.com',
               to: updatedUser.email,
-              subject: 'PostIt test',
+              subject: 'PostIt Password reset',
               text: `Hello ${updatedUser.username}! 
                   The link to reset your password is below
-                  ${process.env.APP_URL}/reset/${token}`
+                  ${process.env.APP_URL}/reset/${token}`,
+              html: passwordResetTemplate(updatedUser.username, token)
             };
             transporter.sendMail(mailOptions, (error, info) => {
               if (error) {

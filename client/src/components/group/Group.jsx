@@ -46,17 +46,13 @@ class Group extends Component {
     this.onPaginateClick = this.onPaginateClick.bind(this);
   }
   /**
-    * @returns { actions } actions
-    */
-  componentWillMount() {
-    this.props.actions.messageActions.fetchGroupMessages(this.props.params.id);
-
-    this.props.actions.groupActions.fetchGroupUsers(this.props.params.id);
-  }
-  /**
    * @return { dom } dom
    */
   componentDidMount() {
+    this.props.actions.messageActions.fetchGroupMessages(this.props.params.id);
+
+    this.props.actions.groupActions.fetchGroupUsers(this.props.params.id);
+
     $('.modal').modal({
       opacity: 0.5,
     });
@@ -257,7 +253,7 @@ class Group extends Component {
                   onDeleteGroup={ this.onDeleteGroup }/>
 
                 <div id="messages" className="messageOverflow">
-                  <ul>
+                  <ul className="post">
                     {
                       messages.map((message, i) =>
                         <SingleGroupMessage message={message}
