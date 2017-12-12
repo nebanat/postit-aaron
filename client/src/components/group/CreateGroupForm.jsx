@@ -9,7 +9,11 @@ import Button from '../common/Button.jsx';
  * @param { props } props
  * @returns { jsx } jsx
  */
-const CreateGroupForm = ({ group, onChange, onSubmit }) => {
+const CreateGroupForm = ({
+  group, onChange, onSubmit,
+  onBlur, onFocus, groupError,
+  showGroupButton
+}) => {
   const textFieldWrapperClass = 'input-field col s12';
   const textFieldClass = 'materialize-textarea';
   const buttonWrapperClass = 'col m3';
@@ -28,6 +32,9 @@ const CreateGroupForm = ({ group, onChange, onSubmit }) => {
                     label = "Name"
                     onChange = { onChange }
                     value = { group.name }
+                    onBlur = { onBlur }
+                    onFocus = { onFocus }
+                    error = { groupError }
                     required = "required"/>
                 </div>
                 <div className='row'>
@@ -45,11 +52,11 @@ const CreateGroupForm = ({ group, onChange, onSubmit }) => {
                     id='create-group'
                     wrapperClass={ buttonWrapperClass }
                     buttonClassName={ buttonClassName }
+                    disabled={ showGroupButton ? '' : 'disabled' }
                     name="action"
                     type="submit"
                     label="Create Group"/>
                 </div>
-              <br/>
             </form>
         </div>
 

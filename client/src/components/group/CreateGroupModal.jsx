@@ -10,9 +10,13 @@ import Loader from '../loaders/Loader.jsx';
  * @returns { jsx } jsx
  */
 const CreateGroupModal = ({
-  group, onChange, onSubmit, groupIsLoading
+  group, onChange, onSubmit,
+  groupIsLoading, onBlur, onFocus,
+  groupError, showGroupButton
 }) => {
-  const modalButtonClass = 'btn waves-effect waves-light purple darken-4 white-text modal-trigger';
+  const modalButtonClass =
+  'btn waves-effect waves-light purple darken-4 white-text modal-trigger';
+
   const modalButtonText = 'New Group';
 
 
@@ -32,7 +36,11 @@ const CreateGroupModal = ({
                   <CreateGroupForm
                     group = { group }
                     onChange = { onChange }
-                    onSubmit = { onSubmit }/>
+                    onSubmit = { onSubmit }
+                    onBlur = { onBlur }
+                    onFocus = { onFocus }
+                    groupError = { groupError }
+                    showGroupButton = { showGroupButton }/>
               </div>
             </div>
 

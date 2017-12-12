@@ -9,7 +9,11 @@ import Button from '../../common/Button.jsx';
  * @param { props } props
  * @returns { jsx } jsx
  */
-const PasswordForm = ({ user, onChange, onSubmit }) => {
+const PasswordForm = ({
+  user, onChange, onSubmit,
+  onFocus, onBlur, emailError,
+  showPasswordButton
+}) => {
   const wrapperClass = 'input-field col s10 offset-s1';
   const buttonWrapperClass = 'col s8 offset-s2 center';
   const buttonClassName = 'purple darken-4 btn col s12';
@@ -26,7 +30,10 @@ const PasswordForm = ({ user, onChange, onSubmit }) => {
                       onChange ={ onChange }
                       value = { user.email }
                       required="required"
-                      placeholder="Enter your email"/>
+                      placeholder="Enter your email"
+                      onFocus = { onFocus }
+                      onBlur = { onBlur }
+                      error = { emailError }/>
                 </div>
                 <div className='row'>
                   <Button
@@ -34,9 +41,9 @@ const PasswordForm = ({ user, onChange, onSubmit }) => {
                       buttonClassName = { buttonClassName }
                       name="action"
                       type="submit"
+                      disabled={ showPasswordButton ? '' : 'disabled' }
                       label='Send Reset Link'/>
                 </div>
-              <br/>
             </form>
         </div>
 

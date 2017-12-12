@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -25,15 +26,113 @@ export class SignUp extends Component {
     super(props);
     this.registerUser = this.registerUser.bind(this);
     this.setUserDetails = this.setUserDetails.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+
     this.state = {
       user: {
         username: '',
         email: '',
         password: '',
-        cpassword: '',
+        confirmPassword: '',
       },
-      passwordError: ''
+      usernameError: '',
+      emailError: '',
+      passwordError: '',
+      confirmPasswordError: '',
+      showRegisterButton: true
     };
+  }
+  /**
+   *
+   * @param { event } event
+   * @return { errorMessage } errorMessage
+   */
+  onBlur(event) {
+    const { name } = event.target;
+    const { value } = event.target;
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+
+    switch (name) {
+      case 'username':
+        if (!value) {
+          this.setState({
+            usernameError: 'Please enter your username',
+            showRegisterButton: false
+          });
+        } else if (value.length < 3) {
+          this.setState({
+            usernameError: 'Username must be at least 3 characters',
+            showRegisterButton: false
+          });
+        }
+        break;
+      case 'password':
+        if (!value) {
+          this.setState({
+            passwordError: 'Please enter your password',
+            showRegisterButton: false
+          });
+        } else if (value.length < 6) {
+          this.setState({
+            passwordError: 'Password must be at least 6 characters',
+            showRegisterButton: false
+          });
+        }
+        break;
+      case 'email':
+        if (!value) {
+          this.setState({
+            emailError: 'Please enter your email',
+            showRegisterButton: false
+          });
+        } else if (!emailRegex.test(value)) {
+          this.setState({
+            emailError: 'Please enter a valid email',
+            showRegisterButton: false
+          });
+        }
+        break;
+      default:
+        break;
+    }
+  }
+  /**
+   *
+   * @param { event } event
+   * @return { errorMessage } errorMessage
+   */
+  onFocus(event) {
+    const { name } = event.target;
+
+    switch (name) {
+      case 'username':
+        this.setState({
+          usernameError: '',
+          showRegisterButton: true
+        });
+        break;
+      case 'password':
+        this.setState({
+          passwordError: '',
+          showRegisterButton: true
+        });
+        break;
+      case 'email':
+        this.setState({
+          emailError: '',
+          showRegisterButton: true
+        });
+        break;
+      case 'confirmPassword':
+        this.setState({
+          passwordError: '',
+          showRegisterButton: true
+        });
+        break;
+      default:
+        break;
+    }
   }
   /**
    *
@@ -43,13 +142,10 @@ export class SignUp extends Component {
   registerUser(event) {
     event.preventDefault();
 
-    if (this.state.user.password !== this.state.user.cpassword) {
+    if (this.state.user.password !== this.state.user.confirmPassword) {
       return this.setState({
         passwordError: 'Confirm password does not match password'
       });
-    }
-    if (this.state.user.password.length < 6) {
-      return this.setState({ passwordError: 'Password must be at least 6 characters' });
     }
 
     this.props.actions.userActions.signUpUser(this.state.user);
@@ -92,7 +188,7 @@ export class SignUp extends Component {
                     wrapperClass={ sectionWrapperClass }
                     headerText = "PostIt Messaging"
                     headerClass = { sectionHeaderClass }>
-                    <br/>
+
                       <Card
                         cardClass = { cardClass }
                         wrapperClass={ cardWrapperClass }
@@ -100,16 +196,16 @@ export class SignUp extends Component {
                         cardTitleClass = { cardTitleClass }
                         title='Register'>
 
-                            <p id='password-error'
-                              className='red-text center col s12'>
-                              { this.state.passwordError }
-                              </p><br/>
-                            <br/>
-
                           <SignUpForm
-                              user ={this.state.user}
-                              onChange = { this.setUserDetails }
-                              onSubmit = { this.registerUser }/>
+                            user ={this.state.user}
+                            onChange = { this.setUserDetails }
+                            onSubmit = { this.registerUser }
+                            passwordError={this.state.passwordError}
+                            usernameError={this.state.usernameError}
+                            emailError={this.state.emailError}
+                            onBlur={this.onBlur}
+                            onFocus={this.onFocus}
+                            showRegisterButton={this.state.showRegisterButton}/>
 
                           <SignUpFooter/>
                       </Card>

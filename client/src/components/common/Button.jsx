@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
  * @return { jsx } jsx
  */
 const Button = ({
-  id, wrapperClass, name, type, buttonClassName, label, onClick, children
+  id, wrapperClass, name, type, buttonClassName,
+  label, onClick, disabled, children
 }) =>
   (
     <div
@@ -18,6 +19,7 @@ const Button = ({
           type = { type }
           name = {name}
           onClick = { onClick }
+          disabled = { disabled }
           className ={ buttonClassName } >
           { children }
           { label }

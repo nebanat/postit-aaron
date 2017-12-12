@@ -7,7 +7,10 @@ import Button from '../../common/Button.jsx';
  * @param { props } props
  * @returns { jsx } jsx
  */
-const SignInForm = ({ user, onChange, onSubmit }) => {
+const SignInForm = ({
+  user, onChange, onSubmit, usernameError, passwordError,
+  onBlur, onFocus, showLoginButton
+}) => {
   const wrapperClass = 'input-field col s10 offset-s1';
   const buttonWrapperClass = 'col s10 offset-s1 center';
   const buttonClassName = 'purple darken-4 btn col s12';
@@ -24,7 +27,10 @@ const SignInForm = ({ user, onChange, onSubmit }) => {
                     label = "Username"
                     onChange = { onChange }
                     value = { user.username }
-                    required = "required"/>
+                    required = "required"
+                    error = { usernameError }
+                    onBlur={ onBlur }
+                    onFocus = { onFocus }/>
                 </div>
                 <div className='row'>
                     <InputField
@@ -34,6 +40,9 @@ const SignInForm = ({ user, onChange, onSubmit }) => {
                         validate="validate"
                         onChange ={ onChange }
                         value = { user.password }
+                        error = { passwordError }
+                        onBlur={ onBlur }
+                        onFocus = { onFocus }
                         required="required"
                         label = "Password"/>
                 </div>
@@ -44,10 +53,10 @@ const SignInForm = ({ user, onChange, onSubmit }) => {
                       id='login'
                       name="action"
                       type="submit"
-                      label='Login'/>
+                      label='Login'
+                      disabled={ showLoginButton ? '' : 'disabled' }/>
                 </div>
-              <br/>
-            </form>
+             </form>
         </div>
 
   );
