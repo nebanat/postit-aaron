@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 const InputField = ({
   wrapperClass, name, onChange, value, label, type,
   placeholder, validate, required, labelError, labelSuccess, maxlength,
-  onKeyDown, onKeyUp
+  onKeyDown, onKeyUp, onBlur, onFocus, error
 }) =>
   (
     <div
@@ -25,13 +25,18 @@ const InputField = ({
               required = { required }
               onKeyDown ={ onKeyDown }
               onKeyUp = { onKeyUp }
-              maxLength={ maxlength }/>
+              onFocus = { onFocus }
+              maxLength={ maxlength }
+              onBlur={ onBlur }/>
             <label
               data-error = { labelError }
               data-success = { labelSuccess } >
               { label }
             </label>
-    </div>
+            <span id={ name } className="red-text center-align">
+              { error }
+             </span>
+          </div>
 
   );
 // proptype validation
@@ -41,6 +46,9 @@ InputField.propTypes = {
   type: PropTypes.string.isRequired,
   validate: PropTypes.string,
   onChange: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onKeyUp: PropTypes.func,
+  onFocus: PropTypes.func,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string,

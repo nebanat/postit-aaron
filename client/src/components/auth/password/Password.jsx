@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -24,11 +25,66 @@ export class Password extends Component {
     super(props);
     this.handleResetOnSubmit = this.handleResetOnSubmit.bind(this);
     this.setUserEmail = this.setUserEmail.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+
     this.state = {
+      initialState: {
+        email: ''
+      },
       user: {
         email: ''
-      }
+      },
+      emailError: '',
+      showPasswordButton: true
     };
+  }
+  /**
+   *
+   * @param { event } event
+   * @return { errorMessage } errorMessage
+   */
+  onBlur(event) {
+    const { name } = event.target;
+    const { value } = event.target;
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+
+    switch (name) {
+      case 'email':
+        if (!value) {
+          this.setState({
+            emailError: 'Please enter your email',
+            showPasswordButton: false
+          });
+        } else if (!emailRegex.test(value)) {
+          this.setState({
+            emailError: 'Please enter a valid email',
+            showPasswordButton: false
+          });
+        }
+        break;
+      default:
+        break;
+    }
+  }
+  /**
+   *
+   * @param { event } event
+   * @return { errorMessage } errorMessage
+   */
+  onFocus(event) {
+    const { name } = event.target;
+
+    switch (name) {
+      case 'email':
+        this.setState({
+          emailError: '',
+          showPasswordButton: true
+        });
+        break;
+      default:
+        break;
+    }
   }
   /**
    *
@@ -38,7 +94,11 @@ export class Password extends Component {
   handleResetOnSubmit(event) {
     event.preventDefault();
 
-    this.props.actions.passwordActions.sendResetPassword(this.state.user.email);
+    this.props
+      .actions
+      .passwordActions.sendResetPassword(this.state.user.email);
+
+    return this.setState({ user: this.state.initialState });
   }
   /**
    * @param { event } event
@@ -81,9 +141,13 @@ export class Password extends Component {
                     title = "Recover Password">
 
                       <PasswordForm
-                          user = { this.state.user }
-                          onSubmit = { this.handleResetOnSubmit }
-                          onChange = { this.setUserEmail }/>
+                        user = { this.state.user }
+                        onSubmit = { this.handleResetOnSubmit }
+                        onChange = { this.setUserEmail }
+                        onFocus = { this.onFocus }
+                        onBlur = { this.onBlur }
+                        emailError = { this.state.emailError }
+                        showPasswordButton = { this.state.showPasswordButton }/>
 
                   </Card>
               </Section>

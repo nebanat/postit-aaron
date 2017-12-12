@@ -8,7 +8,11 @@ import Button from '../../common/Button.jsx';
  * @param { props } props
  * @returns { jsx } jsx
  */
-const SignUpForm = ({ user, onChange, onSubmit }) => {
+const SignUpForm = ({
+  user, onChange, onSubmit,
+  usernameError, passwordError, emailError,
+  onBlur, onFocus, showRegisterButton
+}) => {
   const wrapperClass = 'input-field col s10 offset-s1';
   const buttonWrapperClass = 'col s6 offset-s3 center';
   const buttonClassName = 'purple darken-4 btn col s12';
@@ -25,7 +29,10 @@ const SignUpForm = ({ user, onChange, onSubmit }) => {
                     label = "Username"
                     onChange = { onChange }
                     value = { user.username }
-                    required = "required"/>
+                    required = "required"
+                    error={ usernameError }
+                    onBlur={ onBlur }
+                    onFocus={ onFocus }/>
                   <InputField
                       wrapperClass = { wrapperClass }
                       name = "email"
@@ -35,8 +42,9 @@ const SignUpForm = ({ user, onChange, onSubmit }) => {
                       value = { user.email }
                       required="required"
                       label = "Email"
-                      labelError="Enter a valid Email"
-                      labelSuccess="Correct"/>
+                      error={ emailError }
+                      onBlur={ onBlur }
+                      onFocus={ onFocus }/>
                   </div>
                   <div className='row'>
                     <InputField
@@ -47,27 +55,32 @@ const SignUpForm = ({ user, onChange, onSubmit }) => {
                         onChange ={ onChange }
                         value = { user.password }
                         required="required"
-                        label = "Password"/>
+                        error = { passwordError }
+                        label = "Password"
+                        onBlur={ onBlur }
+                        onFocus={ onFocus }/>
                     <InputField
                       wrapperClass = { wrapperClass }
-                      name = "cpassword"
+                      name = "confirmPassword"
                       type="password"
                       validate="validate"
                       onChange ={ onChange }
-                      value = { user.cpassword }
+                      value = { user.confirmPassword }
                       required="required"
-                      label = "Confirm Password"/>
+                      label = "Confirm Password"
+                      onBlur={ onBlur }
+                      onFocus={ onFocus }/>
                 </div>
                 <div className='row'>
                   <Button
                     wrapperClass={ buttonWrapperClass }
                     buttonClassName={ buttonClassName }
+                    disabled={ showRegisterButton ? '' : 'disabled' }
                     id='register'
                     name="action"
                     type="submit"
                     label='Register'/>
                 </div>
-              <br/>
             </form>
         </div>
 

@@ -24,13 +24,25 @@ export class ResetPassword extends Component {
     super(props);
     this.handleSubmitPasswordReset = this.handleSubmitPasswordReset.bind(this);
     this.setUserPassword = this.setUserPassword.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+
     this.state = {
       user: {
         password: '',
-        cpassword: ''
+        confirmPassword: ''
       },
       confirmPasswordError: '',
     };
+  }
+  /**
+   *@description clears errorState
+   *
+   * @return { errorMessage } errorMessage
+   */
+  onFocus() {
+    this.setState({
+      confirmPasswordError: '',
+    });
   }
 
   /**
@@ -40,15 +52,17 @@ export class ResetPassword extends Component {
    */
   handleSubmitPasswordReset(event) {
     event.preventDefault();
-    const { password, cpassword } = this.state.user;
+    const { password, confirmPassword } = this.state.user;
     const { resetToken } = this.props.params;
 
-    if (password !== cpassword) {
+    if (password !== confirmPassword) {
       return this.setState({ confirmPasswordError: 'Passwords do not match' });
     }
 
     if (password.length < 6) {
-      return this.setState({ confirmPasswordError: 'Passwords must be at least 6 characters' });
+      return this.setState({
+        confirmPasswordError: 'Passwords must be at least 6 characters'
+      });
     }
 
 
@@ -89,16 +103,23 @@ export class ResetPassword extends Component {
                   wrapperClass={sectionWrapperClass}
                   headerText = "PostIt Messaging"
                   headerClass = { sectionHeaderClass }>
+
                     <Card
                       cardClass = { cardClass }
                       wrapperClass={cardWrapperClass}
                       cardContentClass ={ cardContentClass }
                       cardTitleClass = { cardTitleClass }
                       title="Reset Password">
+
+                      <p className='red-text center-align'>
+                        { this.state.confirmPasswordError }
+                      </p>
+
                         <ResetPasswordForm
                               user = { this.state.user }
                               onSubmit={this.handleSubmitPasswordReset}
-                              onChange={this.setUserPassword}/>
+                              onChange={this.setUserPassword}
+                              onFocus = { this.onFocus }/>
                     </Card>
                </Section>
                <Footer/>

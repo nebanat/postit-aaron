@@ -26,12 +26,74 @@ export class SignIn extends Component {
     super(props);
     this.signInUser = this.signInUser.bind(this);
     this.setUserDetails = this.setUserDetails.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+
     this.state = {
       user: {
         username: '',
         password: ''
-      }
+      },
+      usernameError: '',
+      passwordError: '',
+      showLoginButton: true
+
     };
+  }
+  /**
+   *
+   * @param { event } event
+   * @return { errorMessage } errorMessage
+   */
+  onFocus(event) {
+    const { name } = event.target;
+
+    switch (name) {
+      case 'username':
+        this.setState({
+          usernameError: '',
+          showLoginButton: true
+        });
+        break;
+      case 'password':
+        this.setState({
+          passwordError: '',
+          showLoginButton: true
+        });
+        break;
+      default:
+        break;
+    }
+  }
+  /**
+   *
+   * @param { event } event
+   * @return { errorMessage } errorMessage
+   */
+  onBlur(event) {
+    const { name } = event.target;
+    const { value } = event.target;
+
+    switch (name) {
+      case 'username':
+        if (!value) {
+          this.setState({
+            usernameError: 'Please enter your username',
+            showLoginButton: false
+          });
+        }
+        break;
+      case 'password':
+        if (!value) {
+          this.setState({
+            passwordError: 'Please enter your password',
+            showLoginButton: false
+          });
+        }
+        break;
+      default:
+        break;
+    }
   }
   /**
    *@description fires an action to sign in a user
@@ -41,6 +103,7 @@ export class SignIn extends Component {
    */
   signInUser(event) {
     event.preventDefault();
+
     this.props.actions.userActions.signInUser(this.state.user);
   }
   /**
@@ -78,8 +141,8 @@ export class SignIn extends Component {
                <Section wrapperClass={ sectionWrapperClass }
                     headerText = "PostIt Messaging"
                     headerClass = { sectionHeaderClass }>
-                   <br/>
-                    <Card
+
+                  <Card
                       cardClass = { cardClass }
                       wrapperClass = { cardWrapperClass }
                       cardContentClass ={ cardContentClass }
@@ -89,7 +152,12 @@ export class SignIn extends Component {
                       <SignInForm
                         user = { this.state.user }
                         onChange = { this.setUserDetails }
-                        onSubmit = { this.signInUser }/>
+                        onSubmit = { this.signInUser }
+                        usernameError = {this.state.usernameError}
+                        passwordError = { this.state.passwordError }
+                        onFocus ={ this.onFocus }
+                        onBlur = {this.onBlur}
+                        showLoginButton= { this.state.showLoginButton }/>
 
                       <SignInFooter/>
                     </Card>

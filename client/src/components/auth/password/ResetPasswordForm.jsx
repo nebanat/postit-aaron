@@ -9,7 +9,9 @@ import Button from '../../common/Button.jsx';
  * @param { props } props
  * @returns { jsx } jsx
  */
-const ResetPasswordForm = ({ user, onChange, onSubmit }) => {
+const ResetPasswordForm = ({
+  user, onChange, onSubmit, onFocus
+}) => {
   const wrapperClass = 'input-field col s8 offset-s2';
   const buttonWrapperClass = 'col s8 offset-s2 center';
   const buttonClassName = 'purple darken-4 btn col s12';
@@ -26,18 +28,20 @@ const ResetPasswordForm = ({ user, onChange, onSubmit }) => {
                       onChange ={ onChange }
                       value = { user.password }
                       required="required"
-                      placeholder="New Password"/>
+                      placeholder="New Password"
+                      onFocus = { onFocus }/>
                 </div>
                 <div className='row'>
                     <InputField
                       wrapperClass = { wrapperClass }
-                      name = "cpassword"
+                      name = "confirmPassword"
                       type="password"
                       validate="validate"
                       onChange ={ onChange }
-                      value = { user.cpassword }
+                      value = { user.confirmPassword }
                       required="required"
-                      placeholder="Confirm Password"/>
+                      placeholder="Confirm Password"
+                      onFocus = { onFocus }/>
                 </div>
                 <div className='row'>
                   <Button
@@ -47,7 +51,6 @@ const ResetPasswordForm = ({ user, onChange, onSubmit }) => {
                       type="submit"
                       label='Reset'/>
                 </div>
-              <br/>
             </form>
         </div>
 
