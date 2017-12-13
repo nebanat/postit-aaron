@@ -42,6 +42,7 @@ export default (sequelize, DataTypes) => {
     },
     priority: {
       type: DataTypes.ENUM,
+      allowNull: false,
       values: ['normal', 'urgent', 'critical']
     },
 

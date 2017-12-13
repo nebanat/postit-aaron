@@ -1,5 +1,6 @@
 module.exports = {
-  'it should show an error when user tries to signup with password less than 6 characters': (client) => {
+  'it should throw an error if password is less than 6 characters':
+  (client) => {
     client
       .resizeWindow(1280, 800)
       .url('http://localhost:3000/signup')
@@ -10,7 +11,8 @@ module.exports = {
       .setValue('input#confirmPassword', 'top')
       .click('button#register')
       .pause(1000)
-      .assert.containsText('#password-error', 'Password must be at least 6 characters')
+      .assert
+      .containsText('div.toast', 'password must be at least 6 characters')
       .pause(1000)
       .end();
   },
@@ -19,17 +21,34 @@ module.exports = {
       .resizeWindow(1280, 800)
       .url('http://localhost:3000/signup')
       .waitForElementVisible('body', 1000)
-      .setValue('input#username', 'biliyok')
-      .setValue('input#email', 'biliyok@yahoo.com')
+      .setValue('input#username', 'neban')
+      .setValue('input#email', 'neban@yahoo.com')
       .setValue('input#password', 'topper234')
       .setValue('input#confirmPassword', 'topper123')
       .click('button#register')
       .pause(1000)
-      .assert.containsText('#password-error', 'Confirm password does not match password')
+      .assert
+      .containsText('span#password', 'Confirm password does not match password')
       .pause(1000)
       .end();
   },
-  'it should show successfully sign up the user and redirect to the sign in page': (client) => {
+  'it should show an error if user enters wrong email': (client) => {
+    client
+      .resizeWindow(1280, 800)
+      .url('http://localhost:3000/signup')
+      .waitForElementVisible('body', 1000)
+      .setValue('input#username', 'neban')
+      .setValue('input#email', 'neban@yahoo')
+      .setValue('input#password', 'topper234')
+      .setValue('input#confirmPassword', 'topper234')
+      .click('button#register')
+      .pause(1000)
+      .assert.containsText('span#email', 'Please enter a valid email')
+      .pause(1000)
+      .end();
+  },
+  'it should successfully signup user and redirect to the sign in page':
+  (client) => {
     client
       .resizeWindow(1280, 800)
       .url('http://localhost:3000/signup')

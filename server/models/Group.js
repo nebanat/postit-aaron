@@ -3,6 +3,7 @@ export default (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: {
           args: true,
@@ -23,7 +24,10 @@ export default (sequelize, DataTypes) => {
   });
   Group.associate = (models) => {
     // relationship between groups and users//
-    Group.belongsToMany(models.User, { through: 'UsersGroups', foreignKey: 'groupId' });
+    Group.belongsToMany(
+      models.User,
+      { through: 'UsersGroups', foreignKey: 'groupId' }
+    );
   };
   return Group;
 };

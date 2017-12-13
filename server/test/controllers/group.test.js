@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-expressions */
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../../server/app';
-import models from '../../server/models';
-import { insertSeedData, user1token, user2token } from './../mockers/testHelper';
+import app from '../../app';
+import models from '../../models';
+import {
+  insertSeedData, user1token, user2token } from './../helpers/testSeedData';
 
 
 chai.use(chaiHttp);
@@ -26,6 +28,8 @@ describe('Group API', () => {
         .send({})
         .end((err, res) => {
           expect(res.status).to.equal(403);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('No token provided');
           done();
         });
@@ -39,7 +43,43 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Please enter a group name');
+          done();
+        });
+    });
+    it(
+      'should throw an error if group name is less than 3 characters',
+      (done) => {
+        chai.request(app)
+          .post('/api/group')
+          .set('x-access-token', user1token)
+          .send({
+            name: 'Re'
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(400);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            expect(res.body.message)
+              .to.equal('group name must be at least 3 characters');
+            done();
+          });
+      }
+    );
+    it('should throw an error if group name contains spaces', (done) => {
+      chai.request(app)
+        .post('/api/group')
+        .set('x-access-token', user1token)
+        .send({
+          name: 'React redux group'
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('group name cannot contain spaces');
           done();
         });
     });
@@ -52,12 +92,18 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(201);
+          expect(res.body).to.have.property('message');
+          expect(res.body).to.have.property('group');
+          expect(res.body.group).to.be.an('object');
           expect(res.body.message).to.equal('Group successfully created');
           expect(res.body.group.name).to.equal('react-redux-group');
+          expect(res.body.group.description).to.equal(null);
+          expect(res.body.group.updatedAt).to.exist;
+          expect(res.body.group.createdAt).to.exist;
           done();
         });
     });
-    it('should throw an error if user tries to create group with group name that already exist', (done) => {
+    it('should throw an error if group name already exist', (done) => {
       chai.request(app)
         .post('/api/group')
         .set('x-access-token', user1token)
@@ -66,17 +112,21 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Group name already exist');
           done();
         });
     });
   });
-  describe('Get authenticated user groups', () => {
+  describe('GET AUTHENTICATED USER GROUPS: /api/groups', () => {
     it('should throw an error if user has no token', (done) => {
       chai.request(app)
         .get('/api/group/user')
         .end((err, res) => {
           expect(res.status).to.equal(403);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('No token provided');
           done();
         });
@@ -111,6 +161,8 @@ describe('Group API', () => {
         .send({})
         .end((err, res) => {
           expect(res.status).to.equal(403);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('No token provided');
           done();
         });
@@ -122,6 +174,8 @@ describe('Group API', () => {
         .send({})
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Please enter group');
           done();
         });
@@ -135,6 +189,8 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Please enter search query');
           done();
         });
@@ -149,24 +205,31 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Group does not exist');
           done();
         });
     });
-    it('should return an empty array if no users found with search query ', (done) => {
-      chai.request(app)
-        .post('/api/user/search')
-        .set('x-access-token', user1token)
-        .send({
-          groupId: '1',
-          query: 'xyshhss'
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(404);
-          expect(res.body.message).to.equal('No user found');
-          done();
-        });
-    });
+    it(
+      'should return an empty array if no users found with search query ',
+      (done) => {
+        chai.request(app)
+          .post('/api/user/search')
+          .set('x-access-token', user1token)
+          .send({
+            groupId: '1',
+            query: 'xyshhss'
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            expect(res.body.message).to.equal('No user found');
+            done();
+          });
+      }
+    );
     it('should return an array of users matching the search query ', (done) => {
       chai.request(app)
         .post('/api/user/search')
@@ -177,7 +240,10 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(200);
+          expect(res.body).to.have.property('nUsers');
+          expect(res.body).to.have.property('pages');
           expect(res.body.nUsers.rows.length).to.equal(1);
+          expect(res.body.pages).to.equal(1);
           expect(res.body.nUsers.rows).to.be.an('array');
           done();
         });
@@ -191,6 +257,8 @@ describe('Group API', () => {
         .send({})
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Please enter a valid user');
           done();
         });
@@ -204,6 +272,8 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Please enter a valid user');
           done();
         });
@@ -217,6 +287,8 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Please enter a valid group');
           done();
         });
@@ -230,6 +302,8 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('This user does not exist');
           done();
         });
@@ -243,6 +317,8 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(409);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('User is already a group member');
           done();
         });
@@ -256,49 +332,72 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(201);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
+          expect(res.body).to.have.property('user');
+          expect(res.body.user).to.be.an('object');
+          expect(res.body.user.id).to.equal(2);
           expect(res.body.message).to.equal('User successfully added to group');
           done();
         });
     });
   });
   describe('REMOVE USER FROM GROUP: /api/group/:id/remove/member', () => {
-    it('should remove a member from group when removed by group admin', (done) => {
-      chai.request(app)
-        .post('/api/group/1/remove/member')
-        .set('x-access-token', user1token)
-        .send({
-          userId: 2
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal('You have successfully removed user from group');
-          done();
-        });
-    });
-    it('should throw an error if admin tries to delete a user not in the group', (done) => {
-      chai.request(app)
-        .post('/api/group/1/remove/member')
-        .set('x-access-token', user1token)
-        .send({
-          userId: 2
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(404);
-          expect(res.body.message).to.equal('User is not a member of this group');
-          done();
-        });
-    });
-    it('should throw an error if user tries to exit a group they do not belong to', (done) => {
-      chai.request(app)
-        .post('/api/group/1/exit')
-        .set('x-access-token', user2token)
-        .send()
-        .end((err, res) => {
-          expect(res.status).to.equal(404);
-          expect(res.body.message).to.equal('you are not a member of this group');
-          done();
-        });
-    });
+    it(
+      'should remove a member from group when removed by group admin',
+      (done) => {
+        chai.request(app)
+          .post('/api/group/1/remove/member')
+          .set('x-access-token', user1token)
+          .send({
+            userId: 2
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            expect(res.body.message)
+              .to.equal('You have successfully removed user from group');
+            done();
+          });
+      }
+    );
+    it(
+      'should throw an error if admin tries to delete a user not in the group',
+      (done) => {
+        chai.request(app)
+          .post('/api/group/1/remove/member')
+          .set('x-access-token', user1token)
+          .send({
+            userId: 2
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            expect(res.body.message)
+              .to.equal('User is not a member of this group');
+            done();
+          });
+      }
+    );
+    it(
+      'should throw an error if user tries to exit a group they dont belong to',
+      (done) => {
+        chai.request(app)
+          .post('/api/group/1/exit')
+          .set('x-access-token', user2token)
+          .send()
+          .end((err, res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            expect(res.body.message)
+              .to.equal('you are not a member of this group');
+            done();
+          });
+      }
+    );
     it('should successfully add the user to the group', (done) => {
       chai.request(app)
         .post('/api/group/1/user')
@@ -308,6 +407,8 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(201);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('User successfully added to group');
           done();
         });
@@ -319,23 +420,32 @@ describe('Group API', () => {
         .send()
         .end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal('You have successfully exited group');
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
+          expect(res.body.message)
+            .to.equal('You have successfully exited group');
           done();
         });
     });
   });
   describe('GROUP - DELETE: /api/group/:id', () => {
-    it('should throw an error if not group admin tries to delete group', (done) => {
-      chai.request(app)
-        .del('/api/group/1')
-        .set('x-access-token', user2token)
-        .send()
-        .end((err, res) => {
-          expect(res.status).to.equal(403);
-          expect(res.body.message).to.equal('You are not authorized to perform this action');
-          done();
-        });
-    });
+    it(
+      'should throw an error if not group admin tries to delete group',
+      (done) => {
+        chai.request(app)
+          .del('/api/group/1')
+          .set('x-access-token', user2token)
+          .send()
+          .end((err, res) => {
+            expect(res.status).to.equal(403);
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.have.property('message');
+            expect(res.body.message)
+              .to.equal('You are not authorized to perform this action');
+            done();
+          });
+      }
+    );
     it('should delete group when group admin deletes', (done) => {
       chai.request(app)
         .del('/api/group/2')
@@ -343,6 +453,8 @@ describe('Group API', () => {
         .send()
         .end((err, res) => {
           expect(res.status).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Group successfully deleted');
           done();
         });
