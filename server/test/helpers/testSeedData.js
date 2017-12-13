@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt';
-import md5 from 'md5';
 import jwt from 'jsonwebtoken';
-import db from '../../server/models';
+import db from '../../models';
 
 export const salt = bcrypt.genSaltSync(8);
 
@@ -9,7 +8,7 @@ export const users = [
   {
     email: 'douglas@gmail.com',
     username: 'douglas1995',
-    password: bcrypt.hashSync('douglaspass', salt, null),
+    password: 'douglaspass',
     resetPassToken: null,
     expirePassToken: null,
     createdAt: Date.now(),
@@ -18,7 +17,7 @@ export const users = [
   {
     email: 'patience@gmail.com',
     username: 'patience1987',
-    password: bcrypt.hashSync('patiencepass', salt, null),
+    password: 'patiencepass',
     resetPasswordToken: null,
     resetPasswordExpires: null,
     createdAt: Date.now(),
@@ -27,7 +26,7 @@ export const users = [
   {
     email: 'cynthia@gmail.com',
     username: 'cynthia1987',
-    password: bcrypt.hashSync('cynthiapass', salt, null),
+    password: 'cynthiapass',
     resetPasswordToken: null,
     resetPasswordExpires: null,
     createdAt: Date.now(),
@@ -39,7 +38,7 @@ export const users = [
 
 export const group =
   {
-    name: 'Laravel group',
+    name: 'Laravel-group',
   };
 export const insertSeedData = () => {
   db.User.bulkCreate(users);
@@ -65,63 +64,80 @@ export const user1token = generateToken(1, users[0]);
 export const user2token = generateToken(2, users[1]);
 
 export const newGroup = {
-  name: 'Europeans'
+  name: 'python-group',
+  description: 'pythonistas'
+};
+
+export const groupWithNoName = {
+  name: '',
+  description: 'pythonistas'
+};
+
+export const duplicatedGroup = {
+  name: 'python-group',
+  description: 'hello python '
 };
 
 export const newMessage = {
-  content: 'Maiores ut enim ratione voluptas accusamus lorem.',
-  priority: 'Urgent',
-  senderId: 1,
+  content: 'I love javascript',
+  priority: 'normal',
+  userId: 1,
+  author: 'tiesan',
   groupId: 1
+};
+
+export const invalidMessage = {
+  content: '',
+  priority: 'normal',
+  userId: '',
+  author: '',
+  groupId: ''
 };
 
 export const invalidPriorityMessage = {
-  content: 'Maiores ut enim ratione voluptas accusamus lorem.',
-  priority: 'Uncertain',
-  senderId: 1,
-  groupId: 1
-};
-
-export const invalidSenderId = {
-  content: 'Maiores ut enim ratione voluptas accusamus lorem.',
-  priority: 'Urgent',
-  senderId: 'most',
-  groupId: 1
-};
-
-export const invalidGroupId = {
-  content: 'Maiores ut enim ratione voluptas accusamus lorem.',
-  priority: 'Urgent',
-  senderId: 1,
-  groupId: 'president'
-};
-
-export const forDefaultValue = {
-  content: 'Maiores ut enim ratione voluptas accusamus et.',
-  senderId: 1,
+  content: 'I love python',
+  priority: '',
+  userId: 1,
+  author: 'tiesan',
   groupId: 1
 };
 
 export const validUser = {
-  email: 'coconutmilk@fruits.com',
-  username: 'coconutmilk',
-  password: 'sweetcoconut100'
+  email: 'nebanat@yahoo.com',
+  username: 'nebanat',
+  password: 'topper234'
 };
 
+export const userWithNoEmail = {
+  username: 'nebanat',
+  email: '',
+  password: 'topper234'
+};
+
+export const userWithNoUsername = {
+  username: '',
+  email: 'nebanat@yahoo.com',
+  password: 'topper234'
+};
+export const userWithNoPassword = {
+  username: 'nebanat',
+  email: 'nebanat@yahoo.com',
+  password: ''
+};
 export const duplicateUsername = {
-  email: 'coconut@fruits.com',
-  username: 'coconutmilk',
-  password: 'coconut100'
+  email: 'nebanat@gmail.com',
+  username: 'nebanat',
+  password: 'topper234'
 };
 
 export const badEmail = {
-  email: 'pineapples@',
-  username: 'pineapplejuice',
-  password: 'pine100apples'
+  email: 'nebanat@',
+  username: 'neban',
+  password: 'topper234'
 };
 
 export const duplicateEmail = {
-  email: 'coconutmilk@fruits.com',
+  email: 'nebanat@yahoo.com',
   username: 'coconutchips',
   password: 'coco100fruits'
 };

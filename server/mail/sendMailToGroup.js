@@ -33,10 +33,8 @@ export default (req, senderId, message) => {
         html: newMessageTemplate(user.username, message, group.name)
       };
       // sends the email to all memnbers of the group
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.log(error);
-        }
+      transporter.sendMail(mailOptions, () => {
+
       });
     });
   });

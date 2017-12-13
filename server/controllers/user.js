@@ -5,7 +5,6 @@ import models from '../models';
 require('dotenv').config();
 
 const jwtSecret = process.env.SECRET || 'PrivateKey';
-const salt = bcrypt.genSaltSync(8);
 
 export default {
   /**
@@ -26,7 +25,7 @@ export default {
       .create({
         username,
         email,
-        password: bcrypt.hashSync(password, salt, null)
+        password
       })
       .then(user => res.status(201).send({
         message: 'Signup successful',

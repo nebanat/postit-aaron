@@ -25,11 +25,11 @@ export default {
             message: 'User does not exist in our records'
           });
         }
-        const token = randomstring.generate();
+        const resetToken = randomstring.generate();
         const expiryDate = Date.now() + 360000;
 
         user.update({
-          resetPassToken: token,
+          resetPassToken: resetToken,
           expirePassToken: expiryDate
         })
           .then((updatedUser) => {
@@ -39,10 +39,10 @@ export default {
               subject: 'PostIt Password reset',
               text: `Hello ${updatedUser.username}! 
                   The link to reset your password is below
-                  ${process.env.APP_URL}/reset/${token}`,
-              html: passwordResetTemplate(updatedUser.username, token)
+                  ${process.env.APP_URL}/reset/${resetToken}`,
+              html: passwordResetTemplate(updatedUser.username, resetToken)
             };
-            transporter.sendMail(mailOptions, (error, info) => {
+            transporter.sendMail(mailOptions, (error) => {
               if (error) {
                 return res.status(500).send({
                   message: 'Unable to send email something went wrong'

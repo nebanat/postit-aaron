@@ -39,6 +39,7 @@ const PasswordForm = ({
                   <Button
                       wrapperClass = { buttonWrapperClass }
                       buttonClassName = { buttonClassName }
+                      id = "resetPassword"
                       name="action"
                       type="submit"
                       disabled={ showPasswordButton ? '' : 'disabled' }

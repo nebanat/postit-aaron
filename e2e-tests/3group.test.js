@@ -1,5 +1,6 @@
 module.exports = {
-  'it should successfully create a group and redirects to dashboard': (client) => {
+  'it should throw an error if user enters group name with spaces':
+  (client) => {
     client
       .resizeWindow(1280, 800)
       .url('http://localhost:3000/signin')
@@ -14,7 +15,47 @@ module.exports = {
       .click('button#create-group')
       .pause(1500)
       .assert.urlEquals('http://localhost:3000/dashboard')
-      .assert.containsText('div.toast', 'Group successfully created')
+      .assert.containsText('span#name', 'group name not allowed to have spaces')
+      .pause(1000)
+      .end();
+  },
+  'it should successfully create a group and redirects to dashboard':
+   (client) => {
+     client
+       .resizeWindow(1280, 800)
+       .url('http://localhost:3000/signin')
+       .waitForElementVisible('body', 1000)
+       .setValue('input#username', 'abiliyok')
+       .setValue('input#password', 'topper234')
+       .click('button#login')
+       .pause(1000)
+       .click('a.btn')
+       .setValue('input#name', 'Laravel-group')
+       .setValue('textarea#description', 'laravel description')
+       .click('button#create-group')
+       .pause(1500)
+       .assert.urlEquals('http://localhost:3000/dashboard')
+       .assert.containsText('div.toast', 'Group successfully created')
+       .pause(1000)
+       .end();
+   },
+  'it should show throw an error if user enters a group name that already exist':
+  (client) => {
+    client
+      .resizeWindow(1280, 800)
+      .url('http://localhost:3000/signin')
+      .waitForElementVisible('body', 1000)
+      .setValue('input#username', 'abiliyok')
+      .setValue('input#password', 'topper234')
+      .click('button#login')
+      .pause(1000)
+      .click('a.btn')
+      .setValue('input#name', 'Laravel-group')
+      .setValue('textarea#description', 'laravel description')
+      .click('button#create-group')
+      .pause(1500)
+      .assert.urlEquals('http://localhost:3000/dashboard')
+      .assert.containsText('div.toast', 'Group name already exist')
       .pause(1000)
       .end();
   },
@@ -57,16 +98,17 @@ module.exports = {
       .click('a.modal-close')
       .pause(1000);
   },
-  'it should successfully delete the group and redirect to dashboard': (client) => {
-    client
-      .click('i.dropdown-button')
-      .pause(1500)
-      .click('button#delete-group')
-      .click('button.swal-button--confirm')
-      .pause(1500)
-      .assert.containsText('div.toast', 'Group successfully deleted')
-      .assert.urlEquals('http://localhost:3000/dashboard')
-      .pause(1000)
-      .end();
-  },
+  'it should successfully delete the group and redirect to dashboard':
+   (client) => {
+     client
+       .click('i.dropdown-button')
+       .pause(1500)
+       .click('button#delete-group')
+       .click('button.swal-button--confirm')
+       .pause(1500)
+       .assert.containsText('div.toast', 'Group successfully deleted')
+       .assert.urlEquals('http://localhost:3000/dashboard')
+       .pause(1000)
+       .end();
+   },
 };

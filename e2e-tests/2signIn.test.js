@@ -1,5 +1,6 @@
 module.exports = {
-  'it should toast an error if user tries to sign in with wrong username and password combination': (client) => {
+  'it should toast an error if user tries to signin with wrong username or password':
+  (client) => {
     client
       .resizeWindow(1280, 800)
       .url('http://localhost:3000/signin')
@@ -13,7 +14,7 @@ module.exports = {
       .pause(1000)
       .end();
   },
-  'it should successfully sign in user when correct username and password combination is provided, and redirect to dashboard': (client) => {
+  'it should successfully sign in user and redirect to dashboard': (client) => {
     client
       .resizeWindow(1280, 800)
       .url('http://localhost:3000/signin')

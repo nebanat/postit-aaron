@@ -1,10 +1,12 @@
+import bcrypt from 'bcrypt';
+
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: {
       type: DataTypes.STRING,
+      allowNull: false,
       unique: true,
       validate: {
-        // validates that the username doesnt already exist//
         notEmpty: {
           args: true,
           msg: 'username cannot be empty'
@@ -13,10 +15,9 @@ export default (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
+      allowNull: false,
       unique: true,
-      // validations for the email field defined//
       validate: {
-        // validates that the email doesnt already exist//
         isEmail: {
           args: true,
           msg: 'A valid email is required',
@@ -39,6 +40,7 @@ export default (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         min: {
           args: 5,
@@ -52,10 +54,22 @@ export default (sequelize, DataTypes) => {
       }
     }
   });
+
+  User.beforeCreate((user) => {
+    user.password = bcrypt.hashSync(
+      user.password,
+      bcrypt.genSaltSync(8), null
+    );
+  });
+
   User.associate = function (models) {
     // relationship between users and groups//
-    User.belongsToMany(models.Group, { through: 'UsersGroups', foreignKey: 'userId' });
+    User.belongsToMany(
+      models.Group,
+      { through: 'UsersGroups', foreignKey: 'userId' }
+    );
   };
+
   return User;
 };
 
