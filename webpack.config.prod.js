@@ -1,4 +1,3 @@
-// const path = require('path');
 import webpack from 'webpack';
 import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
@@ -16,10 +15,6 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js'
   },
-  // devServer: {
-  //   historyApiFallback: true,
-  //   contentBase: './dist',
-  // },
   module: {
     loaders: [
       {
@@ -51,12 +46,10 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  // devtool: '#eval-source-map',
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin(GLOBALS),
     new ExtractTextPlugin('./client/css/style.css'),
-    // new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin()
   ],
 };
