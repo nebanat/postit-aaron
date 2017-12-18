@@ -4,6 +4,11 @@ module.exports = {
       .resizeWindow(1280, 800)
       .url('http://localhost:3000/password')
       .waitForElementVisible('body', 1000)
+      .assert.elementPresent('span.card-title')
+      .assert.containsText('span.card-title', 'Recover Password')
+      .assert.elementPresent('input#email')
+      .assert.elementPresent('button#resetPassword')
+      .assert.containsText('input#email', '')
       .setValue('input#email', 'abiliyok@gmail')
       .click('button#resetPassword')
       .pause(1500)
@@ -31,12 +36,13 @@ module.exports = {
     client
       .resizeWindow(1280, 800)
       .url('http://localhost:3000/password')
-      .waitForElementVisible('body', 1000)
+      .waitForElementVisible('body', 400)
       .setValue('input#email', 'abiliyok@yahoo.com')
       .click('button#resetPassword')
-      .pause(6000)
+      .pause(4000)
       .assert.urlEquals('http://localhost:3000/password')
-      .assert.containsText('div.green', 'Reset password link has been sent to your email')
+      .assert
+      .containsText('div.green', 'Reset password link has been sent to your email')
       .pause(1000)
       .end();
   }

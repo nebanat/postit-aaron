@@ -11,13 +11,15 @@ import Footer from '../../footer/Footer.jsx';
 /**
  * @description handles resetting user password
  *
- * @class
- * @extends component
+ * @class ResetPassword
+ *
+ * @extends Component
  */
 export class ResetPassword extends Component {
   /**
+   * @constructor
    *
-   * @param { props } props
+   * @param { object } props
    *
    */
   constructor(props) {
@@ -35,9 +37,9 @@ export class ResetPassword extends Component {
     };
   }
   /**
-   *@description clears errorState
+   * @description clears errorState
    *
-   * @return { errorMessage } errorMessage
+   * @return { object } password Error
    */
   onFocus() {
     this.setState({
@@ -46,9 +48,11 @@ export class ResetPassword extends Component {
   }
 
   /**
+   * @description handles on submit event
    *
-   * @param { event } event
-   * @return { password } password
+   * @param { object } event
+   *
+   * @return { object } action that handles password reset
    */
   handleSubmitPasswordReset(event) {
     event.preventDefault();
@@ -71,8 +75,11 @@ export class ResetPassword extends Component {
     this.setState({ confirmPasswordError: '' });
   }
   /**
-   * @param { event } event
-   * @returns { state } state
+   * @description handles on change event
+   *
+   * @param { object } event
+   *
+   * @returns { object } state
    */
   setUserPassword(event) {
     const field = event.target.name;
@@ -82,6 +89,8 @@ export class ResetPassword extends Component {
     return this.setState({ user: this.state.user });
   }
   /**
+   * @description renders ResetPassword form
+   *
    * @return { jsx } jsx
    */
   render() {
@@ -128,9 +137,11 @@ export class ResetPassword extends Component {
   }
 }
 /**
+ * @description maps state to props
  *
- * @param { state } state
- * @return { state } state
+ * @param { object } state
+ *
+ * @return { object } props
  */
 const mapStateToProps = state => ({
   resetSuccessMessage: state.resetSuccessMessage,
@@ -138,9 +149,11 @@ const mapStateToProps = state => ({
   passwordIsLoading: state.passwordIsLoading
 });
 /**
+ * @description maps dispatch to props
  *
- * @param { dispatch } dispatch
- * @return { object } actions
+ * @param { object } dispatch
+ *
+ * @return { object } props
  */
 const mapDispatchToProps = dispatch => ({
   actions: {

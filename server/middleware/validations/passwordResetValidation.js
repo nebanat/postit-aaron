@@ -1,10 +1,12 @@
+/* eslint-disable no-useless-escape */
 /**
- *@description handles validation for resetting password
+ * @description handles validation for resetting password
  *
- * @param { req } req
- * @param { res } res
- * @param { next } next
- * @return {message} message
+ * @param { object } req contains email
+ * @param { object } res contains message
+ * @param { object } next
+ *
+ * @return { object } message
  */
 export default (req, res, next) => {
   const { email } = req.body;

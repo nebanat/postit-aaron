@@ -4,9 +4,10 @@ import CreateGroupForm from './CreateGroupForm.jsx';
 import Loader from '../loaders/Loader.jsx';
 
 /**
- *@description displays create group modal with form
+ * @description displays create group modal with form
  *
- * @param { props } props
+ * @param { object } props
+ *
  * @returns { jsx } jsx
  */
 const CreateGroupModal = ({

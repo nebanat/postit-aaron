@@ -3,7 +3,8 @@ import React from 'react';
 /**
  *@description displays a single user component
  *
- * @param { props } props
+ * @param { object } props
+ *
  * @returns { jsx } jsx
  */
 const SingleUser = ({ username, children }) => {

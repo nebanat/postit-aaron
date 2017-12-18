@@ -1,18 +1,22 @@
 import * as types from './actionTypes';
 import * as api from '../utils/postItApi';
 /**
+ * @description handles message loaders
  *
  * @param { bool } bool
- * @return { messageLoadingObject } passwordLoadingObject
+ *
+ * @return { object } message loading
  */
 export const messageIsLoading = bool => ({
   type: types.MESSAGE_IS_LOADING,
   bool
 });
 /**
+ * @description handles on post message
  *
- * @param { newMessage } newMessage
- * @return { newMessageObject } newMessageObject
+ * @param { object } newMessage
+ *
+ * @return { object } post message
  */
 export const onPost = newMessage => ({
   type: types.POST_MESSAGE,
@@ -20,11 +24,13 @@ export const onPost = newMessage => ({
 });
 
 /**
+ * @description handles posting message
  *
- * @param { message } message
- * @param { priority } priority
- * @param { groupId } groupId
- *  @return { dispatch } dispatch
+ * @param { string } message
+ * @param { string } priority
+ * @param { integer } groupId
+ *
+ * @return { object } post message
  *
  */
 export const postMessage = (message, priority, groupId) => (dispatch) => {
@@ -45,9 +51,11 @@ export const postMessage = (message, priority, groupId) => (dispatch) => {
     });
 };
 /**
+ * @description handles create group success
  *
  * @param { messages } messages
- * @return { actionObject } actionObject
+ *
+ * @return { object } fetch group messages
  */
 export const fetchGroupMessageSuccess = messages => ({
   type: types.FETCH_MESSAGES_SUCCESS,
@@ -55,9 +63,11 @@ export const fetchGroupMessageSuccess = messages => ({
 });
 
 /**
+ * @description handles fetch group messages
  *
- * @param { id } id
- * @return { dispatch } dispatch
+ * @param { integer } id holds group id
+ *
+ * @return { array } messages
  *
  */
 export const fetchGroupMessages = id => (dispatch) => {

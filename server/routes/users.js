@@ -7,8 +7,6 @@ import passwordResetValidation from
   '../middleware/validations/passwordResetValidation';
 import resetPasswordValidation from
   '../middleware/validations/resetPasswordValidation';
-import emailExist from '../middleware/validations/emailExist';
-import usernameExist from '../middleware/validations/usernameExist';
 import signInValidation from '../middleware/validations/signInValidation';
 import searchUsersValidation from
   '../middleware/validations/searchUsersValidation';
@@ -17,11 +15,7 @@ import searchUsersValidation from
 const app = express.Router();
 
 
-app.post(
-  '/signup',
-  signUpValidation, emailExist, usernameExist,
-  userController.signup
-);
+app.post('/signup', signUpValidation, userController.signup);
 
 app.post('/signin', signInValidation, userController.signIn);
 

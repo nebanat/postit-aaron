@@ -1,18 +1,19 @@
 import randomstring from 'randomstring';
 import bcrypt from 'bcrypt';
 import models from '../models';
-import transporter from '../mail/nodemailer';
+import transporter from '../mail/transporter';
 import passwordResetTemplate from '../mail/templates/passwordResetTemplate';
 
 const salt = bcrypt.genSaltSync(8);
 
 export default {
   /**
-   *@description handles email sending with password reset link
+   * @description handles email sending with password reset link
    *
-   * @param { req } req
-   * @param { res } res
-   * @return { successMessage } successMessage
+   * @param { object } req contains email
+   * @param { object } res contains message
+   *
+   * @return { object } successMessage
    */
   sendPasswordResetLinkEmail(req, res) {
     const { email } = req.body;
@@ -56,11 +57,12 @@ export default {
       });
   },
   /**
-   *@description handles resetting a user password
+   * @description handles resetting a user password
    *
-   * @param { req } req
-   * @param { res } res
-   * @return { password } password
+   * @param { object } req contains password details
+   * @param { object } res contains email reset message
+   *
+   * @return { object } passwordMessage
    */
   resetPassword(req, res) {
     const { resetToken, password } = req.body;
@@ -73,14 +75,13 @@ export default {
             message: 'No User associated with this Token'
           });
         }
-        // checks if the token has expired
+
         if (Date.now() > user.expiryPassToken) {
           return res.status(401).send({
             message: 'Token has expired'
           });
         }
 
-        // updates the password and garbage collects the token
         user.update({
           password: bcrypt.hashSync(password, salt, null),
           resetPassToken: '',

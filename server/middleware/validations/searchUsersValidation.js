@@ -1,10 +1,11 @@
 /**
- *@description handles validation for searching users
+ * @description handles validation for searching users
  *
- * @param { req } req
- * @param { res } res
- * @param { next } next
- * @return { json } validations
+ * @param { object } req contains group and query
+ * @param { object } res message
+ * @param { object } next
+ *
+ * @return { object } message
  */
 export default (req, res, next) => {
   const { groupId, query } = req.body;

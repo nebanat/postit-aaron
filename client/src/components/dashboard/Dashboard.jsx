@@ -9,15 +9,15 @@ import Navigation from '../navigation/Navigation.jsx';
 /**
  *@description HOC for dashboard components
  *
- * @class
- * @extends component
+ * @class Dashboard
+ *
+ * @extends Component
  */
 export class Dashboard extends Component {
   /**
    * @return { userGroups} userGroups
    */
   componentDidMount() {
-    // loads user groups
     this.props.actions.groupActions.fetchUserGroups();
   }
   /**
@@ -41,9 +41,11 @@ export class Dashboard extends Component {
   }
 }
 /**
+ * @description maps state to props
  *
- * @param { state } state
- * @return { state } state
+ * @param { object } state
+ *
+ * @return { object } props
  */
 const mapStateToProps = state => ({
   authenticatedUser: state.authenticatedUser,
@@ -54,9 +56,11 @@ const mapStateToProps = state => ({
   messageIsLoading: state.messageIsLoading
 });
 /**
+ * @description maps dispatch to props
  *
- * @param { dispatch } dispatch
- * @return { object } actions
+ * @param { object } dispatch
+ *
+ * @return { object } props
  */
 const mapDispatchToProps = dispatch => ({
   actions: {

@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { getAccessToken } from './authservice';
 /**
+ * @description handles calls to signup endpoint
  *
  * @param { user } user object
- * @return { promise } promise
+ *
+ * @return { promise } promise call to signup api
  */
 export const signUp = user => axios({
   method: 'post',
@@ -19,9 +21,11 @@ export const signUp = user => axios({
 });
 
 /**
+ * @description handles calls to signin endpoint
  *
- * @param { user } user object
- * @return { promise } promise
+ * @param { object } user object
+ *
+ * @return { promise } promise call to signin endpoint
  */
 export const signIn = user => axios({
   method: 'post',
@@ -35,9 +39,11 @@ export const signIn = user => axios({
   })
 });
 /**
+ * @description handles calls to create group endpoint
  *
- * @param { group } group
- * @return { promise } promise
+ * @param { object } group
+ *
+ * @return { promise } promise call to signin endpoint
  */
 export const createGroup = group => axios({
   method: 'post',
@@ -52,9 +58,11 @@ export const createGroup = group => axios({
   })
 });
 /**
+ * @description handles calls to send reset link endpoint
  *
- * @param {email} email
- * @return {promise} promise
+ * @param { string } email
+ *
+ * @return { promise } promise to call send reset link endpoint
  */
 export const sendResetPasswordLink = email => axios({
   method: 'post',
@@ -67,10 +75,12 @@ export const sendResetPasswordLink = email => axios({
   })
 });
 /**
+ * @description handles calls to reset password endpoint
  *
- * @param { resetToken } resetToken
- * @param { password } password
- * @return { promise } promise
+ * @param { string } resetToken
+ * @param { string } password
+ *
+ * @return { promise } promise calls to reset password endpoint
  */
 export const resetPassword = (resetToken, password) => axios({
   method: 'post',
@@ -84,7 +94,9 @@ export const resetPassword = (resetToken, password) => axios({
   })
 });
 /**
- * @return { promise } promise
+ * @description handles calls to signin endpoint
+ *
+ * @return { promise } promise call to get user groups endpoint
  */
 export const getUserGroups = () => axios({
   method: 'GET',
@@ -96,11 +108,13 @@ export const getUserGroups = () => axios({
 });
 
 /**
+ * @description handles calls to signin endpoint
  *
- * @param { message } message
- * @param { priority } priority
- * @param { groupId } groupId
- * @returns { promise } promise
+ * @param { string } message
+ * @param { integer } priority
+ * @param { integer } groupId
+ *
+ * @returns { promise } promise calls to signin endpoint
  */
 export const postNewMessage = (message, priority, groupId) => axios({
   method: 'post',
@@ -115,9 +129,11 @@ export const postNewMessage = (message, priority, groupId) => axios({
   })
 });
 /**
+ * @description handles calls to get group messages endpoint
  *
- * @param { groupId } groupId
- * @returns { promise } promise
+ * @param { integer } groupId
+ *
+ * @returns { promise } promise call to get group messages
  */
 export const getGroupMessages = groupId => axios({
   method: 'GET',
@@ -126,10 +142,13 @@ export const getGroupMessages = groupId => axios({
     'Content-type': 'application/json; charset=utf-8',
     'x-access-token': getAccessToken()
   }
-});/**
+});
+/**
+ * @description handles calls to get group users endpoint
  *
- * @param { groupId } groupId
- * @returns { groupUsers } groupUsers
+ * @param { integer } groupId
+ *
+ * @returns { promise } get group users endpoint
  */
 export const getGroupUsers = groupId => axios({
   method: 'GET',
@@ -140,11 +159,13 @@ export const getGroupUsers = groupId => axios({
   }
 });
 /**
+ * @description handles calls to search endpoint
  *
- * @param { groupId } groupId
- * @param { query } query
- * @param {  offset } offset
- * @return { promise } promise
+ * @param { integer } groupId
+ * @param { string } query
+ * @param {  number } offset
+ *
+ * @return { promise } promise call to search endpoint
  */
 export const searchUsersNotInGroup = (groupId, query, offset) => axios({
   method: 'post',
@@ -160,10 +181,12 @@ export const searchUsersNotInGroup = (groupId, query, offset) => axios({
   })
 });
 /**
+ * @description handles calls to add user to group endpoint
  *
- * @param { groupId } groupId
- * @param { userId } userId
- * @return { promise } promise
+ * @param { integer } groupId
+ * @param { integer } userId
+ *
+ * @return { promise } promise calls to add user to group endpoint
  */
 export const addUserToGroup = (groupId, userId) => axios({
   method: 'post',
@@ -177,10 +200,12 @@ export const addUserToGroup = (groupId, userId) => axios({
   })
 });
 /**
+ * @description handles calls to exit group endpoint
  *
- * @param { groupId } groupId
- * @param { userId } userId
- * @return { promise } promise
+ * @param { integer } groupId
+ * @param { integer} userId
+ *
+ * @return { promise } promise handles calls to exit group endpoint
  */
 export const exitGroup = groupId => axios({
   method: 'post',
@@ -191,10 +216,12 @@ export const exitGroup = groupId => axios({
   }
 });
 /**
+ * @description handles calls to delete group endpoint
  *
- * @param { groupId } groupId
- * @param { userId } userId
- * @return { promise } promise
+ * @param { integer } groupId
+ * @param { integer } userId
+ *
+ * @return { promise } promise calls to delete group endpoint
  */
 export const deleteGroup = groupId => axios({
   method: 'delete',
@@ -206,10 +233,12 @@ export const deleteGroup = groupId => axios({
 });
 
 /**
+ * @description handles calls to delete group member endpoint
  *
- * @param { groupId } groupId
- * @param { userId } userId
- * @return { promise } promise
+ * @param { integer } groupId
+ * @param { integer } userId
+ *
+ * @return { promise } promise calls to delete group member endpoint
  */
 export const deleteGroupMember = (groupId, userId) => axios({
   method: 'post',

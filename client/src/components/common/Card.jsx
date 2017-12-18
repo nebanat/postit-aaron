@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 /**
  * @description defines card component
  *
- * @param {props} props
+ * @param { object} props
+ *
  * @return { jsx } jsx
  */
 const Card = ({
-  wrapperClass, children, title, cardContentClass, cardClass, cardTitleClass
+  wrapperClass, children, title,
+  cardContentClass, cardClass, cardTitleClass
 }) =>
   (
     <div

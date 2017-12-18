@@ -1,7 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import { mount, shallow } from 'enzyme';
-// import TestUtils from 'react-addons-test-utils';
+import { shallow } from 'enzyme';
 import SignUpForm from '../../../src/components/auth/signUp/SignUpForm.jsx';
 /**
  * @return { shallow } shallow
@@ -23,5 +22,4 @@ describe('<SignUpForm/>', () => {
     expect(wrapper.find('InputField').length).toBe(4);
     expect(wrapper.find('Button').length).toBe(1);
   });
-  // checks it populates the inputfield value with user props
 });

@@ -7,15 +7,17 @@ import { isLoggedIn } from '../../utils/authservice';
 
 
 /**
- *@description handles app navigation
+ * @description handles app navigation
  *
- * @class
+ * @class Navigation
+ *
  * @extends Component
  */
 class Navigation extends Component {
   /**
    * @constructor
-   * @param {props} props
+   *
+   * @param { object } props
    */
   constructor(props) {
     super(props);
@@ -24,7 +26,9 @@ class Navigation extends Component {
     };
   }
   /**
-   * @return { dom } dom
+   * @description initializes jquery element and nav state
+   *
+   * @return { * } null
    */
   componentDidMount() {
     $('.button-collapse').sideNav();
@@ -44,7 +48,9 @@ class Navigation extends Component {
       : this.setState({ navLinks: userNav });
   }
   /**
-   * @returns {jsx} jsx
+   * @description renders navigation
+   *
+   * @returns { jsx } jsx
    */
   render() {
     const navBarClassName = 'purple darken-4';

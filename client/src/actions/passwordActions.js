@@ -3,8 +3,10 @@ import * as types from './actionTypes';
 import * as api from '../utils/postItApi';
 
 /**
+ * @description handles password loading state
  *
- * @param { bool } bool
+ * @param { boolean } bool
+ *
  * @return { passwordLoadingObject } passwordLoadingObject
  */
 export const passwordIsLoading = bool => ({
@@ -13,9 +15,11 @@ export const passwordIsLoading = bool => ({
 });
 
 /**
+ * @description handles sending reset emails
  *
- * @param { email } email
- * @return { action } action
+ * @param { string } email
+ *
+ * @return { object } password link message
  */
 export const sendResetPassword = email => (dispatch) => {
   const { Materialize } = window;
@@ -36,10 +40,12 @@ export const sendResetPassword = email => (dispatch) => {
 
 
 /**
+ * @description handles create group success
  *
- * @param { resetToken } resetToken
- * @param { password } password
- * @return { action } action
+ * @param { string } resetToken
+ * @param { string } password
+ *
+ * @return { object } reset password message
  */
 export const resetPassword = (resetToken, password) => (dispatch) => {
   const { Materialize } = window;

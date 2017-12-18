@@ -6,12 +6,14 @@ import NotFound from '../common/NotFound.jsx';
 /**
  *@description displays all user groups
  *
- * @class
+ * @class UserGroups
+ *
  * @extends Component
  */
 class UserGroups extends Component {
   /**
    * @constructor
+   *
    * @param {props} props
    */
   constructor(props) {
@@ -19,6 +21,8 @@ class UserGroups extends Component {
     this.showNoGroupMessage = this.showNoGroupMessage.bind(this);
   }
   /**
+   * @description show no group message
+   *
    * @return {jsx} jsx
    */
   showNoGroupMessage() {
@@ -30,6 +34,8 @@ class UserGroups extends Component {
     );
   }
   /**
+   * @description displays user groups
+   *
    * @return { jsx } jsx
    */
   render() {

@@ -7,9 +7,10 @@ import Button from '../common/Button.jsx';
 import Pagination from '../common/Pagination.jsx';
 
 /**
- *@description displays search modal
+ * @description displays search modal
  *
- * @param { props } props
+ * @param { object } props
+ *
  * @return { jsx } jsx
  */
 const SearchModal = ({

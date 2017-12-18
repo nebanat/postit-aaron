@@ -23,7 +23,6 @@ export default (sequelize, DataTypes) => {
 
   });
   Group.associate = (models) => {
-    // relationship between groups and users//
     Group.belongsToMany(
       models.User,
       { through: 'UsersGroups', foreignKey: 'groupId' }

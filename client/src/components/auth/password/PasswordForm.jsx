@@ -4,9 +4,10 @@ import InputField from '../../common/InputField.jsx';
 import Button from '../../common/Button.jsx';
 
 /**
- *@description displays password form
+ * @description displays password form
  *
- * @param { props } props
+ * @param { object } props contains user, event based actions
+ *
  * @returns { jsx } jsx
  */
 const PasswordForm = ({
@@ -50,7 +51,6 @@ const PasswordForm = ({
 
   );
 };
-// proptype validation
 PasswordForm.propTypes = {
   user: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,

@@ -3,7 +3,7 @@ import Jumbotron from './Jumbotron.jsx';
 import Navigation from '../../navigation/Navigation.jsx';
 
 /**
- *@description shows home page
+ * @description shows home page
  *
  * @returns { jsx } jsx
  */

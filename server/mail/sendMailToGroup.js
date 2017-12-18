@@ -1,4 +1,4 @@
-import transporter from './nodemailer';
+import transporter from './transporter';
 import newMessageTemplate from './templates/newMessageTemplate';
 /**
  *@description sends email to members of a group
@@ -9,7 +9,6 @@ import newMessageTemplate from './templates/newMessageTemplate';
  * @return { message } message
  */
 export default (req, senderId, message) => {
-  // const userEmails = [];
   const { group } = req;
 
   group.getUsers({
@@ -20,9 +19,7 @@ export default (req, senderId, message) => {
     },
     attributes: ['username', 'email']
   }).then((groupUsers) => {
-    // get all the emails of users in the group except the message sender
     groupUsers.forEach((user) => {
-      // mail options
       const mailOptions = {
         from: '"Post It" <noreply@postit.com',
         to: user.email,
@@ -32,7 +29,6 @@ export default (req, senderId, message) => {
         was posted in your ${group.name}`,
         html: newMessageTemplate(user.username, message, group.name)
       };
-      // sends the email to all memnbers of the group
       transporter.sendMail(mailOptions, () => {
 
       });

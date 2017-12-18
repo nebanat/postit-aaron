@@ -1,11 +1,12 @@
 /* eslint-disable no-useless-escape */
 /**
- *@description handles validation for sign up
+ * @description handles validation for sign up
  *
- * @param { req } req
- * @param { res } res
- * @param { next } next
- * @return { json } validation messages
+ * @param { object } req contains user details
+ * @param { object} res contains validation messages
+ * @param { object } next
+ *
+ * @return { object } validation messages
  */
 export default (req, res, next) => {
   const { username, email, password } = req.body;

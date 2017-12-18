@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 /**
  * @description defines SelectField component
  *
- * @param { props } props
+ * @param { object } props
+ *
  * @return { jsx } jsx
  */
 const SelectField = ({

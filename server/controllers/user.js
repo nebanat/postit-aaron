@@ -8,42 +8,55 @@ const jwtSecret = process.env.SECRET || 'PrivateKey';
 
 export default {
   /**
-   *@description handles signup
+   * @description handles signup
    *
-   * @param {req} req
-   * @param {res} res
-   * @param {next} next
-   * @return {object} message,username,email
+   * @param { object } req user details
+   * @param { object } res message and user details
+   * @param { object } next
+   *
+   * @return {object} user details and message
    */
   signup(req, res) {
-    const { username, password } = req.body;
-    const email = req.body.email.toLowerCase();
+    const { username, password, email } = req.body;
 
-
-    // creates user
-    models.User
-      .create({
-        username,
-        email,
-        password
-      })
-      .then(user => res.status(201).send({
-        message: 'Signup successful',
-        username: user.username,
-        email: user.email,
-      }))
-      .catch(error => res.status(500).send({ error: error.message }));
+    return models.User
+      .findOne({
+        where: { $or: [{ username }, { email }] }
+      }).then((existingUser) => {
+        if (existingUser && existingUser.username === username) {
+          return res.status(409).json({
+            message: 'Username you entered already exist',
+          });
+        }
+        if (existingUser && existingUser.email === email) {
+          return res.status(409).json({
+            message: 'Email address you entered already exist',
+          });
+        }
+        models.User
+          .create({
+            username,
+            email,
+            password
+          })
+          .then(user => res.status(201).send({
+            message: 'Signup successful',
+            username: user.username,
+            email: user.email,
+          }))
+          .catch(error => res.status(500).send({ error: error.message }));
+      }).catch(error => res.status(500).send({ error: error.message }));
   },
   /**
-   *@description handles signin
+   * @description handles signin
    *
-   * @param {req} req
-   * @param {res} res
-   * @return {object} user
+   * @param { object } req user details
+   * @param { object } res message, token and user details
+   *
+   * @return { object } user
    */
   signIn(req, res) {
     const { username, password } = req.body;
-    // check if there is a user with email and password combination
     models.User
       .findOne({
         where: {
@@ -54,19 +67,16 @@ export default {
         }
       })
       .then((user) => {
-        // Checks to see if the user exist//
         if (!user) {
-          return res.status(400).send({
+          return res.status(401).send({
             message: 'Invalid username or password'
           });
         }
-        // checks the password
         if (!bcrypt.compareSync(password, user.password)) {
-          return res.status(400).send({
+          return res.status(401).send({
             message: 'Invalid username or password'
           });
         }
-        // generates the token
         const token = jwt.sign({ user }, jwtSecret, {
           expiresIn: '24h'
         });
@@ -86,9 +96,10 @@ export default {
   /**
    *@description handles searching for users
    *
-   * @param {req} req
-   * @param {res} res
-   * @return {users} users searched
+   * @param { object } req
+   * @param { object } res
+   *
+   * @return { object } users searched
    */
   searchUsersNotInGroup(req, res) {
     const {
@@ -124,19 +135,20 @@ export default {
             limit: limit || 5,
             offset: offset || 0
           })
-          // nusers represent users not in a group
             .then((nUsers) => {
               if (nUsers.rows.length === 0) {
                 return res.status(404).send({
                   message: 'No user found'
                 });
               }
-              pageNumber = parseInt(nUsers.count, 10) / parseInt(limit || 5, 10);
+              pageNumber = parseInt(nUsers.count, 10) /
+              parseInt(limit || 5, 10);
+
               return res.status(200).send({
                 nUsers,
                 pages: Math.ceil(pageNumber)
               });
-            });
+            }).catch(error => res.status(500).send({ error: error.message }));
         });
       });
   }

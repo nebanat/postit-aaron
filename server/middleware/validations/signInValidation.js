@@ -1,14 +1,15 @@
 /**
- *@description handles validation for sign in
+ * @description handles validation for sign in
  *
- * @param { req } req
- * @param { res } res
- * @param { next } next
- * @return { json } validations
+ * @param { object } req user details
+ * @param { object } res contains message
+ * @param { object } next
+ *
+ * @return { object } message
  */
 export default (req, res, next) => {
   const { username, password } = req.body;
-  // validates user entries
+
   if (!username || username.trim() === '') {
     return res.status(400).send({
       message: 'Please enter username'

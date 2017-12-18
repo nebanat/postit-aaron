@@ -1,10 +1,11 @@
 /**
- *@description handles validation for posting a message
+ * @description handles validation for posting a message
  *
- * @param { req } req
- * @param { res } res
- * @param { next } next
- * @return {message} message
+ * @param { object } req contains message details
+ * @param { object } res contains message
+ * @param { object } next
+ *
+ * @return { object} message
  */
 export default (req, res, next) => {
   const { content, priority } = req.body;

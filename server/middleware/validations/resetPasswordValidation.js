@@ -1,10 +1,11 @@
 /**
- *@description handles validation for resetting a password
+ * @description handles validation for resetting a password
  *
- * @param { req } req
- * @param { res } res
- * @param { next } next
- * @return { message } message
+ * @param { object } req contains password and resetToken
+ * @param { object } res message
+ * @param { object } next
+ *
+ * @return { object } message
  */
 export default (req, res, next) => {
   const { resetToken, password } = req.body;

@@ -5,7 +5,8 @@ import Button from '../../common/Button.jsx';
 /**
  *@description displays signup form
  *
- * @param { props } props
+ * @param { object } props contains user details and events
+ *
  * @returns { jsx } jsx
  */
 const SignUpForm = ({

@@ -3,7 +3,8 @@ import React from 'react';
 /**
  * @description defines Pagination component
  *
- * @param { props } props
+ * @param { object } props
+ *
  * @return { jsx } jsx
  */
 const Pagination = ({ pageNumber, currentPaginatePage, onPaginateClick }) => {
@@ -25,6 +26,7 @@ const Pagination = ({ pageNumber, currentPaginatePage, onPaginateClick }) => {
   );
   /**
    * @description returns pagination base on pageNumber property
+   *
    * @return { jsx } jsx
    */
   const showPages = () => {
@@ -36,6 +38,7 @@ const Pagination = ({ pageNumber, currentPaginatePage, onPaginateClick }) => {
   };
   /**
    * @description renders pagination
+   *
    * @return { jsx } jsx
    */
   return (

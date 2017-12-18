@@ -1,22 +1,20 @@
 import models from '../models';
 import sendMailToGroup from '../mail/sendMailToGroup';
-import { decodeUser } from '../middleware/authenticate';
 
 export default {
   /**
-   *@description handles posting messages to groups
+   * @description handles posting messages to groups
    *
-   * @param {req} req
-   * @param {res} res
-   * @return {groupMessage} groupMessage
+   * @param { object } req contains message details
+   * @param { object } res contains user and message details
+   *
+   * @return { object } groupMessage
    */
   postMessageToGroup(req, res) {
     const { content, priority } = req.body;
     const groupId = req.params.id;
+    const authUser = req.decoded.user;
 
-    // gets decoded user//
-    const authUser = decodeUser(req);
-    // creates message
     models.Message.create({
       content,
       priority,
@@ -24,7 +22,6 @@ export default {
       author: authUser.username,
       groupId
     }).then((newMessage) => {
-      // send email notification
       if (priority === 'urgent' || priority === 'critical') {
         sendMailToGroup(req, authUser.id, newMessage.content);
       }
@@ -33,23 +30,23 @@ export default {
         newMessage
       });
     })
-      .catch(error => res.status(500).send(error));
+      .catch(error => res.status(500).send({ error: error.message }));
   },
   /**
-   *@description handles retrieving group messages
+   * @description handles retrieving group messages
    *
-   * @param { req } req
-   * @param { res } res
-   * @return { groupMessages } groupMessages
+   * @param { object } req contains group details
+   * @param { object } res contains group messages
+   *
+   * @return { object } groupMessages
    */
   getGroupMessages(req, res) {
-    // retrieve all group messages
     models.Message
       .findAll({ where: { groupId: req.params.id } })
       .then(messages => res.status(200).send({
         messages
       }))
-      .catch(error => res.status(500).send(error));
+      .catch(error => res.status(500).send({ error: error.message }));
   },
 };
 

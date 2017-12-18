@@ -1,23 +1,26 @@
 import { browserHistory } from 'react-router';
-// check if the user is authenticated//
-// make sure pages other login,register are protected
 /**
- * @return { jwtToken } jwtTokn
+ * @description gets user token in localStorage
+ *
+ * @return { string } jwtTokn
  */
 export const getAccessToken = () => localStorage.getItem('POSTIT_ACCESS_TOKEN');
 /**
- * @return { boolean } boolean
+ * @description checks if user is authenticated
+ *
+ * @return { boolean } accessToken
  */
 export const isLoggedIn = () => {
-  // future check if token is expired//
   const accessToken = getAccessToken();
   return !!accessToken;
 };
 /**
+ * @description handles authentication check
  *
- * @param { nextState } nextState
- * @param { replace } replace
- * @return { route } route
+ * @param { object } nextState
+ * @param { object } replace
+ *
+ *  @return { object } route object
  */
 export const requireAuth = (nextState, replace) => {
   if (!isLoggedIn()) {
@@ -25,10 +28,12 @@ export const requireAuth = (nextState, replace) => {
   }
 };
 /**
+ * @description handles authentication check
  *
- * @param { nextState } nextState
- * @param { replace } replace
- * @return { route } route
+ * @param { object } nextState
+ * @param { object } replace
+ *
+ * @return {object } route object
  */
 export const noRequireAuth = (nextState, replace) => {
   if (isLoggedIn()) {
@@ -36,22 +41,27 @@ export const noRequireAuth = (nextState, replace) => {
   }
 };
 /**
- * @return { emptyToken } emptyToken
+ * @description clears token on logout
+ *
+ * @return { string } emptyToken
  */
 export const clearAccessToken = () => {
   localStorage.removeItem('POSTIT_ACCESS_TOKEN');
   localStorage.removeItem('USER_ACCESS');
 };
 /**
- * @return { route } route
+ * @description handles logout
+ *
+ * @return { object } route object
  */
 export const logout = () => {
   clearAccessToken();
   browserHistory.push('/signin');
 };
 /**
+ * @description gets user deciphered id
  *
- * @return { userAccessId } accessId
+ * @return { integer } accessId
  */
 export const getAuthUser = () => localStorage.getItem('USER_ACCESS');
 

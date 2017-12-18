@@ -42,12 +42,7 @@ app.get('/*', (req, res) => {
 app.all('/*', (req, res) => res.status(404).send({
   message: 'Resource not found!',
 }));
-// routes(app);
 
-app.listen(port, (err) => {
-  if (err) {
-    console.log(err);
-  }
-});
+app.listen(port);
 
 export default app;

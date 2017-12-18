@@ -4,7 +4,10 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 
 /**
- * @param { initialState } initialState
+ * @description configures redux store for development
+ *
+ * @param { object } initialState
+ *
  * @return { store } store
  */
 export default function configureStore(initialState) {
