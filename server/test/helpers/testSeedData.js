@@ -147,3 +147,5 @@ export const checkPassword = {
   username: 'grapejuice',
   password: 'grapejuiced800'
 };
+
+export const invalidToken = '1VDE2OjQzOjI2Ljk1OFoifSwiaWF0IjoxN';

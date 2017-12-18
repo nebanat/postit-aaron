@@ -5,6 +5,8 @@ import InputLine from '../../../src/components/common/InputLine.jsx';
 
 let props;
 /**
+ * @description shallow mounts the input field
+ *
  * @return { shallow } shallow
  */
 function setup() {

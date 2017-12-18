@@ -5,13 +5,15 @@ import CreateGroupModal from './CreateGroupModal.jsx';
 /**
  *@description handles creating a new group
  *
- * @class
- * @extends component
+ * @class CreateGroup
+ *
+ * @extends Component
  */
 class CreateGroup extends Component {
   /**
    * @constructor
-   * @param { props }  props
+   *
+   * @param { object }  props
    */
   constructor(props) {
     super(props);
@@ -34,9 +36,11 @@ class CreateGroup extends Component {
     };
   }
   /**
+   * @description handles on blur event
    *
-   * @param { event } event
-   * @return { errorMessage } errorMessage
+   * @param { object } event
+   *
+   * @return { object } errorMessage
    */
   onBlur(event) {
     const { name } = event.target;
@@ -67,9 +71,9 @@ class CreateGroup extends Component {
     }
   }
   /**
-   *@description reset state
+   * @description handles on focus event
    *
-   * @return { errorMessage } errorMessage
+   * @return { object } errorMessage
    */
   onFocus() {
     this.setState({
@@ -78,7 +82,7 @@ class CreateGroup extends Component {
     });
   }
   /**
-   * @return { modal } modal
+   * @return { * } null
    */
   componentDidMount() {
     $('.modal').modal({
@@ -86,9 +90,11 @@ class CreateGroup extends Component {
     });
   }
   /**
+   * @description handles on submit event for creating group
    *
-   * @param { event } event
-   * @return { group } group
+   * @param { object } event
+   *
+   * @return { object } group
    */
   handleGroupSubmit(event) {
     event.preventDefault();
@@ -96,8 +102,11 @@ class CreateGroup extends Component {
     return this.setState({ group: this.state.initialState });
   }
   /**
-   * @param { event } event
-   * @returns { state } state
+   * @description handles on change event
+   *
+   * @param { object } event
+   *
+   * @returns { object } state contains group detail
    */
   setGroupDetail(event) {
     const field = event.target.name;

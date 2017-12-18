@@ -26,47 +26,53 @@ describe('Group Async Actions', () => {
   });
   afterEach(() => moxios.uninstall());
 
-  it('should create GROUP_IS_LOADING and FETCH_USER_GROUP_SUCCESS ', (done) => {
-    moxios.stubRequest('/api/group/user', {
-      status: 200,
-      response: groups
-    });
+  it(
+    'should create GROUP_IS_LOADING and FETCH_USER_GROUP_SUCCESS ',
+    (done) => {
+      moxios.stubRequest('/api/group/user', {
+        status: 200,
+        response: groups
+      });
 
-    const expectedActions = [
-      { type: types.GROUP_IS_LOADING, bool: true },
-      { type: types.FETCH_USER_GROUPS_SUCCESS, groups },
-      { type: types.GROUP_IS_LOADING, bool: false }
-    ];
+      const expectedActions = [
+        { type: types.GROUP_IS_LOADING, bool: true },
+        { type: types.FETCH_USER_GROUPS_SUCCESS, groups },
+        { type: types.GROUP_IS_LOADING, bool: false }
+      ];
 
-    const store = mockStore();
+      const store = mockStore();
 
-    return store.dispatch(groupActions.fetchUserGroups()).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
-  });
-  it('should create GROUP_IS_LOADING and toast an error for fetching user groups ', (done) => {
-    moxios.stubRequest('/api/group/user', {
-      status: 400,
-      response: {
-        data: {
-          message: 'an error occured'
+      return store.dispatch(groupActions.fetchUserGroups()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
+    }
+  );
+  it(
+    'should create GROUP_IS_LOADING and toast an error for fetching user groups ',
+    (done) => {
+      moxios.stubRequest('/api/group/user', {
+        status: 400,
+        response: {
+          data: {
+            message: 'an error occured'
+          }
         }
-      }
-    });
+      });
 
-    const expectedActions = [
-      { type: types.GROUP_IS_LOADING, bool: true },
-      { type: types.GROUP_IS_LOADING, bool: false }
-    ];
+      const expectedActions = [
+        { type: types.GROUP_IS_LOADING, bool: true },
+        { type: types.GROUP_IS_LOADING, bool: false }
+      ];
 
-    const store = mockStore();
+      const store = mockStore();
 
-    return store.dispatch(groupActions.fetchUserGroups()).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
-  });
+      return store.dispatch(groupActions.fetchUserGroups()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
+    }
+  );
   it('should create GROUP_IS_LOADING and CREATE_GROUP_SUCCESS ', (done) => {
     moxios.stubRequest('/api/group', {
       status: 200,
@@ -91,45 +97,51 @@ describe('Group Async Actions', () => {
       done();
     });
   });
-  it('should create GROUP_IS_LOADING and toast an error for create group ', (done) => {
-    moxios.stubRequest('/api/group', {
-      status: 400,
-      response: {
-        data: {
-          message: 'an error occured'
+  it(
+    'should create GROUP_IS_LOADING and toast an error for create group ',
+    (done) => {
+      moxios.stubRequest('/api/group', {
+        status: 400,
+        response: {
+          data: {
+            message: 'an error occured'
+          }
         }
-      }
-    });
+      });
 
-    const expectedActions = [
-      { type: types.GROUP_IS_LOADING, bool: true },
-      { type: types.GROUP_IS_LOADING, bool: false }
-    ];
+      const expectedActions = [
+        { type: types.GROUP_IS_LOADING, bool: true },
+        { type: types.GROUP_IS_LOADING, bool: false }
+      ];
 
-    const store = mockStore();
+      const store = mockStore();
 
-    return store.dispatch(groupActions.createGroup(group)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
-  });
-  it('should create GROUP_IS_LOADING and FETCH_GROUP_USERS_SUCCESS ', (done) => {
-    moxios.stubRequest('/api/group/1/users', {
-      status: 200,
-      response: [{ id: 1, username: 'userone', email: 'userone@gmail.com' }]
-    });
+      return store.dispatch(groupActions.createGroup(group)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
+    }
+  );
+  it(
+    'should create GROUP_IS_LOADING and FETCH_GROUP_USERS_SUCCESS ',
+    (done) => {
+      moxios.stubRequest('/api/group/1/users', {
+        status: 200,
+        response: [{ id: 1, username: 'userone', email: 'userone@gmail.com' }]
+      });
 
-    const expectedActions = [
-      { type: types.FETCH_GROUP_USERS_SUCCESS, groupUsers },
-    ];
+      const expectedActions = [
+        { type: types.FETCH_GROUP_USERS_SUCCESS, groupUsers },
+      ];
 
-    const store = mockStore();
+      const store = mockStore();
 
-    return store.dispatch(groupActions.fetchGroupUsers(group.id)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
-  });
+      return store.dispatch(groupActions.fetchGroupUsers(group.id)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
+    }
+  );
   it('should toast an error for fetch group users', (done) => {
     moxios.stubRequest('/api/group/1/users', {
       status: 400,
@@ -162,10 +174,11 @@ describe('Group Async Actions', () => {
 
     const store = mockStore();
 
-    return store.dispatch(groupActions.addUserToGroup(group.id, user.id)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
+    return store
+      .dispatch(groupActions.addUserToGroup(group.id, user.id)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
   });
   it('should toast an error for add a user to group', (done) => {
     const user = { id: 1, username: 'userone', email: 'userone@gmail.com' };
@@ -182,10 +195,11 @@ describe('Group Async Actions', () => {
 
     const store = mockStore();
 
-    return store.dispatch(groupActions.addUserToGroup(group.id, user.id)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
+    return store
+      .dispatch(groupActions.addUserToGroup(group.id, user.id)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
   });
   it('should create EXIT_GROUP action and toast a message ', (done) => {
     moxios.stubRequest('/api/group/1/exit', {
@@ -201,10 +215,11 @@ describe('Group Async Actions', () => {
 
     const store = mockStore();
 
-    return store.dispatch(groupActions.leaveGroup(group.id, groupIndex)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
+    return store
+      .dispatch(groupActions.leaveGroup(group.id, groupIndex)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
   });
   it('should toast an error for exit group action', (done) => {
     moxios.stubRequest('/api/group/1/exit', {
@@ -220,30 +235,35 @@ describe('Group Async Actions', () => {
 
     const store = mockStore();
 
-    return store.dispatch(groupActions.leaveGroup(group.id, groupIndex)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
+    return store
+      .dispatch(groupActions.leaveGroup(group.id, groupIndex)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
   });
-  it('should create EXIT_GROUP action and toast a message for delete group ', (done) => {
-    moxios.stubRequest('/api/group/1', {
-      status: 200,
-      response: {
-        message: 'Action was successful'
-      }
-    });
+  it(
+    'should create EXIT_GROUP action and toast a message for delete group ',
+    (done) => {
+      moxios.stubRequest('/api/group/1', {
+        status: 200,
+        response: {
+          message: 'Action was successful'
+        }
+      });
 
-    const expectedActions = [
-      { type: types.EXIT_GROUP, index: groupIndex },
-    ];
+      const expectedActions = [
+        { type: types.EXIT_GROUP, index: groupIndex },
+      ];
 
-    const store = mockStore();
+      const store = mockStore();
 
-    return store.dispatch(groupActions.deleteGroup(group.id, groupIndex)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
-  });
+      return store
+        .dispatch(groupActions.deleteGroup(group.id, groupIndex)).then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    }
+  );
   it('should toast an error for delete group action', (done) => {
     moxios.stubRequest('/api/group/1', {
       status: 400,
@@ -258,30 +278,36 @@ describe('Group Async Actions', () => {
 
     const store = mockStore();
 
-    return store.dispatch(groupActions.deleteGroup(group.id, groupIndex)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
+    return store
+      .dispatch(groupActions.deleteGroup(group.id, groupIndex)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
   });
-  it('should create REMOVE_GROUP_MEMBER action and toast a message for removing a group member ', (done) => {
-    moxios.stubRequest('/api/group/1/remove/member', {
-      status: 200,
-      response: {
-        message: 'Action was successful'
-      }
-    });
+  it(
+    'should create REMOVE_GROUP_MEMBER action and toast a message for removing a group member ',
+    (done) => {
+      moxios.stubRequest('/api/group/1/remove/member', {
+        status: 200,
+        response: {
+          message: 'Action was successful'
+        }
+      });
 
-    const expectedActions = [
-      { type: types.REMOVE_GROUP_MEMBER, userIndex },
-    ];
+      const expectedActions = [
+        { type: types.REMOVE_GROUP_MEMBER, userIndex },
+      ];
 
-    const store = mockStore();
+      const store = mockStore();
 
-    return store.dispatch(groupActions.deleteGroupMember(group.id, userId, userIndex)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
-  });
+      return store
+        .dispatch(groupActions.deleteGroupMember(group.id, userId, userIndex))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    }
+  );
   it('should toast an error for remove group member action', (done) => {
     moxios.stubRequest('/api/group/1/remove/member', {
       status: 400,
@@ -296,9 +322,11 @@ describe('Group Async Actions', () => {
 
     const store = mockStore();
 
-    return store.dispatch(groupActions.deleteGroupMember(group.id, userId, userIndex)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
+    return store
+      .dispatch(groupActions
+        .deleteGroupMember(group.id, userId, userIndex)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
   });
 });

@@ -2,10 +2,12 @@ import * as types from '../actions/actionTypes';
 
 
 /**
+ * @description holds password loader
  *
- * @param { state } state
- * @param { action } action
- * @return { passwordLoading } passwordLoading
+ * @param { boolean } state
+ * @param { object } action
+ *
+ * @return { boolean } passwordLoading
  */
 export default (state = false, action) => {
   switch (action.type) {

@@ -1,6 +1,6 @@
 import expect from 'expect';
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import Group from '../../../src/components/group/Group.jsx';
 
 let event;
@@ -60,12 +60,4 @@ describe('<Group/>', () => {
     wrapper.instance().onSearchChange(event);
     expect(handleChangeSpy).toHaveBeenCalledTimes(1);
   });
-  // it(`should call the addUserToGroup method when the add user button is 
-  // clicked`, () => {
-  //     const wrapper = setup(false);
-  //     const addUserToGroupSpy = jest.spyOn(wrapper.instance(), 'onAddUser');
-  //     const addUserButton = wrapper.find('.non-members');
-  //     addUserButton.simulate('click');
-  //     expect(addUserToGroupSpy).toHaveBeenCalledTimes(1);
-  //   });
 });

@@ -48,10 +48,8 @@ export default (sequelize, DataTypes) => {
 
   });
   Message.associate = function (models) {
-    // relationship between messages and user//
     Message.belongsTo(models.User, { foreignKey: 'userId', as: 'message' });
 
-    // relationship between messages and group//
     Message.belongsTo(models.Group, { foreignKey: 'groupId', as: 'user' });
   };
   return Message;

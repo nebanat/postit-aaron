@@ -1,7 +1,6 @@
 import expect from 'expect';
 import React from 'react';
 import { shallow } from 'enzyme';
-// import TestUtils from 'react-addons-test-utils';
 import Button from '../../../src/components/common/Button.jsx';
 /**
  * @return { shallow } shallow

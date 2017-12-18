@@ -3,8 +3,7 @@ import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../app';
 import models from '../../models';
-import { user1token } from '../helpers/testSeedData';
-import token from '../helpers/token';
+import { user1token, invalidToken } from '../helpers/testSeedData';
 
 chai.use(chaiHttp);
 
@@ -35,10 +34,10 @@ describe('MESSAGES API', () => {
     it('should throw an error if an invalid token is provided', (done) => {
       chai.request(app)
         .post('/api/group/1/message')
-        .set('x-access-token', token)
+        .set('x-access-token', invalidToken)
         .send({})
         .end((err, res) => {
-          expect(res.status).to.equal(400);
+          expect(res.status).to.equal(403);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Failed to authenticate token');

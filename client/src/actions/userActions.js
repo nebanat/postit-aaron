@@ -3,9 +3,11 @@ import * as types from './actionTypes';
 import * as api from '../utils/postItApi';
 
 /**
+ * @description handles authentication loading
  *
- * @param { bool } bool
- * @return { authLoadingObject } authLoadingObject
+ * @param { boolean } bool
+ *
+ * @return { object } auth loader
  */
 export const authIsLoading = bool => ({
   type: types.AUTH_IS_LOADING,
@@ -14,9 +16,11 @@ export const authIsLoading = bool => ({
 
 
 /**
+ * @description handles sign up user
  *
- * @param { user } user
- * @return { object } user
+ * @param { object } user holds user details
+ *
+ * @return { object } user holds user details
  *
  */
 export const signUpUser = user => (dispatch) => {
@@ -40,9 +44,11 @@ export const signUpUser = user => (dispatch) => {
     });
 };
 /**
+ * @description handles sign in success
  *
- * @param { authenticatedUser } authenticatedUser
- * @return { object } action
+ * @param { object } authenticatedUser
+ *
+ * @return { object } sign in success
  */
 export const signInSuccess = authenticatedUser => ({
   type: types.SIGN_IN_SUCCESS,
@@ -50,8 +56,10 @@ export const signInSuccess = authenticatedUser => ({
 });
 
 /**
+ * @description handles sign in user
  *
- * @param { user } user object
+ * @param { object } user holds user details
+ *
  * @return { Object } user
  */
 export const signInUser = user => (dispatch) => {
@@ -69,7 +77,7 @@ export const signInUser = user => (dispatch) => {
       dispatch(authIsLoading(false));
 
       Materialize.toast(response.data.message, 1500, 'green');
-      // redirect to dashboard
+
       browserHistory.push({
         pathname: '/dashboard',
       });

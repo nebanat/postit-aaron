@@ -1,16 +1,16 @@
 import models from '../models';
-import { decodeUser } from '../middleware/authenticate';
 
 export default {
   /**
-   *@description handles creating new group
+   * @description handles creating new group
    *
-   * @param { req } req
-   * @param { res } res
-   * @return { newGroup } newGroup
+   * @param { object } req contains group name and description
+   * @param { object } res contains group data and success message
+   *
+   * @return { object } newgroup object
    */
   createNewGroup(req, res) {
-    const authUser = decodeUser(req);
+    const userId = req.decoded.user.id;
     const { description } = req.body;
     const name = req.body.name.toLowerCase();
 
@@ -20,8 +20,7 @@ export default {
         description
       })
       .then((group) => {
-        /** adds group creator to group */
-        group.addUser(authUser.id);
+        group.addUser(userId);
 
 
         return res.status(201).send({
@@ -32,20 +31,19 @@ export default {
       .catch(error => res.status(500).send({ error: error.message }));
   },
   /**
-   *@description handles getting authusers groups
+   * @description handles getting authusers groups
    *
-   * @param { req } req
-   * @param { res } res
-   * @return { groups } groups
+   * @param { object } req contains authenticated user details
+   * @param { object } res contains an array of groups
+   *
+   * @return { object } groups
    */
   getAuthUserGroups(req, res) {
-    const authUser = decodeUser(req);
-    const userId = authUser.id;
+    const userId = req.decoded.user.id;
 
     models.User
       .findById(userId)
       .then((user) => {
-      /* Checks to see if the user exist */
         if (!user) {
           return res.status(404).send({
             message: 'User does not exist'
@@ -57,24 +55,27 @@ export default {
       .catch(error => res.status(500).send({ error: error.message }));
   },
   /**
-   *@description handles retrieving group members
+   * @description handles retrieving group members
    *
-   * @param { req } req
-   * @param { res } res
-   * @return { groupMembers } groupMembers
+   * @param { object } req contains group data
+   * @param { object } res contains group members
+   *
+   * @return { object } groupMembers
    */
   getGroupMembers(req, res) {
     const { group } = req;
 
     group.getUsers({ attributes: ['id', 'username', 'email'] })
-      .then(groupUsers => res.status(200).send(groupUsers));
+      .then(groupUsers => res.status(200).send(groupUsers))
+      .catch(error => res.status(500).send({ error: error.message }));
   },
   /**
-   *@description handles adding a user to a group
+   * @description handles adding a user to a group
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { newMember} newMember
+   * @param { object } req contains user and group data
+   * @param { object } res contains user data
+   *
+   * @return { object } newMember
    */
   addUserToGroup(req, res) {
     const { userId } = req.body;
@@ -96,16 +97,16 @@ export default {
       .catch(error => res.status(500).send({ error: error.message }));
   },
   /**
-   *@description handles user exiting a group
+   * @description handles user exiting a group
    *
-   * @param { req } req
-   * @param { res } res
-   * @return { groupUser } groupUser
+   * @param { object } req contains user and group details
+   * @param { object } res contains success message
+   *
+   * @return { object } groupUser
    */
   exitGroup(req, res) {
     const { group } = req;
-    const authUser = decodeUser(req);
-    const userId = authUser.id;
+    const userId = req.decoded.user.id;
 
     group.hasUser(userId).then((result) => {
       if (!result) {
@@ -119,14 +120,15 @@ export default {
       return res.status(200).send({
         message: 'You have successfully exited group'
       });
-    });
+    }).catch(error => res.status(500).send({ error: error.message }));
   },
   /**
-   *@description handles deleting a group
+   * @description handles deleting a group
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { deleteMessage } deleteMessage
+   * @param { object } req contains group details
+   * @param { object } res contains delete success message
+   *
+   * @return { object } deleteMessage
    */
   deleteGroup(req, res) {
     const { group } = req;
@@ -134,14 +136,15 @@ export default {
     group.destroy()
       .then(() => res.status(200).send({
         message: 'Group successfully deleted',
-      }));
+      })).catch(error => res.status(500).send({ error: error.message }));
   },
   /**
-   *@description handles removing a user from a group
+   * @description handles removing a user from a group
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { removeMemberMessage } removeMemberMessage
+   * @param { object } req contains user and group details
+   * @param { object } res contains remove member message
+   *
+   * @return { object } removeMemberMessage
    */
   removeGroupMember(req, res) {
     const { userId } = req.body;
@@ -159,6 +162,6 @@ export default {
       return res.status(200).send({
         message: 'You have successfully removed user from group'
       });
-    });
+    }).catch(error => res.status(500).send({ error: error.message }));
   }
 };

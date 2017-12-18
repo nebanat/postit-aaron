@@ -6,7 +6,8 @@ import Button from '../common/Button.jsx';
 /**
  *@description displays create group form
  *
- * @param { props } props
+ * @param { object } props
+ *
  * @returns { jsx } jsx
  */
 const CreateGroupForm = ({

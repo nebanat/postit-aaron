@@ -4,9 +4,10 @@ import InputField from '../../common/InputField.jsx';
 import Button from '../../common/Button.jsx';
 
 /**
- *@description displays reset password form
+ * @description displays reset password form
  *
- * @param { props } props
+ * @param { object } props contains user details and form actions
+ *
  * @returns { jsx } jsx
  */
 const ResetPasswordForm = ({

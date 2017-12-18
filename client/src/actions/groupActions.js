@@ -3,18 +3,22 @@ import * as types from './actionTypes';
 import * as api from '../utils/postItApi';
 
 /**
+ * @description handles loading for groups
  *
- * @param { bool } bool
- * @return { groupLoading } groupLoading
+ * @param { boolean } bool contains loader state
+ *
+ * @return { object } groupLoadingAction
  */
 export const groupIsLoading = bool => ({
   type: types.GROUP_IS_LOADING,
   bool
 });
 /**
+ * @description handles create group success
  *
- * @param { group } group
- * @return { group } group
+ * @param { object } group contains group
+ *
+ * @return { object } createGroup action
  */
 export const createGroupSuccess = group => ({
   type: types.CREATE_GROUP_SUCCESS,
@@ -22,9 +26,11 @@ export const createGroupSuccess = group => ({
 });
 
 /**
+ * @description handles create group success
  *
- * @param { group } group
- * @return { group } group
+ * @param { object } group contains group details
+ *
+ * @return { object } group
  *
  */
 export const createGroup = group => (dispatch) => {
@@ -48,9 +54,11 @@ export const createGroup = group => (dispatch) => {
     });
 };
 /**
+ * @description handles fetch group success
  *
- * @param { groups } groups
- * @return { actionObject } actionObject
+ * @param { object } groups
+ *
+ * @return { object } fetchUserGroupSuccess
  */
 export const fetchUserGroupsSuccess = groups => ({
   type: types.FETCH_USER_GROUPS_SUCCESS,
@@ -58,7 +66,9 @@ export const fetchUserGroupsSuccess = groups => ({
 });
 
 /**
- * @return { userGroups } userGroups
+ * @description handles fetching user groups
+ *
+ * @return { array } userGroups
  */
 export const fetchUserGroups = () => {
   const { Materialize } = window;
@@ -76,9 +86,11 @@ export const fetchUserGroups = () => {
   };
 };
 /**
+ * @description handles fetching group users success
  *
- * @param {groupUsers} groupUsers
- * @return { groupUsersObject } groupUsersObject
+ * @param { array } groupUsers
+ *
+ * @return { array } groupUsers
  */
 export const fetchGroupUsersSuccess = groupUsers => ({
   type: types.FETCH_GROUP_USERS_SUCCESS,
@@ -86,8 +98,11 @@ export const fetchGroupUsersSuccess = groupUsers => ({
 });
 
 /**
- * @param { groupId } groupId
- * @return { groupUsers } groupUsers
+ * @description handles fetching group users
+ *
+ * @param { integer } groupId
+ *
+ * @return { array } groupUsers
  */
 export const fetchGroupUsers = (groupId) => {
   const { Materialize } = window;
@@ -100,18 +115,23 @@ export const fetchGroupUsers = (groupId) => {
     });
 };
 /**
+ * @description handles add user to group success
  *
- * @param { groupUser } groupUser
- * @return { groupUsersObject } groupUsersObject
+ * @param { object } groupUser
+ *
+ * @return { array } groupUsers
  */
 export const addUserToGroupSuccess = groupUser => ({
   type: types.ADD_USER_TO_GROUP,
   groupUser
 });
 /**
- * @param { groupId } groupId
- * @param { userId } userId
- * @return { groupUsers } groupUsers
+ * @description handles create group success
+ *
+ * @param { integer } groupId
+ * @param { integer } userId
+ *
+ * @return { array } groupUsers
  */
 export const addUserToGroup = (groupId, userId) => {
   const { Materialize } = window;
@@ -125,18 +145,23 @@ export const addUserToGroup = (groupId, userId) => {
     });
 };
 /**
+ * @description handles create group success
  *
- * @param { index } index
- * @return { actionObject } actionObject
+ * @param { integer } index
+ *
+ * @return { object } leave group
  */
 export const leaveGroupSuccess = index => ({
   type: types.EXIT_GROUP,
   index
 });
 /**
- * @param { groupId } groupId
- * @param { groupIndex } groupIndex
- * @return { exitMessage } exitMessage
+ * @description handles create group success
+ *
+ * @param { integer } groupId
+ * @param { integer } groupIndex
+ *
+ * @return { object } exitMessage
  */
 export const leaveGroup = (groupId, groupIndex) => {
   const { Materialize } = window;
@@ -154,10 +179,12 @@ export const leaveGroup = (groupId, groupIndex) => {
     });
 };
 /**
+ * @description handles delete group
  *
- * @param { groupId } groupId
- * @param { groupIndex } groupIndex
- * @return { deleteMessage } deleteMessage
+ * @param { integer } groupId
+ * @param { integer } groupIndex
+ *
+ * @return { object } deleteMessage
  */
 export const deleteGroup = (groupId, groupIndex) => {
   const { Materialize } = window;
@@ -175,20 +202,24 @@ export const deleteGroup = (groupId, groupIndex) => {
     });
 };
 /**
+ * @description handles delete group member success
  *
- * @param { userIndex } userIndex
- * @return { actionObject } actionObject
+ * @param { integer } userIndex
+ *
+ * @return { object } delete group member success
  */
 export const deleteGroupMemberSuccess = userIndex => ({
   type: types.REMOVE_GROUP_MEMBER,
   userIndex
 });
 /**
+* @description handles create group success
 *
-* @param { groupId } groupId
-* @param { userId } userId
-* @param { userIndex } userIndex
-* @return { deleteMessage } deleteMessage
+* @param { integer } groupId
+* @param { integer } userId
+* @param { integer } userIndex
+*
+* @return { object } deleteMessage
 */
 export const deleteGroupMember = (groupId, userId, userIndex) => {
   const { Materialize } = window;

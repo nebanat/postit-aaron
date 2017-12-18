@@ -6,7 +6,8 @@ import Button from '../common/Button.jsx';
 /**
  * @description displays group header
  *
- * @param { props } props
+ * @param { object } props
+ *
  * @returns { jsx } jsx
  */
 const GroupHeader = ({ headerText, onExitGroup, onDeleteGroup }) => {
@@ -30,6 +31,8 @@ const GroupHeader = ({ headerText, onExitGroup, onDeleteGroup }) => {
     </div>
   );
   /**
+   * @description shows delete button
+   *
    * @return { jsx } jsx
   */
   const showDeleteGroup = () => (
@@ -43,6 +46,8 @@ const GroupHeader = ({ headerText, onExitGroup, onDeleteGroup }) => {
     </Button>
   );
   /**
+   * @description shows group link
+   *
    * @return { jsx } jsx
    */
   const showGroupLink = () => (

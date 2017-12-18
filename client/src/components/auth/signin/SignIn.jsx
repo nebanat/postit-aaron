@@ -13,13 +13,15 @@ import Footer from '../../footer/Footer.jsx';
 /**
  * @description handles user sign in
  *
- * @class
+ * @class SignIn
+ *
  * @extends Component
  */
 export class SignIn extends Component {
   /**
+   * @constructor
    *
-   * @param { props } props
+   * @param { object } props
    *
    */
   constructor(props) {
@@ -41,9 +43,11 @@ export class SignIn extends Component {
     };
   }
   /**
+   * @description handles on focus event
    *
-   * @param { event } event
-   * @return { errorMessage } errorMessage
+   * @param { object } event
+   *
+   * @return { object } state contains error handler
    */
   onFocus(event) {
     const { name } = event.target;
@@ -66,9 +70,11 @@ export class SignIn extends Component {
     }
   }
   /**
+   * @description handles on blur event
    *
-   * @param { event } event
-   * @return { errorMessage } errorMessage
+   * @param { object } event
+   *
+   * @return { object } state contains error handler
    */
   onBlur(event) {
     const { name } = event.target;
@@ -98,8 +104,9 @@ export class SignIn extends Component {
   /**
    *@description fires an action to sign in a user
    *
-   * @param { event } event
-   * @return { action } action
+   * @param { object } event
+   *
+   * @return { object } action signs in user
    */
   signInUser(event) {
     event.preventDefault();
@@ -107,10 +114,11 @@ export class SignIn extends Component {
     this.props.actions.userActions.signInUser(this.state.user);
   }
   /**
-   *@description set users details onchange
+   * @description set users details onchange
    *
-   * @param { event } event
-   * @returns { state } state
+   * @param { object } event
+   *
+   * @returns { object } state contains user details
    */
   setUserDetails(event) {
     const field = event.target.name;
@@ -121,7 +129,9 @@ export class SignIn extends Component {
   }
 
   /**
-  * @return { jsx } jsx
+   * @description renders signin form
+   *
+   * @return { jsx } jsx
   */
   render() {
     const { authIsLoading } = this.props;
@@ -168,9 +178,11 @@ export class SignIn extends Component {
   }
 }
 /**
+ * @description maps state to props
  *
- * @param { state } state
- * @return { states } states
+ * @param { object } state
+ *
+ * @return { object } props contains sign in details
  */
 export const mapStateToProps = state => ({
   signInErrorMessage: state.signInErrorMessage,
@@ -178,9 +190,11 @@ export const mapStateToProps = state => ({
   authenticatedUser: state.authenticatedUser,
 });
 /**
+ * @description maps dispatch events to props
  *
- * @param {  dispatch } dispatch
- * @return { actions } actions
+ * @param { object } dispatch
+ *
+ * @return { object } props
  */
 export const mapDispatchToProps = dispatch => ({
   actions: {

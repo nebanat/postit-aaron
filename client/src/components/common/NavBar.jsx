@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 /**
  * @description defines NavBar component
  *
- * @param { props } props
+ * @param { object } props
+ *
  * @return { jsx } jsx
  */
 const NavBar = ({

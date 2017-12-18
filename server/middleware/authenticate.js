@@ -3,21 +3,22 @@ import decode from 'jwt-decode';
 
 require('dotenv').config();
 /**
+ * @description verifies user token
  *
- * @param {req} req
- * @param {res} res
- * @param {next} next
- * @return {message} message
+ * @param { object } req contains jwt token
+ * @param { object } res contains message
+ * @param { object } next
+ *
+ * @return { object } message
  */
 export default (req, res, next) => {
   const token = req.body.token ||
     req.query.token || req.headers['x-access-token'];
 
   if (token) {
-    // verifies token//;
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
       if (err) {
-        return res.status(400).json({
+        return res.status(403).json({
           success: false,
           message: 'Failed to authenticate token'
         });
@@ -33,10 +34,12 @@ export default (req, res, next) => {
   }
 };
 /**
+ *@description decodes user token
  *
- * @param {req} req
- * @param {res} res
- * @return {userId} userId
+ * @param { object } req contains token
+ * @param { object } res contains user details
+ *
+ * @return { object } user
  */
 export const decodeUser = (req) => {
   const token = req.body.token ||

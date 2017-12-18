@@ -11,9 +11,10 @@ import Section from '../../common/Section.jsx';
 import Footer from '../../footer/Footer.jsx';
 
 /**
- *@description handles sending password reset email link
+ * @description handles sending password reset email link
  *
- * @class
+ * @class Password
+ *
  * @extends Component
  */
 export class Password extends Component {
@@ -40,9 +41,11 @@ export class Password extends Component {
     };
   }
   /**
+   * @description handles on blur event
    *
-   * @param { event } event
-   * @return { errorMessage } errorMessage
+   * @param { object } event
+   *
+   * @return { object } errorMessage
    */
   onBlur(event) {
     const { name } = event.target;
@@ -68,9 +71,11 @@ export class Password extends Component {
     }
   }
   /**
+   * @description handles on focus event
    *
-   * @param { event } event
-   * @return { errorMessage } errorMessage
+   * @param { object } event
+   *
+   * @return { object } errorMessage
    */
   onFocus(event) {
     const { name } = event.target;
@@ -87,9 +92,11 @@ export class Password extends Component {
     }
   }
   /**
+   *@description handles on submit event
    *
-   * @param { event } event
-   * @returns { event } method
+   * @param { object } event
+   *
+   * @returns { object } user state contains email
    */
   handleResetOnSubmit(event) {
     event.preventDefault();
@@ -101,8 +108,11 @@ export class Password extends Component {
     return this.setState({ user: this.state.initialState });
   }
   /**
-   * @param { event } event
-   * @returns { state } state
+   * @description handles on change event
+   *
+   * @param { object } event
+   *
+   * @returns { object } user state contains email
    */
   setUserEmail(event) {
     const field = event.target.name;
@@ -112,6 +122,8 @@ export class Password extends Component {
     return this.setState({ user: this.state.user });
   }
   /**
+   *@description renders password form
+   *
    * @returns { jsx } jsx
    */
   render() {
@@ -157,9 +169,11 @@ export class Password extends Component {
   }
 }
 /**
+ *@description maps state to props
  *
- * @param { state } state
- * @return { state } state
+ * @param { object} state
+ *
+ * @return { object } props
  */
 const mapStateToProps = state => ({
   sendResetSuccessMessage: state.sendResetSuccessMessage,
@@ -167,9 +181,11 @@ const mapStateToProps = state => ({
   passwordIsLoading: state.passwordIsLoading
 });
 /**
+ * @description maps dispatch to props
  *
- * @param { dispatch } dispatch
- * @return { actions } actions
+ * @param { object } dispatch
+ *
+ * @return { object } props
  */
 const mapDispatchToProps = dispatch => ({
   actions: {

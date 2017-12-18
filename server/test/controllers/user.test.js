@@ -176,7 +176,7 @@ describe('User Controllers', () => {
             password: 'wrongpassword',
           })
           .end((err, res) => {
-            expect(res.status).to.equal(400);
+            expect(res.status).to.equal(401);
             expect(res.body).to.be.an('object');
             expect(res.body).to.have.property('message');
             expect(res.body.message).to.equal('Invalid username or password');

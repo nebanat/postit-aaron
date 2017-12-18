@@ -2,8 +2,12 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 
+
 /**
- * @param { initialState } initialState
+ * @description configures redux store for production
+ *
+ * @param { object } initialState
+ *
  * @return { store } store
  */
 export default function configureStore(initialState) {

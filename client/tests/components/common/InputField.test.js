@@ -3,7 +3,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import InputField from '../../../src/components/common/InputField.jsx';
 /**
- * @return { shallow } shallow
+ * @description shallow mounts the input field
+ *
+ * @return { * } null
  */
 function setup() {
   const props = {

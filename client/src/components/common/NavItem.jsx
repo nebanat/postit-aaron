@@ -5,7 +5,8 @@ import { Link } from 'react-router';
 /**
  * @description defines NavItem component
  *
- * @param { props } props
+ * @param { object } props
+ *
  * @return { jsx } jsx
  */
 const NavItem = ({

@@ -1,9 +1,11 @@
 import * as types from '../actions/actionTypes';
 /**
+ * @description holds group state
  *
- * @param { state } state
- * @param { action } action
- * @return { object } state
+ * @param { array } state
+ * @param { object } action
+ *
+ * @return { array } groups state
  */
 export const groups = (state = [], action) => {
   switch (action.type) {
@@ -23,10 +25,12 @@ export const groups = (state = [], action) => {
 };
 
 /**
+ * @description holds group users state
  *
- * @param { state } state
- * @param { action } action
- * @return { groupUsers } groupUsers
+ * @param { array } state
+ * @param { object } action
+ *
+ * @return { array } groupUsers
  */
 export const groupUsers = (state = [], action) => {
   switch (action.type) {
@@ -50,10 +54,12 @@ export const groupUsers = (state = [], action) => {
 };
 
 /**
+ * @description holds group loader state
  *
- * @param { state } state
- * @param { action } action
- * @return { groupLoading } groupLoading
+ * @param { boolean } state
+ * @param { object } action
+ *
+ * @return { bool } groupLoading state
  */
 export const groupIsLoading = (state = false, action) => {
   switch (action.type) {

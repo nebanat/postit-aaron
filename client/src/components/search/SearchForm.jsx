@@ -4,7 +4,8 @@ import InputField from '../common/InputField.jsx';
 /**
  *@description displays a search form
  *
- * @param { props} props
+ * @param { object } props contains search form properties and events
+ *
  * @returns { jsx } jsx
  */
 const SearchForm = ({ onSearchChange, onSearch, search }) => {

@@ -14,8 +14,9 @@ import '../../../../css/style.scss';
 
 /** @description handles signing up a user
  *
- * @class
- * @extends component
+ *  @class SignUp
+ *
+ *  @extends Component
  */
 export class SignUp extends Component {
   /**
@@ -44,9 +45,11 @@ export class SignUp extends Component {
     };
   }
   /**
+   * @description handles on blur event
    *
-   * @param { event } event
-   * @return { errorMessage } errorMessage
+   * @param { object } event
+   *
+   * @return { object } errorMessage
    */
   onBlur(event) {
     const { name } = event.target;
@@ -98,9 +101,11 @@ export class SignUp extends Component {
     }
   }
   /**
+   * @description handles on focus event
    *
-   * @param { event } event
-   * @return { errorMessage } errorMessage
+   * @param { object } event
+   *
+   * @return { object } errorMessage
    */
   onFocus(event) {
     const { name } = event.target;
@@ -135,9 +140,11 @@ export class SignUp extends Component {
     }
   }
   /**
+   * @description handles registering a user
    *
    * @param {object} event
-   * @return { action } action
+   *
+   * @return { object } state containing user data
    */
   registerUser(event) {
     event.preventDefault();
@@ -153,8 +160,9 @@ export class SignUp extends Component {
   }
   /** @description sets user details onchange
    *
-   * @param { event } event
-   * @returns { state } state
+   * @param { object } event
+   *
+   * @returns { object } state containing user details
    */
   setUserDetails(event) {
     const field = event.target.name;
@@ -164,6 +172,8 @@ export class SignUp extends Component {
     return this.setState({ user: this.state.user });
   }
   /**
+   * @description renders signup form
+   *
    * @return { jsx } jsx
    */
   render() {
@@ -219,9 +229,11 @@ export class SignUp extends Component {
   }
 }
 /**
+ * @description maps state to props
  *
- * @param { state } state
- * @return { state } state
+ * @param { object } state
+ *
+ * @return { object } props
  */
 const mapStateToProps = state => ({
   signUpSuccessMessage: state.signUpSuccessMessage,
@@ -230,9 +242,11 @@ const mapStateToProps = state => ({
   authIsLoading: state.authIsLoading
 });
 /**
+ * @description handles on focus event
  *
- * @param { dispatch } dispatch
- * @return { actions } actions
+ * @param { object } dispatch
+ *
+ * @return { object } props
  */
 const mapDispatchToProps = dispatch => ({
   actions: {

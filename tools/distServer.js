@@ -1,6 +1,5 @@
 import express from 'express';
 import favicon from 'serve-favicon';
-// import webpack from 'webpack';
 import path from 'path';
 import compression from 'compression';
 import cors from 'cors';
@@ -28,12 +27,6 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-// routes(app);
-
-app.listen(port, (err) => {
-  if (err) {
-    console.log(err);
-  }
-});
+app.listen(port);
 
 export default app;

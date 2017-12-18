@@ -36,33 +36,40 @@ describe('MESSAGE ACTIONS', () => {
 
     const store = mockStore();
 
-    return store.dispatch(messageActions.postMessage(message, priority, groupId)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
+    return store
+      .dispatch(messageActions.postMessage(message, priority, groupId))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
   });
-  it('should create MESSAGE_IS_LOADING and toast an error for posting a message ', (done) => {
-    moxios.stubRequest('/api/group/1/message', {
-      status: 400,
-      response: {
-        data: {
-          message: 'an error occured'
+  it(
+    'should create MESSAGE_IS_LOADING and toast an error for posting a message ',
+    (done) => {
+      moxios.stubRequest('/api/group/1/message', {
+        status: 400,
+        response: {
+          data: {
+            message: 'an error occured'
+          }
         }
-      }
-    });
+      });
 
-    const expectedActions = [
-      { type: types.MESSAGE_IS_LOADING, bool: true },
-      { type: types.MESSAGE_IS_LOADING, bool: false }
-    ];
+      const expectedActions = [
+        { type: types.MESSAGE_IS_LOADING, bool: true },
+        { type: types.MESSAGE_IS_LOADING, bool: false }
+      ];
 
-    const store = mockStore();
+      const store = mockStore();
 
-    return store.dispatch(messageActions.postMessage(message, priority, groupId)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
-  });
+      return store
+        .dispatch(messageActions.postMessage(message, priority, groupId))
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+          done();
+        });
+    }
+  );
   it('should create MESSAGE_IS_LOADING and FETCH_MESSAGES_SUCCESS ', (done) => {
     moxios.stubRequest('/api/group/1/messages', {
       status: 200,
@@ -84,26 +91,29 @@ describe('MESSAGE ACTIONS', () => {
       done();
     });
   });
-  it('should create MESSAGE_IS_LOADING and toast an error for fetching a group messages ', (done) => {
-    moxios.stubRequest('/api/group/1/messages', {
-      status: 400,
-      response: {
-        data: {
-          message: 'an error occured'
+  it(
+    'should create MESSAGE_IS_LOADING and toast an error for fetching a group messages ',
+    (done) => {
+      moxios.stubRequest('/api/group/1/messages', {
+        status: 400,
+        response: {
+          data: {
+            message: 'an error occured'
+          }
         }
-      }
-    });
+      });
 
-    const expectedActions = [
-      { type: types.MESSAGE_IS_LOADING, bool: true },
-      { type: types.MESSAGE_IS_LOADING, bool: false }
-    ];
+      const expectedActions = [
+        { type: types.MESSAGE_IS_LOADING, bool: true },
+        { type: types.MESSAGE_IS_LOADING, bool: false }
+      ];
 
-    const store = mockStore();
+      const store = mockStore();
 
-    return store.dispatch(messageActions.fetchGroupMessages(groupId)).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
-    });
-  });
+      return store.dispatch(messageActions.fetchGroupMessages(groupId)).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
+    }
+  );
 });

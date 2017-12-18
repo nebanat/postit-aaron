@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import expect from 'expect';
 import React from 'react';
 import { mount } from 'enzyme';
@@ -6,8 +7,9 @@ import { SignUp } from '../../../src/components/auth/signUp/SignUp.jsx';
 let event;
 
 /**
- * @param { loading } loading
- * @return { mount } mount
+ * @param { boolean } loading
+ *
+ * @return { * } null
  */
 const setup = (loading) => {
   const props = {
@@ -43,7 +45,7 @@ describe('<SignUp', () => {
         username: 'testuser',
         email: 'testuser@gmail.com',
         password: 'topper234',
-        cpassword: 'topper234'
+        confirmPassword: 'topper234'
       }
     };
     wrapper.instance().setUserDetails(event);
@@ -64,31 +66,36 @@ describe('<SignUp', () => {
         username: 'testuser',
         email: 'testuser@gmail.com',
         password: 'topper',
-        cpassword: 'topper234'
+        confirmPassword: 'topper234'
       }
     };
     wrapper.setState({ user: event.target });
     wrapper.instance().registerUser(event);
     expect(handleSubmitSpy).toHaveBeenCalledTimes(1);
-    expect(wrapper.state().passwordError).toEqual('Confirm password does not match password');
+    expect(wrapper.state().passwordError)
+      .toEqual('Confirm password does not match password');
   });
-  it('should set the confirmPasswordError state to password must be at least 6 characters', () => {
-    const wrapper = setup(false);
-    const handleSubmitSpy = jest.spyOn(wrapper.instance(), 'registerUser');
-    event = {
-      preventDefault: jest.fn(),
-      target: {
-        username: 'testuser',
-        email: 'testuser@gmail.com',
-        password: 'top',
-        cpassword: 'top'
-      }
-    };
-    wrapper.setState({ user: event.target });
-    wrapper.instance().registerUser(event);
-    expect(handleSubmitSpy).toHaveBeenCalledTimes(1);
-    expect(wrapper.state().passwordError).toEqual('Passwords must be at least 6 characters');
-  });
+  it(
+    'should set the confirmPasswordError state to password must be at least 6 characters',
+    () => {
+      const wrapper = setup(false);
+      const handleSubmitSpy = jest.spyOn(wrapper.instance(), 'registerUser');
+      event = {
+        preventDefault: jest.fn(),
+        target: {
+          username: 'testuser',
+          email: 'testuser@gmail.com',
+          password: 'top',
+          confirmPassword: 'top'
+        }
+      };
+      wrapper.setState({ user: event.target });
+      wrapper.instance().registerUser(event);
+      expect(handleSubmitSpy).toHaveBeenCalledTimes(1);
+      expect(wrapper.state().passwordError)
+        .toEqual('Passwords must be at least 6 characters');
+    }
+);
   it('should sign up user and set the passwordError to empty', () => {
     const wrapper = setup(false);
     const handleSubmitSpy = jest.spyOn(wrapper.instance(), 'registerUser');
@@ -98,7 +105,7 @@ describe('<SignUp', () => {
         username: 'testuser',
         email: 'testuser@gmail.com',
         password: 'topper234',
-        cpassword: 'topper234'
+        confirmPassword: 'topper234'
       }
     };
     wrapper.setState({ user: event.target });

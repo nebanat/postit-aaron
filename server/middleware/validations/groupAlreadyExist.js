@@ -2,13 +2,19 @@ import models from '../../models';
 /**
  * @description handles validation for group name taken
  *
- * @param { req } req
- * @param { res } res
- * @param { next } next
- * @return { user } user
+ * @param { object } req contains group name
+ * @param { object } res contains message
+ * @param { object } next
+ *
+ * @return { object } message
  */
 export default (req, res, next) => {
-  // checks if group name already exist
+  if (!req.body.name) {
+    return res.status(400).send({
+      message: 'Please you enter a valid group name'
+    });
+  }
+
   const name = req.body.name.trim().toLowerCase();
 
   models.Group
@@ -20,5 +26,5 @@ export default (req, res, next) => {
         });
       }
       next();
-    });
+    }).catch(error => res.status(500).send({ error: error.message }));
 };

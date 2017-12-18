@@ -1,15 +1,14 @@
 import { expect } from 'chai';
 import React from 'react';
-// import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import Logout from '../../../src/components/common/Logout.jsx';
-// import NavItem from '../../../src/components/common/NavItem.jsx';
-// import { logout } from '../../../src/utils/authservice';
 
 let props;
 
 /**
- * @return { shallow } shallow
+ * @description shallow mounts the logout field
+ *
+ * @return { * } null
  */
 function setup() {
   props = {

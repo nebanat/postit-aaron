@@ -11,9 +11,10 @@ import { getAuthUser } from '../../utils/authservice';
 import NotFound from '../common/NotFound.jsx';
 
 /**
- *@description HOC for group components
+ * @description HOC for group components
  *
- * @class
+ * @class Group
+ *
  * @extends component
  */
 class Group extends Component {
@@ -46,7 +47,9 @@ class Group extends Component {
     this.onPaginateClick = this.onPaginateClick.bind(this);
   }
   /**
-   * @return { dom } dom
+   * @description handles fetching group details
+   *
+   * @return { * } null
    */
   componentDidMount() {
     this.props.actions.messageActions.fetchGroupMessages(this.props.params.id);
@@ -68,9 +71,12 @@ class Group extends Component {
     });
   }
   /**
-   * @param { userId } userId
-   * @param { userIndex } userIndex
-   * @return { members } members
+   * @description handles removing a member from group
+   *
+   * @param { integer } userId
+   * @param { integer} userIndex
+   *
+   * @return { object } members of the group
    */
   handleRemoveMember(userId, userIndex) {
     const groupId = this.props.params.id;
@@ -92,19 +98,25 @@ class Group extends Component {
       });
   }
   /**
-   * @return { newState } newtSate
+   * @description handles on mouse enter event
+   *
+   * @return { object } delete button
    */
   onMouseEnterDeleteMember() {
     return this.setState({ showDelete: true });
   }
   /**
+   * @description handles on mouse leave event
+   *
    * @return { newState} newState
    */
   onMouseLeaveDeleteMember() {
     return this.setState({ showDelete: false });
   }
   /**
-   * @return { deleteGroup } deleteGroup
+   * @description handles on delete group event
+   *
+   * @return { object } delete message
    */
   onDeleteGroup() {
     const { id } = this.props.params;
@@ -125,7 +137,9 @@ class Group extends Component {
       });
   }
   /**
-   * @returns { group } group
+   * @description handles on exit group event
+   *
+   * @returns { object } group
    */
   onExitGroup() {
     const { id } = this.props.params;
@@ -146,15 +160,21 @@ class Group extends Component {
       });
   }
   /**
-   * @param { bool } bool
-   * @returns { searchLoading } searchLoading
+   * @description handles rendering search loader
+   *
+   * @param { boolean } bool
+   *
+   * @returns { object } search loader
    */
   isSearchLoading(bool) {
     return this.setState({ searchLoading: bool });
   }
   /**
-   * @param { userId } userId
-   * @return { user } user
+   * @description handles adding a user to group event
+   *
+   * @param { integer } userId
+   *
+   * @return { object } user contains user details
    */
   onAddUser(userId) {
     const { searchResults } = this.state;
@@ -165,7 +185,9 @@ class Group extends Component {
     this.props.actions.groupActions.addUserToGroup(id, userId);
   }
   /**
-   * @return { users } users
+   * @description on searching user
+   *
+   * @return { array } users
    */
   searchUsers() {
     const { id } = this.props.params;
@@ -187,9 +209,11 @@ class Group extends Component {
       });
   }
   /**
+   * @description handles on change event for search field
    *
-   * @param { event } event
-   * @param { offset } offset
+   * @param { object } event
+   * @param { integer } offset
+   *
    * @return { state } state
    */
   onSearchChange(event) {
@@ -197,9 +221,11 @@ class Group extends Component {
     this.setState({ search: event.target.value });
   }
   /**
+   * @description handles click event with pagination
    *
-   * @param { page } page
-   * @return { currentPaginatePage } currentPaginatePage
+   * @param {integer } page
+   *
+   * @return { object } currentPaginatePage
    */
   onPaginateClick(page) {
     this.setState({ currentPaginatePage: page }, () => {
@@ -208,7 +234,9 @@ class Group extends Component {
   }
 
   /**
-   * @returns {jsx} jsx
+   * @description renders group components
+   *
+   * @returns { jsx } jsx
    */
   render() {
     const { id } = this.props.params;

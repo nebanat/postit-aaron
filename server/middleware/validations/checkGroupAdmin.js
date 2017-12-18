@@ -1,10 +1,11 @@
 /**
  * @description handles validation for group admin
  *
- * @param { req } req
- * @param { res } res
- * @param { next } next
- * @return { group } group
+ * @param { object } req contains user and group details
+ * @param { object } res contains message
+ * @param { object } next
+ *
+ * @return { object } message
  */
 export default (req, res, next) => {
   const userId = req.decoded.user.id;
@@ -18,5 +19,5 @@ export default (req, res, next) => {
         });
       }
       next();
-    });
+    }).catch(error => res.status(500).send({ error: error.message }));
 };

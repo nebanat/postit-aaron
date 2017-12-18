@@ -2,11 +2,14 @@ import React from 'react';
 import { Link } from 'react-router';
 
 /**
- * @class
+ * @class Jumbotron
+ *
  * @extends component
  */
 const Jumbotron = () =>
   /**
+   * @description displays home page jumbotron
+   *
    * @returns {jsx} jsx
    */
 

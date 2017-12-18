@@ -7,7 +7,9 @@ import NotFound from '../../../src/components/common/NotFound.jsx';
 let props;
 
 /**
- * @return { shallow } shallow
+ * @description shallow mounts the Not found
+ *
+ * @return { * } null
  */
 function setup() {
   props = {

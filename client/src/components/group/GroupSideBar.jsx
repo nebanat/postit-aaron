@@ -5,7 +5,10 @@ import GroupUsers from './GroupUsers.jsx';
 import SearchModal from '../search/SearchModal.jsx';
 
 /**
- * @param { props } props
+ * @description renders group side bar
+ *
+ * @param { object } props
+ *
  * @return { jsx } jsx
  */
 const GroupSideBar = ({

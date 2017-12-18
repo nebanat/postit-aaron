@@ -1,16 +1,14 @@
-import { decodeUser } from '../../middleware/authenticate';
-
 /**
  * @description checks for user group membership
  *
- * @param { req } req
- * @param { res } res
- * @param { next } next
- * @return { group } group
+ * @param { object } req contains user details
+ * @param { object } res contains message
+ * @param { object } next
+ *
+ * @return { object} message
  */
 export default (req, res, next) => {
-  const authUser = decodeUser(req);
-  const userId = authUser.id;
+  const userId = req.decoded.user.id;
   const { group } = req;
 
   group.hasUser(userId).then((result) => {
@@ -20,5 +18,5 @@ export default (req, res, next) => {
       });
     }
     next();
-  });
+  }).catch(error => res.status(500).send({ error: error.message }));
 };

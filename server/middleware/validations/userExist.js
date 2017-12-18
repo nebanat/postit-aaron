@@ -1,18 +1,32 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-unused-expressions */
 import models from '../../models';
 /**
- *@description checks the existence of a user
+ * @description checks the existence of a user
  *
- * @param { req } req
- * @param { res } res
- * @param { next } next
- * @return { user } user
+ * @param { object } req contains user id
+ * @param { object } res contains user details
+ * @param { object } next
+ *
+ * @return { object } user
  */
 export default (req, res, next) => {
   let userId = '';
-  /* eslint-disable no-unused-expressions */
+
   req.params.userId
     ? ({ userId } = req.params)
     : ({ userId } = req.body);
+
+  if (!userId) {
+    return res.status(400).send({
+      message: 'Please pass a valid user id'
+    });
+  }
+  if (isNaN(parseInt(userId, 10))) {
+    return res.status(400).send({
+      message: 'Please pass a valid user id'
+    });
+  }
 
   models.User
     .findById(userId)
@@ -24,5 +38,5 @@ export default (req, res, next) => {
       }
       req.user = user;
       next();
-    });
+    }).catch(error => res.status(500).send({ error: error.message }));
 };

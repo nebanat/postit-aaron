@@ -1,5 +1,7 @@
 import React from 'react';
 /**
+ * @description displays linear loader
+ *
  * @return { jsx } jsx
  */
 const Loader = () =>

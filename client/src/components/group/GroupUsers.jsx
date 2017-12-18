@@ -2,7 +2,10 @@ import React from 'react';
 import SingleUser from './SingleUser.jsx';
 
 /**
- * @param { props } props
+ * @description shows group users
+ *
+ * @param { object } props
+ *
  * @return { jsx } jsx
  */
 const GroupUsers = ({
@@ -10,9 +13,11 @@ const GroupUsers = ({
   handleRemoveMember, authUser
 }) => {
   /**
+   * @description shows remove button
    *
-   * @param { userId } userId
-   * @param { index } index
+   * @param { integer } userId
+   * @param { integer } index
+   *
    * @return { jsx } jsx
    */
   const removeMemberButton = (userId, index) =>

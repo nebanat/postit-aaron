@@ -5,19 +5,24 @@
 export default class LocalStorage {
   /**
    * @description creates a new instance of this class
+   *
    * @constructor
-   * @memberOf LocalStorageMock
+   *
+   * @memberof LocalStorageMock
    */
   constructor() {
-    /** @type {Object} */
+    /** @type { Object } */
     this.store = {};
   }
 
   /**
    * @description clears the store
+   *
    * @method
-   * @memberOf LocalStorageMock
-   * @returns {void}
+   *
+   * @memberof LocalStorageMock
+   *
+   * @returns { * } null
    */
   clear() {
     this.store = {};
@@ -25,10 +30,14 @@ export default class LocalStorage {
 
   /**
    * @description returns the value stored on the supplied key
+   *
    * @method
-   * @memberOf LocalStorageMock
-   * @param {string} key The item's key to retrieve from
-   * @returns {void}
+   *
+   * @memberof LocalStorageMock
+   *
+   * @param { string } key The item's key to retrieve from
+   *
+   * @returns { * } null
    */
   getItem(key) {
     return this.store[key] || null;
@@ -36,11 +45,15 @@ export default class LocalStorage {
 
   /**
    * @description sets the store with the supplied key
+   *
    * @method
-   * @memberOf LocalStorageMock
-   * @param {Object} key The key to store
-   * @param {string} value The value to set the key to
-   * @returns {void}
+   *
+   * @memberof LocalStorageMock
+   *
+   * @param { Object } key The key to store
+   * @param { string } value The value to set the key to
+   *
+   * @returns { * } null
    */
   setItem(key, value) {
     this.store[key] = value;
@@ -48,10 +61,14 @@ export default class LocalStorage {
 
   /**
    * @description removes the item from the store corresponding to the key
+   *
    * @method
-   * @memberOf LocalStorageMock
-   * @param {Object} key The key to remove
-   * @returns {void}
+   *
+   * @memberof LocalStorageMock
+   *
+   * @param { Object } key The key to remove
+   *
+   * @returns { * } null
    */
   removeItem(key) {
     delete this.store[key];

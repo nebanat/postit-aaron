@@ -4,7 +4,8 @@ import Button from '../../common/Button.jsx';
 
 /** @description displays sign in form
  *
- * @param { props } props
+ * @param { object } props
+ *
  * @returns { jsx } jsx
  */
 const SignInForm = ({

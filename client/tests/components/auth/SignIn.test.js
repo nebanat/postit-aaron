@@ -1,7 +1,9 @@
+/* eslint-disable no-undef */
 import expect from 'expect';
 import React from 'react';
 import { mount } from 'enzyme';
-import { SignIn, mapStateToProps } from '../../../src/components/auth/signin/SignIn.jsx';
+import { SignIn, mapStateToProps }
+  from '../../../src/components/auth/signin/SignIn.jsx';
 
 let event;
 const state = {
@@ -41,7 +43,8 @@ describe('<SignIn', () => {
   });
   it('should call the setUserDetails method', () => {
     const wrapper = setup(true);
-    const handleChangeSpy = jest.spyOn(wrapper.instance(), 'setUserDetails');
+    const handleChangeSpy = jest
+      .spyOn(wrapper.instance(), 'setUserDetails');
     event = {
       preventDefault: jest.fn(),
       target: {
@@ -54,7 +57,8 @@ describe('<SignIn', () => {
   });
   it('should call the signInUser method', () => {
     const wrapper = setup(false);
-    const handleSubmitSpy = jest.spyOn(wrapper.instance(), 'signInUser');
+    const handleSubmitSpy = jest
+      .spyOn(wrapper.instance(), 'signInUser');
     wrapper.instance().signInUser(event);
     expect(handleSubmitSpy).toHaveBeenCalledTimes(1);
   });

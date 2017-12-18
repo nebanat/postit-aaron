@@ -3,9 +3,10 @@ import { Link } from 'react-router';
 import Card from '../common/Card.jsx';
 
 /**
- *@description displays a single group
+ * @description displays a single group
  *
- * @param { props } props
+ * @param { object } props
+ *
  * @return { jsx } jsx
  */
 const SingleGroup = ({ group }) => {

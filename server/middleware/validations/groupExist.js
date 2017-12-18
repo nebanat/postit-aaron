@@ -1,18 +1,32 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-restricted-globals */
 import models from '../../models';
 /**
  * @description handles validation for group existence
  *
- * @param { req } req
- * @param { res } res
- * @param { next } next
- * @return {group} group
+ * @param { object } req group id
+ * @param { object } res group details
+ * @param { object } next
+ *
+ * @return { object } group
  */
 export default (req, res, next) => {
   let groupId = '';
-  /* eslint-disable no-unused-expressions */
+
   req.params.id
     ? (groupId = req.params.id)
     : ({ groupId } = req.body);
+
+  if (!groupId) {
+    return res.status(400).send({
+      message: 'Please pass a valid group id'
+    });
+  }
+  if (isNaN(parseInt(groupId, 10))) {
+    return res.status(400).send({
+      message: 'Please pass a valid group id'
+    });
+  }
 
   models.Group
     .findById(groupId)
@@ -24,5 +38,5 @@ export default (req, res, next) => {
       }
       req.group = group;
       next();
-    });
+    }).catch(error => res.status(500).send({ error: error.message }));
 };

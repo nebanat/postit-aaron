@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import expect from 'expect';
 import React from 'react';
 import { mount, shallow } from 'enzyme';
@@ -46,7 +47,8 @@ describe('<Password/>', () => {
   });
   it('should call the handleResetSubmit method', () => {
     const wrapper = setup(false);
-    const handleSubmitSpy = jest.spyOn(wrapper.instance(), 'handleResetOnSubmit');
+    const handleSubmitSpy = jest
+      .spyOn(wrapper.instance(), 'handleResetOnSubmit');
     wrapper.instance().handleResetOnSubmit(event);
     expect(handleSubmitSpy).toHaveBeenCalledTimes(1);
   });

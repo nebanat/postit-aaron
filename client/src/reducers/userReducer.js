@@ -2,10 +2,12 @@ import * as types from '../actions/actionTypes';
 
 
 /**
+ * @description holds authenticated user state
  *
- * @param {state} state
- * @param {action} action
- * @return {authenticatedUser} authenticatedUser
+ * @param { array } state
+ * @param { object } action
+ *
+ * @return { object } authenticatedUser
  */
 export const authenticatedUser = (state = [], action) => {
   switch (action.type) {
@@ -16,10 +18,12 @@ export const authenticatedUser = (state = [], action) => {
   }
 };
 /**
+ * @description holds authentication loader state
  *
- * @param { state } state
- * @param { action } action
- * @return { authIsLoading } passwordLoading
+ * @param { boolean } state
+ * @param { object} action
+ *
+ * @return { boolean } passwordLoading
  */
 export const authIsLoading = (state = false, action) => {
   switch (action.type) {
