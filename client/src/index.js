@@ -15,6 +15,7 @@ import UserGroups from './components/group/UserGroups.jsx';
 import NewMessage from './components/message/NewMessage.jsx';
 import PageNotFound from '../src/components/pages/PageNotFound.jsx';
 import Group from './components/group/Group.jsx';
+import Test from './Test.jsx';
 import { requireAuth, noRequireAuth } from './utils/authservice';
 import configureStore from './store/configureStore';
 
