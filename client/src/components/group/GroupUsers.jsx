@@ -27,7 +27,7 @@ const GroupUsers = ({
     </i>);
 
   return (
-      <div>
+      <div className="group-users">
         <div className="row">
           <div className="col s12">
             <ul className="collection">

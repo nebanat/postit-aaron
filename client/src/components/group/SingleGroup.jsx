@@ -17,19 +17,22 @@ const SingleGroup = ({ group }) => {
 
   return (
     <div>
-        <Card
-          cardClass ={ cardClass }
-          wrapperClass= { cardWrapperClass }
-          cardContentClass ={ cardContentClass }
-          cardTitleClass = { cardTitleClass }>
+      <Link to={`group/${group.id}/messages`}>
+          <Card
+            cardClass ={ cardClass }
+            wrapperClass= { cardWrapperClass }
+            cardContentClass ={ cardContentClass }
+            cardTitleClass = { cardTitleClass }>
 
-              <span className="card-title">
-                <Link to={`/group/${group.id}/messages`}
-                  className="purple-text darken-4">{group.name}
-                </Link>
-             </span>
+                <span className="card-title">
+                  <p className="purple-text darken-4">
+                    { group.name }
+                  </p>
+              </span>
 
-        </Card>
+          </Card>
+      </Link>
+       
     </div>
   );
 };
