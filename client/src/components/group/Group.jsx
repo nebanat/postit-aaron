@@ -20,7 +20,7 @@ import NotFound from '../common/NotFound.jsx';
 class Group extends Component {
   /**
    * @constructor
-   * @param {props} props
+   * @param { props } props - contains group, search details,event based actions
    */
   constructor(props) {
     super(props);
@@ -73,10 +73,10 @@ class Group extends Component {
   /**
    * @description handles removing a member from group
    *
-   * @param { integer } userId
-   * @param { integer} userIndex
+   * @param { integer } userId - contains user id
+   * @param { integer} userIndex - contains user index
    *
-   * @return { object } members of the group
+   * @return { object } members of the group - return removed member
    */
   handleRemoveMember(userId, userIndex) {
     const groupId = this.props.params.id;
@@ -100,7 +100,7 @@ class Group extends Component {
   /**
    * @description handles on mouse enter event
    *
-   * @return { object } delete button
+   * @return { object } delete button - returns show delete button state
    */
   onMouseEnterDeleteMember() {
     return this.setState({ showDelete: true });
@@ -108,7 +108,7 @@ class Group extends Component {
   /**
    * @description handles on mouse leave event
    *
-   * @return { newState} newState
+   * @return { newState} showdelete - returns show delete button state
    */
   onMouseLeaveDeleteMember() {
     return this.setState({ showDelete: false });
@@ -116,7 +116,7 @@ class Group extends Component {
   /**
    * @description handles on delete group event
    *
-   * @return { object } delete message
+   * @return { object } delete message - returns delete message
    */
   onDeleteGroup() {
     const { id } = this.props.params;
@@ -139,7 +139,7 @@ class Group extends Component {
   /**
    * @description handles on exit group event
    *
-   * @returns { object } group
+   * @returns { object } group - return exited group
    */
   onExitGroup() {
     const { id } = this.props.params;
@@ -162,9 +162,9 @@ class Group extends Component {
   /**
    * @description handles rendering search loader
    *
-   * @param { boolean } bool
+   * @param { boolean } bool - contains search loader state
    *
-   * @returns { object } search loader
+   * @returns { object } search loader - shows/disable search loader
    */
   isSearchLoading(bool) {
     return this.setState({ searchLoading: bool });
@@ -172,7 +172,7 @@ class Group extends Component {
   /**
    * @description handles adding a user to group event
    *
-   * @param { integer } userId
+   * @param { integer } userId - contains user id
    *
    * @return { object } user contains user details
    */
@@ -187,7 +187,7 @@ class Group extends Component {
   /**
    * @description on searching user
    *
-   * @return { array } users
+   * @return { array } users - returns an array of search users
    */
   searchUsers() {
     const { id } = this.props.params;
@@ -196,9 +196,9 @@ class Group extends Component {
     this.isSearchLoading(true);
     searchUsersNotInGroup(id, this.state.search, offset)
       .then((response) => {
-        this.setState({ searchResults: response.data.nUsers.rows });
+        this.setState({ searchResults: response.data.foundUsers.rows });
         this.setState({ totalSearchPages: response.data.pages });
-        this.setState({ totalSearchResult: response.data.nUsers.count });
+        this.setState({ totalSearchResult: response.data.foundUsers.count });
         this.setState({ searchErrorMessage: '' });
         this.isSearchLoading(false);
       })
@@ -211,8 +211,8 @@ class Group extends Component {
   /**
    * @description handles on change event for search field
    *
-   * @param { object } event
-   * @param { integer } offset
+   * @param { object } event - event object containing search details
+   * @param { integer } offset - integer representing the pagination offset
    *
    * @return { state } state
    */
@@ -223,9 +223,9 @@ class Group extends Component {
   /**
    * @description handles click event with pagination
    *
-   * @param {integer } page
+   * @param {integer } page - contains page number
    *
-   * @return { object } currentPaginatePage
+   * @return { object } currentPaginatePage - return current paginated page
    */
   onPaginateClick(page) {
     this.setState({ currentPaginatePage: page }, () => {
@@ -236,7 +236,7 @@ class Group extends Component {
   /**
    * @description renders group components
    *
-   * @returns { jsx } jsx
+   * @returns { jsx } jsx - renders group component
    */
   render() {
     const { id } = this.props.params;

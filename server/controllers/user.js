@@ -10,14 +10,14 @@ export default {
   /**
    * @description handles signup
    *
-   * @param { object } req user details
-   * @param { object } res message and user details
-   * @param { object } next
+   * @param { object } req - user contains user entered details
+   * @param { object } res - contains message and user details
    *
-   * @return {object} user details and message
+   * @return {object} user - returns user details and message
    */
   signup(req, res) {
-    const { username, password, email } = req.body;
+    const { password, email } = req.body;
+    const username = req.body.username.toLowerCase();
 
     return models.User
       .findOne({
@@ -50,13 +50,15 @@ export default {
   /**
    * @description handles signin
    *
-   * @param { object } req user details
-   * @param { object } res message, token and user details
+   * @param { object } req - contains user details
+   * @param { object } res - contains message, token and user details
    *
-   * @return { object } user
+   * @return { object } user - returns user details and message
    */
   signIn(req, res) {
-    const { username, password } = req.body;
+    const { password } = req.body;
+    const username = req.body.username.toLowerCase();
+
     models.User
       .findOne({
         where: {
@@ -96,10 +98,10 @@ export default {
   /**
    *@description handles searching for users
    *
-   * @param { object } req
-   * @param { object } res
+   * @param { object } req - contains user search query and details
+   * @param { object } res - contains users search result
    *
-   * @return { object } users searched
+   * @return { object } users - returns users search result
    */
   searchUsersNotInGroup(req, res) {
     const {
@@ -135,17 +137,17 @@ export default {
             limit: limit || 5,
             offset: offset || 0
           })
-            .then((nUsers) => {
-              if (nUsers.rows.length === 0) {
+            .then((foundUsers) => {
+              if (foundUsers.rows.length === 0) {
                 return res.status(404).send({
                   message: 'No user found'
                 });
               }
-              pageNumber = parseInt(nUsers.count, 10) /
+              pageNumber = parseInt(foundUsers.count, 10) /
               parseInt(limit || 5, 10);
 
               return res.status(200).send({
-                nUsers,
+                foundUsers,
                 pages: Math.ceil(pageNumber)
               });
             }).catch(error => res.status(500).send({ error: error.message }));

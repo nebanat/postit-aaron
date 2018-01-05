@@ -1,15 +1,14 @@
 import React from 'react';
 import { Collapsible, CollapsibleItem } from 'react-materialize';
-import PropTypes from 'prop-types';
 import GroupUsers from './GroupUsers.jsx';
 import SearchModal from '../search/SearchModal.jsx';
 
 /**
  * @description renders group side bar
  *
- * @param { object } props
+ * @param { object } props - contains group sidebar properties and events
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders group sidebar
  */
 const GroupSideBar = ({
   groupUsers, search, onSearchChange, searchLoading,
@@ -44,11 +43,5 @@ const GroupSideBar = ({
           </Collapsible>
         </div>
 );
-
-// proptype validation
-GroupUsers.propTypes = {
-  onSearchChange: PropTypes.func,
-  onSearchSubmit: PropTypes.func
-};
 
 export default GroupSideBar;

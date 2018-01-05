@@ -14,7 +14,7 @@ class UserGroups extends Component {
   /**
    * @constructor
    *
-   * @param {props} props
+   * @param { props } props - contains user groups,compoonent properties
    */
   constructor(props) {
     super(props);
@@ -23,7 +23,7 @@ class UserGroups extends Component {
   /**
    * @description show no group message
    *
-   * @return {jsx} jsx
+   * @return {jsx} jsx - renders no group message info
    */
   showNoGroupMessage() {
     return (
@@ -36,7 +36,7 @@ class UserGroups extends Component {
   /**
    * @description displays user groups
    *
-   * @return { jsx } jsx
+   * @return { jsx } jsx - renders user groups
    */
   render() {
     const { groups } = this.props;

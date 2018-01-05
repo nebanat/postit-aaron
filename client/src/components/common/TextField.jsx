@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 /**
  * @description defines TextField component
  *
- * @param { object } props
+ * @param { object } props - contains TextField properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders Text Field component
  */
 const TextField = ({
   wrapperClass, name, className, onChange, value, label, maxlength

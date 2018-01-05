@@ -5,7 +5,7 @@ import Navigation from '../../navigation/Navigation.jsx';
 /**
  * @description shows home page
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx - renders home page
  */
 const Home = () =>
   (

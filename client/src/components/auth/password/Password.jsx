@@ -20,7 +20,8 @@ import Footer from '../../footer/Footer.jsx';
 export class Password extends Component {
   /**
    * @constructor
-   * @param { props } props
+   *
+   * @param { props } props - contains user details and event based actions
    */
   constructor(props) {
     super(props);
@@ -43,9 +44,9 @@ export class Password extends Component {
   /**
    * @description handles on blur event
    *
-   * @param { object } event
+   * @param { object } event - event object containing user details
    *
-   * @return { object } errorMessage
+   * @return { object } errorMessage - returns error message
    */
   onBlur(event) {
     const { name } = event.target;
@@ -73,9 +74,9 @@ export class Password extends Component {
   /**
    * @description handles on focus event
    *
-   * @param { object } event
+   * @param { object } event - event object containing user details
    *
-   * @return { object } errorMessage
+   * @return { object } errorMessage - returns error message
    */
   onFocus(event) {
     const { name } = event.target;
@@ -92,11 +93,11 @@ export class Password extends Component {
     }
   }
   /**
-   *@description handles on submit event
+   * @description handles on submit event
    *
-   * @param { object } event
+   * @param { object } event - event object containing user details
    *
-   * @returns { object } user state contains email
+   * @returns { object } user - contains user email
    */
   handleResetOnSubmit(event) {
     event.preventDefault();
@@ -104,15 +105,13 @@ export class Password extends Component {
     this.props
       .actions
       .passwordActions.sendResetPassword(this.state.user.email);
-
-    return this.setState({ user: this.state.initialState });
   }
   /**
    * @description handles on change event
    *
-   * @param { object } event
+   * @param { object } event - event object containing user details
    *
-   * @returns { object } user state contains email
+   * @returns { object } user - contains user email
    */
   setUserEmail(event) {
     const field = event.target.name;
@@ -124,7 +123,7 @@ export class Password extends Component {
   /**
    *@description renders password form
    *
-   * @returns { jsx } jsx
+   * @returns { jsx } jsx - renders password component
    */
   render() {
     const { passwordIsLoading } = this.props;
@@ -169,11 +168,11 @@ export class Password extends Component {
   }
 }
 /**
- *@description maps state to props
+ * @description maps state to props
  *
- * @param { object} state
+ * @param { object} state - holds password state
  *
- * @return { object } props
+ * @return { object } props - returns mapped props from state
  */
 const mapStateToProps = state => ({
   sendResetSuccessMessage: state.sendResetSuccessMessage,
@@ -183,9 +182,9 @@ const mapStateToProps = state => ({
 /**
  * @description maps dispatch to props
  *
- * @param { object } dispatch
+ * @param { object } dispatch - holds dispatch action
  *
- * @return { object } props
+ * @return { object } props - returns mapped props from dispatch
  */
 const mapDispatchToProps = dispatch => ({
   actions: {

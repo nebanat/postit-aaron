@@ -19,7 +19,7 @@ export class ResetPassword extends Component {
   /**
    * @constructor
    *
-   * @param { object } props
+   * @param { object } props - contains reset password details
    *
    */
   constructor(props) {
@@ -39,7 +39,7 @@ export class ResetPassword extends Component {
   /**
    * @description clears errorState
    *
-   * @return { object } password Error
+   * @return { object } password Error - returns confirm password error state
    */
   onFocus() {
     this.setState({
@@ -50,7 +50,7 @@ export class ResetPassword extends Component {
   /**
    * @description handles on submit event
    *
-   * @param { object } event
+   * @param { object } event - event object containing password details
    *
    * @return { object } action that handles password reset
    */
@@ -77,9 +77,9 @@ export class ResetPassword extends Component {
   /**
    * @description handles on change event
    *
-   * @param { object } event
+   * @param { object } event - event object containing user details
    *
-   * @returns { object } state
+   * @returns { object } state - return user details as state
    */
   setUserPassword(event) {
     const field = event.target.name;
@@ -91,7 +91,7 @@ export class ResetPassword extends Component {
   /**
    * @description renders ResetPassword form
    *
-   * @return { jsx } jsx
+   * @return { jsx } jsx  - renders password component
    */
   render() {
     const { passwordIsLoading } = this.props;
@@ -139,9 +139,9 @@ export class ResetPassword extends Component {
 /**
  * @description maps state to props
  *
- * @param { object } state
+ * @param { object } state - holds reset password state
  *
- * @return { object } props
+ * @return { object } props - returns mapped props from state
  */
 const mapStateToProps = state => ({
   resetSuccessMessage: state.resetSuccessMessage,
@@ -151,9 +151,9 @@ const mapStateToProps = state => ({
 /**
  * @description maps dispatch to props
  *
- * @param { object } dispatch
+ * @param { object } dispatch - holds dispatchable actions
  *
- * @return { object } props
+ * @return { object } props - returns mapped props from dispatch
  */
 const mapDispatchToProps = dispatch => ({
   actions: {

@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 /**
  * @description displays sign up footer
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx - renders signup footer component
  */
 const SignUpFooter = () => (
     <div className='row'>

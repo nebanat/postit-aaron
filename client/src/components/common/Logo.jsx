@@ -5,9 +5,9 @@ import { Link } from 'react-router';
 /**
  * @description defines Logo component
  *
- * @param { object } props
+ * @param { object } props - contains Logo properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders Logo component
  */
 const Logo = ({
   logoClassName, logoText
@@ -20,7 +20,7 @@ const Logo = ({
       </Link>
 
     </div>
-   
+
 
   );
 // proptype validation

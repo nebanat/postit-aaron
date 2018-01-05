@@ -24,7 +24,7 @@ const store = configureStore();
 /**
  * @description shows all routes for the application
  *
- * @return { routes } routes
+ * @return { routes } routes - registers all react routes for the application
  */
 const Root = () => (
   <Provider store={store}>

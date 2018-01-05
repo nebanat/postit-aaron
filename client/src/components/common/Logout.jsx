@@ -5,9 +5,9 @@ import { logout } from '../../utils/authservice';
 /**
  * @description defines Logout component
  *
- * @param { object } props
+ * @param { object } props - contains Logout properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders Logout
  */
 const Logout = ({ navItemClass, navText }) =>
   (

@@ -6,9 +6,9 @@ import rootReducer from '../reducers';
 /**
  * @description configures redux store for development
  *
- * @param { object } initialState
+ * @param { object } initialState - contains store initial state
  *
- * @return { store } store
+ * @return { store } store - returns a store initialization
  */
 export default function configureStore(initialState) {
   return createStore(

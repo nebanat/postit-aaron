@@ -2,10 +2,10 @@ import * as types from '../actions/actionTypes';
 /**
  * @description holds group state
  *
- * @param { array } state
- * @param { object } action
+ * @param { array } state - contains groups initial state
+ * @param { object } action - contains action details to be performed on groups
  *
- * @return { array } groups state
+ * @return { array } groups state - returns the new groups state
  */
 export const groups = (state = [], action) => {
   switch (action.type) {
@@ -27,10 +27,10 @@ export const groups = (state = [], action) => {
 /**
  * @description holds group users state
  *
- * @param { array } state
- * @param { object } action
+ * @param { array } state - contains group users initial state
+ * @param { object } action - contains action to be performed on groupusers
  *
- * @return { array } groupUsers
+ * @return { array } groupUsers - returns the new group users state
  */
 export const groupUsers = (state = [], action) => {
   switch (action.type) {
@@ -56,10 +56,10 @@ export const groupUsers = (state = [], action) => {
 /**
  * @description holds group loader state
  *
- * @param { boolean } state
- * @param { object } action
+ * @param { boolean } state - contains group loader initial state
+ * @param { object } action - contains action to be performed on group loader
  *
- * @return { bool } groupLoading state
+ * @return { bool } groupLoading  - returns the new group loading state
  */
 export const groupIsLoading = (state = false, action) => {
   switch (action.type) {

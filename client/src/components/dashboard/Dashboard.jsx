@@ -15,13 +15,13 @@ import Navigation from '../navigation/Navigation.jsx';
  */
 export class Dashboard extends Component {
   /**
-   * @return { userGroups} userGroups
+   * @return { userGroups} userGroups - returns fetch user group action
    */
   componentDidMount() {
     this.props.actions.groupActions.fetchUserGroups();
   }
   /**
-   * @return { jsx } jsx
+   * @return { jsx } jsx - renders dashboard and its children component
    */
   render() {
     return (
@@ -43,9 +43,9 @@ export class Dashboard extends Component {
 /**
  * @description maps state to props
  *
- * @param { object } state
+ * @param { object } state - holds dashboard state
  *
- * @return { object } props
+ * @return { object } props - returns mapped props from state
  */
 const mapStateToProps = state => ({
   authenticatedUser: state.authenticatedUser,
@@ -58,9 +58,9 @@ const mapStateToProps = state => ({
 /**
  * @description maps dispatch to props
  *
- * @param { object } dispatch
+ * @param { object } dispatch - holds dispatchable actions
  *
- * @return { object } props
+ * @return { object } props - returns mapped props from dispatch
  */
 const mapDispatchToProps = dispatch => ({
   actions: {

@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 /**
  * @description defines button component
  *
- * @param { object } props
+ * @param { object } props - contains button properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders button component
  */
 const Button = ({
   id, wrapperClass, name, type, buttonClassName,

@@ -6,7 +6,7 @@ import InputField from '../common/InputField.jsx';
  *
  * @param { object } props contains search form properties and events
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx - renders search form
  */
 const SearchForm = ({ onSearchChange, onSearch, search }) => {
   const inputFieldWrapperClass = 'input-field col s12';

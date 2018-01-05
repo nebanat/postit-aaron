@@ -2,7 +2,7 @@ import React from 'react';
 /**
  * @description displays circular loader
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders circular loader
  */
 const CircleLoader = () =>
   (

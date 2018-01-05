@@ -1,12 +1,13 @@
 import transporter from './transporter';
 import newMessageTemplate from './templates/newMessageTemplate';
 /**
- *@description sends email to members of a group
+ * @description sends email to members of a group
  *
- * @param { req } req
- * @param { senderId } senderId
- * @param { message } message
- * @return { message } message
+ * @param { req } req - contains group id
+ * @param { senderId } senderId - contains message sender id
+ * @param { message } message - contains new group message
+ *
+ * @return { message } message - returns new group message email
  */
 export default (req, senderId, message) => {
   const { group } = req;

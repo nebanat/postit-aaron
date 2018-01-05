@@ -50,7 +50,7 @@ class Navigation extends Component {
   /**
    * @description renders navigation
    *
-   * @returns { jsx } jsx
+   * @returns { jsx } jsx - renders Navigation component
    */
   render() {
     const navBarClassName = 'purple darken-4';

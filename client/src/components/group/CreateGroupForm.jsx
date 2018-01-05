@@ -4,11 +4,11 @@ import TextField from '../common/TextField.jsx';
 import Button from '../common/Button.jsx';
 
 /**
- *@description displays create group form
+ * @description displays create group form
  *
- * @param { object } props
+ * @param { object } props - contains group details and event based actions
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx - renders create group form component
  */
 const CreateGroupForm = ({
   group, onChange, onSubmit,

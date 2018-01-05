@@ -3,9 +3,9 @@ import { getAccessToken } from './authservice';
 /**
  * @description handles calls to signup endpoint
  *
- * @param { user } user object
+ * @param { user } user object - contains user details
  *
- * @return { promise } promise call to signup api
+ * @return { promise } promise - call to signup api
  */
 export const signUp = user => axios({
   method: 'post',
@@ -23,9 +23,9 @@ export const signUp = user => axios({
 /**
  * @description handles calls to signin endpoint
  *
- * @param { object } user object
+ * @param { object } user object - contains user details
  *
- * @return { promise } promise call to signin endpoint
+ * @return { promise } promise - call to signin endpoint
  */
 export const signIn = user => axios({
   method: 'post',
@@ -41,9 +41,9 @@ export const signIn = user => axios({
 /**
  * @description handles calls to create group endpoint
  *
- * @param { object } group
+ * @param { object } group - contains group details
  *
- * @return { promise } promise call to signin endpoint
+ * @return { promise } promise - call to signin endpoint
  */
 export const createGroup = group => axios({
   method: 'post',
@@ -60,9 +60,9 @@ export const createGroup = group => axios({
 /**
  * @description handles calls to send reset link endpoint
  *
- * @param { string } email
+ * @param { string } email - contains user email
  *
- * @return { promise } promise to call send reset link endpoint
+ * @return { promise } promise - call to send reset link endpoint
  */
 export const sendResetPasswordLink = email => axios({
   method: 'post',
@@ -77,10 +77,10 @@ export const sendResetPasswordLink = email => axios({
 /**
  * @description handles calls to reset password endpoint
  *
- * @param { string } resetToken
- * @param { string } password
+ * @param { string } resetToken - contains user reset password token
+ * @param { string } password - contains user password details
  *
- * @return { promise } promise calls to reset password endpoint
+ * @return { promise } promise - calls to reset password endpoint
  */
 export const resetPassword = (resetToken, password) => axios({
   method: 'post',
@@ -96,7 +96,7 @@ export const resetPassword = (resetToken, password) => axios({
 /**
  * @description handles calls to signin endpoint
  *
- * @return { promise } promise call to get user groups endpoint
+ * @return { promise } promise - call to get user groups endpoint
  */
 export const getUserGroups = () => axios({
   method: 'GET',
@@ -110,11 +110,11 @@ export const getUserGroups = () => axios({
 /**
  * @description handles calls to signin endpoint
  *
- * @param { string } message
- * @param { integer } priority
- * @param { integer } groupId
+ * @param { string } message - contains new message
+ * @param { integer } priority - contains new message priority
+ * @param { integer } groupId - contains group id
  *
- * @returns { promise } promise calls to signin endpoint
+ * @returns { promise } promise - calls to signin endpoint
  */
 export const postNewMessage = (message, priority, groupId) => axios({
   method: 'post',
@@ -131,9 +131,9 @@ export const postNewMessage = (message, priority, groupId) => axios({
 /**
  * @description handles calls to get group messages endpoint
  *
- * @param { integer } groupId
+ * @param { integer } groupId - holds group id for message to be posted
  *
- * @returns { promise } promise call to get group messages
+ * @returns { promise } promise - call to get group messages
  */
 export const getGroupMessages = groupId => axios({
   method: 'GET',
@@ -146,9 +146,9 @@ export const getGroupMessages = groupId => axios({
 /**
  * @description handles calls to get group users endpoint
  *
- * @param { integer } groupId
+ * @param { integer } groupId - holds group id to retrieve group users
  *
- * @returns { promise } get group users endpoint
+ * @returns { promise } promise - get group users endpoint
  */
 export const getGroupUsers = groupId => axios({
   method: 'GET',
@@ -161,11 +161,11 @@ export const getGroupUsers = groupId => axios({
 /**
  * @description handles calls to search endpoint
  *
- * @param { integer } groupId
- * @param { string } query
- * @param {  number } offset
+ * @param { integer } groupId - holds group id to search users
+ * @param { string } query - holds user search query
+ * @param {  number } offset - holds search result pagination offset
  *
- * @return { promise } promise call to search endpoint
+ * @return { promise } promise - calls to search endpoint
  */
 export const searchUsersNotInGroup = (groupId, query, offset) => axios({
   method: 'post',
@@ -183,8 +183,8 @@ export const searchUsersNotInGroup = (groupId, query, offset) => axios({
 /**
  * @description handles calls to add user to group endpoint
  *
- * @param { integer } groupId
- * @param { integer } userId
+ * @param { integer } groupId - holds group id to add a user to
+ * @param { integer } userId - - holds user id to be added to group
  *
  * @return { promise } promise calls to add user to group endpoint
  */
@@ -202,8 +202,7 @@ export const addUserToGroup = (groupId, userId) => axios({
 /**
  * @description handles calls to exit group endpoint
  *
- * @param { integer } groupId
- * @param { integer} userId
+ * @param { integer } groupId - holds group id to exit
  *
  * @return { promise } promise handles calls to exit group endpoint
  */
@@ -218,8 +217,7 @@ export const exitGroup = groupId => axios({
 /**
  * @description handles calls to delete group endpoint
  *
- * @param { integer } groupId
- * @param { integer } userId
+ * @param { integer } groupId - holds group id to delete
  *
  * @return { promise } promise calls to delete group endpoint
  */
@@ -235,10 +233,10 @@ export const deleteGroup = groupId => axios({
 /**
  * @description handles calls to delete group member endpoint
  *
- * @param { integer } groupId
- * @param { integer } userId
+ * @param { integer } groupId - holds group id to delete a member
+ * @param { integer } userId - holds user id of a member to be deleted
  *
- * @return { promise } promise calls to delete group member endpoint
+ * @return { promise } promise - calls to delete group member endpoint
  */
 export const deleteGroupMember = (groupId, userId) => axios({
   method: 'post',

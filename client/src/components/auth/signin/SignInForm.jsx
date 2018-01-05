@@ -4,9 +4,9 @@ import Button from '../../common/Button.jsx';
 
 /** @description displays sign in form
  *
- * @param { object } props
+ * @param { object } props - contains user details and event based actions
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx  - renders signin form component
  */
 const SignInForm = ({
   user, onChange, onSubmit, usernameError, passwordError,

@@ -10,10 +10,10 @@ export default {
   /**
    * @description handles email sending with password reset link
    *
-   * @param { object } req contains email
-   * @param { object } res contains message
+   * @param { object } req - contains user email
+   * @param { object } res - contains reset password email message
    *
-   * @return { object } successMessage
+   * @return { object } successMessage - returns reset password success message
    */
   sendPasswordResetLinkEmail(req, res) {
     const { email } = req.body;
@@ -22,7 +22,7 @@ export default {
       .findOne({ where: { email } })
       .then((user) => {
         if (!user) {
-          return res.status(400).send({
+          return res.status(404).send({
             message: 'User does not exist in our records'
           });
         }
@@ -59,10 +59,10 @@ export default {
   /**
    * @description handles resetting a user password
    *
-   * @param { object } req contains password details
-   * @param { object } res contains email reset message
+   * @param { object } req - contains password details
+   * @param { object } res - contains email reset message
    *
-   * @return { object } passwordMessage
+   * @return { object } passwordMessage - returns password reset success message
    */
   resetPassword(req, res) {
     const { resetToken, password } = req.body;
@@ -77,7 +77,7 @@ export default {
         }
 
         if (Date.now() > user.expiryPassToken) {
-          return res.status(401).send({
+          return res.status(400).send({
             message: 'Token has expired'
           });
         }

@@ -1,11 +1,11 @@
 /**
  * @description handles validation for creating groups
  *
- * @param { object } req contains group name
- * @param { object } res contains message
- * @param { object } next
+ * @param { object } req - contains group name
+ * @param { object } res - contains message
+ * @param { object } next - contains middleware flow control
  *
- * @return { object } message
+ * @return { object } message - contains validation message
  */
 export default (req, res, next) => {
   const name = req.body.name.toLowerCase();

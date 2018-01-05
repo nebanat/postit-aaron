@@ -5,9 +5,9 @@ import SelectField from '../common/SelectField.jsx';
 /**
  *@description shows new message form
  *
- * @param { object } props
+ * @param { object } props - contains new message form component properties
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx - renders new message form
  */
 const NewMessageForm = ({
   message, onMessageChange, priorityValue,

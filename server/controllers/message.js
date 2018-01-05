@@ -5,10 +5,10 @@ export default {
   /**
    * @description handles posting messages to groups
    *
-   * @param { object } req contains message details
-   * @param { object } res contains user and message details
+   * @param { object } req - contains message details
+   * @param { object } res - contains user and message details
    *
-   * @return { object } groupMessage
+   * @return { object } - groupMessage returns a new group message
    */
   postMessageToGroup(req, res) {
     const { content, priority } = req.body;
@@ -35,10 +35,10 @@ export default {
   /**
    * @description handles retrieving group messages
    *
-   * @param { object } req contains group details
-   * @param { object } res contains group messages
+   * @param { object } req - contains group details
+   * @param { object } res - contains group messages
    *
-   * @return { object } groupMessages
+   * @return { object } groupMessages - returns a group messages
    */
   getGroupMessages(req, res) {
     models.Message

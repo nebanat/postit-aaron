@@ -4,9 +4,9 @@ import SingleUser from './SingleUser.jsx';
 /**
  * @description shows group users
  *
- * @param { object } props
+ * @param { object } props - contains groupusers,component properties and events
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - shows group users
  */
 const GroupUsers = ({
   groupUsers, showDelete, onMouseEnterDelete, onMouseLeaveDelete,
@@ -15,10 +15,10 @@ const GroupUsers = ({
   /**
    * @description shows remove button
    *
-   * @param { integer } userId
-   * @param { integer } index
+   * @param { integer } userId - contains user id
+   * @param { integer } index - contains user index
    *
-   * @return { jsx } jsx
+   * @return { jsx } jsx - show remove member button
    */
   const removeMemberButton = (userId, index) =>
     (<i onClick={() => handleRemoveMember(userId, index)}

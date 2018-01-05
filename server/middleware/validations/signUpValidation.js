@@ -2,11 +2,11 @@
 /**
  * @description handles validation for sign up
  *
- * @param { object } req contains user details
- * @param { object} res contains validation messages
- * @param { object } next
+ * @param { object } req - contains user details
+ * @param { object} res - contains validation messages
+ * @param { object } next  - contains middleware control flow
  *
- * @return { object } validation messages
+ * @return { object } message - returns validation message
  */
 export default (req, res, next) => {
   const { username, email, password } = req.body;
