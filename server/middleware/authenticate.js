@@ -5,11 +5,11 @@ require('dotenv').config();
 /**
  * @description verifies user token
  *
- * @param { object } req contains jwt token
- * @param { object } res contains message
- * @param { object } next
+ * @param { object } req - contains jwt token
+ * @param { object } res - contains message
+ * @param { object } next  - contains middleware control flow
  *
- * @return { object } message
+ * @return { object } message  - returns validation message
  */
 export default (req, res, next) => {
   const token = req.body.token ||
@@ -18,7 +18,7 @@ export default (req, res, next) => {
   if (token) {
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
       if (err) {
-        return res.status(403).json({
+        return res.status(401).json({
           success: false,
           message: 'Failed to authenticate token'
         });
@@ -28,7 +28,7 @@ export default (req, res, next) => {
       next();
     });
   } else {
-    return res.status(403).send({
+    return res.status(401).send({
       message: 'No token provided'
     });
   }
@@ -36,10 +36,10 @@ export default (req, res, next) => {
 /**
  *@description decodes user token
  *
- * @param { object } req contains token
- * @param { object } res contains user details
+ * @param { object } req - contains token
+ * @param { object } res - contains user details
  *
- * @return { object } user
+ * @return { object } user  - returns user details
  */
 export const decodeUser = (req) => {
   const token = req.body.token ||

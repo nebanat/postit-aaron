@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 /**
  * @description defines card component
  *
- * @param { object} props
+ * @param { object} props - contains card properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders card component
  */
 const Card = ({
   wrapperClass, children, title,

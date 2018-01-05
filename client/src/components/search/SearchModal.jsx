@@ -9,9 +9,9 @@ import Pagination from '../common/Pagination.jsx';
 /**
  * @description displays search modal
  *
- * @param { object } props
+ * @param { object } props - contains search modal properties and events
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders search modal
  */
 const SearchModal = ({
   search, onSearchChange, searchLoading, searchResult,
@@ -25,7 +25,7 @@ const SearchModal = ({
   /**
    * @description shows search result count
    *
-   * @return { jsx } jsx
+   * @return { jsx } jsx - render search details
    */
   const showSearchDetails = () => (
       <div className="grey-text left-align">
@@ -35,7 +35,7 @@ const SearchModal = ({
   /**
    * @description displays search result
    *
-   * @returns { jsx } jsx
+   * @returns { jsx } jsx - render search results
    */
   const showSearchResult = () => (
     searchResult.map((user, index) =>

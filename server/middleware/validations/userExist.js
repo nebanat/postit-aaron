@@ -4,11 +4,11 @@ import models from '../../models';
 /**
  * @description checks the existence of a user
  *
- * @param { object } req contains user id
- * @param { object } res contains user details
- * @param { object } next
+ * @param { object } req - contains user id
+ * @param { object } res - contains user details
+ * @param { object } next - contains middleware control flow
  *
- * @return { object } user
+ * @return { object } user  - returns validation message
  */
 export default (req, res, next) => {
   let userId = '';

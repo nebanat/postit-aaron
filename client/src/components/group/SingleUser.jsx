@@ -3,9 +3,9 @@ import React from 'react';
 /**
  *@description displays a single user component
  *
- * @param { object } props
+ * @param { object } props - contains user's username
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx - renders a single user
  */
 const SingleUser = ({ username, children }) => {
   const userString = username;

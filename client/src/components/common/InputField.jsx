@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 /**
  * @description defines InputField component
  *
- * @param { object } props
+ * @param { object } props - contains InputField properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders InputField component
  */
 const InputField = ({
   wrapperClass, name, onChange, value, label, type,

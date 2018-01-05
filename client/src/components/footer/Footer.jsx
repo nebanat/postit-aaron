@@ -4,7 +4,7 @@ import React from 'react';
 /**
  * @description shows page footer
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders page footer
  */
 const Footer = () =>
   (

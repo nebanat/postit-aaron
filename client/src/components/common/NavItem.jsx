@@ -5,9 +5,9 @@ import { Link } from 'react-router';
 /**
  * @description defines NavItem component
  *
- * @param { object } props
+ * @param { object } props - contains NavItem properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx  - displays NavItem properties
  */
 const NavItem = ({
   id, navLink, navClassName, navActiveClass, navText, onClick

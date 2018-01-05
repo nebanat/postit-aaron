@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 /**
  * @description defines SelectField component
  *
- * @param { object } props
+ * @param { object } props - selectfield component properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders the select input type
  */
 const SelectField = ({
   id, wrapperClass, name, className, onChange, optionEntries,

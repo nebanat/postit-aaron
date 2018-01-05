@@ -3,14 +3,17 @@ import React from 'react';
 /**
  * @description defines Pagination component
  *
- * @param { object } props
+ * @param { object } props  - contains Pagination properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx  - displays pagination
  */
 const Pagination = ({ pageNumber, currentPaginatePage, onPaginateClick }) => {
   /**
-   * @param { page } page
-   * @return { jsx } jsx
+   * @description displays a list of pagination pages
+   *
+   * @param { page } page - holds the page number
+   *
+   * @return { jsx } jsx - returns the list of pagination pages
    */
   const showList = page => (
       <li key={ page }
@@ -27,7 +30,7 @@ const Pagination = ({ pageNumber, currentPaginatePage, onPaginateClick }) => {
   /**
    * @description returns pagination base on pageNumber property
    *
-   * @return { jsx } jsx
+   * @return { jsx } jsx - display paginated pages
    */
   const showPages = () => {
     const pages = [];
@@ -39,7 +42,7 @@ const Pagination = ({ pageNumber, currentPaginatePage, onPaginateClick }) => {
   /**
    * @description renders pagination
    *
-   * @return { jsx } jsx
+   * @return { jsx } jsx - shows pagination
    */
   return (
     <div>

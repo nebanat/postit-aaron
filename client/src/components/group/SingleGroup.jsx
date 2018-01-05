@@ -5,9 +5,9 @@ import Card from '../common/Card.jsx';
 /**
  * @description displays a single group
  *
- * @param { object } props
+ * @param { object } props - contains group detail
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders a single group component
  */
 const SingleGroup = ({ group }) => {
   const cardClass = 'card white purple-text darken-4';
@@ -32,7 +32,7 @@ const SingleGroup = ({ group }) => {
 
           </Card>
       </Link>
-       
+
     </div>
   );
 };

@@ -27,7 +27,7 @@ describe('Group API', () => {
         .post('/api/group')
         .send({})
         .end((err, res) => {
-          expect(res.status).to.equal(403);
+          expect(res.status).to.equal(401);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('No token provided');
@@ -111,7 +111,7 @@ describe('Group API', () => {
           name: 'React-redux-group'
         })
         .end((err, res) => {
-          expect(res.status).to.equal(400);
+          expect(res.status).to.equal(409);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Group name already exist');
@@ -124,7 +124,7 @@ describe('Group API', () => {
       chai.request(app)
         .get('/api/group/user')
         .end((err, res) => {
-          expect(res.status).to.equal(403);
+          expect(res.status).to.equal(401);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('No token provided');
@@ -160,7 +160,7 @@ describe('Group API', () => {
         .post('/api/user/search')
         .send({})
         .end((err, res) => {
-          expect(res.status).to.equal(403);
+          expect(res.status).to.equal(401);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('No token provided');
@@ -240,11 +240,11 @@ describe('Group API', () => {
         })
         .end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(res.body).to.have.property('nUsers');
+          expect(res.body).to.have.property('foundUsers');
           expect(res.body).to.have.property('pages');
-          expect(res.body.nUsers.rows.length).to.equal(1);
+          expect(res.body.foundUsers.rows.length).to.equal(1);
           expect(res.body.pages).to.equal(1);
-          expect(res.body.nUsers.rows).to.be.an('array');
+          expect(res.body.foundUsers.rows).to.be.an('array');
           done();
         });
     });
@@ -331,7 +331,7 @@ describe('Group API', () => {
           userId: 2
         })
         .end((err, res) => {
-          expect(res.status).to.equal(201);
+          expect(res.status).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('message');
           expect(res.body).to.have.property('user');
@@ -406,7 +406,7 @@ describe('Group API', () => {
           userId: 2
         })
         .end((err, res) => {
-          expect(res.status).to.equal(201);
+          expect(res.status).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('User successfully added to group');

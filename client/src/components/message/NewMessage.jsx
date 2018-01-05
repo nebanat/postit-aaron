@@ -12,7 +12,7 @@ class NewMessage extends Component {
   /**
    * @constructor
    *
-   * @param { props } props
+   * @param { props } props - contains new message component properties
    *
    */
   constructor(props) {
@@ -33,7 +33,7 @@ class NewMessage extends Component {
   /**
    *@description autoscrolls to the bottom of message area
    *
-   *@return { * } null
+   *@return { * } null - initializes autoscroll when message is posted
    */
   handleScroll() {
     /* eslint-disable no-unused-vars */
@@ -49,7 +49,7 @@ class NewMessage extends Component {
   /**
    * @description scrolls to the botton of message component
    *
-   * @return { * } null
+   * @return { * } null - initializes autoscroll when message is posted
    */
   componentDidMount() {
     this.handleScroll();
@@ -58,9 +58,9 @@ class NewMessage extends Component {
   /**
    * @description handles on change event for select
    *
-   * @param { object } select contains select state
+   * @param { object } select - contains select state
    *
-   * @return { objecy } validation message
+   * @return { objecy } validation message - returns new message validation
    */
   validateSelection(select) {
     const { Materialize } = window;
@@ -73,9 +73,9 @@ class NewMessage extends Component {
   /**
    * @description handles on submit event
    *
-   * @param { object } event
+   * @param { object } event - event object containing message details
    *
-   * @return { message } message
+   * @return { message } message - return new message state
    */
   handleOnSubmitMessage(event) {
     event.preventDefault();
@@ -96,9 +96,9 @@ class NewMessage extends Component {
   /**
    * @description handles on message change
    *
-   * @param { object } event
+   * @param { object } event - event object containing message details
    *
-   * @return { object } message
+   * @return { object } message - return new message state
    */
   onMessageChange(event) {
     return this.setState({ message: event.target.value });
@@ -106,9 +106,9 @@ class NewMessage extends Component {
   /**
    * @description handles on change event for select
    *
-   * @param { object } event
+   * @param { object } event - event object containing message details
    *
-   * @return { object } select contains select state
+   * @return { object } select - contains select state
    */
   onSelectChange(event) {
     const field = event.target.name;
@@ -121,7 +121,7 @@ class NewMessage extends Component {
   /**
    * @description renders New message form
    *
-   * @returns { jsx } jsx
+   * @returns { jsx } jsx - renders new message form
    */
   render() {
     return (

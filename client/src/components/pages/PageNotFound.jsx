@@ -5,7 +5,7 @@ import Navigation from '../navigation/Navigation.jsx';
 /**
  *@description handles 404
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx - renders 404 page
  */
 const PageNotFound = () => {
   const header = '404';

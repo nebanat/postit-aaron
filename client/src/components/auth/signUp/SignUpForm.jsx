@@ -3,11 +3,11 @@ import InputField from '../../common/InputField.jsx';
 import Button from '../../common/Button.jsx';
 
 /**
- *@description displays signup form
+ * @description displays signup form
  *
- * @param { object } props contains user details and events
+ * @param { object } props - contains user details and events
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx - renders signup form component
  */
 const SignUpForm = ({
   user, onChange, onSubmit,

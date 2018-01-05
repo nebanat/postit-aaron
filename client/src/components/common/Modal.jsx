@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 /**
  * @description defines Modal component
  *
- * @param { object } props
+ * @param { object } props - contains Modal properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders Modal component
  */
 const Modal = ({ modalButtonClass, modalButtonText, children }) => (
     <div>

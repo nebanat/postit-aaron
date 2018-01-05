@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 /**
  * @description displays sign in footer
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx  - renders signin footer component
  */
 const SignInFooter = () => (
   <div className='row'>

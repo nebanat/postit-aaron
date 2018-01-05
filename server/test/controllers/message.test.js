@@ -24,7 +24,7 @@ describe('MESSAGES API', () => {
         .post('/api/group/1/message')
         .send({})
         .end((err, res) => {
-          expect(res.status).to.equal(403);
+          expect(res.status).to.equal(401);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('No token provided');
@@ -37,7 +37,7 @@ describe('MESSAGES API', () => {
         .set('x-access-token', invalidToken)
         .send({})
         .end((err, res) => {
-          expect(res.status).to.equal(403);
+          expect(res.status).to.equal(401);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('Failed to authenticate token');
@@ -155,7 +155,7 @@ describe('MESSAGES API', () => {
       chai.request(app)
         .get('/api/group/1/messages')
         .end((err, res) => {
-          expect(res.status).to.equal(403);
+          expect(res.status).to.equal(401);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('message');
           expect(res.body.message).to.equal('No token provided');

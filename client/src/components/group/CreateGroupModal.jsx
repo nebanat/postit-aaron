@@ -6,9 +6,9 @@ import Loader from '../loaders/Loader.jsx';
 /**
  * @description displays create group modal with form
  *
- * @param { object } props
+ * @param { object } props - contains group details and event based actions
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx - renders create group modal component
  */
 const CreateGroupModal = ({
   group, onChange, onSubmit,

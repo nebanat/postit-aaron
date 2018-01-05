@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 /**
  * @description defines InputLine component
  *
- * @param { object } props
+ * @param { object } props - contains InputLine properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - renders InputLine component
  */
 const InputLine = ({
   wrapperClass, name, onChange, value, type, children,

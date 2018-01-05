@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 /**
  * @description defines NavBar component
  *
- * @param { object } props
+ * @param { object } props  - contains NavBar properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - displays NavBar component
  */
 const NavBar = ({
   navBarClassName, navBarWrapperClass, children

@@ -4,11 +4,11 @@ import models from '../../models';
 /**
  * @description handles validation for group existence
  *
- * @param { object } req group id
- * @param { object } res group details
- * @param { object } next
+ * @param { object } req - contains group id
+ * @param { object } res - contains group details
+ * @param { object } next  - contains middleware control flow
  *
- * @return { object } group
+ * @return { object } group - returns validation message
  */
 export default (req, res, next) => {
   let groupId = '';

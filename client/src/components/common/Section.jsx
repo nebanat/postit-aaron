@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 /**
  * @description defines Section component
  *
- * @param { object } props
+ * @param { object } props  - contains Section properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - displays section component
  */
 const Section = ({
   wrapperClass, headerText, headerClass, children

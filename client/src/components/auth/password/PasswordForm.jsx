@@ -8,7 +8,7 @@ import Button from '../../common/Button.jsx';
  *
  * @param { object } props contains user, event based actions
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx - renders password form component
  */
 const PasswordForm = ({
   user, onChange, onSubmit,

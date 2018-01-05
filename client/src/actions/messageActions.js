@@ -1,11 +1,12 @@
 import * as types from './actionTypes';
 import * as api from '../utils/postItApi';
+import { checkToken } from '../utils/authservice';
 /**
  * @description handles message loaders
  *
- * @param { bool } bool
+ * @param { bool } bool - contains loader state boolean
  *
- * @return { object } message loading
+ * @return { object } message loading - returns message loading action
  */
 export const messageIsLoading = bool => ({
   type: types.MESSAGE_IS_LOADING,
@@ -14,9 +15,9 @@ export const messageIsLoading = bool => ({
 /**
  * @description handles on post message
  *
- * @param { object } newMessage
+ * @param { object } newMessage - contains new message details
  *
- * @return { object } post message
+ * @return { object } post message  - returns post message action
  */
 export const onPost = newMessage => ({
   type: types.POST_MESSAGE,
@@ -26,36 +27,37 @@ export const onPost = newMessage => ({
 /**
  * @description handles posting message
  *
- * @param { string } message
- * @param { string } priority
- * @param { integer } groupId
+ * @param { string } message - contains new message
+ * @param { string } priority - contains new message priority
+ * @param { integer } groupId - contains group Id of the new message
  *
- * @return { object } post message
+ * @return { object } post message - returns post message action
  *
  */
 export const postMessage = (message, priority, groupId) => (dispatch) => {
-  const { Materialize } = window;
+  const materialize = window.Materialize;
 
   dispatch(messageIsLoading(true));
   return api.postNewMessage(message, priority, groupId)
     .then((response) => {
       dispatch(onPost(response.data.newMessage));
 
-      Materialize.toast(response.data.message, 2500, 'green');
+      materialize.toast(response.data.message, 2500, 'green');
 
       dispatch(messageIsLoading(false));
     })
     .catch((error) => {
-      Materialize.toast(error.response.data.message, 2500, 'red');
+      materialize.toast(error.response.data.message, 2500, 'red');
+      checkToken(error.response.status);
       dispatch(messageIsLoading(false));
     });
 };
 /**
  * @description handles create group success
  *
- * @param { messages } messages
+ * @param { messages } messages - contains group messages
  *
- * @return { object } fetch group messages
+ * @return { object } fetch group messages - returns fetch group message action
  */
 export const fetchGroupMessageSuccess = messages => ({
   type: types.FETCH_MESSAGES_SUCCESS,
@@ -65,13 +67,13 @@ export const fetchGroupMessageSuccess = messages => ({
 /**
  * @description handles fetch group messages
  *
- * @param { integer } id holds group id
+ * @param { integer } id - holds group id
  *
- * @return { array } messages
+ * @return { array } messages - returns fetch group message action
  *
  */
 export const fetchGroupMessages = id => (dispatch) => {
-  const { Materialize } = window;
+  const materialize = window.Materialize;
 
   dispatch(messageIsLoading(true));
   return api.getGroupMessages(id)
@@ -80,7 +82,8 @@ export const fetchGroupMessages = id => (dispatch) => {
       dispatch(messageIsLoading(false));
     })
     .catch((error) => {
+      materialize.toast(error.response.data.message, 2500, 'red');
+      checkToken(error.response.status);
       dispatch(messageIsLoading(false));
-      Materialize.toast(error.response.data.message, 2500, 'red');
     });
 };

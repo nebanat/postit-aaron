@@ -3,16 +3,18 @@ import moment from 'moment';
 import SingleUser from '../group/SingleUser.jsx';
 
 /**
- *@description shows group messages
+ * @description shows group messages
  *
- * @param { message } object
- * @return { jsx } jsx
+ * @param { message } object - contains message details
+ *
+ * @return { jsx } jsx - renders a single message
  */
 const SingleGroupMessage = ({ message }) => {
   /**
    *
-   * @param { value } value
-   * @return { messageBadge } messageBadge
+   * @param { value } value - contains the priority value
+   *
+   * @return { messageBadge } messageBadge - displays message badge
    */
   const messageTypeColor = (value) => {
     if (value === 'normal') {

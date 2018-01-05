@@ -21,7 +21,8 @@ import '../../../../css/style.scss';
 export class SignUp extends Component {
   /**
    * @constructor
-   * @param { object } props
+   *
+   * @param { object } props - contains user details and event based actions
    */
   constructor(props) {
     super(props);
@@ -47,9 +48,9 @@ export class SignUp extends Component {
   /**
    * @description handles on blur event
    *
-   * @param { object } event
+   * @param { object } event - event object containing user details
    *
-   * @return { object } errorMessage
+   * @return { object } errorMessage - return error messages when error occurs
    */
   onBlur(event) {
     const { name } = event.target;
@@ -103,9 +104,9 @@ export class SignUp extends Component {
   /**
    * @description handles on focus event
    *
-   * @param { object } event
+   * @param { object } event - event object containing user details
    *
-   * @return { object } errorMessage
+   * @return { object } errorMessage - return error messages when error occurs
    */
   onFocus(event) {
     const { name } = event.target;
@@ -142,7 +143,7 @@ export class SignUp extends Component {
   /**
    * @description handles registering a user
    *
-   * @param {object} event
+   * @param {object} event - event object containing user details
    *
    * @return { object } state containing user data
    */
@@ -160,9 +161,9 @@ export class SignUp extends Component {
   }
   /** @description sets user details onchange
    *
-   * @param { object } event
+   * @param { object } event - event object containing user details
    *
-   * @returns { object } state containing user details
+   * @returns { object } state - containing user details
    */
   setUserDetails(event) {
     const field = event.target.name;
@@ -174,7 +175,7 @@ export class SignUp extends Component {
   /**
    * @description renders signup form
    *
-   * @return { jsx } jsx
+   * @return { jsx } jsx - renders sigin component
    */
   render() {
     const { authIsLoading } = this.props;
@@ -231,9 +232,9 @@ export class SignUp extends Component {
 /**
  * @description maps state to props
  *
- * @param { object } state
+ * @param { object } state  - holds signup state
  *
- * @return { object } props
+ * @return { object } props - returns mapped props from state
  */
 const mapStateToProps = state => ({
   signUpSuccessMessage: state.signUpSuccessMessage,
@@ -244,9 +245,9 @@ const mapStateToProps = state => ({
 /**
  * @description handles on focus event
  *
- * @param { object } dispatch
+ * @param { object } dispatch - holds dispatchable action
  *
- * @return { object } props
+ * @return { object } props - returns mapped props from dispatch
  */
 const mapDispatchToProps = dispatch => ({
   actions: {

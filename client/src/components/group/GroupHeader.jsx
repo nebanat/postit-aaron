@@ -6,15 +6,15 @@ import Button from '../common/Button.jsx';
 /**
  * @description displays group header
  *
- * @param { object } props
+ * @param { object } props - contains group header properties
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx - renders group header
  */
 const GroupHeader = ({ headerText, onExitGroup, onDeleteGroup }) => {
   const exitButtonClass = 'btn-flat col s12 exit-group';
   const deleteButtonClass = 'btn-flat col s12';
   /**
-   * @return { jsx } jsx
+   * @return { jsx } jsx - renders exit group button
    */
   const showExitGroup = () => (
     <div>
@@ -33,7 +33,7 @@ const GroupHeader = ({ headerText, onExitGroup, onDeleteGroup }) => {
   /**
    * @description shows delete button
    *
-   * @return { jsx } jsx
+   * @return { jsx } jsx - shows delete group button
   */
   const showDeleteGroup = () => (
     <Button
@@ -48,7 +48,7 @@ const GroupHeader = ({ headerText, onExitGroup, onDeleteGroup }) => {
   /**
    * @description shows group link
    *
-   * @return { jsx } jsx
+   * @return { jsx } jsx - shows group link
    */
   const showGroupLink = () => (
     <div>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import CreateGroupModal from './CreateGroupModal.jsx';
 
 /**
- *@description handles creating a new group
+ * @description handles creating a new group
  *
  * @class CreateGroup
  *
@@ -13,7 +13,7 @@ class CreateGroup extends Component {
   /**
    * @constructor
    *
-   * @param { object }  props
+   * @param { object }  props - contains group details and event based actions
    */
   constructor(props) {
     super(props);
@@ -38,9 +38,9 @@ class CreateGroup extends Component {
   /**
    * @description handles on blur event
    *
-   * @param { object } event
+   * @param { object } event - event object containing group details
    *
-   * @return { object } errorMessage
+   * @return { object } errorMessage - return error messages when error occurs
    */
   onBlur(event) {
     const { name } = event.target;
@@ -73,7 +73,7 @@ class CreateGroup extends Component {
   /**
    * @description handles on focus event
    *
-   * @return { object } errorMessage
+   * @return { object } errorMessage - return error messages when error occurs
    */
   onFocus() {
     this.setState({
@@ -92,21 +92,24 @@ class CreateGroup extends Component {
   /**
    * @description handles on submit event for creating group
    *
-   * @param { object } event
+   * @param { object } event - event object containing group details
    *
-   * @return { object } group
+   * @return { object } group - returns group state
    */
   handleGroupSubmit(event) {
     event.preventDefault();
-    this.props.actions.groupActions.createGroup(this.state.group);
-    return this.setState({ group: this.state.initialState });
+    this.props.actions.groupActions.createGroup(this.state.group)
+      .then(() => (this.setState({ group: this.state.initialState })))
+      .catch(() => {
+        this.setState({ group: this.state.group });
+      });
   }
   /**
    * @description handles on change event
    *
-   * @param { object } event
+   * @param { object } event - event object containing group details
    *
-   * @returns { object } state contains group detail
+   * @returns { object } state - contains group detail
    */
   setGroupDetail(event) {
     const field = event.target.name;
@@ -116,24 +119,24 @@ class CreateGroup extends Component {
     return this.setState({ group: this.state.group });
   }
   /**
-   * @return { jsx } jsx
+   * @return { jsx } jsx - renders create group component
    */
   render() {
     const { groupIsLoading } = this.props;
 
     return (
-          <div className="container">
-            <CreateGroupModal
-              {...this.props}
-              group = { this.state.group }
-              onChange={ this.setGroupDetail }
-              onSubmit={this.handleGroupSubmit}
-              groupIsLoading={ groupIsLoading }
-              onBlur = {this.onBlur}
-              onFocus = { this.onFocus }
-              groupError = { this.state.groupError }
-              showGroupButton = {this.state.showGroupButton}/>
-          </div>
+      <div className="container">
+        <CreateGroupModal
+          {...this.props}
+          group={this.state.group}
+          onChange={this.setGroupDetail}
+          onSubmit={this.handleGroupSubmit}
+          groupIsLoading={groupIsLoading}
+          onBlur={this.onBlur}
+          onFocus={this.onFocus}
+          groupError={this.state.groupError}
+          showGroupButton={this.state.showGroupButton} />
+      </div>
     );
   }
 }

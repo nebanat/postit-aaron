@@ -2,13 +2,13 @@ import { browserHistory } from 'react-router';
 /**
  * @description gets user token in localStorage
  *
- * @return { string } jwtTokn
+ * @return { string } jwtTokn - returns jwt token from localstorage
  */
 export const getAccessToken = () => localStorage.getItem('POSTIT_ACCESS_TOKEN');
 /**
  * @description checks if user is authenticated
  *
- * @return { boolean } accessToken
+ * @return { boolean } accessToken - checks if user has a token
  */
 export const isLoggedIn = () => {
   const accessToken = getAccessToken();
@@ -17,10 +17,10 @@ export const isLoggedIn = () => {
 /**
  * @description handles authentication check
  *
- * @param { object } nextState
- * @param { object } replace
+ * @param { object } nextState - contains next state middleware
+ * @param { object } replace - contains replace middleware
  *
- *  @return { object } route object
+ *  @return { object } route object - pushes browser history to signin route
  */
 export const requireAuth = (nextState, replace) => {
   if (!isLoggedIn()) {
@@ -30,10 +30,10 @@ export const requireAuth = (nextState, replace) => {
 /**
  * @description handles authentication check
  *
- * @param { object } nextState
- * @param { object } replace
+ * @param { object } nextState - contains next state middleware
+ * @param { object } replace - contains replace middleware
  *
- * @return {object } route object
+ * @return {object } route object - pushes browser history to dashboard route
  */
 export const noRequireAuth = (nextState, replace) => {
   if (isLoggedIn()) {
@@ -43,7 +43,7 @@ export const noRequireAuth = (nextState, replace) => {
 /**
  * @description clears token on logout
  *
- * @return { string } emptyToken
+ * @return { string } emptyToken - empties the token on logout
  */
 export const clearAccessToken = () => {
   localStorage.removeItem('POSTIT_ACCESS_TOKEN');
@@ -52,7 +52,7 @@ export const clearAccessToken = () => {
 /**
  * @description handles logout
  *
- * @return { object } route object
+ * @return { object } route object - pushes browser history to signin route
  */
 export const logout = () => {
   clearAccessToken();
@@ -61,7 +61,15 @@ export const logout = () => {
 /**
  * @description gets user deciphered id
  *
- * @return { integer } accessId
+ * @return { integer } accessId - return user access id
  */
 export const getAuthUser = () => localStorage.getItem('USER_ACCESS');
+/**
+ * @description checks for failed token authentication
+ *
+ * @param { status } status - holds error status code
+ *
+ * @return { object } route object - pushes browser history to signin route
+ */
+export const checkToken = status => (status === 401 ? logout() : '');
 

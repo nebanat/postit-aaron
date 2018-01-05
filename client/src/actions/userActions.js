@@ -5,9 +5,9 @@ import * as api from '../utils/postItApi';
 /**
  * @description handles authentication loading
  *
- * @param { boolean } bool
+ * @param { boolean } bool - contains loader state boolean
  *
- * @return { object } auth loader
+ * @return { object } auth loader - returns loading action
  */
 export const authIsLoading = bool => ({
   type: types.AUTH_IS_LOADING,
@@ -18,18 +18,18 @@ export const authIsLoading = bool => ({
 /**
  * @description handles sign up user
  *
- * @param { object } user holds user details
+ * @param { object } user - holds user details
  *
- * @return { object } user holds user details
+ * @return { object } user - returns sign up user action
  *
  */
 export const signUpUser = user => (dispatch) => {
-  const { Materialize } = window;
+  const materialize = window.Materialize;
 
   dispatch(authIsLoading(true));
   return api.signUp(user)
     .then((response) => {
-      Materialize.toast(response.data.message, 2500, 'green');
+      materialize.toast(response.data.message, 2500, 'green');
 
       dispatch(authIsLoading(false));
 
@@ -38,7 +38,7 @@ export const signUpUser = user => (dispatch) => {
       });
     })
     .catch((error) => {
-      Materialize.toast(error.response.data.message, 2500, 'red');
+      materialize.toast(error.response.data.message, 2500, 'red');
 
       dispatch(authIsLoading(false));
     });
@@ -46,9 +46,9 @@ export const signUpUser = user => (dispatch) => {
 /**
  * @description handles sign in success
  *
- * @param { object } authenticatedUser
+ * @param { object } authenticatedUser - holds user details
  *
- * @return { object } sign in success
+ * @return { object } sign in success - returns sign in success action
  */
 export const signInSuccess = authenticatedUser => ({
   type: types.SIGN_IN_SUCCESS,
@@ -58,12 +58,12 @@ export const signInSuccess = authenticatedUser => ({
 /**
  * @description handles sign in user
  *
- * @param { object } user holds user details
+ * @param { object } user - holds user details
  *
- * @return { Object } user
+ * @return { Object } sign in success - returns sign in success action
  */
 export const signInUser = user => (dispatch) => {
-  const { Materialize } = window;
+  const materialize = window.Materialize;
 
   dispatch(authIsLoading(true));
 
@@ -76,14 +76,14 @@ export const signInUser = user => (dispatch) => {
 
       dispatch(authIsLoading(false));
 
-      Materialize.toast(response.data.message, 1500, 'green');
+      materialize.toast(response.data.message, 1500, 'green');
 
       browserHistory.push({
         pathname: '/dashboard',
       });
     })
     .catch((error) => {
-      Materialize.toast(error.response.data.message, 3000, 'red');
+      materialize.toast(error.response.data.message, 3000, 'red');
       dispatch(authIsLoading(false));
     });
 };

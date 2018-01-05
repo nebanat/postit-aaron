@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 /**
  * @description defines NotFound component
  *
- * @param { object } props
+ * @param { object } props - contains NotFound properties
  *
- * @return { jsx } jsx
+ * @return { jsx } jsx - displays NotFound component
  */
 const NotFound = ({ header, body }) =>
   (

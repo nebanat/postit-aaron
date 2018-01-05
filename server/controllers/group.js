@@ -4,10 +4,10 @@ export default {
   /**
    * @description handles creating new group
    *
-   * @param { object } req contains group name and description
-   * @param { object } res contains group data and success message
+   * @param { object } req - contains group name and description
+   * @param { object } res - contains group data and success message
    *
-   * @return { object } newgroup object
+   * @return { object } newgroup - returns new created group
    */
   createNewGroup(req, res) {
     const userId = req.decoded.user.id;
@@ -33,10 +33,10 @@ export default {
   /**
    * @description handles getting authusers groups
    *
-   * @param { object } req contains authenticated user details
-   * @param { object } res contains an array of groups
+   * @param { object } req - contains authenticated user details
+   * @param { object } res - contains an array of groups
    *
-   * @return { object } groups
+   * @return { object } groups - returns user groups
    */
   getAuthUserGroups(req, res) {
     const userId = req.decoded.user.id;
@@ -57,10 +57,10 @@ export default {
   /**
    * @description handles retrieving group members
    *
-   * @param { object } req contains group data
-   * @param { object } res contains group members
+   * @param { object } req - contains group data
+   * @param { object } res - contains group members
    *
-   * @return { object } groupMembers
+   * @return { object } groupMembers - returns group members
    */
   getGroupMembers(req, res) {
     const { group } = req;
@@ -72,10 +72,10 @@ export default {
   /**
    * @description handles adding a user to a group
    *
-   * @param { object } req contains user and group data
-   * @param { object } res contains user data
+   * @param { object } req - contains user and group data
+   * @param { object } res - contains user data
    *
-   * @return { object } newMember
+   * @return { object } newMember - returns a success-failure message
    */
   addUserToGroup(req, res) {
     const { userId } = req.body;
@@ -89,7 +89,7 @@ export default {
       }
       group.addUser(userId);
 
-      return res.status(201).send({
+      return res.status(200).send({
         message: 'User successfully added to group',
         user: { id: user.id, username: user.username, email: user.email }
       });
@@ -99,10 +99,10 @@ export default {
   /**
    * @description handles user exiting a group
    *
-   * @param { object } req contains user and group details
-   * @param { object } res contains success message
+   * @param { object } req - contains user and group details
+   * @param { object } res - contains success message
    *
-   * @return { object } groupUser
+   * @return { object } groupUser - removes user from the group
    */
   exitGroup(req, res) {
     const { group } = req;
@@ -125,10 +125,10 @@ export default {
   /**
    * @description handles deleting a group
    *
-   * @param { object } req contains group details
-   * @param { object } res contains delete success message
+   * @param { object } req - contains group details
+   * @param { object } res - contains delete success message
    *
-   * @return { object } deleteMessage
+   * @return { object } deleteMessage - returns delete success-failure message
    */
   deleteGroup(req, res) {
     const { group } = req;
@@ -141,10 +141,10 @@ export default {
   /**
    * @description handles removing a user from a group
    *
-   * @param { object } req contains user and group details
-   * @param { object } res contains remove member message
+   * @param { object } req - contains user and group details
+   * @param { object } res - contains remove member message
    *
-   * @return { object } removeMemberMessage
+   * @return { object } removeMemberMessage - returns success-failure message
    */
   removeGroupMember(req, res) {
     const { userId } = req.body;

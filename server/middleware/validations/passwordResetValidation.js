@@ -2,11 +2,11 @@
 /**
  * @description handles validation for resetting password
  *
- * @param { object } req contains email
- * @param { object } res contains message
- * @param { object } next
+ * @param { object } req - contains email
+ * @param { object } res - contains message
+ * @param { object } next  - contains middleware control flow
  *
- * @return { object } message
+ * @return { object } message  - contains validation message
  */
 export default (req, res, next) => {
   const { email } = req.body;

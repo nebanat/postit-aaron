@@ -2,12 +2,12 @@ import * as types from '../actions/actionTypes';
 
 
 /**
- * @description holds group  message state
+ * @description holds group message state
  *
- * @param { array } state
- * @param { object } action
+ * @param { array } state  - contains messages initial state
+ * @param { object } action - contains actions to be performed on messages
  *
- * @return { array } groupMessages
+ * @return { array } groupMessages - returns new group messages state
  */
 export const messages = (state = [], action) => {
   switch (action.type) {
@@ -22,10 +22,10 @@ export const messages = (state = [], action) => {
 /**
  * @description holds message loader state
  *
- * @param { boolean } state
- * @param { object } action
+ * @param { boolean } state - contains messages loader initial state
+ * @param { object } action - contains actions to be performed on message loader
  *
- * @return { boolean } messageLoading
+ * @return { boolean } messageLoading - returns new group messages loader state
  */
 export const messageIsLoading = (state = false, action) => {
   switch (action.type) {

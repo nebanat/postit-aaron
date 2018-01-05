@@ -1,11 +1,11 @@
 /**
  * @description handles validation for adding users to groups
  *
- * @param { object } req contains userId and groupId
- * @param { object } res
- * @param { object } next
+ * @param { object } req - contains userId and groupId
+ * @param { object } res - contains validation message
+ * @param { object } next - contains middleware flow control
  *
- * @return { object } message
+ * @return { object } message - returns validation message
  */
 export default (req, res, next) => {
   const { userId } = req.body;

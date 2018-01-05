@@ -2,11 +2,11 @@ import models from '../../models';
 /**
  * @description handles validation for group name taken
  *
- * @param { object } req contains group name
- * @param { object } res contains message
- * @param { object } next
+ * @param { object } req - contains group name
+ * @param { object } res - contains message
+ * @param { object } next - contains middleware flow control
  *
- * @return { object } message
+ * @return { object } message - contains validation message
  */
 export default (req, res, next) => {
   if (!req.body.name) {
@@ -21,7 +21,7 @@ export default (req, res, next) => {
     .findOne({ where: { name } })
     .then((group) => {
       if (group) {
-        return res.status(400).send({
+        return res.status(409).send({
           message: 'Group name already exist'
         });
       }

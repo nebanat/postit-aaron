@@ -8,7 +8,7 @@ import Button from '../../common/Button.jsx';
  *
  * @param { object } props contains user details and form actions
  *
- * @returns { jsx } jsx
+ * @returns { jsx } jsx  - renders reset password form component
  */
 const ResetPasswordForm = ({
   user, onChange, onSubmit, onFocus

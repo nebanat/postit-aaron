@@ -10,7 +10,7 @@ const Jumbotron = () =>
   /**
    * @description displays home page jumbotron
    *
-   * @returns {jsx} jsx
+   * @returns {jsx} jsx - renders home page jumbotron
    */
 
   (
