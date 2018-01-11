@@ -1,6 +1,6 @@
 import express from 'express';
-import userController from '../controllers/user';
-import passwordController from '../controllers/password';
+import UserController from '../controllers/UserController';
+import PasswordController from '../controllers/PasswordController';
 import signUpValidation from '../middleware/validations/signUpValidation';
 import authenticate from '../middleware/authenticate';
 import passwordResetValidation from
@@ -15,24 +15,24 @@ import searchUsersValidation from
 const app = express.Router();
 
 
-app.post('/signup', signUpValidation, userController.signup);
+app.post('/signup', signUpValidation, UserController.signup);
 
-app.post('/signin', signInValidation, userController.signIn);
+app.post('/signin', signInValidation, UserController.signIn);
 
 app.post(
   '/password',
   passwordResetValidation,
-  passwordController.sendPasswordResetLinkEmail
+  PasswordController.sendPasswordResetLinkEmail
 );
 
 app.post(
   '/password/reset',
-  resetPasswordValidation, passwordController.resetPassword
+  resetPasswordValidation, PasswordController.resetPassword
 );
 
 app.post(
   '/search',
-  authenticate, searchUsersValidation, userController.searchUsersNotInGroup
+  authenticate, searchUsersValidation, UserController.searchUsersNotInGroup
 );
 
 

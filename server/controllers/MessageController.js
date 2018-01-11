@@ -1,8 +1,16 @@
 import models from '../models';
 import sendMailToGroup from '../mail/sendMailToGroup';
 
-export default {
+/**
+ * @class MessageController
+ *
+ * @description contains all functions for MessageController class
+ *
+ */
+class MessageController {
   /**
+   * @static
+   *
    * @description handles posting messages to groups
    *
    * @param { object } req - contains message details
@@ -10,7 +18,7 @@ export default {
    *
    * @return { object } - groupMessage returns a new group message
    */
-  postMessageToGroup(req, res) {
+  static postMessageToGroup(req, res) {
     const { content, priority } = req.body;
     const groupId = req.params.id;
     const authUser = req.decoded.user;
@@ -31,8 +39,10 @@ export default {
       });
     })
       .catch(error => res.status(500).send({ error: error.message }));
-  },
+  }
   /**
+   * @static
+   *
    * @description handles retrieving group messages
    *
    * @param { object } req - contains group details
@@ -40,13 +50,14 @@ export default {
    *
    * @return { object } groupMessages - returns a group messages
    */
-  getGroupMessages(req, res) {
+  static getGroupMessages(req, res) {
     models.Message
       .findAll({ where: { groupId: req.params.id } })
       .then(messages => res.status(200).send({
         messages
       }))
       .catch(error => res.status(500).send({ error: error.message }));
-  },
-};
+  }
+}
 
+export default MessageController;

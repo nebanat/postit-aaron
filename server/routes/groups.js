@@ -1,6 +1,6 @@
 import express from 'express';
-import groupController from '../controllers/group';
-import messageController from '../controllers/message';
+import GroupController from '../controllers/GroupController';
+import MessageController from '../controllers/MessageController';
 import createGroupValidation from
   '../middleware/validations/createGroupValidation';
 import groupAlreadyExist from '../middleware/validations/groupAlreadyExist';
@@ -23,44 +23,44 @@ app.use(authenticate); // check if a user has a valid token
 
 app.post(
   '/', createGroupValidation, groupAlreadyExist,
-  groupController.createNewGroup
+  GroupController.createNewGroup
 );
 
-app.get('/user', groupController.getAuthUserGroups);
+app.get('/user', GroupController.getAuthUserGroups);
 
 app.post(
   '/:id/message',
   groupExist, checkUserGroupMembership, postMessageValidation,
-  messageController.postMessageToGroup
+  MessageController.postMessageToGroup
 );
 
 app.get(
   '/:id/messages',
-  groupExist, checkUserGroupMembership, messageController.getGroupMessages
+  groupExist, checkUserGroupMembership, MessageController.getGroupMessages
 );
 
 app.get(
   '/:id/users',
-  groupExist, checkUserGroupMembership, groupController.getGroupMembers
+  groupExist, checkUserGroupMembership, GroupController.getGroupMembers
 );
 
 app.post(
   '/:id/user',
   addUserToGroupValidation, userExist, groupExist, checkUserGroupMembership,
-  groupController.addUserToGroup
+  GroupController.addUserToGroup
 );
 
-app.post('/:id/exit', groupExist, groupController.exitGroup);
+app.post('/:id/exit', groupExist, GroupController.exitGroup);
 
 app.delete(
   '/:id',
-  groupExist, checkGroupAdmin, groupController.deleteGroup
+  groupExist, checkGroupAdmin, GroupController.deleteGroup
 );
 
 app.post(
   '/:id/remove/member',
   userExist, groupExist, checkGroupAdmin,
-  groupController.removeGroupMember
+  GroupController.removeGroupMember
 );
 
 export default app;
