@@ -6,8 +6,16 @@ require('dotenv').config();
 
 const jwtSecret = process.env.SECRET || 'PrivateKey';
 
-export default {
+/**
+ * @class UserController
+ *
+ * @description contains all functions for UserController class
+ *
+ */
+class UserController {
   /**
+   * @static
+   *
    * @description handles signup
    *
    * @param { object } req - user contains user entered details
@@ -15,7 +23,7 @@ export default {
    *
    * @return {object} user - returns user details and message
    */
-  signup(req, res) {
+  static signup(req, res) {
     const { password, email } = req.body;
     const username = req.body.username.toLowerCase();
 
@@ -46,8 +54,10 @@ export default {
           }))
           .catch(error => res.status(500).send({ error: error.message }));
       }).catch(error => res.status(500).send({ error: error.message }));
-  },
+  }
   /**
+   * @static
+   *
    * @description handles signin
    *
    * @param { object } req - contains user details
@@ -55,7 +65,7 @@ export default {
    *
    * @return { object } user - returns user details and message
    */
-  signIn(req, res) {
+  static signIn(req, res) {
     const { password } = req.body;
     const username = req.body.username.toLowerCase();
 
@@ -94,8 +104,10 @@ export default {
         });
       })
       .catch(error => res.status(500).send({ error: error.message }));
-  },
+  }
   /**
+   *@static
+   *
    *@description handles searching for users
    *
    * @param { object } req - contains user search query and details
@@ -103,7 +115,7 @@ export default {
    *
    * @return { object } users - returns users search result
    */
-  searchUsersNotInGroup(req, res) {
+  static searchUsersNotInGroup(req, res) {
     const {
       groupId, query, limit, offset
     } = req.body;
@@ -154,4 +166,7 @@ export default {
         });
       });
   }
-};
+}
+
+export default UserController;
+

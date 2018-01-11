@@ -1,7 +1,15 @@
 import models from '../models';
 
-export default {
+/**
+ * @class GroupController
+ *
+ * @description GroupController
+ *
+ */
+class GroupController {
   /**
+   * @static
+   *
    * @description handles creating new group
    *
    * @param { object } req - contains group name and description
@@ -9,7 +17,7 @@ export default {
    *
    * @return { object } newgroup - returns new created group
    */
-  createNewGroup(req, res) {
+  static createNewGroup(req, res) {
     const userId = req.decoded.user.id;
     const { description } = req.body;
     const name = req.body.name.toLowerCase();
@@ -29,8 +37,10 @@ export default {
         });
       })
       .catch(error => res.status(500).send({ error: error.message }));
-  },
+  }
   /**
+   * @static
+   *
    * @description handles getting authusers groups
    *
    * @param { object } req - contains authenticated user details
@@ -38,7 +48,7 @@ export default {
    *
    * @return { object } groups - returns user groups
    */
-  getAuthUserGroups(req, res) {
+  static getAuthUserGroups(req, res) {
     const userId = req.decoded.user.id;
 
     models.User
@@ -53,8 +63,10 @@ export default {
         user.getGroups().then(userGroups => res.status(200).send(userGroups));
       })
       .catch(error => res.status(500).send({ error: error.message }));
-  },
+  }
   /**
+   * @static
+   *
    * @description handles retrieving group members
    *
    * @param { object } req - contains group data
@@ -62,14 +74,16 @@ export default {
    *
    * @return { object } groupMembers - returns group members
    */
-  getGroupMembers(req, res) {
+  static getGroupMembers(req, res) {
     const { group } = req;
 
     group.getUsers({ attributes: ['id', 'username', 'email'] })
       .then(groupUsers => res.status(200).send(groupUsers))
       .catch(error => res.status(500).send({ error: error.message }));
-  },
+  }
   /**
+   * @static
+   *
    * @description handles adding a user to a group
    *
    * @param { object } req - contains user and group data
@@ -77,7 +91,7 @@ export default {
    *
    * @return { object } newMember - returns a success-failure message
    */
-  addUserToGroup(req, res) {
+  static addUserToGroup(req, res) {
     const { userId } = req.body;
     const { user, group } = req;
 
@@ -95,8 +109,10 @@ export default {
       });
     })
       .catch(error => res.status(500).send({ error: error.message }));
-  },
+  }
   /**
+   * @static
+   *
    * @description handles user exiting a group
    *
    * @param { object } req - contains user and group details
@@ -104,7 +120,7 @@ export default {
    *
    * @return { object } groupUser - removes user from the group
    */
-  exitGroup(req, res) {
+  static exitGroup(req, res) {
     const { group } = req;
     const userId = req.decoded.user.id;
 
@@ -121,8 +137,10 @@ export default {
         message: 'You have successfully exited group'
       });
     }).catch(error => res.status(500).send({ error: error.message }));
-  },
+  }
   /**
+   * @static
+   *
    * @description handles deleting a group
    *
    * @param { object } req - contains group details
@@ -130,15 +148,17 @@ export default {
    *
    * @return { object } deleteMessage - returns delete success-failure message
    */
-  deleteGroup(req, res) {
+  static deleteGroup(req, res) {
     const { group } = req;
 
     group.destroy()
       .then(() => res.status(200).send({
         message: 'Group successfully deleted',
       })).catch(error => res.status(500).send({ error: error.message }));
-  },
+  }
   /**
+   * @static
+   *
    * @description handles removing a user from a group
    *
    * @param { object } req - contains user and group details
@@ -146,7 +166,7 @@ export default {
    *
    * @return { object } removeMemberMessage - returns success-failure message
    */
-  removeGroupMember(req, res) {
+  static removeGroupMember(req, res) {
     const { userId } = req.body;
     const { group } = req;
 
@@ -164,4 +184,6 @@ export default {
       });
     }).catch(error => res.status(500).send({ error: error.message }));
   }
-};
+}
+
+export default GroupController;

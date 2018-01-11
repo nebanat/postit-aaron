@@ -4,10 +4,16 @@ import models from '../models';
 import transporter from '../mail/transporter';
 import passwordResetTemplate from '../mail/templates/passwordResetTemplate';
 
-const salt = bcrypt.genSaltSync(8);
-
-export default {
+/**
+ * @class PasswordController
+ *
+ * @description contains all functions for PasswordController class
+ *
+ */
+class PasswordController {
   /**
+   * @static
+   *
    * @description handles email sending with password reset link
    *
    * @param { object } req - contains user email
@@ -15,7 +21,7 @@ export default {
    *
    * @return { object } successMessage - returns reset password success message
    */
-  sendPasswordResetLinkEmail(req, res) {
+  static sendPasswordResetLinkEmail(req, res) {
     const { email } = req.body;
 
     models.User
@@ -55,8 +61,10 @@ export default {
             });
           });
       });
-  },
+  }
   /**
+   * @static
+   *
    * @description handles resetting a user password
    *
    * @param { object } req - contains password details
@@ -64,8 +72,9 @@ export default {
    *
    * @return { object } passwordMessage - returns password reset success message
    */
-  resetPassword(req, res) {
+  static resetPassword(req, res) {
     const { resetToken, password } = req.body;
+    const salt = bcrypt.genSaltSync(8);
 
     models.User
       .findOne({ where: { resetPassToken: resetToken } })
@@ -92,5 +101,6 @@ export default {
       })
       .catch(error => res.status(500).send({ error: error.message }));
   }
-};
+}
+export default PasswordController;
 
